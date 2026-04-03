@@ -18,49 +18,48 @@ export default function Footer() {
 
       <div className="s12-layout">
         {/* Logo — bottom left */}
-        <div className="s12-logo-wrap">
+        <a href="/" className="s12-logo-wrap">
           <Image
             src="/images/icons/DNA.png"
             alt="Reality DNA"
-            width={80}
-            height={55}
+            width={102}
+            height={47}
             style={{ width: 'auto', height: 'auto' }}
           />
-          <span className="s12-logo-text">REALITY DNA</span>
+          <span className="s12-logo-text">Reality DNA</span>
+        </a>
+
+        {/* Headline */}
+        <div className="s12-headline">
+          <span className="hl">{tr('s12_headline_hl')}</span> {tr('s12_headline')}
         </div>
 
-        {/* Headline — top left area */}
-        <div className="s12-headline">
-          <span className="hl">{tr('s12_headline_hl')}</span>{tr('s12_headline')}
-        </div>
+        {/* Tagline */}
         <p className="s12-tagline">{tr('s12_tagline')}</p>
 
-        {/* Currency — right side, vertically centered */}
+        {/* Currency — right side */}
         <div className="s12-currency">
           <div className="s12-currency-title">{tr('s12_currency_title')}</div>
-          <div className="s12-currency-body">{tr('s12_currency_body')}</div>
+          <p className="s12-currency-body">{tr('s12_currency_body')}</p>
         </div>
 
         {/* Social + copyright — bottom center */}
         <div className="s12-social-wrap">
           <div className="s12-social">
-            {/* Instagram */}
-            <a href="https://www.instagram.com/medvedieva.anna" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a href="https://instagram.com/medvedieva.anna" target="_blank" rel="noopener noreferrer" title="Instagram">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
                 <circle cx="12" cy="12" r="5"/>
                 <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
               </svg>
             </a>
-            {/* YouTube */}
-            <a href="https://www.youtube.com/@medvedievaanna" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <a href="https://www.youtube.com/@medvedievaanna" target="_blank" rel="noopener noreferrer" title="YouTube">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
                 <rect x="1.5" y="4.5" width="21" height="15" rx="4"/>
                 <polygon points="10,8.5 16,12 10,15.5" fill="currentColor" stroke="none"/>
               </svg>
             </a>
-            {/* Telegram */}
-            <a href="https://t.me/wayofsoulanna" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+            <a href="https://t.me/wayofsoulanna" target="_blank" rel="noopener noreferrer" title="Telegram">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
                 <path d="M22 2L11 13"/>
                 <path d="M22 2L15 22L11 13L2 9L22 2Z"/>
@@ -72,14 +71,14 @@ export default function Footer() {
 
         {/* Book + links — bottom right */}
         <div className="s12-right">
+          <div className="s12-book-label">{tr('s12_book')}</div>
           <a
             href="https://drive.google.com/drive/folders/1V5KF6JG-TGjbRFOk_Y0n7wxdmd0SG49V"
             target="_blank"
             rel="noopener noreferrer"
-            className="s12-book-btn"
+            className="s12-book-title"
           >
-            <span className="s12-book-label">{tr('s12_book')}</span>
-            <span className="s12-book-title">{tr('s12_dna_book')}</span>
+            {tr('s12_dna_book')}
           </a>
           <div className="s12-links">
             <a href="#">{tr('s12_offer')}</a>
