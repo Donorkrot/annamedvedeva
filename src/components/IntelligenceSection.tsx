@@ -77,7 +77,7 @@ export default function IntelligenceSection() {
                   alt=""
                   width={530}
                   height={530}
-                  style={{ width: 530, height: 530 }}
+                  style={{ width: 530, height: 530, maxWidth: 'none' }}
                 />
               </div>
               <Image
