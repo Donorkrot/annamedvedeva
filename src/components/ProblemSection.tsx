@@ -6,7 +6,7 @@ export default function ProblemSection() {
   const { tr } = useTranslation();
 
   return (
-    <section id="s2" className="section" style={{ height: 670 }}>
+    <section id="s2" className="section">
       {/* Brain image as FULL background */}
       <div className="section-bg-img">
         <Image

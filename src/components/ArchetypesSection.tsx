@@ -6,7 +6,7 @@ export default function ArchetypesSection() {
   const { tr } = useTranslation();
 
   return (
-    <section id="s9" className="section" style={{ height: 670 }}>
+    <section id="s9" className="section">
       <div className="section-bg-img">
         <Image
           src="/images/backgrounds/bg-s9-new.jpg"

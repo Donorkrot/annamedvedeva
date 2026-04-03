@@ -6,7 +6,7 @@ export default function UnitySection() {
   const { tr } = useTranslation();
 
   return (
-    <section id="s10" className="section" style={{ height: 670, overflow: "hidden" }}>
+    <section id="s10" className="section">
       {/* Background image — full section bg with figures + sparkles */}
       <div className="s10-bg">
         <Image

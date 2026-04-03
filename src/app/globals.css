@@ -92,6 +92,14 @@ footer.s12-footer {
   border-top: none;
 }
 
+/* Desktop section heights (moved from inline styles) */
+#s1 { height: 700px; }
+#s2 { height: 670px; }
+#s3 { height: 670px; }
+#s6 { height: 670px; }
+#s9 { height: 670px; }
+#s10 { height: 670px; overflow: hidden; }
+
 #s4 {
   background: var(--cream);
 }
@@ -1724,6 +1732,13 @@ footer.s12-footer {
    =================================================== */
 @media (max-width: 768px) {
 
+  /* Force all sections to auto height and visible overflow on mobile */
+  .section {
+    overflow: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
   /* === HEADER === */
   .site-header {
     padding: 0 16px;
@@ -1732,7 +1747,7 @@ footer.s12-footer {
   .header-login,
   .lang-switcher,
   .header-btn {
-    display: none;
+    display: none !important;
   }
   .header-right {
     gap: 12px;
@@ -1800,8 +1815,7 @@ footer.s12-footer {
 
   /* === S2 PROBLEM === */
   #s2 {
-    height: auto !important;
-    min-height: 791px;
+    min-height: 791px !important;
   }
   .s2-tagline {
     top: auto;
@@ -1841,7 +1855,7 @@ footer.s12-footer {
 
   /* === S3 OLD CODE === */
   #s3 {
-    height: 635px !important;
+    min-height: 635px !important;
   }
   .s3-content {
     padding: 48px 24px;
@@ -1870,9 +1884,6 @@ footer.s12-footer {
   }
 
   /* === S4 INTELLIGENCE === */
-  #s4 {
-    height: auto !important;
-  }
   .s4-content {
     padding: 48px 0;
     justify-content: flex-start;
@@ -1921,9 +1932,6 @@ footer.s12-footer {
   .s4-new-lang { font-size: 18px; margin-top: 12px; }
 
   /* === S5 RI FEATURES === */
-  #s5 {
-    height: auto !important;
-  }
   .s5-wrap {
     padding: 48px 24px 48px;
     justify-content: flex-start;
@@ -1946,16 +1954,13 @@ footer.s12-footer {
 
   /* === S6 VIDEO === */
   #s6 {
-    height: 240px !important;
+    min-height: 240px !important;
   }
   .s6-video-wrap {
     width: 320px;
   }
 
   /* === S7 ANNA === */
-  #s7 {
-    height: auto !important;
-  }
   .s7-grid {
     grid-template-columns: 1fr;
     height: auto;
@@ -1978,9 +1983,6 @@ footer.s12-footer {
   .s7-desc { max-width: 100%; }
 
   /* === S8 DNA === */
-  #s8 {
-    height: auto !important;
-  }
   .s8-grid {
     grid-template-columns: 1fr;
     padding: 48px 24px;
@@ -2007,8 +2009,7 @@ footer.s12-footer {
 
   /* === S9 ARCHETYPES === */
   #s9 {
-    height: auto !important;
-    min-height: 700px;
+    min-height: 700px !important;
   }
   .s9-layout {
     grid-template-columns: 1fr;
@@ -2046,8 +2047,8 @@ footer.s12-footer {
 
   /* === S10 UNITY === */
   #s10 {
-    height: auto !important;
-    min-height: 500px;
+    min-height: 500px !important;
+    overflow: visible !important;
   }
   .s10-left {
     padding: 48px 24px;
@@ -2068,9 +2069,6 @@ footer.s12-footer {
   }
 
   /* === S11 PROGRAMS === */
-  #s11 {
-    height: auto !important;
-  }
   .s11-content {
     padding: 48px 24px;
   }

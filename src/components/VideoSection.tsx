@@ -6,7 +6,7 @@ export default function VideoSection() {
   const { tr } = useTranslation();
 
   return (
-    <section id="s6" className="section" style={{ height: 670 }}>
+    <section id="s6" className="section">
       <div className="section-bg-img">
         <Image
           src="/images/backgrounds/fon-1-new.png"

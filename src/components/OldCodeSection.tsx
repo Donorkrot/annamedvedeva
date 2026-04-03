@@ -6,7 +6,7 @@ export default function OldCodeSection() {
   const { tr } = useTranslation();
 
   return (
-    <section id="s3" className="section" style={{ height: 670 }}>
+    <section id="s3" className="section">
       <div className="section-bg-img">
         <Image
           src="/images/backgrounds/bg-s3-new.jpg"
