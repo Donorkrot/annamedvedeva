@@ -57,7 +57,7 @@ export default function IntelligenceSection() {
             <div className="s4-label">SQ</div>
             <div className="s4-crystal s4-c3">
               <Image
-                src="/images/crystals/crystal-sq-new.png"
+                src="/images/crystals/crystal-sq.png"
                 alt="SQ"
                 fill
                 className="s4-crystal-img"
@@ -81,7 +81,7 @@ export default function IntelligenceSection() {
                 />
               </div>
               <Image
-                src="/images/crystals/crystal-ri-new.png"
+                src="/images/crystals/crystal-ri.png"
                 alt="RI"
                 fill
                 className="s4-crystal-img"
