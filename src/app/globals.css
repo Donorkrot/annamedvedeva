@@ -95,24 +95,24 @@ footer.s12-footer {
   border-top: none;
 }
 
-/* Desktop section heights — 700px, full-width */
+/* Desktop section heights — pixel-perfect match to original */
 #s1  { height: 700px; }
-#s2  { height: 700px; }
-#s3  { height: 700px; }
+#s2  { height: 670px; }
+#s3  { height: 670px; }
 .s4s5s6-wrapper {
   position: relative;
   width: 100%;
   background: var(--cream) url('/images/backgrounds/fon.png') center center / cover no-repeat;
 }
-#s4  { height: 700px; }
-#s5  { height: 700px; }
-#s6  { height: 700px; }
-#s7  { height: 700px; }
-#s8  { height: 700px; }
-#s9  { height: 700px; }
-#s10 { height: 700px; overflow: hidden; }
-#s11 { height: 700px; }
-.s12-footer { height: 700px; }
+#s4  { height: 691px; }
+#s5  { height: 626px; }
+#s6  { height: 688px; }
+#s7  { height: 649px; }
+#s8  { height: 619px; }
+#s9  { height: 670px; }
+#s10 { height: 659px; overflow: hidden; }
+#s11 { height: 679px; }
+.s12-footer { height: 671px; }
 
 .section-bg-img {
   position: absolute;
