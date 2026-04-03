@@ -7,22 +7,6 @@ export default function RIFeaturesSection() {
 
   return (
     <section id="s5" className="section">
-      <div className="section-bg-img">
-        <Image
-          src="/images/backgrounds/fon.png"
-          alt=""
-          fill
-          className="object-cover"
-        />
-      </div>
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-        <Image
-          src="/images/backgrounds/bliki.png"
-          alt=""
-          fill
-          className="object-cover"
-        />
-      </div>
       <div className="s5-wrap">
         <h2 className="s5-title">Reality Intelligence</h2>
 

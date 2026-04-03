@@ -39,7 +39,8 @@ export default function HeroSection() {
 
       {/* Caption */}
       <div className="hero-caption">
-        <span className="hl">{tr('hero_caption_hl')}</span>{tr('hero_caption')}
+        <span className="hl">{tr('hero_caption_hl')}</span>{tr('hero_caption')}<br />
+        {tr('hero_caption2')}
       </div>
     </section>
   );

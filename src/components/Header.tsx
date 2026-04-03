@@ -25,8 +25,8 @@ export default function Header() {
           <Image
             src="/images/icons/DNA.png"
             alt="Reality DNA"
-            width={40}
-            height={28}
+            width={120}
+            height={84}
             style={{ width: 'auto', height: 'auto' }}
           />
           <span className="header-logo-text">REALITY DNA</span>

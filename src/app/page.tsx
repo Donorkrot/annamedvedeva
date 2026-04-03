@@ -17,11 +17,11 @@ export default function Home() {
       <HeroSection />
       <ProblemSection />
       <OldCodeSection />
-      <div className="s4s5-wrapper">
+      <div className="s4s5s6-wrapper">
         <IntelligenceSection />
         <RIFeaturesSection />
+        <VideoSection />
       </div>
-      <VideoSection />
       <AnnaSection />
       <DNASection />
       <ArchetypesSection />

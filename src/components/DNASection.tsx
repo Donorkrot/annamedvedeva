@@ -9,7 +9,7 @@ export default function DNASection() {
     <section id="s8" className="section">
       <div className="section-bg-img">
         <Image
-          src="/images/backgrounds/fon-new.png"
+          src="/images/backgrounds/bg-s8-new.jpg"
           alt=""
           fill
           className="object-cover"

@@ -7,15 +7,6 @@ export default function VideoSection() {
 
   return (
     <section id="s6" className="section">
-      <div className="section-bg-img">
-        <Image
-          src="/images/backgrounds/fon-1-new.png"
-          alt=""
-          fill
-          className="object-cover"
-        />
-      </div>
-
       <div className="s6-content">
         <div className="s6-video-wrap">
           <div className="s6-video-placeholder">

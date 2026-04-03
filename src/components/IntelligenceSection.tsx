@@ -7,15 +7,6 @@ export default function IntelligenceSection() {
 
   return (
     <section id="s4" className="section">
-      <div className="section-bg-img">
-        <Image
-          src="/images/content/frame-9204-1.png"
-          alt=""
-          fill
-          className="object-cover"
-        />
-      </div>
-
       <div className="s4-content">
         <h2 className="s4-title">{tr('s4_title')}</h2>
 

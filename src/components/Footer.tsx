@@ -22,8 +22,8 @@ export default function Footer() {
           <Image
             src="/images/icons/DNA.png"
             alt="Reality DNA"
-            width={102}
-            height={47}
+            width={60}
+            height={42}
             style={{ width: 'auto', height: 'auto' }}
           />
           <span className="s12-logo-text">Reality DNA</span>
