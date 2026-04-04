@@ -25,7 +25,7 @@ export default function AnnaSection() {
       <div className="s7-grid" style={{ position: "relative", zIndex: 2 }}>
         <div className="s7-text">
           <p className="s7-kicker">{tr('s7_kicker')}</p>
-          <h2 className="s7-title">{tr('s7_title_1')}<br />{tr('s7_title_2')}</h2>
+          <h2 className="s7-title">{tr('s7_title_1')} {tr('s7_title_2')}</h2>
           <p className="s7-desc">{tr('s7_desc')}</p>
           <p className="s7-name">
             <span className="accent">{tr('s7_name')}</span>{tr('s7_name_suffix')}

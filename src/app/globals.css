@@ -894,10 +894,10 @@ footer.s12-footer {
 }
 
 .s7-text {
-  padding: 100px 20px 100px 150px;
+  padding: 100px 20px 60px 150px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   position: relative;
   z-index: 2;
 }
@@ -917,7 +917,8 @@ footer.s12-footer {
   text-transform: uppercase;
   line-height: 57.2px;
   color: var(--cream);
-  margin-bottom: 28px;
+  margin-bottom: 18px;
+  white-space: nowrap;
 }
 
 .s7-desc {
@@ -926,7 +927,7 @@ footer.s12-footer {
   font-weight: 400;
   color: var(--cream);
   line-height: 21.6px;
-  margin-bottom: 48px;
+  margin-bottom: 40px;
 }
 
 .s7-name {
@@ -947,7 +948,7 @@ footer.s12-footer {
   font-size: 18px;
   font-weight: 400;
   color: var(--cream);
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .s7-bio {
@@ -956,7 +957,7 @@ footer.s12-footer {
   font-weight: 400;
   color: var(--cream);
   line-height: 19.2px;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
   max-width: 580px;
 }
 
@@ -979,8 +980,8 @@ footer.s12-footer {
   height: 100%;
   display: grid;
   grid-template-columns: 340px 380px 340px;
-  align-items: center;
-  padding: 130px 150px 100px;
+  align-items: start;
+  padding: 138px 150px 100px;
   gap: 40px;
   position: relative;
   z-index: 2;
@@ -989,13 +990,13 @@ footer.s12-footer {
 .s8-left {
   display: flex;
   flex-direction: column;
-  gap: 200px;
+  gap: 192px;
 }
 
 .s8-right {
   display: flex;
   flex-direction: column;
-  gap: 200px;
+  gap: 192px;
   align-items: flex-end;
   justify-content: flex-start;
 }
