@@ -1347,83 +1347,112 @@ footer.s12-footer {
 
 .s11-card {
   position: relative;
-  border-radius: 16px;
-  padding: 1.5px;
-  background: linear-gradient(160deg, rgba(180, 140, 80, 0.7) 0%, rgba(80, 50, 20, 0.5) 40%, rgba(120, 90, 40, 0.6) 100%);
+  border-radius: 10px;
   flex: 1;
   align-self: stretch;
+  overflow: hidden;
+}
+
+.s11-card:nth-child(1) .s11-card-inner::after,
+.s11-card:nth-child(2) .s11-card-inner::after,
+.s11-card:nth-child(3) .s11-card-inner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 10px;
+  pointer-events: none;
+  -webkit-mask: linear-gradient(to bottom, transparent 0%, transparent 25%, black 40%);
+  mask: linear-gradient(to bottom, transparent 0%, transparent 25%, black 40%);
+}
+.s11-card:nth-child(1) .s11-card-inner::after {
+  border: 1px solid rgba(219, 132, 59, 0.15);
+}
+.s11-card:nth-child(2) .s11-card-inner::after {
+  border: 1px solid rgba(243, 181, 25, 0.12);
+}
+.s11-card:nth-child(3) .s11-card-inner::after {
+  border: 1px solid rgba(255, 216, 74, 0.15);
 }
 
 .s11-card-inner {
-  border-radius: 15px;
-  padding: 36px 32px 32px;
+  position: relative;
+  border-radius: 10px;
+  padding: 80px 40px 110px;
   display: flex;
   flex-direction: column;
   height: 100%;
   box-sizing: border-box;
+  gap: 40px;
 }
 
-/* Card 1: dark brown */
+/* Card 1: amber/orange — пересчёт под реальную высоту карточки */
 .s11-card:nth-child(1) .s11-card-inner {
-  background: linear-gradient(180deg, rgba(140, 100, 70, 0.45) 0%, rgba(60, 35, 15, 0.6) 100%);
+  background: linear-gradient(180deg, rgba(219, 132, 59, 0) 0%, rgba(219, 132, 59, 0.3) 14%, rgba(219, 132, 59, 0.3) 100%);
 }
 
-/* Card 2: olive/dark gold */
+/* Card 2: golden — пересчёт под реальную высоту карточки */
 .s11-card:nth-child(2) .s11-card-inner {
-  background: linear-gradient(180deg, rgba(150, 135, 60, 0.5) 0%, rgba(100, 85, 30, 0.55) 100%);
+  background: linear-gradient(180deg, rgba(243, 181, 25, 0) 0%, rgba(243, 181, 25, 0.3) 25%, rgba(243, 181, 25, 0.3) 100%);
 }
 
-/* Card 3: bright gold */
+/* Card 3: bright yellow — пересчёт под реальную высоту карточки */
 .s11-card:nth-child(3) .s11-card-inner {
-  background: linear-gradient(180deg, rgba(180, 155, 50, 0.5) 0%, rgba(140, 110, 25, 0.55) 100%);
+  background: linear-gradient(180deg, rgba(255, 216, 74, 0) 0%, rgba(255, 216, 74, 0.5) 21%, rgba(255, 216, 74, 0.5) 100%);
 }
 
 .s11-col-title {
   font-family: var(--font-heading);
   font-size: 28px;
+  line-height: 34px;
   font-weight: 500;
-  color: #e8ddd0;
-  margin-bottom: 16px;
+  color: #FFF5EF;
+  font-feature-settings: 'pnum' on, 'lnum' on;
 }
 
 .s11-col-body {
   font-family: var(--font-body);
-  font-size: 17px;
-  line-height: 1.35;
-  color: rgba(220, 200, 170, 0.9);
-  margin-bottom: 24px;
-  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: 500;
+  color: #FFF5EF;
+  font-feature-settings: 'pnum' on, 'lnum' on;
 }
 
 .s11-col-sub {
   font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.3;
-  color: rgba(210, 190, 160, 0.8);
-  flex-grow: 1;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: 400;
+  color: #FFF5EF;
+  font-feature-settings: 'pnum' on, 'lnum' on;
 }
 
 .s11-card-btn-wrap {
-  margin-top: 28px;
+  margin-top: auto;
 }
 
 .s11-btn {
-  display: inline-block;
-  padding: 10px 36px;
-  border: 1px solid rgba(180, 140, 80, 0.6);
-  border-radius: 6px;
-  color: #e8ddd0;
+  display: block;
+  width: 100%;
+  padding: 14px 0;
+  border: 1px solid rgba(255, 245, 239, 0.35);
+  border-radius: 8px;
+  color: #FFF5EF;
   font-family: var(--font-body);
   font-size: 16px;
   font-weight: 400;
   text-decoration: none;
+  text-align: center;
   transition: all 0.3s ease;
   background: transparent;
 }
 
 .s11-btn:hover {
-  background: rgba(180, 140, 80, 0.15);
-  border-color: rgba(180, 140, 80, 0.9);
+  background: rgba(255, 245, 239, 0.08);
+  border-color: rgba(255, 245, 239, 0.5);
 }
 
 /* ===== S12 - Footer ===== */
