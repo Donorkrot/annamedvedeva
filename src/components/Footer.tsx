@@ -29,22 +29,32 @@ export default function Footer() {
           <span className="s12-logo-text">Reality DNA</span>
         </a>
 
-        {/* Headline */}
-        <div className="s12-headline">
-          <span className="hl">{tr('s12_headline_hl')}</span> {tr('s12_headline')}
+        {/* Left column: headline + tagline + book block */}
+        <div className="s12-left">
+          <div className="s12-headline">
+            <span className="hl">{tr('s12_headline_hl')}</span> {tr('s12_headline')}
+          </div>
+          <p className="s12-tagline">{tr('s12_tagline')}</p>
+
+          {/* Book block */}
+          <a
+            href="https://drive.google.com/drive/folders/1V5KF6JG-TGjbRFOk_Y0n7wxdmd0SG49V"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="s12-book-block"
+          >
+            <span className="s12-book-title">{tr('s12_dna_book')}</span>
+            <span className="s12-book-label">{tr('s12_book')}</span>
+          </a>
         </div>
 
-        {/* Tagline */}
-        <p className="s12-tagline">{tr('s12_tagline')}</p>
+        {/* Right column: currency + social icons */}
+        <div className="s12-right-col">
+          <div className="s12-currency">
+            <div className="s12-currency-title">{tr('s12_currency_title')}</div>
+            <p className="s12-currency-body">{tr('s12_currency_body')}</p>
+          </div>
 
-        {/* Currency — right side */}
-        <div className="s12-currency">
-          <div className="s12-currency-title">{tr('s12_currency_title')}</div>
-          <p className="s12-currency-body">{tr('s12_currency_body')}</p>
-        </div>
-
-        {/* Social + copyright — bottom center */}
-        <div className="s12-social-wrap">
           <div className="s12-social">
             <a href="https://instagram.com/medvedieva.anna" target="_blank" rel="noopener noreferrer" title="Instagram">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
@@ -66,20 +76,11 @@ export default function Footer() {
               </svg>
             </a>
           </div>
-          <div className="s12-copyright">&copy; 2026</div>
         </div>
 
-        {/* Book + links — bottom right */}
-        <div className="s12-right">
-          <div className="s12-book-label">{tr('s12_book')}</div>
-          <a
-            href="https://drive.google.com/drive/folders/1V5KF6JG-TGjbRFOk_Y0n7wxdmd0SG49V"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="s12-book-title"
-          >
-            {tr('s12_dna_book')}
-          </a>
+        {/* Bottom bar: copyright + links */}
+        <div className="s12-bottom">
+          <div className="s12-copyright">REALITY DNA &copy; 2026</div>
           <div className="s12-links">
             <a href="#">{tr('s12_offer')}</a>
             <a href="#">{tr('s12_privacy')}</a>

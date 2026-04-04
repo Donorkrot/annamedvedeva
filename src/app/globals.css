@@ -1440,11 +1440,15 @@ footer.s12-footer {
   text-transform: uppercase;
 }
 
-/* Headline — "Reality Intelligence — Ваш навык" */
-.s12-headline {
+/* Left column */
+.s12-left {
   position: absolute;
   top: 150px;
   left: 10.4%;
+}
+
+/* Headline — "Reality Intelligence — Ваш навык" */
+.s12-headline {
   font-family: var(--font-heading);
   font-size: 36px;
   font-weight: 600;
@@ -1458,21 +1462,55 @@ footer.s12-footer {
 }
 
 .s12-tagline {
-  position: absolute;
-  top: 210px;
-  left: 10.4%;
   font-family: var(--font-body);
   font-size: 15px;
   color: var(--cream);
   opacity: 0.7;
+  margin-top: 16px;
 }
 
-/* Currency — right side, lower area */
-.s12-currency {
+/* Book block — bordered box */
+.s12-book-block {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 16px 24px;
+  border: 1px solid rgba(255, 250, 240, 0.35);
+  text-decoration: none;
+  transition: border-color 0.3s;
+}
+
+.s12-book-block:hover {
+  border-color: rgba(255, 250, 240, 0.6);
+}
+
+.s12-book-title {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--cream);
+  letter-spacing: 2px;
+}
+
+.s12-book-label {
+  display: block;
+  font-size: 12px;
+  color: rgba(255, 250, 252, 0.5);
+  font-family: var(--font-body);
+  margin-top: 4px;
+}
+
+/* Right column */
+.s12-right-col {
   position: absolute;
   top: 55%;
-  left: 66.7%;
-  max-width: 30%;
+  left: 56%;
+  transform: translateY(-50%);
+}
+
+.s12-currency {
+  margin-bottom: 40px;
 }
 
 .s12-currency-title {
@@ -1488,20 +1526,10 @@ footer.s12-footer {
   line-height: 1.5;
   color: var(--cream);
   opacity: 0.7;
+  max-width: 300px;
 }
 
-/* Social + copyright — bottom center */
-.s12-social-wrap {
-  position: absolute;
-  bottom: 48px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-
+/* Social icons — under currency */
 .s12-social {
   display: flex;
   gap: 16px;
@@ -1530,48 +1558,28 @@ footer.s12-footer {
   color: var(--gold);
 }
 
+/* Bottom bar — copyright + legal links */
+.s12-bottom {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
 .s12-copyright {
   font-size: 12px;
   color: var(--cream);
   opacity: 0.4;
-}
-
-/* Book + links — bottom right */
-.s12-right {
-  position: absolute;
-  bottom: 48px;
-  left: 66.7%;
-}
-
-.s12-book-label {
-  font-size: 12px;
-  color: rgba(255, 250, 252, 0.5);
   letter-spacing: 1px;
-  text-transform: uppercase;
-  font-family: var(--font-body);
-  margin-bottom: 4px;
-}
-
-.s12-book-title {
-  display: block;
-  font-family: var(--font-heading);
-  font-size: 28px;
-  font-weight: 300;
-  text-transform: uppercase;
-  color: var(--cream);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.s12-book-title:hover {
-  color: var(--gold);
 }
 
 .s12-links {
   display: flex;
   gap: 24px;
-  justify-content: flex-start;
-  margin-top: 16px;
 }
 
 .s12-links a {
@@ -1587,26 +1595,16 @@ footer.s12-footer {
 
 /* S12 — medium screens */
 @media (min-width: 769px) and (max-width: 1199px) {
-  .s12-headline {
-    font-size: 28px;
+  .s12-left {
     top: 100px;
     left: 5%;
   }
-  .s12-tagline {
-    top: 160px;
-    left: 5%;
+  .s12-headline {
+    font-size: 28px;
   }
-  .s12-currency {
-    top: auto;
-    bottom: 200px;
+  .s12-right-col {
     left: auto;
     right: 5%;
-    max-width: 35%;
-  }
-  .s12-right {
-    left: auto;
-    right: 5%;
-    bottom: 48px;
   }
 }
 
@@ -2186,50 +2184,42 @@ footer.s12-footer {
     padding: 48px 24px 32px;
     height: auto;
   }
-  .s12-headline {
+  .s12-left {
     position: relative;
     top: auto;
     left: auto;
+    margin-bottom: 40px;
+  }
+  .s12-headline {
     font-size: 24px;
     max-width: 100%;
     margin-bottom: 12px;
   }
   .s12-tagline {
+    font-size: 14px;
+    max-width: 100%;
+  }
+  .s12-book-block {
+    margin-top: 24px;
+  }
+  .s12-book-title { font-size: 18px; }
+  .s12-right-col {
     position: relative;
     top: auto;
     left: auto;
-    font-size: 14px;
-    max-width: 100%;
+    transform: none;
     margin-bottom: 40px;
   }
   .s12-currency {
-    position: relative;
-    top: auto;
-    right: auto;
-    left: auto;
     max-width: 100%;
-    margin-bottom: 40px;
-    margin-left: auto;
   }
   .s12-currency-title { font-size: 24px; }
-  .s12-social-wrap {
+  .s12-bottom {
     position: relative;
     bottom: auto;
-    left: auto;
-    transform: none;
-    flex-direction: row;
-    justify-content: center;
-    margin-bottom: 32px;
+    flex-direction: column;
+    gap: 16px;
   }
-  .s12-right {
-    position: relative;
-    bottom: auto;
-    right: auto;
-    left: auto;
-    margin-left: auto;
-    margin-bottom: 32px;
-  }
-  .s12-book-title { font-size: 20px; }
   .s12-logo-wrap {
     position: relative;
     left: auto;
