@@ -93,6 +93,7 @@ const t = {
     s11_c3_title: 'VIP',
     s11_c3_body: 'Для сопровождения масштабных изменений: смена идентичности, ключевые события, апгрейд состояния, стратегические решения.',
     s11_c3_sub: 'Работа с перегрузкой, ответственностью и высоким уровнем влияния',
+    s11_btn: 'Перейти',
     // S12 Footer
     s12_headline_hl: 'Reality Intelligence',
     s12_headline: ' — Ваш навык',
@@ -204,6 +205,7 @@ const t = {
     s11_c3_title: 'VIP',
     s11_c3_body: 'Для супроводу масштабних змін: зміна ідентичності, ключові події, апгрейд стану, стратегічні рішення.',
     s11_c3_sub: 'Робота з перевантаженням, відповідальністю та високим рівнем впливу',
+    s11_btn: 'Перейти',
     s12_headline_hl: 'Reality Intelligence',
     s12_headline: ' — Ваша навичка',
     s12_tagline: 'Коди реальності — це доступ до можливостей світу',
@@ -314,6 +316,7 @@ const t = {
     s11_c3_title: 'VIP',
     s11_c3_body: 'For supporting major changes: identity shifts, key events, state upgrades, strategic decisions.',
     s11_c3_sub: 'Working with overload, responsibility and high levels of influence',
+    s11_btn: 'Go',
     s12_headline_hl: 'Reality Intelligence',
     s12_headline: ' — Your skill',
     s12_tagline: "Reality codes are access to the world's opportunities",

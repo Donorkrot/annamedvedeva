@@ -20,22 +20,37 @@ export default function ProgramsSection() {
         <div className="s11-title">{tr('s11_title')}</div>
 
         <div className="s11-grid">
-          <div className="s11-col">
-            <div className="s11-col-title">{tr('s11_c1_title')}</div>
-            <div className="s11-col-body">{tr('s11_c1_body')}</div>
-            <div className="s11-col-sub">{tr('s11_c1_sub')}</div>
+          <div className="s11-card">
+            <div className="s11-card-inner">
+              <div className="s11-col-title">{tr('s11_c1_title')}</div>
+              <div className="s11-col-body">{tr('s11_c1_body')}</div>
+              <div className="s11-col-sub">{tr('s11_c1_sub')}</div>
+              <div className="s11-card-btn-wrap">
+                <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" className="s11-btn">{tr('s11_btn')}</a>
+              </div>
+            </div>
           </div>
 
-          <div className="s11-col">
-            <div className="s11-col-title">{tr('s11_c2_title')}</div>
-            <div className="s11-col-body">{tr('s11_c2_body')}</div>
-            <div className="s11-col-sub">{tr('s11_c2_sub')}</div>
+          <div className="s11-card">
+            <div className="s11-card-inner">
+              <div className="s11-col-title">{tr('s11_c2_title')}</div>
+              <div className="s11-col-body">{tr('s11_c2_body')}</div>
+              <div className="s11-col-sub">{tr('s11_c2_sub')}</div>
+              <div className="s11-card-btn-wrap">
+                <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" className="s11-btn">{tr('s11_btn')}</a>
+              </div>
+            </div>
           </div>
 
-          <div className="s11-col">
-            <div className="s11-col-title">{tr('s11_c3_title')}</div>
-            <div className="s11-col-body">{tr('s11_c3_body')}</div>
-            <div className="s11-col-sub">{tr('s11_c3_sub')}</div>
+          <div className="s11-card">
+            <div className="s11-card-inner">
+              <div className="s11-col-title">{tr('s11_c3_title')}</div>
+              <div className="s11-col-body">{tr('s11_c3_body')}</div>
+              <div className="s11-col-sub">{tr('s11_c3_sub')}</div>
+              <div className="s11-card-btn-wrap">
+                <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" className="s11-btn">{tr('s11_btn')}</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

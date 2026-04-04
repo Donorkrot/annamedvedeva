@@ -1297,7 +1297,7 @@ footer.s12-footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 210px 150px 100px;
+  padding: 60px 150px 80px;
   position: relative;
   z-index: 2;
 }
@@ -1306,38 +1306,78 @@ footer.s12-footer {
   font-family: var(--font-heading);
   font-size: 36px;
   font-weight: 600;
-  color: var(--text-dark);
-  margin-bottom: 110px;
+  color: #e8ddd0;
+  margin-bottom: 40px;
 }
 
 .s11-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 78px;
+  gap: 30px;
+}
+
+.s11-card {
+  position: relative;
+  border-radius: 16px;
+  padding: 1.5px;
+  background: linear-gradient(160deg, rgba(180, 140, 80, 0.7) 0%, rgba(80, 50, 20, 0.5) 40%, rgba(120, 90, 40, 0.6) 100%);
+}
+
+.s11-card-inner {
+  background: rgba(15, 8, 3, 0.75);
+  border-radius: 15px;
+  padding: 36px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .s11-col-title {
   font-family: var(--font-heading);
   font-size: 28px;
   font-weight: 500;
-  color: var(--text-dark);
+  color: #e8ddd0;
   margin-bottom: 16px;
 }
 
 .s11-col-body {
   font-family: var(--font-body);
-  font-size: 18px;
-  line-height: 1.2;
-  color: var(--text-dark);
-  margin-bottom: 40px;
-  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.35;
+  color: rgba(220, 200, 170, 0.9);
+  margin-bottom: 24px;
+  font-weight: 400;
 }
 
 .s11-col-sub {
   font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.3;
+  color: rgba(210, 190, 160, 0.8);
+  flex-grow: 1;
+}
+
+.s11-card-btn-wrap {
+  margin-top: 28px;
+}
+
+.s11-btn {
+  display: inline-block;
+  padding: 10px 36px;
+  border: 1px solid rgba(180, 140, 80, 0.6);
+  border-radius: 6px;
+  color: #e8ddd0;
+  font-family: var(--font-body);
   font-size: 16px;
-  line-height: 1.2;
-  color: var(--text-dark);
+  font-weight: 400;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.s11-btn:hover {
+  background: rgba(180, 140, 80, 0.15);
+  border-color: rgba(180, 140, 80, 0.9);
 }
 
 /* ===== S12 - Footer ===== */
