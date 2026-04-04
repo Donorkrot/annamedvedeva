@@ -1274,45 +1274,42 @@ footer.s12-footer {
 .s10-items {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 0;
 }
 
 .s10-item {
   position: relative;
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(245,240,232,0.12);
+  padding: 24px 0;
   font-family: var(--font-body);
   font-size: 15px;
   line-height: 1.6;
   color: var(--cream);
-  max-width: 265px;
+  max-width: 420px;
 }
 
-.s10-item::before {
+.s10-item::after {
   content: "";
   position: absolute;
   bottom: 0;
-  left: -115px;
-  width: 559px;
-  height: 2px;
+  left: 0;
+  width: 560px;
+  height: 1px;
   background: linear-gradient(
     to right,
     #C1B9B4 0%,
-    #250D03 14%,
-    #DF8E2A 26%,
-    #FFF4EE 39%,
-    #E19537 62%,
-    #200B02 82%,
+    #DF8E2A 20%,
+    #FFF4EE 50%,
+    #E19537 75%,
     #CFC1B6 100%
   );
 }
 
 .s10-item-2 {
-  margin-left: 115px;
+  margin-left: 0;
 }
 
 .s10-item-3 {
-  margin-left: 230px;
+  margin-left: 0;
 }
 
 /* ===== S11 - Programs ===== */
