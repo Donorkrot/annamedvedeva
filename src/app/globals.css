@@ -1268,7 +1268,7 @@ footer.s12-footer {
   font-family: var(--font-body);
   font-size: 15px;
   color: var(--cream);
-  margin-bottom: 40px;
+  margin-bottom: 80px;
 }
 
 .s10-items {
@@ -1296,6 +1296,33 @@ footer.s12-footer {
   height: 2px;
   background: linear-gradient(
     to right,
+    #C1B9B4 0%,
+    #250D03 14%,
+    #DF8E2A 26%,
+    #FFF4EE 39%,
+    #E19537 62%,
+    #200B02 82%,
+    #CFC1B6 100%
+  );
+}
+
+/* Items 2&3: clip left portion so line starts at connector point — prevents box effect */
+.s10-item-2::before,
+.s10-item-3::before {
+  clip-path: inset(0 0 0 440px);
+}
+
+/* Vertical connectors at right end of each line */
+.s10-item-1::after,
+.s10-item-2::after {
+  content: "";
+  position: absolute;
+  left: 440px;
+  top: 100%;
+  width: 2px;
+  height: 88px;
+  background: linear-gradient(
+    to bottom,
     #C1B9B4 0%,
     #250D03 14%,
     #DF8E2A 26%,
