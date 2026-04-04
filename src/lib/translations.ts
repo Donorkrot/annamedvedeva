@@ -5,7 +5,7 @@ const t = {
     // Nav
     nav_login: 'Регистрация / Вход',
     nav_consult: 'Консультация',
-    nav_btn: 'Консультация',
+    nav_btn: 'Продукты Академии',
     // Hero
     hero_tagline_1: 'Новый',
     hero_tagline_2: 'Интеллект',
@@ -128,7 +128,7 @@ const t = {
   ua: {
     nav_login: 'Реєстрація / Вхід',
     nav_consult: 'Консультація',
-    nav_btn: 'Консультація',
+    nav_btn: 'Продукти Академії',
     hero_tagline_1: 'Новий',
     hero_tagline_2: 'Інтелект',
     hero_tagline_3: 'Реальності',
@@ -239,7 +239,7 @@ const t = {
   en: {
     nav_login: 'Sign In / Register',
     nav_consult: 'Consultation',
-    nav_btn: 'Consultation',
+    nav_btn: 'Academy Products',
     hero_tagline_1: 'New',
     hero_tagline_2: 'Reality',
     hero_tagline_3: 'Intelligence',

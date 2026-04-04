@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { useTranslation } from '@/components/LanguageProvider';
 import AuthModal from '@/components/AuthModal';
 import SideMenu from '@/components/SideMenu';
@@ -22,25 +21,10 @@ export default function Header() {
     <>
       <header className={`site-header${scrolled ? ' scrolled' : ''}`}>
         <a href="/" className="header-logo">
-          <Image
-            src="/images/icons/DNA.png"
-            alt="Reality DNA"
-            width={120}
-            height={84}
-            style={{ width: 'auto', height: 'auto' }}
-          />
           <span className="header-logo-text">REALITY DNA</span>
         </a>
 
         <div className="header-right">
-          <a
-            href="#"
-            className="header-login"
-            onClick={e => { e.preventDefault(); setAuthOpen(true); }}
-          >
-            {tr('nav_login')}
-          </a>
-
           <div className="lang-switcher">
             {(['ru', 'ua', 'en'] as Lang[]).map((l) => (
               <a
