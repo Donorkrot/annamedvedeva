@@ -1306,26 +1306,6 @@ footer.s12-footer {
   );
 }
 
-.s10-item-1::after,
-.s10-item-2::after {
-  content: "";
-  position: absolute;
-  left: 444px;
-  top: 100%;
-  width: 2px;
-  height: 88px;
-  background: linear-gradient(
-    to bottom,
-    #C1B9B4 0%,
-    #250D03 14%,
-    #DF8E2A 26%,
-    #FFF4EE 39%,
-    #E19537 62%,
-    #200B02 82%,
-    #CFC1B6 100%
-  );
-}
-
 .s10-item-2 {
   margin-left: 115px;
 }
