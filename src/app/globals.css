@@ -1363,19 +1363,19 @@ footer.s12-footer {
   box-sizing: border-box;
 }
 
-/* Card 1: amber */
+/* Card 1: transparent top → pink/amber bottom */
 .s11-card:nth-child(1) .s11-card-inner {
-  background: linear-gradient(180deg, rgba(220, 133, 60, 0.25) 0%, rgba(220, 133, 60, 0.3) 100%);
+  background: linear-gradient(180deg, rgba(220, 133, 60, 0) 0%, rgba(220, 133, 60, 0.3) 100%);
 }
 
-/* Card 2: golden */
+/* Card 2: transparent top → gold bottom */
 .s11-card:nth-child(2) .s11-card-inner {
-  background: linear-gradient(180deg, rgba(243, 181, 25, 0.25) 0%, rgba(242, 180, 26, 0.3) 100%);
+  background: linear-gradient(180deg, rgba(242, 180, 26, 0) 0%, rgba(242, 180, 26, 0.3) 100%);
 }
 
-/* Card 3: bright yellow */
+/* Card 3: transparent top → yellow bottom */
 .s11-card:nth-child(3) .s11-card-inner {
-  background: linear-gradient(180deg, rgba(255, 215, 73, 0.3) 0%, rgba(255, 215, 73, 0.4) 100%);
+  background: linear-gradient(180deg, rgba(255, 215, 73, 0) 0%, rgba(255, 215, 73, 0.5) 100%);
 }
 
 .s11-col-title {
