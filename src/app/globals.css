@@ -1002,9 +1002,9 @@ footer.s12-footer {
 .s8-grid {
   height: 100%;
   display: grid;
-  grid-template-columns: 340px 380px 340px;
-  align-items: start;
-  padding: 138px 150px 100px;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 60px 120px;
   gap: 40px;
   position: relative;
   z-index: 2;
@@ -1013,22 +1013,23 @@ footer.s12-footer {
 .s8-left {
   display: flex;
   flex-direction: column;
-  gap: 192px;
+  justify-content: space-between;
+  height: 460px;
 }
 
 .s8-right {
   display: flex;
   flex-direction: column;
-  gap: 192px;
+  justify-content: space-between;
   align-items: flex-end;
-  justify-content: flex-start;
+  height: 460px;
 }
 
 .s8-center {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 0;
 }
 
 .s8-center-label {
@@ -1036,11 +1037,12 @@ footer.s12-footer {
   font-size: 36px;
   font-weight: 600;
   color: var(--text-dark);
+  margin-bottom: 8px;
 }
 
 .s8-dna-img {
-  width: 380px;
-  height: 380px;
+  width: 460px;
+  height: 460px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1050,8 +1052,8 @@ footer.s12-footer {
 
 .s8-dna-symbol {
   position: absolute !important;
-  width: 760px !important;
-  height: 760px !important;
+  width: 700px !important;
+  height: 700px !important;
   max-width: none !important;
   top: 50%;
   left: 50%;
@@ -1073,7 +1075,7 @@ footer.s12-footer {
   font-size: 14px;
   color: var(--text-dark);
   max-width: 260px;
-  line-height: 1.2;
+  line-height: 1.35;
 }
 
 /* ===== S9 - Archetypes ===== */

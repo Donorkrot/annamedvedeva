@@ -61,7 +61,7 @@ export default function AnnaSection() {
 
         <div className="s7-photo">
           <Image
-            src="/images/content/s7-anna.jpg"
+            src="/images/content/s7-anna-new.png"
             alt="Анна Медведева"
             fill
             className="object-cover"
