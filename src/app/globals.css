@@ -987,13 +987,12 @@ footer.s12-footer {
 .s7-photo {
   position: relative;
   overflow: hidden;
+  max-width: 470px;
 }
 
 .s7-photo img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
   object-fit: cover;
   object-position: center top;
 }

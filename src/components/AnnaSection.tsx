@@ -63,8 +63,10 @@ export default function AnnaSection() {
           <Image
             src="/images/content/s7-anna-new.png"
             alt="Анна Медведева"
-            fill
-            className="object-cover"
+            width={470}
+            height={700}
+            unoptimized
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
           />
         </div>
       </div>
