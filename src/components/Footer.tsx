@@ -66,13 +66,13 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar: copyright + links */}
-        <div className="s12-bottom">
-          <div className="s12-copyright">REALITY DNA &copy; 2026</div>
-          <div className="s12-links">
-            <a href="#">{tr('s12_offer')}</a>
-            <a href="#">{tr('s12_privacy')}</a>
-          </div>
+        {/* Copyright — absolute center per Figma */}
+        <div className="s12-copyright">REALITY DNA &copy; 2026</div>
+
+        {/* Legal links — bottom right */}
+        <div className="s12-links">
+          <a href="#">{tr('s12_offer')}</a>
+          <a href="#">{tr('s12_privacy')}</a>
         </div>
       </div>
     </footer>

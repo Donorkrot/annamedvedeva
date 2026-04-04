@@ -1551,39 +1551,39 @@ footer.s12-footer {
   color: var(--gold);
 }
 
-/* Bottom bar — copyright + legal links */
-.s12-bottom {
-  position: absolute;
-  bottom: 40px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-}
-
+/* Copyright — center per Figma: left 636px on 1440px canvas = centered */
 .s12-copyright {
-  font-size: 12px;
-  color: var(--cream);
-  opacity: 0.4;
-  letter-spacing: 1px;
+  position: absolute;
+  width: 167px;
+  left: calc(50% - 83.5px);
+  top: 425px;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  color: #FFF5EF;
 }
 
 .s12-links {
+  position: absolute;
+  bottom: 40px;
+  right: 150px;
   display: flex;
   gap: 24px;
 }
 
 .s12-links a {
-  font-size: 12px;
-  color: rgba(255, 250, 252, 0.5);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: rgba(255, 245, 239, 0.5);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .s12-links a:hover {
-  color: var(--cream);
+  color: #FFF5EF;
 }
 
 /* S12 — medium screens */
