@@ -955,6 +955,35 @@ footer.s12-footer {
   max-width: 580px;
 }
 
+.s7-btns {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.s7-btn-outline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  border: 1px solid rgba(255, 245, 239, 0.5);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  color: #FFF5EF;
+  text-decoration: none;
+  background: transparent;
+  transition: border-color 0.3s, background 0.3s;
+  white-space: nowrap;
+}
+
+.s7-btn-outline:hover {
+  border-color: #FFF5EF;
+  background: rgba(255, 245, 239, 0.08);
+}
+
 .s7-photo {
   position: relative;
   overflow: hidden;

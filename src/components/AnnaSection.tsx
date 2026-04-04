@@ -26,18 +26,33 @@ export default function AnnaSection() {
         <div className="s7-text">
           <p className="s7-kicker">{tr('s7_kicker')}</p>
           <h2 className="s7-title">{tr('s7_title_1')} {tr('s7_title_2')}</h2>
-          <p className="s7-desc">{tr('s7_desc')}</p>
+          <p className="s7-desc">
+            {tr('s7_desc').split('\n').map((line, i) => (
+              <span key={i}>{line}{i === 0 && <br />}</span>
+            ))}
+          </p>
           <p className="s7-name">
-            <span className="accent">{tr('s7_name')}</span>{tr('s7_name_suffix')}
+            <span className="accent">{tr('s7_name')}</span>
+            <span className="accent">{tr('s7_name_suffix')}</span>
           </p>
           <p className="s7-name-title">{tr('s7_name_title')}</p>
-          <p className="s7-bio">{tr('s7_bio')}</p>
-          <div>
+          <p className="s7-bio">
+            {tr('s7_bio').split('\n').map((line, i) => (
+              <span key={i}>{line}{i === 0 && <br />}</span>
+            ))}
+          </p>
+          <div className="s7-btns">
+            <a
+              href="#about"
+              className="s7-btn-outline"
+            >
+              {tr('s7_btn2')}
+            </a>
             <a
               href="https://t.me/medvedieva_anna"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-site"
+              className="s7-btn-outline"
             >
               {tr('s7_btn')}
             </a>
