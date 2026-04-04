@@ -128,7 +128,7 @@ footer.s12-footer {
 
 /* ===== FIXED HEADER ===== */
 .site-header {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -139,13 +139,6 @@ footer.s12-footer {
   padding: 0 40px;
   z-index: 100;
   background: transparent;
-  transition: background 0.4s, backdrop-filter 0.4s;
-}
-
-.site-header.scrolled {
-  background: rgba(18, 8, 2, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
 .header-logo {

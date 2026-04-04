@@ -17,18 +17,6 @@ export default function Footer() {
       </div>
 
       <div className="s12-layout">
-        {/* Logo — bottom left */}
-        <a href="/" className="s12-logo-wrap">
-          <Image
-            src="/images/icons/DNA.png"
-            alt="Reality DNA"
-            width={60}
-            height={42}
-            style={{ width: 'auto', height: 'auto' }}
-          />
-          <span className="s12-logo-text">Reality DNA</span>
-        </a>
-
         {/* Left column: headline + tagline + book block */}
         <div className="s12-left">
           <div className="s12-headline">
