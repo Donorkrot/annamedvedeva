@@ -95,24 +95,18 @@ footer.s12-footer {
   border-top: none;
 }
 
-/* Desktop section heights — pixel-perfect match to original */
-#s1  { height: 700px; }
-#s2  { height: 670px; }
-#s3  { height: 670px; }
+/* Full-screen sections */
+#s1, #s2, #s3, #s4, #s5, #s6, #s7, #s8, #s9, #s10, #s11 {
+  height: 100vh;
+  min-height: 600px;
+}
+#s10 { overflow: hidden; }
 .s4s5s6-wrapper {
   position: relative;
   width: 100%;
   background: var(--cream) url('/images/backgrounds/fon.png') center center / cover no-repeat;
 }
-#s4  { height: 691px; }
-#s5  { height: 626px; }
-#s6  { height: 688px; }
-#s7  { height: 649px; }
-#s8  { height: 619px; }
-#s9  { height: 670px; }
-#s10 { height: 659px; overflow: hidden; }
-#s11 { height: 100vh; min-height: 800px; }
-.s12-footer { height: 671px; }
+.s12-footer { height: 100vh; min-height: 600px; }
 
 .section-bg-img {
   position: absolute;
@@ -1333,19 +1327,9 @@ footer.s12-footer {
   box-sizing: border-box;
 }
 
-/* Card 1: dark brown */
-.s11-card:nth-child(1) .s11-card-inner {
-  background: linear-gradient(180deg, rgba(140, 100, 70, 0.45) 0%, rgba(60, 35, 15, 0.6) 100%);
-}
-
-/* Card 2: olive/dark gold */
-.s11-card:nth-child(2) .s11-card-inner {
-  background: linear-gradient(180deg, rgba(150, 135, 60, 0.5) 0%, rgba(100, 85, 30, 0.55) 100%);
-}
-
-/* Card 3: bright gold */
-.s11-card:nth-child(3) .s11-card-inner {
-  background: linear-gradient(180deg, rgba(180, 155, 50, 0.5) 0%, rgba(140, 110, 25, 0.55) 100%);
+/* All cards: same gold gradient */
+.s11-card-inner {
+  background: linear-gradient(180deg, rgba(160, 140, 55, 0.5) 0%, rgba(110, 90, 25, 0.55) 100%);
 }
 
 .s11-col-title {
