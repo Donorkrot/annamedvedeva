@@ -104,18 +104,14 @@ footer.s12-footer {
 .s4s5s6-wrapper {
   position: relative;
   width: 100%;
-  background: #000;
-}
-.s4s5s6-wrapper .section {
-  margin: 0;
-  padding: 0;
-  border: none;
-  gap: 0;
 }
 .s4s5s6-wrapper .section + .section {
   margin-top: 0;
   padding-top: 0;
 }
+#s4 { background: #e8ddd4; }
+#s5 { background: #1a0d05; }
+#s6 { background: #1a0d05; }
 .s12-footer { height: 100vh; min-height: 600px; }
 
 .section-bg-img {
