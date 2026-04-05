@@ -89,7 +89,7 @@ main {
 
 /* All sections — uniform aspect-ratio */
 #s1, #s2, #s3, #s4, #s5, #s6, #s7, #s8, #s9, #s10, #s11 {
-  aspect-ratio: 1440 / 750;
+  aspect-ratio: 1440 / 700;
 }
 #s1  { background: #1a0d05; }
 #s2  { background: #d4c4b8; }
