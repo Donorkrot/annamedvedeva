@@ -94,7 +94,7 @@ main {
 #s4  { aspect-ratio: 1440 / 675; background: #e8ddd4; }
 #s5  { aspect-ratio: 1440 / 685; background: #e8ddd4; }
 #s6  { aspect-ratio: 1440 / 804; background: #e8ddd4; }
-#s7  { height: 100vh; min-height: 600px; }
+#s7  { aspect-ratio: 1440 / 700; }
 #s8  { aspect-ratio: 1440 / 700; background: #e0d0c4; }
 #s9  { aspect-ratio: 1440 / 670; background: #e0d0c4; }
 #s10 { aspect-ratio: 1440 / 670; background: #000; overflow: hidden; }
