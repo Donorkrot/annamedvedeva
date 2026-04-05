@@ -116,42 +116,39 @@ main {
 .s12-footer { aspect-ratio: 1440 / 495; background: #000; }
 
 /* === Overlay clickable buttons on image sections === */
-.s1-btn-overlay {
+.s1-btn-overlay,
+.s11-btn-overlay,
+.s12-book-overlay,
+.s12-social-overlay {
   position: absolute;
-  z-index: 5;
+  z-index: 10;
+  display: block;
+  cursor: pointer;
+}
+.s1-btn-overlay {
   left: 10.2%;
   bottom: 18%;
   width: 21%;
   height: 6%;
-  cursor: pointer;
 }
 .s11-btn-overlay {
-  position: absolute;
-  z-index: 5;
   bottom: 12%;
   width: 22%;
   height: 5%;
-  cursor: pointer;
 }
 .s11-btn-1 { left: 5.5%; }
 .s11-btn-2 { left: 39%; }
 .s11-btn-3 { left: 72%; }
 .s12-book-overlay {
-  position: absolute;
-  z-index: 5;
   left: 9%;
   bottom: 22%;
   width: 16%;
   height: 12%;
-  cursor: pointer;
 }
 .s12-social-overlay {
-  position: absolute;
-  z-index: 5;
   bottom: 16%;
   width: 5%;
   height: 8%;
-  cursor: pointer;
 }
 .s12-ig { left: 58%; }
 .s12-yt { left: 63.5%; }
