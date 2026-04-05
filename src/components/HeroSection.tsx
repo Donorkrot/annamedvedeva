@@ -4,15 +4,11 @@ import Image from "next/image";
 export default function HeroSection() {
   return (
     <section id="s1" className="section">
-      <div className="s10-bg">
-        <Image
-          src="/images/backgrounds/bg-s1-full.png"
-          alt="Reality DNA — Академия управления состоянием"
-          fill
-          style={{ objectFit: "cover", objectPosition: "center center" }}
-          priority
-          unoptimized
-        />
+      <div className="s10-bg desktop-only">
+        <Image src="/images/backgrounds/bg-s1-full.png" alt="Reality DNA" fill style={{ objectFit: "cover", objectPosition: "center center" }} priority unoptimized />
+      </div>
+      <div className="s10-bg mobile-only">
+        <Image src="/images/mobile/s1.png" alt="Reality DNA" fill style={{ objectFit: "cover", objectPosition: "center top" }} priority unoptimized />
       </div>
     </section>
   );

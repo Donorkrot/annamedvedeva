@@ -87,6 +87,14 @@ main {
   padding: 0;
 }
 
+/* Desktop / Mobile image switching */
+.desktop-only { display: block; }
+.mobile-only { display: none; }
+@media (max-width: 768px) {
+  .desktop-only { display: none; }
+  .mobile-only { display: block; }
+}
+
 /* All sections — uniform aspect-ratio */
 #s1, #s2, #s3, #s4, #s5, #s6, #s7, #s8, #s9, #s10, #s11 {
   aspect-ratio: 1440 / 700;
@@ -1772,23 +1780,22 @@ main {
    =================================================== */
 @media (max-width: 768px) {
 
-  /* Force all sections to auto height and visible overflow on mobile */
+  /* Mobile: aspect-ratios from Figma phone exports (375 base) */
   .section {
-    overflow: visible !important;
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
+    overflow: hidden !important;
   }
-  #s1, #s2, #s3, #s4, #s5, #s6, #s7, #s8, #s9, #s10, #s11 {
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
-  }
-  .s12-footer {
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
-  }
+  #s1  { aspect-ratio: 375 / 716 !important; }
+  #s2  { aspect-ratio: 375 / 791 !important; }
+  #s3  { aspect-ratio: 375 / 635 !important; }
+  #s4  { aspect-ratio: 375 / 1219 !important; }
+  #s5  { aspect-ratio: 375 / 538 !important; }
+  #s6  { aspect-ratio: 375 / 306 !important; }
+  #s7  { aspect-ratio: 375 / 992 !important; }
+  #s8  { aspect-ratio: 375 / 690 !important; }
+  #s9  { aspect-ratio: 375 / 994 !important; }
+  #s10 { aspect-ratio: 375 / 788 !important; }
+  #s11 { aspect-ratio: 375 / 1239 !important; }
+  .s12-footer { aspect-ratio: 375 / 600 !important; }
 
   /* === HEADER === */
   .site-header {
