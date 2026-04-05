@@ -49,7 +49,7 @@ export default function Header() {
 
           <button
             className="btn-site header-btn"
-            onClick={() => document.querySelector('#s7')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => document.querySelector('#s11')?.scrollIntoView({ behavior: 'smooth' })}
           >
             {tr('nav_btn')}
           </button>
