@@ -103,6 +103,7 @@ main {
 #s2  { background: #d4c4b8; }
 #s3  { background: #1a1a1a; }
 #s4, #s5, #s6 { background: #e8ddd4; }
+#s6 { aspect-ratio: 1440 / 804 !important; }
 #s8  { background: #e0d0c4; }
 #s9  { background: #e0d0c4; }
 #s10 { background: #000; overflow: hidden; }
