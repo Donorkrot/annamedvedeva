@@ -11,6 +11,7 @@ export default function ProgramsSection() {
           fill
           style={{ objectFit: "contain", objectPosition: "center center" }}
           priority
+          unoptimized
         />
       </div>
     </section>
