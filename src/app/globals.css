@@ -140,13 +140,9 @@ main {
   padding: 0 40px;
   z-index: 100;
   background: transparent;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: background 0.3s ease;
 }
 .site-header.scrolled {
-  opacity: 1;
-  pointer-events: auto;
   background: rgba(26, 13, 5, 0.95);
 }
 
@@ -1804,9 +1800,12 @@ main {
     height: 56px;
   }
   .header-login,
-  .lang-switcher,
   .header-btn {
     display: none !important;
+  }
+  .lang-switcher {
+    gap: 12px;
+    font-size: 14px;
   }
   .header-right {
     gap: 12px;
