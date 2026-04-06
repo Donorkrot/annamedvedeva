@@ -10,9 +10,16 @@ export default function HeroSection() {
       <div className="s10-bg mobile-only">
         <Image src="/images/mobile/s1.png" alt="Reality DNA" fill style={{ objectFit: "cover", objectPosition: "center top" }} priority unoptimized />
       </div>
+      {/* Hero CTA "Продукты Академии" button overlay (bottom-left) */}
       <a
         href="#s11"
         className="s1-btn-overlay"
+        onClick={e => { e.preventDefault(); document.querySelector('#s11')?.scrollIntoView({ behavior: 'smooth' }); }}
+      />
+      {/* Image header "Продукты Академии" button overlay (top-right) */}
+      <a
+        href="#s11"
+        className="s1-header-btn-overlay"
         onClick={e => { e.preventDefault(); document.querySelector('#s11')?.scrollIntoView({ behavior: 'smooth' }); }}
       />
     </section>

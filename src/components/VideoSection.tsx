@@ -10,6 +10,12 @@ export default function VideoSection() {
       <div className="s10-bg mobile-only">
         <Image src="/images/mobile/s6.png" alt="Видео" fill style={{ objectFit: "cover", objectPosition: "center top" }} priority unoptimized />
       </div>
+      {/* "Метод" button overlay — placeholder link */}
+      <a
+        href="#"
+        className="s6-btn-overlay"
+        onClick={e => e.preventDefault()}
+      />
     </section>
   );
 }
