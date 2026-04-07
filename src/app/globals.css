@@ -129,17 +129,7 @@ main {
   z-index: 10;
   display: block;
   cursor: pointer;
-  transition: background 0.2s ease;
-}
-.s1-btn-overlay:hover,
-.s1-header-btn-overlay:hover,
-.s6-btn-overlay:hover,
-.s7-btn-overlay:hover,
-.s11-btn-overlay:hover,
-.s12-book-overlay:hover,
-.s12-social-overlay:hover,
-.s12-offer-overlay:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: transparent;
 }
 
 /* S1 — Hero CTA button (bottom-left) */

@@ -5,10 +5,10 @@ export default function HeroSection() {
   return (
     <section id="s1" className="section">
       <div className="s10-bg desktop-only">
-        <Image src="/images/backgrounds/bg-s1-full.png" alt="Reality DNA" fill style={{ objectFit: "cover", objectPosition: "center center" }} priority unoptimized />
+        <Image src="/images/backgrounds/bg-s1-full.jpg" alt="Reality DNA" fill style={{ objectFit: "cover", objectPosition: "center center" }} priority unoptimized />
       </div>
       <div className="s10-bg mobile-only">
-        <Image src="/images/mobile/s1.png" alt="Reality DNA" fill style={{ objectFit: "cover", objectPosition: "center top" }} priority unoptimized />
+        <Image src="/images/mobile/s1.jpg" alt="Reality DNA" fill style={{ objectFit: "cover", objectPosition: "center top" }} priority unoptimized />
       </div>
       {/* Hero CTA "Продукты Академии" button overlay (bottom-left) */}
       <a
