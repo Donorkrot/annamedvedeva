@@ -129,62 +129,73 @@ main {
   z-index: 10;
   display: block;
   cursor: pointer;
+  transition: background 0.2s ease;
+}
+.s1-btn-overlay:hover,
+.s1-header-btn-overlay:hover,
+.s6-btn-overlay:hover,
+.s7-btn-overlay:hover,
+.s11-btn-overlay:hover,
+.s12-book-overlay:hover,
+.s12-social-overlay:hover,
+.s12-offer-overlay:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* S1 — Hero CTA button (bottom-left) */
 .s1-btn-overlay {
   left: 9%;
-  bottom: 20%;
-  width: 21%;
+  bottom: 26%;
+  width: 22%;
   height: 7%;
 }
 
 /* S1 — Image header "Продукты Академии" button (top-right) */
 .s1-header-btn-overlay {
   right: 2%;
-  top: 2%;
-  width: 11.5%;
-  height: 5.5%;
+  top: 1.5%;
+  width: 14%;
+  height: 5%;
 }
 
 /* S6 — "Метод" button (bottom-center) */
 .s6-btn-overlay {
-  left: 37.5%;
+  left: 42%;
   bottom: 2.5%;
-  width: 14.5%;
-  height: 5.5%;
+  width: 16%;
+  height: 5%;
 }
 
 /* S7 — "О мастере" and "Запись на консультацию" buttons */
 .s7-btn-overlay {
-  bottom: 6%;
-  height: 6.5%;
+  bottom: 7%;
+  height: 6%;
 }
 .s7-btn-about {
-  left: 4%;
-  width: 13.5%;
+  left: 9%;
+  width: 19%;
 }
 .s7-btn-consult {
-  left: 18.5%;
-  width: 17.5%;
-}
-
-/* S11 — Program card buttons */
-.s11-btn-overlay {
-  bottom: 12%;
+  left: 30%;
   width: 22%;
-  height: 5%;
 }
-.s11-btn-1 { left: 5.5%; }
-.s11-btn-2 { left: 39%; }
-.s11-btn-3 { left: 72%; }
 
-/* S12 — Book block overlay */
+/* S11 — Program card "Перейти" buttons */
+.s11-btn-overlay {
+  bottom: 3.5%;
+  width: 24%;
+  height: 4%;
+}
+.s11-btn-1 { left: 2.5%; }
+.s11-btn-2 { left: 33%; }
+.s11-btn-3 { left: 63%; }
+
+/* S12 — Book block overlay ("Читать книгу" + title) */
 .s12-book-overlay {
-  left: 9%;
-  bottom: 22%;
-  width: 16%;
-  height: 12%;
+  left: 8%;
+  bottom: 6%;
+  width: 17%;
+  height: 35%;
 }
 
 /* S12 — Social icons overlays */
@@ -193,32 +204,42 @@ main {
   width: 5%;
   height: 8%;
 }
-.s12-ig { left: 58%; }
-.s12-yt { left: 63.5%; }
-.s12-tg { left: 69%; }
+.s12-ig { left: 53%; }
+.s12-yt { left: 58.5%; }
+.s12-tg { left: 64%; }
 
 /* S12 — "Публичная оферта" and "Политика конфиденциальности" */
 .s12-offer-overlay {
-  bottom: 6%;
-  height: 4%;
+  bottom: 1%;
+  height: 5%;
 }
 .s12-oferta {
-  left: 40%;
-  width: 12%;
+  left: 52%;
+  width: 13%;
 }
 .s12-privacy {
-  left: 54%;
-  width: 17%;
+  left: 66%;
+  width: 30%;
 }
 
-/* Hide image-header overlay on mobile (real header handles it) */
+/* Mobile adjustments */
 @media (max-width: 768px) {
   .s1-header-btn-overlay { display: none; }
-  .s6-btn-overlay { left: 32%; width: 22%; bottom: 1.5%; height: 5%; }
-  .s7-btn-about { left: 5%; width: 28%; bottom: 4%; height: 5%; }
-  .s7-btn-consult { left: 38%; width: 35%; bottom: 4%; height: 5%; }
-  .s12-oferta { left: 5%; width: 30%; bottom: 3%; }
-  .s12-privacy { left: 40%; width: 40%; bottom: 3%; }
+  .s1-btn-overlay { left: 5%; width: 60%; bottom: 18%; height: 6%; }
+  .s6-btn-overlay { left: 25%; width: 50%; bottom: 2%; height: 5%; }
+  .s7-btn-about { left: 4%; width: 35%; bottom: 5%; height: 5%; }
+  .s7-btn-consult { left: 42%; width: 50%; bottom: 5%; height: 5%; }
+  .s11-btn-overlay { bottom: 3%; height: 4%; width: 28%; }
+  .s11-btn-1 { left: 2%; }
+  .s11-btn-2 { left: 36%; }
+  .s11-btn-3 { left: 69%; }
+  .s12-book-overlay { left: 5%; width: 55%; bottom: 5%; height: 30%; }
+  .s12-social-overlay { bottom: 14%; width: 8%; height: 6%; }
+  .s12-ig { left: 47%; }
+  .s12-yt { left: 56%; }
+  .s12-tg { left: 66%; }
+  .s12-oferta { left: 5%; width: 35%; bottom: 2%; height: 4%; }
+  .s12-privacy { left: 42%; width: 55%; bottom: 2%; height: 4%; }
 }
 
 .section-bg-img {

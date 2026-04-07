@@ -14,10 +14,10 @@ export default function Footer() {
       <a href="https://instagram.com/medvedieva.anna" target="_blank" rel="noopener noreferrer" className="s12-social-overlay s12-ig" />
       <a href="https://www.youtube.com/@medvedievaanna" target="_blank" rel="noopener noreferrer" className="s12-social-overlay s12-yt" />
       <a href="https://t.me/wayofsoulanna" target="_blank" rel="noopener noreferrer" className="s12-social-overlay s12-tg" />
-      {/* "Публичная оферта" overlay */}
-      <a href="#" className="s12-offer-overlay s12-oferta" onClick={e => e.preventDefault()} />
-      {/* "Политика конфиденциальности" overlay */}
-      <a href="#" className="s12-offer-overlay s12-privacy" onClick={e => e.preventDefault()} />
+      {/* "Публичная оферта" — TODO: replace href with real link */}
+      <a href="#" className="s12-offer-overlay s12-oferta" />
+      {/* "Политика конфиденциальности" — TODO: replace href with real link */}
+      <a href="#" className="s12-offer-overlay s12-privacy" />
     </footer>
   );
 }

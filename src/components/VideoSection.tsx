@@ -10,11 +10,11 @@ export default function VideoSection() {
       <div className="s10-bg mobile-only">
         <Image src="/images/mobile/s6.png" alt="Видео" fill style={{ objectFit: "cover", objectPosition: "center top" }} priority unoptimized />
       </div>
-      {/* "Метод" button overlay — placeholder link */}
+      {/* "Метод" button overlay — TODO: add real link */}
       <a
-        href="#"
+        href="#s3"
         className="s6-btn-overlay"
-        onClick={e => e.preventDefault()}
+        onClick={e => { e.preventDefault(); document.querySelector('#s3')?.scrollIntoView({ behavior: 'smooth' }); }}
       />
     </section>
   );
