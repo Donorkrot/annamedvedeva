@@ -115,86 +115,79 @@ main {
 }
 .s12-footer { aspect-ratio: 1440 / 495; background: #000; }
 
-/* === Real HTML buttons positioned over background images === */
-
-/* S1 — Hero CTA "Продукты Академии" */
-.s1-cta-wrap {
+/* === Invisible overlay links on image buttons === */
+.s1-btn-overlay,
+.s6-btn-overlay,
+.s7-btn-overlay,
+.s11-btn-overlay,
+.s12-book-overlay,
+.s12-social-overlay,
+.s12-offer-overlay {
   position: absolute;
   z-index: 10;
-  left: 10%;
-  bottom: 22%;
+  display: block;
+  cursor: pointer;
+  background: transparent;
 }
-.s1-cta-btn {
-  padding: 14px 60px !important;
-  font-size: 16px !important;
-  border-radius: 12px !important;
+
+/* S1 — "Продукты Академии" CTA */
+.s1-btn-overlay {
+  left: 9%;
+  bottom: 26%;
+  width: 22%;
+  height: 7%;
 }
 
 /* S6 — "Метод" button */
-.s6-cta-wrap {
-  position: absolute;
-  z-index: 10;
-  bottom: 3%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.s6-cta-btn {
-  padding: 12px 80px !important;
-  font-size: 16px !important;
-  border-radius: 12px !important;
+.s6-btn-overlay {
+  left: 42%;
+  bottom: 2.5%;
+  width: 16%;
+  height: 5%;
 }
 
 /* S7 — "О мастере" + "Запись на консультацию" */
-.s7-btns-wrap {
-  position: absolute;
-  z-index: 10;
-  bottom: 7%;
-  left: 10%;
-  display: flex;
-  gap: 20px;
-}
+.s7-btn-overlay { bottom: 7%; height: 6%; }
+.s7-btn-about { left: 9%; width: 19%; }
+.s7-btn-consult { left: 30%; width: 22%; }
 
-/* S11 — Three "Перейти" buttons */
-.s11-btns-wrap {
-  position: absolute;
-  z-index: 10;
-  bottom: 5%;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 5.5%;
-}
-.s11-real-btn {
-  display: block;
-  width: 27%;
-  padding: 14px 0;
-  border: 1px solid rgba(255, 245, 239, 0.35);
-  border-radius: 8px;
-  color: #FFF5EF;
-  font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 400;
-  text-decoration: none;
-  text-align: center;
-  transition: all 0.3s ease;
-  background: transparent;
-}
-.s11-real-btn:hover {
-  background: rgba(255, 245, 239, 0.08);
-  border-color: rgba(255, 245, 239, 0.5);
-}
+/* S11 — "Перейти" x3 */
+.s11-btn-overlay { bottom: 3.5%; width: 24%; height: 4%; }
+.s11-btn-1 { left: 2.5%; }
+.s11-btn-2 { left: 33%; }
+.s11-btn-3 { left: 63%; }
 
-/* Mobile adjustments for real buttons */
+/* S12 — Book block */
+.s12-book-overlay { left: 8%; bottom: 6%; width: 17%; height: 35%; }
+
+/* S12 — Social icons */
+.s12-social-overlay { bottom: 16%; width: 5%; height: 8%; }
+.s12-ig { left: 53%; }
+.s12-yt { left: 58.5%; }
+.s12-tg { left: 64%; }
+
+/* S12 — Оферта / Политика */
+.s12-offer-overlay { bottom: 1%; height: 5%; }
+.s12-oferta { left: 52%; width: 13%; }
+.s12-privacy { left: 66%; width: 30%; }
+
+/* Mobile overlay adjustments */
 @media (max-width: 768px) {
-  .s1-cta-wrap { left: 5%; bottom: 15%; }
-  .s1-cta-btn { padding: 12px 40px !important; font-size: 14px !important; }
-  .s6-cta-wrap { bottom: 2%; }
-  .s6-cta-btn { padding: 10px 50px !important; font-size: 14px !important; }
-  .s7-btns-wrap { bottom: 5%; left: 5%; gap: 10px; }
-  .s7-btns-wrap .s7-btn-outline { padding: 10px 16px; font-size: 14px; }
-  .s11-btns-wrap { bottom: 3%; padding: 0 3%; }
-  .s11-real-btn { width: 30%; padding: 10px 0; font-size: 14px; }
+  .s1-btn-overlay { left: 5%; width: 60%; bottom: 18%; height: 6%; }
+  .s6-btn-overlay { left: 25%; width: 50%; bottom: 2%; height: 5%; }
+  .s7-btn-about { left: 4%; width: 35%; bottom: 5%; }
+  .s7-btn-consult { left: 42%; width: 50%; bottom: 5%; }
+  .s11-btn-overlay { bottom: 3%; height: 4%; width: 28%; }
+  .s11-btn-1 { left: 2%; }
+  .s11-btn-2 { left: 36%; }
+  .s11-btn-3 { left: 69%; }
+  .s12-book-overlay { left: 5%; width: 55%; bottom: 5%; height: 30%; }
+  .s12-social-overlay { bottom: 14%; width: 8%; height: 6%; }
+  .s12-ig { left: 47%; }
+  .s12-yt { left: 56%; }
+  .s12-tg { left: 66%; }
+  .s12-oferta { left: 5%; width: 35%; bottom: 2%; height: 4%; }
+  .s12-privacy { left: 42%; width: 55%; bottom: 2%; height: 4%; }
 }
 
 .section-bg-img {

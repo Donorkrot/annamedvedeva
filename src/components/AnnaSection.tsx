@@ -10,12 +10,8 @@ export default function AnnaSection() {
       <div className="s10-bg mobile-only">
         <Image src="/images/mobile/s7.jpg" alt="О мастере — Анна Медведева" fill style={{ objectFit: "cover", objectPosition: "center top" }} unoptimized />
       </div>
-
-      {/* Real buttons */}
-      <div className="s7-btns-wrap">
-        <a href="#s7" className="s7-btn-outline">О мастере</a>
-        <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" className="s7-btn-outline">Запись на консультацию</a>
-      </div>
+      <a href="#s7" className="s7-btn-overlay s7-btn-about" />
+      <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" className="s7-btn-overlay s7-btn-consult" />
     </section>
   );
 }
