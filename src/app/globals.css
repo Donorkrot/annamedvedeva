@@ -100,6 +100,17 @@ main {
   aspect-ratio: 1440 / 700;
 }
 #s1  { background: #1a0d05; }
+
+/* Hide baked-in header from background images */
+#s1::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, rgba(26,13,5,1) 0%, rgba(26,13,5,0.85) 60%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
 #s2  { background: #d4c4b8; }
 #s3  { background: #1a1a1a; }
 #s4, #s5, #s6 { background: #e8ddd4; }
@@ -215,13 +226,9 @@ main {
   padding: 0 40px;
   z-index: 100;
   background: transparent;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease, background 0.3s ease;
+  transition: background 0.3s ease;
 }
 .site-header.scrolled {
-  opacity: 1;
-  pointer-events: auto;
   background: rgba(26, 13, 5, 0.95);
 }
 

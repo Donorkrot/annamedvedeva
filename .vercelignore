@@ -1,0 +1,15 @@
+# Figma export folders
+ДНК Реальности десктоп UA
+Phone Version
+blocks
+
+# Source PNGs in project root (not needed for deploy)
+*.png
+
+# Keep PNGs inside public/
+!public/**/*.png
+
+# Other large unused files
+*.psd
+*.sketch
+*.fig
