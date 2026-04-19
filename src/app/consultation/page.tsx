@@ -12,12 +12,12 @@ function consultPath(type: 'desk' | 'mob', section: number, lang: string): strin
   return v(`${base}${langDir}/c${section}.jpg`);
 }
 
-const DESKTOP_RATIOS = ['1440 / 700', '1440 / 963', '1440 / 732', '1440 / 495'];
+const DESKTOP_RATIOS = ['1440 / 700', '1440 / 963', '1440 / 732'];
 // Fallback mobile aspect ratios (RU baseline). Mobile CSS overrides .consult-section
 // to `aspect-ratio: auto`, so the section actually takes the image's natural height;
 // these values are only used during SSR before the media query kicks in.
-const MOBILE_RATIOS  = ['375 / 827', '375 / 2184', '375 / 929', '375 / 647'];
-const DESKTOP_BGS    = ['#1a0d05', '#1a0d05', '#1a0d05', '#000'];
+const MOBILE_RATIOS  = ['375 / 827', '375 / 2184', '375 / 929'];
+const DESKTOP_BGS    = ['#1a0d05', '#1a0d05', '#1a0d05'];
 
 export default function ConsultationPage() {
   const { lang, tr } = useTranslation();
@@ -26,7 +26,7 @@ export default function ConsultationPage() {
     // `data-lang` lets CSS target language-specific button positions for c2
     // (exports have slightly different vertical alignment per language).
     <main data-lang={lang}>
-      {[1, 2, 3, 4].map((n, i) => (
+      {[1, 2, 3].map((n, i) => (
         <section
           key={`c${n}`}
           className="consult-section"
