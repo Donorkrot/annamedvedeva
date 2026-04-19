@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useTranslation } from '@/components/LanguageProvider';
 import SeoText from '@/components/SeoText';
-import { bgDesktop, bgMobile } from '@/lib/imagePaths';
+import { bgMobile } from '@/lib/imagePaths';
 
 export default function ProblemSection() {
   const { lang } = useTranslation();

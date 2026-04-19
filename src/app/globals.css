@@ -156,10 +156,12 @@ main {
 }
 
 /* ===== S1 hero — lightning detail layer =====
-   Sits on top of the sparks background (bg.png) with a soft breathing loop:
-   horizon lightning gently pulses brightness and drifts a few px so the
+   Detail PNG has a black background (Figma export); mix-blend-mode: screen
+   drops the black and additively layers the lightning/sparks on top of the
+   composite bg. Breathing loop pulses brightness and drifts a few px so the
    frozen-frame PNG reads as a live energy field. */
 .s1-detail-anim {
+  mix-blend-mode: screen;
   animation: s1DetailBreathe 6s ease-in-out infinite;
   will-change: transform, filter;
 }
