@@ -8,8 +8,10 @@ const v = (p: string) => `${p}?v=${ASSET_VERSION}`;
 
 function aboutPath(type: 'desk' | 'mob', section: number, lang: string): string {
   const base = type === 'desk' ? '/images/backgrounds/about' : '/images/mobile/about';
-  const langDir = lang === 'ua' ? '/ua' : '';
-  // EN not available yet — fall back to RU
+  // EN desktop exports exist; EN mobile falls back to RU until those are ready.
+  let langDir = '';
+  if (lang === 'ua') langDir = '/ua';
+  else if (lang === 'en' && type === 'desk') langDir = '/en';
   return v(`${base}${langDir}/a${section}.jpg`);
 }
 
