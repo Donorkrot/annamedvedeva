@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useTranslation } from '@/components/LanguageProvider';
 import SeoText from '@/components/SeoText';
-import { bgMobile } from '@/lib/imagePaths';
+import { bgDesktop, bgMobile } from '@/lib/imagePaths';
 
 export default function ProblemSection() {
   const { lang } = useTranslation();
@@ -11,8 +11,7 @@ export default function ProblemSection() {
     <section id="s2" className="section">
       <SeoText section="s2" />
       <div className="s10-bg desktop-only">
-        <Image src="/images/blocks-s2/bg.png" alt="" fill style={{ objectFit: "cover", objectPosition: "center center" }} quality={90} />
-        <Image src="/images/blocks-s2/brain.png" alt="" fill className="s2-brain-anim" style={{ objectFit: "cover", objectPosition: "center center" }} quality={90} />
+        <Image src={bgDesktop(2, lang)} alt="" fill style={{ objectFit: "cover", objectPosition: "center center" }} quality={90} />
       </div>
       <div className="s10-bg mobile-only">
         <Image src={bgMobile(2, lang)} alt="" fill style={{ objectFit: "cover", objectPosition: "center top" }} quality={90} />

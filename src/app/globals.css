@@ -155,39 +155,35 @@ main {
   }
 }
 
-/* ===== S1 hero — lightning detail layer =====
-   Detail PNG has a black background (Figma export); mix-blend-mode: screen
-   drops the black and additively layers the lightning/sparks on top of the
-   composite bg. Breathing loop pulses brightness and drifts a few px so the
-   frozen-frame PNG reads as a live energy field. */
-.s1-detail-anim {
+/* ===== S1 hero — single animated particle layer =====
+   Sits on top of the baked-in JPG sparks with `mix-blend-mode: screen`
+   at low opacity, so it reads as the existing lightning gently
+   breathing rather than a second image layered on top. One animation,
+   no masks, no parallax, no vignette — cheap to render. */
+.s1-particles {
+  position: absolute;
+  inset: -5%;
+  background-image: url('/images/effects/s1-particles.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
   mix-blend-mode: screen;
-  animation: s1DetailBreathe 6s ease-in-out infinite;
-  will-change: transform, filter;
-}
-@keyframes s1DetailBreathe {
-  0%, 100% { transform: translateY(0)   scale(1);     filter: brightness(1)    drop-shadow(0 0 22px rgba(120, 180, 255, 0.18)); }
-  50%      { transform: translateY(-6px) scale(1.012); filter: brightness(1.12) drop-shadow(0 0 38px rgba(255, 170, 110, 0.28)); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .s1-detail-anim { animation: none; }
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 2;
+  will-change: transform, opacity;
+  animation: s1Drift 32s ease-in-out infinite;
 }
 
-/* ===== S2 brain — gentle float + pulse =====
-   Brain PNG sits on top of the background plexus layer. A single keyframe
-   pairs a small Y-drift with a whisper-scale and brightness pulse, so the
-   brain reads as "breathing" rather than bouncing. Low-frequency (5s) keeps
-   the animation calm and non-distracting. */
-.s2-brain-anim {
-  animation: s2BrainFloat 5s ease-in-out infinite;
-  will-change: transform, filter;
+@keyframes s1Drift {
+  0%, 100% { transform: translate(0,      0)   scale(1);    opacity: 0.35; }
+  25%      { transform: translate(-8px, -6px) scale(1.015); opacity: 0.55; }
+  50%      { transform: translate(6px, -10px) scale(1.02);  opacity: 0.5;  }
+  75%      { transform: translate(-4px,  6px) scale(1.01);  opacity: 0.4;  }
 }
-@keyframes s2BrainFloat {
-  0%, 100% { transform: translateY(0) scale(1);         filter: brightness(1)    drop-shadow(0 0 18px rgba(255, 180, 120, 0.18)); }
-  50%      { transform: translateY(-10px) scale(1.015); filter: brightness(1.08) drop-shadow(0 0 32px rgba(255, 180, 120, 0.32)); }
-}
+
 @media (prefers-reduced-motion: reduce) {
-  .s2-brain-anim { animation: none; }
+  .s1-particles { animation: none; opacity: 0.4; }
 }
 
 /* ===== SECTION BASE ===== */
