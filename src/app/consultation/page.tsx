@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useTranslation } from '@/components/LanguageProvider';
 import Footer from '@/components/Footer';
 
-const ASSET_VERSION = '20260418-hq3x';
+const ASSET_VERSION = '20260420-c2-ref';
 const v = (p: string) => `${p}?v=${ASSET_VERSION}`;
 
 function consultPath(type: 'desk' | 'mob', section: number, lang: string): string {
@@ -63,14 +63,14 @@ export default function ConsultationPage() {
           {n === 2 && (
             <>
               {/* Card 1 — Индивидуальная */}
-              <a href="#" aria-label={tr('consult_pay')}     className="cons-hit cons-pay cons-col-1" />
-              <a href="#" aria-label={tr('consult_support')} className="cons-hit cons-support cons-col-1" />
+              <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" aria-label={tr('consult_pay')}     className="cons-hit cons-pay cons-col-1" />
+              <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" aria-label={tr('consult_support')} className="cons-hit cons-support cons-col-1" />
               {/* Card 2 — Срочная */}
-              <a href="#" aria-label={tr('consult_pay')}     className="cons-hit cons-pay cons-col-2" />
-              <a href="#" aria-label={tr('consult_support')} className="cons-hit cons-support cons-col-2" />
+              <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" aria-label={tr('consult_pay')}     className="cons-hit cons-pay cons-col-2" />
+              <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" aria-label={tr('consult_support')} className="cons-hit cons-support cons-col-2" />
               {/* Card 3 — Дистанционная */}
-              <a href="#" aria-label={tr('consult_pay')}     className="cons-hit cons-pay cons-col-3" />
-              <a href="#" aria-label={tr('consult_support')} className="cons-hit cons-support cons-col-3" />
+              <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" aria-label={tr('consult_pay')}     className="cons-hit cons-pay cons-col-3" />
+              <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" aria-label={tr('consult_support')} className="cons-hit cons-support cons-col-3" />
             </>
           )}
         </section>

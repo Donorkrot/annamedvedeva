@@ -196,6 +196,13 @@ main {
   box-shadow: none;
   margin: 0;
   padding: 0;
+  /* Header is fixed 72px desktop / 56px mobile — offset anchor scrolls so
+     the top of baked-in JPG text (S3 kicker, S4/S8 titles) isn't hidden
+     behind the header when menu links scroll to a section. */
+  scroll-margin-top: 72px;
+}
+@media (max-width: 768px) {
+  .section { scroll-margin-top: 56px; }
 }
 
 /* Desktop / Mobile image switching */
@@ -396,6 +403,93 @@ img.desktop-only { display: block !important; }
   animation-play-state: paused;
 }
 
+/* S6 "Метод" button — PNG outline is thin + low-contrast on the bright
+   bokeh background. Tint the fill with warm cream glass (matches site
+   palette, NOT a dark blob) so the pill lifts off the photo, and push
+   the outline/text darker via a filter so "Метод" reads clearly. */
+.s6-btn-overlay {
+  background: rgba(255, 245, 225, 0.42);
+  -webkit-backdrop-filter: blur(6px) saturate(1.1);
+          backdrop-filter: blur(6px) saturate(1.1);
+  box-shadow:
+    inset 0 0 0 1px rgba(100, 60, 20, 0.22),
+    0 3px 14px rgba(100, 60, 20, 0.22);
+}
+.s6-btn-overlay > img {
+  filter:
+    contrast(2.0) saturate(1.25)
+    drop-shadow(0 1px 1px rgba(50, 25, 5, 0.45));
+}
+@keyframes s6MethodBreath {
+  0%, 100% {
+    box-shadow:
+      inset 0 0 0 1px rgba(100, 60, 20, 0.22),
+      0 3px 14px rgba(100, 60, 20, 0.22),
+      0 0 0      rgba(var(--glow-warm), 0);
+  }
+  50% {
+    box-shadow:
+      inset 0 0 0 1px rgba(100, 60, 20, 0.32),
+      0 3px 18px rgba(100, 60, 20, 0.30),
+      0 0 24px   rgba(var(--glow-warm), 0.55);
+  }
+}
+.s6-btn-overlay {
+  animation: s6MethodBreath 4.5s ease-in-out infinite;
+}
+.s6-btn-overlay:hover {
+  animation-play-state: paused;
+}
+
+/* S11 "Перейти" buttons — rotating conic sweep traces the border ring.
+   The button already has overflow:hidden + border-radius, so the effect
+   lives on ::before inside the bounds and is masked to show only as a
+   thin ring along the edge. */
+@property --s11-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes s11BorderRun {
+  to { --s11-angle: 360deg; }
+}
+
+/* Fallback for browsers without @property — rotate the whole pseudo. */
+@keyframes s11BorderRunFallback {
+  to { transform: rotate(360deg); }
+}
+
+.s11-btn-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--s11-angle, 0deg),
+    transparent 0deg,
+    transparent 260deg,
+    rgba(var(--glow-warm), 0.95) 315deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+          mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  animation: s11BorderRun 3.2s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.s11-btn-overlay:hover::before {
+  animation-duration: 1.8s;
+}
+
 /* Scroll-reveal for below-the-fold buttons — CSS-only via view-timeline.
    Modern browsers (Chrome 115+, Edge 115+) play a gentle fade+rise as each
    button enters the viewport. Safari/Firefox get instant display (graceful
@@ -430,8 +524,20 @@ img.desktop-only { display: block !important; }
 
 @media (prefers-reduced-motion: reduce) {
   .s1-btn-overlay,
+  .s6-btn-overlay,
   .s7-btn-consult {
     animation: none;
+  }
+  .s6-btn-overlay {
+    filter: brightness(1.18) contrast(1.06);
+  }
+  .s11-btn-overlay::before {
+    animation: none;
+    background: conic-gradient(
+      transparent 260deg,
+      rgba(var(--glow-warm), 0.6) 315deg,
+      transparent 360deg
+    );
   }
   .s1-btn-overlay,
   .s6-btn-overlay,
@@ -607,6 +713,8 @@ img.desktop-only { display: block !important; }
   cursor: pointer;
   z-index: 11;
   transition: background 0.5s var(--ease-luxe);
+  -webkit-tap-highlight-color: rgba(var(--glow-warm), 0.22);
+  touch-action: manipulation;
 }
 
 /* Legal links — no animation, just a gentle brightness lift on hover. */
@@ -633,21 +741,44 @@ img.desktop-only { display: block !important; }
   .s7-btn-about { bottom: 10.5%; }
   .s7-btn-consult { bottom: 3.8%; }
 
-  /* S11 mobile | ref: 11.png (375×1239) — stacked full-width */
+  /* S11 mobile | ref: 11.png (375×1239) — stacked full-width.
+     Card text in the JPG ends at 30.6% / 51.9% / 75.1% from top;
+     buttons sit in the dark gap just below each card. */
   .s11-btn-overlay { left: 6.7% !important; width: 86.7% !important; }
-  .s11-btn-1 { bottom: 67.6%; }
-  .s11-btn-2 { bottom: 35.4%; }
-  .s11-btn-3 { bottom: 5.2%; }
+  .s11-btn-1 { bottom: 64.5%; }
+  .s11-btn-2 { bottom: 43.5%; }
+  .s11-btn-3 { bottom: 20%; }
 
-  /* S12 mobile | ref: подвал моб версия референс.png (1125×1800 aka 375×600).
-     Artwork (book card, social icons, legal links) is baked into the JPG
-     background. These blocks are invisible click zones aligned to that art. */
-  /* Mobile footer: clean JPG background + separate transparent PNG buttons
-     overlaid on top. Positions measured from `главная страница подвал моб фон.png`
-     (1125×1893). PNG dims drive height; aspect-ratio removed. */
-  .s12-book-overlay { left: 12%; width: 54%; bottom: 27%; aspect-ratio: auto; }
-  .s12-social-block { left: 12%; width: 50%; bottom: 18%; aspect-ratio: auto; }
-  .s12-legal-block { left: 3%; width: 84%; bottom: 9%; aspect-ratio: auto; }
+  /* S12 mobile | ref: подвал моб версия референс.png (1125×1800).
+     Footer background IS the reference image — book card, social icons,
+     legal links, and © line are all BAKED into s12.jpg. Overlay PNGs on
+     mobile would double-draw the text, so the <img> children are hidden
+     below; the anchors remain as invisible click zones. */
+  .s12-footer { aspect-ratio: 1125 / 1800 !important; }
+
+  .s12-book-overlay > img.mobile-only,
+  .s12-social-block > img,
+  .s12-legal-block > img.mobile-only {
+    display: none !important;
+  }
+  /* Icons are drawn in the JPG — clear the CSS background on each hit zone
+     so we don't paint them a second time in the overlay. Keep the element
+     for clicks / hover glow. */
+  .s12-social-hit {
+    background-image: none !important;
+    animation: none !important;
+  }
+
+  /* Book card ("Читать книгу / ДНК РЕАЛЬНОСТИ") — center-right band at
+     ~61-68% from top of the 1800-tall JPG. */
+  .s12-book-overlay  { left: 40%; width: 50%; top: 61%; bottom: auto; height: 7%; aspect-ratio: auto; }
+  /* Social icons — right half of the REALITY DNA / icons row (~69-74%). */
+  .s12-social-block  { left: 45%; width: 50%; top: 69%; bottom: auto; height: 5.5%; }
+  /* Legal links — full-width row at ~78-81%. */
+  /* Legal hit zone is ~20px tall at the baked text row — too small for a
+     reliable mobile tap. Expand vertically around the text so taps just
+     above or below the text still register. */
+  .s12-legal-block   { left: 0%;  width: 100%; top: 74.5%; bottom: auto; height: 10%; aspect-ratio: auto; }
 }
 
 .section-bg-img {
@@ -2337,7 +2468,7 @@ img.desktop-only { display: block !important; }
   #s9  { aspect-ratio: 375 / 994 !important; }
   #s10 { aspect-ratio: 375 / 788 !important; }
   #s11 { aspect-ratio: 375 / 1239 !important; }
-  .s12-footer { aspect-ratio: 1125 / 1893 !important; }
+  .s12-footer { aspect-ratio: 1125 / 1800 !important; }
 
   /* === HEADER === */
   .site-header {
@@ -2876,8 +3007,10 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     height: auto !important;
   }
 
-  /* === Mobile — 375 × 2105…2184 per language ===
-     Button rect 261×46. Horizontal same across langs; verticals per-lang. */
+  /* === Mobile — 375 × 2209 per language ===
+     Button rect 261×46. Pills are DRAWN inside c2 mobile JPG now (the
+     exported 1125×6627 reference), so .cons-hit stays fully transparent —
+     just a click zone aligned to each drawn pill. */
   .cons-hit   { height: 2.15%; }
   .cons-col-1,
   .cons-col-2,
@@ -2886,27 +3019,27 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     width: 69.6% !important;
   }
 
-  /* RU mobile — 375×2184 reference */
-  main[data-lang="ru"] .cons-col-1.cons-pay     { top: 14.88%; }
-  main[data-lang="ru"] .cons-col-1.cons-support { top: 17.58%; }
-  main[data-lang="ru"] .cons-col-2.cons-pay     { top: 48.44%; }
-  main[data-lang="ru"] .cons-col-2.cons-support { top: 51.14%; }
-  main[data-lang="ru"] .cons-col-3.cons-pay     { top: 79.81%; }
-  main[data-lang="ru"] .cons-col-3.cons-support { top: 82.51%; }
+  /* Measured from `индивидуальная консультация моб версия референс.png`
+     (top stroke of each pill / 6627 img height). Same asset is used for
+     all three languages for now; revisit when UA/EN references land. */
+  main[data-lang="ru"] .cons-col-1.cons-pay     { top: 15.57%; }
+  main[data-lang="ru"] .cons-col-1.cons-support { top: 17.66%; }
+  main[data-lang="ru"] .cons-col-2.cons-pay     { top: 49.25%; }
+  main[data-lang="ru"] .cons-col-2.cons-support { top: 51.34%; }
+  main[data-lang="ru"] .cons-col-3.cons-pay     { top: 81.26%; }
+  main[data-lang="ru"] .cons-col-3.cons-support { top: 83.34%; }
 
-  /* EN mobile — 375×2105 reference */
-  main[data-lang="en"] .cons-col-1.cons-pay     { top: 13.82%; }
-  main[data-lang="en"] .cons-col-1.cons-support { top: 16.63%; }
-  main[data-lang="en"] .cons-col-2.cons-pay     { top: 50.26%; }
-  main[data-lang="en"] .cons-col-2.cons-support { top: 53.06%; }
-  main[data-lang="en"] .cons-col-3.cons-pay     { top: 81.33%; }
-  main[data-lang="en"] .cons-col-3.cons-support { top: 84.13%; }
+  main[data-lang="en"] .cons-col-1.cons-pay     { top: 15.57%; }
+  main[data-lang="en"] .cons-col-1.cons-support { top: 17.66%; }
+  main[data-lang="en"] .cons-col-2.cons-pay     { top: 49.25%; }
+  main[data-lang="en"] .cons-col-2.cons-support { top: 51.34%; }
+  main[data-lang="en"] .cons-col-3.cons-pay     { top: 81.26%; }
+  main[data-lang="en"] .cons-col-3.cons-support { top: 83.34%; }
 
-  /* UA mobile — 375×2153 reference */
-  main[data-lang="ua"] .cons-col-1.cons-pay     { top: 15.09%; }
-  main[data-lang="ua"] .cons-col-1.cons-support { top: 17.84%; }
-  main[data-lang="ua"] .cons-col-2.cons-pay     { top: 49.14%; }
-  main[data-lang="ua"] .cons-col-2.cons-support { top: 51.88%; }
-  main[data-lang="ua"] .cons-col-3.cons-pay     { top: 81.10%; }
-  main[data-lang="ua"] .cons-col-3.cons-support { top: 83.84%; }
+  main[data-lang="ua"] .cons-col-1.cons-pay     { top: 15.57%; }
+  main[data-lang="ua"] .cons-col-1.cons-support { top: 17.66%; }
+  main[data-lang="ua"] .cons-col-2.cons-pay     { top: 49.25%; }
+  main[data-lang="ua"] .cons-col-2.cons-support { top: 51.34%; }
+  main[data-lang="ua"] .cons-col-3.cons-pay     { top: 81.26%; }
+  main[data-lang="ua"] .cons-col-3.cons-support { top: 83.34%; }
 }

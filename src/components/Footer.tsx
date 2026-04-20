@@ -1,5 +1,6 @@
 'use client';
 import Image from "next/image";
+import Link from "next/link";
 import { useTranslation } from '@/components/LanguageProvider';
 import { bgDesktop, bgMobile, btnDesktop, btnMobile } from '@/lib/imagePaths';
 import SeoText from '@/components/SeoText';
@@ -31,8 +32,8 @@ export default function Footer() {
       <div className="s12-legal-block">
         <img className="desktop-only" src={btnDesktop(12, lang, 'oferta')} alt="" draggable={false} />
         <img className="mobile-only" src={btnMobile(12, lang, 'oferta')} alt="" draggable={false} />
-        <a href="/offer" className="s12-legal-hit s12-legal-left" aria-label="Публичная оферта" />
-        <a href="/offer" className="s12-legal-hit s12-legal-right" aria-label="Политика конфиденциальности" />
+        <Link href="/offer"   className="s12-legal-hit s12-legal-left"  aria-label="Публичная оферта"><span className="sr-only">Публичная оферта</span></Link>
+        <Link href="/privacy" className="s12-legal-hit s12-legal-right" aria-label="Политика конфиденциальности"><span className="sr-only">Политика конфиденциальности</span></Link>
       </div>
     </footer>
   );
