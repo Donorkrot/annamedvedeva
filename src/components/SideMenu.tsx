@@ -38,8 +38,11 @@ export default function SideMenu({ open, onClose }: SideMenuProps) {
   const scrollTo = (href: string) => {
     onClose();
     setTimeout(() => {
-      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
-    }, 300);
+      const el = document.querySelector(href) as HTMLElement | null;
+      if (!el) return;
+      const top = el.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }, 320);
   };
 
   return (

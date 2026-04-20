@@ -47,7 +47,8 @@ body {
   color: var(--cream);
   font-family: var(--font-body);
   font-size: 16px;
-  overflow-x: hidden;
+  overflow-x: clip;
+  scroll-behavior: smooth;
 }
 
 main {
@@ -55,7 +56,7 @@ main {
   flex-direction: column;
   gap: 0;
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 ::-webkit-scrollbar {
@@ -184,6 +185,46 @@ main {
 
 @media (prefers-reduced-motion: reduce) {
   .s1-particles { animation: none; opacity: 0.4; }
+}
+
+/* ===== S1 scroll-linked reveal =====
+   As the hero exits the viewport the background zooms in and fades out
+   (pulls the viewer forward into the rest of the page); the particle
+   layer simultaneously gets brighter and pushes past the edges, giving
+   the impression the storm is getting stronger. Pure CSS
+   `animation-timeline: view()` — no JS, no scroll listeners, driven by
+   the compositor.  Gracefully no-ops on older browsers. */
+@supports (animation-timeline: view()) {
+  #s1 .s10-bg img {
+    animation: s1HeroZoom linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 100%;
+    will-change: transform, opacity;
+  }
+  .s1-particles {
+    animation:
+      s1Drift 32s ease-in-out infinite,
+      s1ParticlesBoost linear both;
+    animation-timeline: auto, view();
+    animation-range: auto, cover 0% cover 100%;
+  }
+}
+
+@keyframes s1HeroZoom {
+  0%   { transform: scale(1)     translateY(0);   opacity: 1;    }
+  100% { transform: scale(1.09)  translateY(4%);  opacity: 0.55; }
+}
+
+@keyframes s1ParticlesBoost {
+  0%   { filter: brightness(1)   saturate(1);   }
+  100% { filter: brightness(1.6) saturate(1.25); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #s1 .s10-bg img,
+  .s1-particles {
+    animation: none;
+  }
 }
 
 /* ===== SECTION BASE ===== */
