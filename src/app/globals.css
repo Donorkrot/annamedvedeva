@@ -446,6 +446,45 @@ img.desktop-only { display: block !important; }
 #s3  { aspect-ratio: 1440 / 670; }
 #s4  { aspect-ratio: 1440 / 675; }
 #s6  { aspect-ratio: 1440 / 804; }
+/* S6 is now a video block — 16:9 iframe centered on the warm beige
+   background.  Overrides the baked-image aspect ratio above. */
+#s6.s6-video {
+  aspect-ratio: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 6%;
+  background: #e8ddd4;
+}
+#s6.s6-video .s6-video-frame {
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow:
+    0 2px 6px rgba(60, 30, 10, 0.18),
+    0 24px 60px -18px rgba(60, 30, 10, 0.35);
+  background: #0d0702;
+}
+#s6.s6-video .s6-video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+@media (max-width: 768px) {
+  #s6.s6-video {
+    aspect-ratio: auto !important;
+    padding: 28px 4%;
+  }
+  #s6.s6-video .s6-video-frame {
+    border-radius: 10px;
+  }
+}
 #s11 { aspect-ratio: 1440 / 820; }
 #s1  { background: #1a0d05; }
 #s2  { background: #d4c4b8; }
