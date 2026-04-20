@@ -187,44 +187,222 @@ main {
   .s1-particles { animation: none; opacity: 0.4; }
 }
 
-/* ===== S1 scroll-linked reveal =====
-   As the hero exits the viewport the background zooms in and fades out
-   (pulls the viewer forward into the rest of the page); the particle
-   layer simultaneously gets brighter and pushes past the edges, giving
-   the impression the storm is getting stronger. Pure CSS
-   `animation-timeline: view()` — no JS, no scroll listeners, driven by
-   the compositor.  Gracefully no-ops on older browsers. */
-@supports (animation-timeline: view()) {
-  #s1 .s10-bg img {
-    animation: s1HeroZoom linear both;
-    animation-timeline: view();
-    animation-range: cover 0% cover 100%;
-    will-change: transform, opacity;
-  }
-  .s1-particles {
-    animation:
-      s1Drift 32s ease-in-out infinite,
-      s1ParticlesBoost linear both;
-    animation-timeline: auto, view();
-    animation-range: auto, cover 0% cover 100%;
-  }
+/* ===== S1 hero — layered composition =====
+   Desktop renders three stacked layers so the bright lightning detail
+   can breathe independently of the static background:
+     1. .s1-bg-layer    — dark ambient dust, never moves
+     2. .s1-detail-layer — bright lightning (screen-blended), animated
+     3. .s1-text-layer   — HTML headings / subtitle
+     4. .s1-btn-overlay  — existing CTA image button
+   Mobile keeps its single baked JPG composite unchanged.
+
+   `--s1-progress` is set 0..1 by HeroSection.tsx on scroll so the
+   detail intensifies and the whole hero gently parallaxes upward as
+   it leaves the viewport. */
+#s1.s1-animated {
+  --s1-progress: 0;
 }
 
-@keyframes s1HeroZoom {
-  0%   { transform: scale(1)     translateY(0);   opacity: 1;    }
-  100% { transform: scale(1.09)  translateY(4%);  opacity: 0.55; }
+.s1-layers {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
 }
-
-@keyframes s1ParticlesBoost {
-  0%   { filter: brightness(1)   saturate(1);   }
-  100% { filter: brightness(1.6) saturate(1.25); }
+/* Base layer — static dark ambient. Only a whisper of scroll-driven zoom. */
+.s1-bg-layer {
+  position: absolute;
+  inset: 0;
+  background: #1a0d05 url('/images/effects/s1-hero-bg.jpg') center/cover no-repeat;
+  z-index: 0;
+  transform: scale(calc(1 + var(--s1-progress) * 0.05));
+  opacity: calc(1 - var(--s1-progress) * 0.3);
+  will-change: transform, opacity;
+}
+/* Detail layer — lightning.
+   Outer element carries the scroll-driven dolly-in.
+   Inner ::before carries the PNG and a slow hypnotic breath:
+     - a wide/narrow pulse on scaleX (12s, sine-eased)
+     - a gentle vertical float on translateY (17s, sine-eased)
+     - a brightness/saturation pulse (7s, sine-eased)
+   The three periods are deliberately co-prime-ish so the state never
+   exactly repeats for minutes — the eye reads the motion as organic,
+   never looped. */
+.s1-detail-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transform-origin: center 58%;
+  transform: scale(calc(1 + var(--s1-progress) * 0.07));
+  pointer-events: none;
+  will-change: transform;
+}
+.s1-detail-layer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/images/effects/s1-hero-detail.png') center/contain no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.95;
+  transform-origin: center 58%;
+  animation:
+    s1DetailBreathX 12s ease-in-out infinite,
+    s1DetailFloat   17s ease-in-out infinite,
+    s1DetailPulse    7s ease-in-out infinite;
+  will-change: transform, filter, opacity;
+}
+/* Scroll amplification — independent of the pulse so they don't conflict. */
+#s1.s1-animated .s1-detail-layer {
+  --s1-scroll-bright: calc(var(--s1-progress) * 0.45);
+  --s1-scroll-sat:    calc(var(--s1-progress) * 0.25);
+}
+/* Darkening layer — lifts text readability off the bright lightning.
+   Soft radial centered on the title + a gentle top/bottom vignette. */
+.s1-darken {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 70% 45% at 50% 48%,
+      rgba(15, 8, 3, 0.72) 0%,
+      rgba(15, 8, 3, 0.55) 30%,
+      rgba(15, 8, 3, 0.28) 60%,
+      rgba(15, 8, 3, 0)    100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(10, 5, 2, 0.45) 0%,
+      rgba(10, 5, 2, 0)    22%,
+      rgba(10, 5, 2, 0)    78%,
+      rgba(10, 5, 2, 0.35) 100%
+    );
+  mix-blend-mode: multiply;
+}
+/* Three layered, co-prime-ish cycles — scaleX wide/narrow, a gentle
+   vertical float, and a brightness pulse. All ease-in-out (sine-like),
+   all sub-perceptible amplitudes so the motion reads as breath, not
+   animation. */
+@keyframes s1DetailBreathX {
+  0%, 100% { transform: scale(1)       translateY(0); }
+  50%      { transform: scaleX(1.022) scaleY(1.008) translateY(0); }
+}
+@keyframes s1DetailFloat {
+  0%, 100% { translate: 0 0; }
+  35%      { translate: 0 -3px; }
+  70%      { translate: 0 2px;  }
+}
+@keyframes s1DetailPulse {
+  0%, 100% {
+    filter:  brightness(calc(1    + var(--s1-scroll-bright, 0)))
+             saturate(calc(1.02 + var(--s1-scroll-sat, 0)));
+    opacity: 0.92;
+  }
+  50% {
+    filter:  brightness(calc(1.13 + var(--s1-scroll-bright, 0)))
+             saturate(calc(1.17 + var(--s1-scroll-sat, 0)));
+    opacity: 1;
+  }
+}
+#s1.s1-animated .s10-bg {
+  /* mobile composite — light scroll parallax only */
+  transform: scale(calc(1 + var(--s1-progress) * 0.1))
+             translateY(calc(var(--s1-progress) * 4%));
+  opacity: calc(1 - var(--s1-progress) * 0.55);
+  transform-origin: center center;
+  transition: opacity 0.1s linear;
+}
+#s1.s1-animated .s1-text-layer {
+  transform: translateY(calc(var(--s1-progress) * -18px));
+  opacity: calc(1 - var(--s1-progress) * 1.4);
+  transition: opacity 0.12s linear;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #s1 .s10-bg img,
-  .s1-particles {
-    animation: none;
+  #s1.s1-animated .s1-bg-layer,
+  #s1.s1-animated .s1-detail-layer,
+  #s1.s1-animated .s10-bg,
+  #s1.s1-animated .s1-text-layer {
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    animation: none !important;
   }
+}
+
+/* ===== S1 text layer (desktop only) ===== */
+.s1-text-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  /* Everything sized relative to the section's 1440×700 design bounds
+     — using % keeps the layout stable while the section scales with
+     the viewport width (aspect-ratio is fixed). */
+}
+.s1-text-layer .hero-tagline {
+  position: absolute;
+  top: 11.4%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-size: clamp(12px, 1.1vw, 16px);
+  font-weight: 300;
+  color: var(--cream);
+  letter-spacing: 0.5px;
+  text-align: center;
+  line-height: 1.25;
+  opacity: 0.82;
+}
+.s1-text-layer .hero-title-v2 {
+  position: absolute;
+  top: 36%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 3.6vw, 54px);
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-align: center;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  text-shadow:
+    0 0 60px rgba(200, 160, 60, 0.25),
+    0 2px 20px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+}
+.s1-text-layer .hero-glow-line-v2 {
+  position: absolute;
+  top: 58%;
+  left: 6%;
+  right: 6%;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%, rgba(200, 160, 60, 0.3) 10%,
+    rgba(220, 180, 80, 0.9) 30%, #fff8e0 50%,
+    rgba(220, 180, 80, 0.9) 70%, rgba(200, 160, 60, 0.3) 90%, transparent 100%);
+  box-shadow:
+    0 0 12px 4px rgba(220, 180, 80, 0.5),
+    0 0 40px 8px rgba(180, 120, 20, 0.3);
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+.s1-text-layer .hero-subtitle-v2 {
+  position: absolute;
+  top: 62%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-heading);
+  font-size: clamp(14px, 1.5vw, 24px);
+  font-weight: 300;
+  color: var(--cream);
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+  text-align: center;
+  white-space: nowrap;
+  opacity: 0.94;
 }
 
 /* ===== SECTION BASE ===== */
