@@ -1018,10 +1018,19 @@ img.desktop-only { display: block !important; }
   /* S11 mobile | ref: 11.png (375×1239) — stacked full-width.
      Card text in the JPG ends at 30.6% / 51.9% / 75.1% from top;
      buttons sit in the dark gap just below each card. */
-  .s11-btn-overlay { left: 6.7% !important; width: 86.7% !important; }
-  .s11-btn-1 { bottom: 64.5%; }
-  .s11-btn-2 { bottom: 43.5%; }
-  .s11-btn-3 { bottom: 20%; }
+  /* Button positions tuned against `референс перейти блок.png` (1125×3717).
+     The reference bakes visible rounded "Перейти" pills into the art at
+     approximately 26.6% / 54.9% / 87.3% from top. Hit zones sit centered
+     on those pills with a 6% height for a generous tap target. */
+  .s11-btn-overlay {
+    left: 6.7% !important;
+    width: 86.7% !important;
+    height: 6%;
+    aspect-ratio: auto !important;
+  }
+  .s11-btn-1 { bottom: 70%; }
+  .s11-btn-2 { bottom: 42%; }
+  .s11-btn-3 { bottom: 10%; }
 
   /* S12 mobile | ref: подвал моб версия референс.png (1125×1800).
      Footer background IS the reference image — book card, social icons,
@@ -1084,6 +1093,14 @@ img.desktop-only { display: block !important; }
 }
 .site-header.scrolled {
   background: rgba(26, 13, 5, 0.95);
+}
+.site-header.hidden {
+  transform: translateY(-110%);
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.site-header {
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+              background 0.3s ease;
 }
 
 .header-logo {

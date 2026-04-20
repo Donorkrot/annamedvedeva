@@ -8,18 +8,34 @@ import type { Lang } from '@/lib/translations';
 export default function Header() {
   const { lang, setLang, tr } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 60);
+      // Auto-hide on scroll down past the hero, re-show on scroll up.
+      // Avoids the sticky header "chasing" over baked-in block content
+      // on mobile. Stays pinned at the very top (< 80px).
+      if (y < 80) {
+        setHidden(false);
+      } else if (y > lastY + 4) {
+        setHidden(true);
+      } else if (y < lastY - 4) {
+        setHidden(false);
+      }
+      lastY = y;
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
     <>
-      <header className={`site-header${scrolled ? ' scrolled' : ''}`}>
+      <header className={`site-header${scrolled ? ' scrolled' : ''}${hidden ? ' hidden' : ''}`}>
         <a href="/" className="header-logo">
           <span className="header-logo-text">REALITY DNA</span>
         </a>
