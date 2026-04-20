@@ -949,11 +949,27 @@ img.desktop-only { display: block !important; }
 
 /* ===== MOBILE exact positions from Figma reference ===== */
 @media (max-width: 768px) {
+  /* Mobile aspect-ratios per block — matches the 1125×H reference JPGs
+     in public/images/mobile/. Overrides the desktop 1440×700 defaults so
+     the blocks don't get squished into a landscape shape on a portrait
+     viewport. */
+  #s1  { aspect-ratio: 1125 / 2148 !important; }
+  #s2  { aspect-ratio: 1125 / 2373 !important; }
+  #s3  { aspect-ratio: 1125 / 1905 !important; }
+  #s4  { aspect-ratio: 1125 / 3657 !important; }
+  #s5  { aspect-ratio: 1125 / 2148 !important; }
+  #s6  { aspect-ratio: 1125 / 918  !important; }
+  #s7  { aspect-ratio: 1125 / 3129 !important; }
+  #s8  { aspect-ratio: 1125 / 2070 !important; }
+  #s9  { aspect-ratio: 1125 / 2982 !important; }
+  #s10 { aspect-ratio: 1125 / 2364 !important; }
+  #s11 { aspect-ratio: 1125 / 3717 !important; }
+
   /* S1 mobile | ref: 1-1.png (375×716) */
   .s1-btn-overlay { left: 17.3%; width: 65.3%; bottom: 7%; }
 
-  /* S6 mobile — centered "Method" */
-  .s6-btn-overlay { left: 25%; width: 50%; bottom: 3%; }
+  /* S6 mobile — centered "Method" button, bigger so it's tappable. */
+  .s6-btn-overlay { left: 14%; width: 72%; bottom: 12%; }
 
   /* S7 mobile | ref: 7-1.png (375×1043) — stacked full-width */
   .s7-btn-overlay { left: 6.7% !important; width: 86.7% !important; }
@@ -1101,6 +1117,31 @@ img.desktop-only { display: block !important; }
   }
   .header-social {
     display: none;
+  }
+}
+
+/* Mobile header — minimal floating controls, no solid bar.
+   REALITY DNA wordmark is baked into the hero JPG, and the CTA button
+   would overlap the hero title, so hide them on small screens. Keep
+   only the burger + language switcher so navigation still works. */
+@media (max-width: 768px) {
+  .site-header,
+  .site-header.scrolled {
+    background: transparent !important;
+    padding: 0 16px;
+    height: 56px;
+  }
+  .site-header .header-logo,
+  .site-header .header-btn {
+    display: none;
+  }
+  .site-header .header-right {
+    margin-left: auto;
+    gap: 14px;
+  }
+  .lang-switcher {
+    font-size: 11px;
+    gap: 10px;
   }
 }
 
