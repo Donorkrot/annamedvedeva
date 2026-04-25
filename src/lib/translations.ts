@@ -48,6 +48,7 @@ const t = {
     s5_item4_body: 'Умение управлять своим состоянием так, чтобы не сносило штормами — будь то AI, бесконечные кризисы или невероятные скорости изменений.',
     // S6
     s6_video: 'Видео будет здесь',
+    s6_btn: 'Метод',
     // S7
     s7_kicker: 'Класс RI',
     s7_title_1: 'МАСТЕРСТВО',
@@ -169,6 +170,7 @@ const t = {
     s5_item3_body: 'Здатність витримувати будь-які зовнішні події, зберігаючи внутрішній центр',
     s5_item4_body: 'Вміння управляти своїм станом так, щоб не зносило штормами — чи то AI, нескінченні кризи чи неймовірні швидкості змін.',
     s6_video: 'Відео буде тут',
+    s6_btn: 'Метод',
     s7_kicker: 'Клас RI',
     s7_title_1: 'МАЙСТЕРНІСТЬ',
     s7_title_2: 'СТАНУ',
@@ -284,6 +286,7 @@ const t = {
     s5_item3_body: 'The ability to withstand any external events while maintaining your inner centre',
     s5_item4_body: "The ability to manage your state so that storms don't knock you off — whether AI, endless crises or incredible speeds of change.",
     s6_video: 'Video coming soon',
+    s6_btn: 'Method',
     s7_kicker: 'RI Class',
     s7_title_1: 'STATE',
     s7_title_2: 'MASTERY',

@@ -514,6 +514,37 @@ img.desktop-only { display: block !important; }
   border: 0;
   display: block;
 }
+
+/* S6 — HTML "Метод" button (Figma 1:419 desktop / 1:213 mobile) */
+#s6 .s6-btn {
+  position: absolute;
+  z-index: 6;
+  top: 8.45%;             /* 74/876 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 325px;
+  max-width: 70%;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #332000;
+  border-radius: 10px;
+  background: rgba(255, 245, 239, 0);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+#s6 .s6-btn:hover { background: rgba(255, 245, 239, 0.4); transform: translateX(-50%) translateY(-1px); }
+#s6 .s6-btn:active { transform: translateX(-50%) translateY(0); }
+#s6 .s6-btn__label {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+  color: #332000;
+  white-space: nowrap;
+}
 #s11 { aspect-ratio: 1440 / 820; }
 #s1  { background: #1a0d05; }
 #s2  { background: #d4c4b8; }
@@ -3050,12 +3081,31 @@ img.desktop-only { display: block !important; }
   #s5 .s5-card--plain .s5-card__body { opacity: 0.7; }
   #s5 .s5-card--manage .s5-card__body { opacity: 0.7; }
 
-  /* === S6 VIDEO === */
-  #s6 {
-    min-height: 240px !important;
+  /* === S6 VIDEO — Figma 375 mobile (node 1:213) === */
+  #s6.s6-video {
+    aspect-ratio: auto !important;
+    padding: 0 !important;
+    min-height: 422px;
+    background: #fff;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
   }
-  .s6-video-wrap {
-    width: 320px;
+  #s6.s6-video .s6-video-frame {
+    position: absolute;
+    left: 7.73%;          /* 29/375 */
+    top: 0;
+    width: 84%;           /* 315/375 */
+    height: 199px;
+    aspect-ratio: auto;
+    border-radius: 0;
+  }
+  #s6 .s6-btn {
+    position: absolute;
+    top: 238px;
+    width: 84%;           /* 315/375 */
+    max-width: none;
+    background: rgba(255, 245, 239, 0.3);
   }
 
   /* === S7 ANNA === */

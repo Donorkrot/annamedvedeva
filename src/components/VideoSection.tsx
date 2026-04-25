@@ -1,21 +1,27 @@
 'use client';
 import Image from 'next/image';
 import { useTranslation } from '@/components/LanguageProvider';
-import SeoText from '@/components/SeoText';
-import { bgDesktop, bgMobile, btnDesktop } from '@/lib/imagePaths';
+import { bgDesktop, bgMobile } from '@/lib/imagePaths';
 
 export default function VideoSection() {
-  const { lang } = useTranslation();
+  const { lang, tr } = useTranslation();
 
   return (
-    <section id="s6" className="section">
-      <SeoText section="s6" />
+    <section id="s6" className="section s6-video">
       <div className="s10-bg desktop-only">
-        <Image src={bgDesktop(6, lang)} alt="" fill style={{ objectFit: 'cover', objectPosition: 'center center' }} quality={95} />
+        <Image src={bgDesktop(6, lang)} alt="" fill style={{ objectFit: 'cover', objectPosition: 'center center' }} quality={95} sizes="100vw" />
       </div>
       <div className="s10-bg mobile-only">
-        <Image src={bgMobile(6, lang)} alt="" fill style={{ objectFit: 'cover', objectPosition: 'center top' }} quality={95} />
+        <Image src={bgMobile(6, lang)} alt="" fill style={{ objectFit: 'cover', objectPosition: 'center top' }} quality={95} sizes="100vw" />
       </div>
+
+      <a
+        href="#s3"
+        className="s6-btn"
+        onClick={e => { e.preventDefault(); document.querySelector('#s3')?.scrollIntoView({ behavior: 'smooth' }); }}
+      >
+        <span className="s6-btn__label">{tr('s6_btn')}</span>
+      </a>
 
       <div className="s6-video-frame">
         <iframe
@@ -26,10 +32,6 @@ export default function VideoSection() {
           allowFullScreen
         />
       </div>
-
-      <a href="#s3" className="s6-btn-overlay" onClick={e => { e.preventDefault(); document.querySelector('#s3')?.scrollIntoView({ behavior: 'smooth' }); }}>
-        <img src={btnDesktop(6, lang)} alt="" draggable={false} />
-      </a>
     </section>
   );
 }
