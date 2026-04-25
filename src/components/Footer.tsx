@@ -1,40 +1,69 @@
 'use client';
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 import { useTranslation } from '@/components/LanguageProvider';
-import { bgDesktop, bgMobile, btnDesktop, btnMobile } from '@/lib/imagePaths';
-import SeoText from '@/components/SeoText';
 
 export default function Footer() {
-  const { lang } = useTranslation();
+  const { tr } = useTranslation();
 
   return (
-    <footer id="s12" className="s12-footer">
-      <SeoText section="s12" />
-      <div className="s10-bg desktop-only">
-        <Image src={bgDesktop(12, lang)} alt="" fill style={{ objectFit: "cover", objectPosition: "center center" }} quality={90} />
+    <footer id="s12" className="s12-footer s12-figma">
+      <div className="s12-bg desktop-only">
+        <Image src="/images/backgrounds/bg-s12-desktop.jpg" alt="" fill sizes="100vw" />
       </div>
-      <div className="s10-bg mobile-only">
-        <Image src={bgMobile(12, lang)} alt="" fill style={{ objectFit: "cover", objectPosition: "center top" }} quality={90} />
+      <div className="s12-bg mobile-only">
+        <Image src="/images/backgrounds/bg-s12-mobile.jpg" alt="" fill sizes="100vw" style={{ objectPosition: 'center top' }} />
       </div>
-      {/* Background JPG is clean (no buttons). Buttons live as separate
-          transparent PNGs (desktop + mobile variants) on top so each one
-          can lift in brightness / scale on hover. */}
-      <a href="https://drive.google.com/drive/folders/1V5KF6JG-TGjbRFOk_Y0n7wxdmd0SG49V" target="_blank" rel="noopener noreferrer" className="s12-book-overlay" aria-label="ДНК Реальности">
-        <img className="desktop-only" src={btnDesktop(12, lang, 'book')} alt="" draggable={false} />
-        <img className="mobile-only" src={btnMobile(12, lang, 'book')} alt="" draggable={false} />
+
+      {/* Headline left */}
+      <div className="s12-headline-block">
+        <h2 className="s12-headline">
+          <span className="s12-headline__hl">{tr('s12_headline_hl')}</span>
+          <span className="s12-headline__rest">{tr('s12_headline')}</span>
+        </h2>
+        <p className="s12-tagline">{tr('s12_tagline')}</p>
+      </div>
+
+      {/* Currency text right */}
+      <div className="s12-currency-block">
+        <h3 className="s12-currency-title">{tr('s12_currency_title')}</h3>
+        <p className="s12-currency-body">{tr('s12_currency_body')}</p>
+      </div>
+
+      {/* Book block */}
+      <a
+        href="https://drive.google.com/drive/folders/1V5KF6JG-TGjbRFOk_Y0n7wxdmd0SG49V"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="s12-book"
+        aria-label={tr('s12_dna_book')}
+      >
+        <span className="s12-book__title">{tr('s12_dna_book')}</span>
+        <span className="s12-book__sub">{tr('s12_book')}</span>
       </a>
-      <div className="s12-social-block">
-        <a href="https://instagram.com/medvedieva.anna" target="_blank" rel="noopener noreferrer" className="s12-social-hit s12-ig-hit" aria-label="Instagram" />
-        <a href="https://www.youtube.com/@medvedievaanna" target="_blank" rel="noopener noreferrer" className="s12-social-hit s12-yt-hit" aria-label="YouTube" />
-        <a href="https://t.me/wayofsoulanna" target="_blank" rel="noopener noreferrer" className="s12-social-hit s12-tg-hit" aria-label="Telegram" />
+
+      {/* Social icons */}
+      <div className="s12-social">
+        <a href="https://instagram.com/medvedieva.anna" target="_blank" rel="noopener noreferrer" className="s12-social__link" aria-label="Instagram">
+          <Image src="/images/icons/social-ig.png" alt="" width={40} height={40} />
+        </a>
+        <a href="https://www.youtube.com/@medvedievaanna" target="_blank" rel="noopener noreferrer" className="s12-social__link" aria-label="YouTube">
+          <Image src="/images/icons/social-yt.png" alt="" width={40} height={40} />
+        </a>
+        <a href="https://t.me/wayofsoulanna" target="_blank" rel="noopener noreferrer" className="s12-social__link" aria-label="Telegram">
+          <Image src="/images/icons/social-tg.png" alt="" width={40} height={40} />
+        </a>
       </div>
-      <div className="s12-legal-block">
-        <img className="desktop-only" src={btnDesktop(12, lang, 'oferta')} alt="" draggable={false} />
-        <img className="mobile-only" src={btnMobile(12, lang, 'oferta')} alt="" draggable={false} />
-        <Link href="/offer"   className="s12-legal-hit s12-legal-left"  aria-label="Публичная оферта"><span className="sr-only">Публичная оферта</span></Link>
-        <Link href="/privacy" className="s12-legal-hit s12-legal-right" aria-label="Политика конфиденциальности"><span className="sr-only">Политика конфиденциальности</span></Link>
+
+      {/* Legal */}
+      <div className="s12-legal">
+        <Link href="/offer" className="s12-legal__link">{tr('s12_offer')}</Link>
+        <span className="s12-legal__sep" aria-hidden="true">|</span>
+        <Link href="/privacy" className="s12-legal__link">{tr('s12_privacy')}</Link>
       </div>
+
+      {/* Logo */}
+      <p className="s12-logo">REALITY DNA <span className="s12-logo__year">© 2026</span></p>
     </footer>
   );
 }
