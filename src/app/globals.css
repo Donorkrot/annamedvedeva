@@ -2068,85 +2068,71 @@ img.desktop-only { display: block !important; }
   white-space: nowrap;
 }
 
-/* ===== S8 - DNA ===== */
-.s8-grid {
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  padding: 60px 120px;
-  gap: 40px;
-  position: relative;
-  z-index: 2;
+/* ===== S8 — DNA (Figma 1440×700, node 1:129) ===== */
+#s8.s8-figma { background: #e0d0c4; }
+#s8 .s8-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+#s8 .s8-bg img { object-fit: cover; }
+#s8 .s8-dna {
+  position: absolute;
+  z-index: 1;
+  top: 26.43%;            /* 185/700 */
+  left: 22.15%;           /* 319/1440 */
+  width: 52.92%;          /* 762/1440 */
+  height: 55.57%;         /* 389/700 */
+  pointer-events: none;
 }
+#s8 .s8-dna img { object-fit: contain; }
 
-.s8-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 460px;
-}
-
-.s8-right {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-end;
-  height: 460px;
-}
-
-.s8-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-}
-
-.s8-center-label {
-  font-family: var(--font-heading);
-  font-size: 36px;
-  font-weight: 600;
-  color: var(--text-dark);
-  margin-bottom: 8px;
-}
-
-.s8-dna-img {
-  width: 460px;
-  height: 460px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: visible;
-}
-
-.s8-dna-symbol {
-  position: absolute !important;
-  width: 700px !important;
-  height: 700px !important;
-  max-width: none !important;
-  top: 50%;
+#s8 .s8-title {
+  position: absolute;
+  z-index: 3;
+  top: 14.14%;            /* 99/700 */
   left: 50%;
-  transform: translate(-50%, -50%);
-  object-fit: contain;
-}
-
-.s8-trait-title {
+  transform: translateX(-50%);
+  margin: 0;
   font-family: var(--font-heading);
-  font-size: 28px;
   font-weight: 600;
-  text-transform: uppercase;
-  color: var(--text-dark);
-  margin-bottom: 10px;
+  font-size: 36px;
+  line-height: 33.6px;
+  color: #332000;
+  white-space: nowrap;
 }
 
-.s8-trait-body {
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--text-dark);
-  max-width: 260px;
-  line-height: 1.35;
+#s8 .s8-trait {
+  position: absolute;
+  z-index: 2;
+  width: 22.43%;          /* 323/1440 */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #332000;
 }
+#s8 .s8-trait h3 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1;
+  color: #332000;
+  text-transform: uppercase;
+}
+#s8 .s8-trait p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.2;
+  color: #332000;
+}
+/* Positions per Figma 1440×700:
+   1 ЧЕСТНО      | x:155 y:159
+   2 ГЛУБОКО     | x:961 y:159
+   3 КРАСИВО     | x:155 y:486
+   4 СТРУКТУРНО  | x:961 y:488 */
+#s8 .s8-trait-1 { left: 10.76%; top: 22.71%; }
+#s8 .s8-trait-2 { left: 66.74%; top: 22.71%; }
+#s8 .s8-trait-3 { left: 10.76%; top: 69.43%; }
+#s8 .s8-trait-4 { left: 66.74%; top: 69.71%; }
 
 /* ===== S9 - Archetypes ===== */
 .s9-layout {
@@ -3193,30 +3179,31 @@ img.desktop-only { display: block !important; }
   #s7 .s7-btn { width: 100%; padding: 14px 20px; }
   #s7 .s7-btn span { font-size: 18px; text-align: center; }
 
-  /* === S8 DNA === */
-  .s8-grid {
-    grid-template-columns: 1fr;
-    padding: 48px 24px;
-    gap: 32px;
+  /* === S8 DNA — Figma 375×~690 (node 1:235) === */
+  #s8 { aspect-ratio: 375 / 690 !important; }
+  #s8 .s8-title {
+    top: 2.75%;            /* 19/690 */
+    left: calc(50% - 39.5px);
+    transform: none;
   }
-  .s8-left,
-  .s8-right {
-    gap: 40px;
-    align-items: center;
+  #s8 .s8-dna {
+    top: calc(50% - 180px - 96px);  /* center-180 then -h/2(96) */
+    left: 0;
+    width: 100%;
+    height: 192px;
+    transform: none;
   }
-  .s8-right { align-items: center; }
-  .s8-center { order: -1; }
-  .s8-dna-img {
-    width: 220px;
-    height: 220px;
+  #s8 .s8-trait {
+    width: 84%;            /* 315/375 */
+    left: 7.73%;           /* 29/375 */
+    gap: 5px;
+    align-items: flex-start;
   }
-  .s8-center-label { font-size: 28px; }
-  .s8-trait-title { font-size: 22px; }
-  .s8-trait-body {
-    font-size: 14px;
-    max-width: 100%;
-    text-align: center;
-  }
+  /* Mobile positions per Figma 1:235 — title @ y, body slightly below */
+  #s8 .s8-trait-1 { top: 38.12%; }   /* 263/690 — but trait container holds h3+p */
+  #s8 .s8-trait-2 { top: 51.45%; }   /* 355/690 */
+  #s8 .s8-trait-3 { top: 67.54%; }   /* 466/690 */
+  #s8 .s8-trait-4 { top: 80.87%; }   /* 558/690 */
 
   /* === S9 ARCHETYPES === */
   #s9 {

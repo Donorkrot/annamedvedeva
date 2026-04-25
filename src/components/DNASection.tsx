@@ -1,21 +1,44 @@
 'use client';
-import Image from "next/image";
+import Image from 'next/image';
 import { useTranslation } from '@/components/LanguageProvider';
-import SeoText from '@/components/SeoText';
-import { bgDesktop, bgMobile } from '@/lib/imagePaths';
 
 export default function DNASection() {
-  const { lang } = useTranslation();
+  const { tr } = useTranslation();
 
   return (
-    <section id="s8" className="section">
-      <SeoText section="s8" />
-      <div className="s10-bg desktop-only">
-        <Image src={bgDesktop(8, lang)} alt="" fill style={{ objectFit: "cover", objectPosition: "center center" }} quality={90} />
+    <section id="s8" className="section s8-figma">
+      <div className="s8-bg desktop-only">
+        <Image src="/images/backgrounds/bg-s8-desktop.jpg" alt="" fill sizes="100vw" />
       </div>
-      <div className="s10-bg mobile-only">
-        <Image src={bgMobile(8, lang)} alt="" fill style={{ objectFit: "cover", objectPosition: "center top" }} quality={90} />
+      <div className="s8-bg mobile-only">
+        <Image src="/images/backgrounds/bg-s8-mobile.jpg" alt="" fill sizes="100vw" style={{ objectPosition: 'center top' }} />
       </div>
+
+      <h2 className="s8-title">DNA</h2>
+
+      <div className="s8-dna desktop-only">
+        <Image src="/images/content/s8-dna-desktop.png" alt="" fill sizes="(max-width:768px) 0px, 53vw" />
+      </div>
+      <div className="s8-dna mobile-only">
+        <Image src="/images/content/s8-dna-mobile.png" alt="" fill sizes="100vw" />
+      </div>
+
+      <article className="s8-trait s8-trait-1">
+        <h3>{tr('s8_title1')}</h3>
+        <p>{tr('s8_body1')}</p>
+      </article>
+      <article className="s8-trait s8-trait-2">
+        <h3>{tr('s8_title2')}</h3>
+        <p>{tr('s8_body2')}</p>
+      </article>
+      <article className="s8-trait s8-trait-3">
+        <h3>{tr('s8_title3')}</h3>
+        <p>{tr('s8_body3')}</p>
+      </article>
+      <article className="s8-trait s8-trait-4">
+        <h3>{tr('s8_title4')}</h3>
+        <p>{tr('s8_body4')}</p>
+      </article>
     </section>
   );
 }
