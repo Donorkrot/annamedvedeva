@@ -2,10 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Visually-hidden text: section backgrounds have text baked into the JPG,
-   so this mirrors that text in the DOM for screen readers, search engines,
-   and copy-paste via Ctrl+A. Compact clip so it never overlaps clickable
-   overlays or buttons. */
+/* Visually-hidden text: kept as a fallback utility (still used by anything
+   that explicitly opts in). Section text now uses `.seo-overlay` instead so
+   users can drag-select & copy. */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -17,6 +16,36 @@
   white-space: normal;
   border: 0;
   color: transparent;
+}
+
+/* Selectable text overlay — section backgrounds have text baked into the
+   JPG, so this layer mirrors that text in the DOM as transparent (visually
+   invisible) HTML positioned over the section. The user can drag-to-select
+   anywhere in the section, copy, and screen readers / search engines see it.
+   Buttons sit on top via z-index:10 so clicks aren't blocked. */
+.seo-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: 6% 8%;
+  color: transparent;
+  -webkit-user-select: text;
+  user-select: text;
+  pointer-events: auto;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.4;
+  cursor: text;
+}
+.seo-overlay * {
+  color: transparent !important;
+  background: transparent !important;
+  text-shadow: none !important;
+  margin: 0 0 0.4em 0;
+}
+.seo-overlay ::selection {
+  background: rgba(220, 180, 80, 0.35);
+  color: rgba(255, 245, 220, 0.95);
 }
 
 :root {

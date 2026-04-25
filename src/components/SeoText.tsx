@@ -151,5 +151,5 @@ export default function SeoText({ section }: { section: SectionId }) {
     }
   })();
 
-  return <div className="sr-only">{content}</div>;
+  return <div className="seo-overlay">{content}</div>;
 }
