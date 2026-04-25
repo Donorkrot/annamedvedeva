@@ -1949,121 +1949,123 @@ img.desktop-only { display: block !important; }
   opacity: 0.6;
 }
 
-/* ===== S7 - Anna ===== */
-.s7-grid {
+/* ===== S7 — Anna (Figma 1440×700, node 1:113) ===== */
+#s7.s7-figma { background: #332000; }
+#s7 .s7-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; opacity: 0.6; }
+#s7 .s7-bg img { object-fit: cover; }
+#s7 .s7-photo {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 32.71%;          /* matches `left:67.29%` Figma */
   height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 482px;
+  pointer-events: none;
 }
+#s7 .s7-photo img { object-fit: cover; }
 
-.s7-text {
-  padding: 100px 20px 60px 150px;
+#s7 .s7-block {
+  position: absolute;
+  z-index: 2;
+  color: #fff5ef;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  position: relative;
-  z-index: 2;
 }
-
-.s7-kicker {
+/* Block 1: Ключ к RI / МАСТЕРСТВО / desc | x:154 y:95 w:786 */
+#s7 .s7-block-1 {
+  left: 10.69%;           /* 154/1440 */
+  top: 13.57%;            /* 95/700 */
+  width: 54.58%;          /* 786/1440 */
+}
+#s7 .s7-kicker {
+  margin: 0 0 20px 0;
   font-family: var(--font-body);
+  font-weight: 500;
   font-size: 18px;
-  font-weight: 400;
-  color: rgb(255, 245, 239);
-  margin-bottom: 12px;
+  line-height: 1;
+  color: #fff5ef;
 }
-
-.s7-title {
+#s7 .s7-title {
+  margin: 0 0 20px 0;
   font-family: var(--font-heading);
+  font-weight: 600;
   font-size: 52px;
-  font-weight: 600;
+  line-height: 1;
   text-transform: uppercase;
-  line-height: 57.2px;
-  color: var(--cream);
-  margin-bottom: 18px;
-  white-space: nowrap;
+  color: #fff5ef;
 }
-
-.s7-desc {
+#s7 .s7-desc {
+  margin: 0;
   font-family: var(--font-body);
+  font-weight: 500;
   font-size: 18px;
-  font-weight: 400;
-  color: var(--cream);
-  line-height: 21.6px;
-  margin-bottom: 40px;
+  line-height: 1.2;
+  color: #fff5ef;
+  white-space: pre-line;
 }
-
-.s7-name {
+/* Block 2: Anna name + bio | x:154 y:325 w:628 */
+#s7 .s7-block-2 {
+  left: 10.69%;
+  top: 46.43%;            /* approx 325/700 — calculated from Figma vert offsets */
+  width: 43.61%;          /* 628/1440 */
+}
+#s7 .s7-name {
+  margin: 0 0 20px 0;
   font-family: var(--font-heading);
-  font-size: 36px;
   font-weight: 600;
-  line-height: 1.1;
-  color: var(--cream);
-  margin-bottom: 6px;
+  font-size: 36px;
+  line-height: 33.6px;
+  color: #fff5ef;
 }
-
-.s7-name .accent {
-  color: #DE8B23;
-}
-
-.s7-name-title {
+#s7 .s7-name__accent { color: #de8b23; }
+#s7 .s7-name-title {
+  margin: 0 0 20px 0;
   font-family: var(--font-body);
+  font-weight: 500;
   font-size: 18px;
-  font-weight: 400;
-  color: var(--cream);
-  margin-bottom: 12px;
+  line-height: 1.2;
+  color: #fff5ef;
 }
-
-.s7-bio {
+#s7 .s7-bio {
+  margin: 0;
   font-family: var(--font-body);
-  font-size: 16px;
   font-weight: 400;
-  color: var(--cream);
-  line-height: 19.2px;
-  margin-bottom: 32px;
-  max-width: 580px;
+  font-size: 16px;
+  line-height: 1.3;
+  color: #fff5ef;
+  white-space: pre-line;
 }
-
-.s7-btns {
+/* Buttons row | top:~595 (95+40+block content); 2 buttons w:324 + 23 gap */
+#s7 .s7-buttons {
+  position: absolute;
+  z-index: 2;
+  left: 10.69%;
+  bottom: 7%;             /* approx — bottom area */
   display: flex;
-  flex-direction: row;
-  gap: 20px;
-  flex-wrap: wrap;
+  gap: 23px;
+  width: 46.6%;           /* 671/1440 */
 }
-
-.s7-btn-outline {
+#s7 .s7-btn {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 28px;
-  border: 1px solid rgba(255, 245, 239, 0.5);
-  border-radius: 8px;
-  font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 400;
-  color: #FFF5EF;
-  text-decoration: none;
+  padding: 14px 20px;
+  border: 1px solid #fff5ef;
+  border-radius: 10px;
   background: transparent;
-  transition: border-color 0.3s, background 0.3s;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.3s;
+}
+#s7 .s7-btn:hover { background: rgba(255, 245, 239, 0.08); transform: translateY(-1px); }
+#s7 .s7-btn span {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1;
+  color: #fff5ef;
   white-space: nowrap;
-}
-
-.s7-btn-outline:hover {
-  border-color: #FFF5EF;
-  background: rgba(255, 245, 239, 0.08);
-}
-
-.s7-photo {
-  position: relative;
-  overflow: hidden;
-  max-width: 470px;
-}
-
-.s7-photo img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover;
-  object-position: center top;
 }
 
 /* ===== S8 - DNA ===== */
@@ -3108,27 +3110,88 @@ img.desktop-only { display: block !important; }
     background: rgba(255, 245, 239, 0.3);
   }
 
-  /* === S7 ANNA === */
-  .s7-grid {
-    grid-template-columns: 1fr;
-    height: auto;
+  /* === S7 ANNA — Figma 375×1043 (node 1:218) === */
+  #s7 { aspect-ratio: 375 / 1043 !important; }
+  #s7 .s7-photo {
+    position: absolute;
+    top: 47.65%;            /* center 50%-66.5/1043 */
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 27.61%;         /* 288/1043 */
+    z-index: 1;
   }
-  .s7-text {
-    padding: 48px 24px;
-    order: 2;
+  #s7 .s7-block-1 {
+    left: 7.73%;            /* 29/375 */
+    top: 3.74%;             /* 39/1043 */
+    width: 84%;             /* 315/375 */
+    gap: 10px;
   }
-  .s7-photo {
-    height: 400px;
-    order: 1;
+  #s7 .s7-kicker { font-size: 18px; margin-bottom: 0; }
+  #s7 .s7-title  {
+    font-family: var(--font-heading);
+    font-weight: 300;       /* Cormorant Light */
+    font-size: 24px;
+    line-height: 23.1px;
+    text-transform: uppercase;
+    margin-bottom: 0;
   }
-  .s7-kicker { font-size: 14px; margin-bottom: 8px; }
-  .s7-title { font-size: 32px; margin-bottom: 16px; }
-  .s7-desc { font-size: 15px; margin-bottom: 24px; }
-  .s7-name { font-size: 24px; margin-bottom: 4px; }
-  .s7-name-title { font-size: 14px; margin-bottom: 12px; }
-  .s7-bio { font-size: 14px; margin-bottom: 24px; }
-  .s7-bio,
-  .s7-desc { max-width: 100%; }
+  #s7 .s7-desc   {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.2;
+    margin-top: 5px;
+  }
+  #s7 .s7-block-2 {
+    left: 7.73%;
+    top: 21.57%;            /* 225/1043 */
+    width: 77.6%;           /* 291/375 */
+    gap: 5px;
+  }
+  #s7 .s7-name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 33.6px;
+    color: #de8b23;
+  }
+  #s7 .s7-name__accent { color: #de8b23; }
+  #s7 .s7-name span:not(.s7-name__accent) { display: none; }
+  #s7 .s7-name-title {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 23.1px;
+    color: #fff5ef;
+  }
+  /* Mobile: bio gets absolutely positioned out of block-2 flow */
+  #s7 .s7-bio {
+    position: absolute;
+    left: 7.73%;
+    top: 58.20%;            /* 607/1043 */
+    width: 84%;
+    margin: 0;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.3;
+    color: #fff5ef;
+    z-index: 2;
+  }
+  /* Buttons stacked vertically | top:884 + top:953 */
+  #s7 .s7-buttons {
+    position: absolute;
+    top: 84.76%;            /* 884/1043 */
+    left: 7.73%;
+    width: 84%;
+    bottom: auto;
+    flex-direction: column;
+    gap: 13px;              /* 953-884-69 ~ 13 */
+  }
+  #s7 .s7-btn { width: 100%; padding: 14px 20px; }
+  #s7 .s7-btn span { font-size: 18px; text-align: center; }
 
   /* === S8 DNA === */
   .s8-grid {
