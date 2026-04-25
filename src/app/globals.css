@@ -457,7 +457,7 @@ main {
   font-weight: 600;
   text-transform: uppercase;
   color: var(--cream);
-  text-align: center;
+  text-align: left;
   letter-spacing: 0.02em;
   line-height: 1.1;
   text-shadow:
@@ -488,7 +488,7 @@ main {
   color: var(--cream);
   letter-spacing: 0.01em;
   line-height: 1.3;
-  text-align: center;
+  text-align: left;
   white-space: nowrap;
   opacity: 0.94;
 }
@@ -1882,35 +1882,39 @@ img.desktop-only { display: block !important; }
   white-space: nowrap;
 }
 
-/* Column positions (% of 1440×675), 4 columns IQ EQ SQ RI */
-/* IQ:  x:93  top:175  w:210 */
+/* Column positions per Figma 1:737 (1440×675).
+   Math: stone margin-top = stone_top - letter_height (28px for IQ/EQ/SQ, 52px for RI);
+         name  margin-top = name_top - (stone_top + stone_height);
+         desc/accent margin-top = 20px (Figma gap). */
+/* IQ:  col x:93 top:175 w:210 | letter left:80 top:0 | stone 102×113 at left:34 top:110 | text top:275 */
 #s4 .s4-col-iq { left: 6.46%; top: 25.93%; width: 14.58%; }
 #s4 .s4-col-iq .s4-letter { margin-left: 80px; }
-#s4 .s4-col-iq .s4-stone  { width: 102px; height: 113px; margin-left: 34px; }
-#s4 .s4-col-iq .s4-name   { margin-top: 38px; }
+#s4 .s4-col-iq .s4-stone  { width: 102px; height: 113px; margin-left: 34px; margin-top: 82px; }
+#s4 .s4-col-iq .s4-name   { margin-top: 52px; }
 #s4 .s4-col-iq .s4-desc   { margin-top: 20px; }
 
-/* EQ:  x:411 top:170  w:210 */
+/* EQ:  col x:411 top:170 w:210 | letter left:50 top:0 | stone 127×155 at left:2 top:87 | text top:283 */
 #s4 .s4-col-eq { left: 28.54%; top: 25.19%; width: 14.58%; }
 #s4 .s4-col-eq .s4-letter { margin-left: 50px; }
-#s4 .s4-col-eq .s4-stone  { width: 127px; height: 155px; margin-left: 2px; margin-top: 20px; }
-#s4 .s4-col-eq .s4-name   { margin-top: 36px; }
+#s4 .s4-col-eq .s4-stone  { width: 127px; height: 155px; margin-left: 2px; margin-top: 59px; }
+#s4 .s4-col-eq .s4-name   { margin-top: 41px; }
 #s4 .s4-col-eq .s4-desc   { margin-top: 20px; }
 
-/* SQ:  x:729 top:164.5 w:210 */
+/* SQ:  col x:729 top:164.5 w:210 | letter left:40 top:0 | stone 117×189 at left:2 top:77.5 | text top:288.5 */
 #s4 .s4-col-sq { left: 50.63%; top: 24.37%; width: 14.58%; }
 #s4 .s4-col-sq .s4-letter { margin-left: 40px; }
-#s4 .s4-col-sq .s4-stone  { width: 117px; height: 189px; margin-left: 2px; margin-top: 10px; }
-#s4 .s4-col-sq .s4-name   { margin-top: 33px; }
+#s4 .s4-col-sq .s4-stone  { width: 117px; height: 189px; margin-left: 2px; margin-top: 49.5px; }
+#s4 .s4-col-sq .s4-name   { margin-top: 22px; }
 #s4 .s4-col-sq .s4-desc   { margin-top: 20px; }
 
-/* RI:  x:1020 top:147 w:319 */
-#s4 .s4-col-ri { left: 70.83%; top: 21.78%; width: 22.15%; align-items: center; text-align: center; }
+/* RI:  col x:1020 top:147 w:319 | letter "RI" 52px at left:131.5 (centered) top:0 |
+   stone 319×230 at left:0 top:76 | text block 210-wide centered at left:53.5 top:306, items-start (left-aligned). */
+#s4 .s4-col-ri { left: 70.83%; top: 21.78%; width: 22.15%; align-items: center; }
 #s4 .s4-col-ri .s4-letter { margin-left: 0; }
-#s4 .s4-col-ri .s4-stone--ri { width: 319px; max-width: 100%; height: 230px; margin-top: 8px; }
-#s4 .s4-col-ri .s4-name { margin-top: 38px; }
-#s4 .s4-col-ri .s4-desc { margin-top: 20px; max-width: 191px; text-align: center; }
-#s4 .s4-col-ri .s4-accent { margin-top: 20px; }
+#s4 .s4-col-ri .s4-stone--ri { width: 319px; max-width: 100%; height: 230px; margin-top: 24px; }
+#s4 .s4-col-ri .s4-name   { margin-top: 0; width: 210px; max-width: 100%; text-align: left; }
+#s4 .s4-col-ri .s4-desc   { margin-top: 20px; width: 210px; max-width: 100%; text-align: left; }
+#s4 .s4-col-ri .s4-accent { margin-top: 20px; width: 210px; max-width: 100%; text-align: left; white-space: normal; }
 
 /* ===== S5 — Reality Intelligence (Figma 1440×700, node 1:371) ===== */
 #s5.s5-figma { background: #fff5ef; }
@@ -2314,9 +2318,10 @@ img.desktop-only { display: block !important; }
 #s10 .s10-header {
   position: absolute;
   z-index: 2;
-  top: 14.14%;             /* 99/700 */
-  left: calc(50% - 327px);
-  width: auto;
+  top: 14.29%;             /* 100/700 */
+  left: 10.76%;            /* 155/1440 */
+  width: 33.06%;           /* 476/1440 */
+  height: 14.86%;          /* 104/700 */
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -2357,7 +2362,15 @@ img.desktop-only { display: block !important; }
   font-size: 18px;
   line-height: 1.2;
   color: #fff5ef;
+  text-align: left;
 }
+#s10 .s10-step__line {
+  position: relative;
+  width: 100%;          /* 555px in Figma */
+  aspect-ratio: 1110 / 4;
+  flex-shrink: 0;
+}
+#s10 .s10-step__line img { object-fit: cover; }
 /* Figma S10 staircase — 3 steps overlapping */
 #s10 .s10-step-1 { left: 39px;  top: 46.14%; }   /* 323/700 */
 #s10 .s10-step-2 { left: 154px; top: 60.71%; }   /* 425/700 */
@@ -3730,6 +3743,79 @@ img.desktop-only { display: block !important; }
   overflow: hidden;
   margin: 0;
   padding: 0;
+}
+
+/* About-page HTML button overlays — text/copy is baked into the JPG bg, but
+   the buttons need to be clickable. Positions per Figma exports.
+   a5 (Метод: ДНК Реальности, node 1:2056, 1440×700): button 295 wide, top:550, centered.
+   a6 (Книга: ДНК Реальности,  node 1:2064, 1440×685): two stacked buttons 440 wide,
+       at left:500/1440, top:531/685, gap:20px. */
+.about-btn-method {
+  position: absolute;
+  z-index: 5;
+  top: 78.57%;             /* 550/700 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 295px;
+  max-width: 80%;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #332000;
+  border-radius: 10px;
+  background: rgba(255, 245, 239, 0);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+  color: #332000;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.about-btn-method:hover { background: rgba(255, 245, 239, 0.4); transform: translateX(-50%) translateY(-1px); }
+.about-btn-method:active { transform: translateX(-50%) translateY(0); }
+
+.about-btn-book-group {
+  position: absolute;
+  z-index: 5;
+  top: 77.52%;             /* 531/685 */
+  left: 34.72%;            /* 500/1440 */
+  width: 30.56%;           /* 440/1440 */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.about-btn-book {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  border: 1px solid #332000;
+  border-radius: 10px;
+  background: #fff5ef;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+  color: #332000;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+.about-btn-book:hover { background: #fff0e0; transform: translateY(-1px); }
+.about-btn-book:active { transform: translateY(0); }
+
+@media (max-width: 768px) {
+  .about-btn-method,
+  .about-btn-book-group {
+    /* On mobile the layout/photo composite is different — buttons are baked
+       into the mobile JPGs, so hide the desktop HTML overlays. */
+    display: none;
+  }
 }
 
 /* ===== Consultation price-list buttons (c2 section) =====

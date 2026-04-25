@@ -67,6 +67,21 @@ export default function AboutPage() {
               {...(i === 0 ? { priority: true } : {})}
             />
           </div>
+
+          {/* a5 — Метод: ДНК Реальности (Figma 1:2056). Single button at top:550 / 700, centered. */}
+          {i === 4 && (
+            <a href="/method" className="about-btn-method">
+              <span>Подробнее о методе</span>
+            </a>
+          )}
+
+          {/* a6 — Книга: ДНК Реальности (Figma 1:2064). Two stacked buttons at left:500/1440, top:531/685, w:440. */}
+          {i === 5 && (
+            <div className="about-btn-book-group">
+              <a href="#" className="about-btn-book"><span>Читать книгу</span></a>
+              <a href="#" className="about-btn-book"><span>Слушать книгу</span></a>
+            </div>
+          )}
         </section>
       ))}
       <Footer />

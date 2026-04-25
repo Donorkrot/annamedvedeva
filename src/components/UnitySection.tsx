@@ -21,12 +21,21 @@ export default function UnitySection() {
 
       <div className="s10-step s10-step-1">
         <p className="s10-step__text">{tr('s10_item1')}</p>
+        <div className="s10-step__line" aria-hidden="true">
+          <Image src="/images/content/s10-line.png" alt="" fill sizes="555px" />
+        </div>
       </div>
       <div className="s10-step s10-step-2">
         <p className="s10-step__text">{tr('s10_item2')}</p>
+        <div className="s10-step__line" aria-hidden="true">
+          <Image src="/images/content/s10-line.png" alt="" fill sizes="555px" />
+        </div>
       </div>
       <div className="s10-step s10-step-3">
         <p className="s10-step__text">{tr('s10_item3')}</p>
+        <div className="s10-step__line" aria-hidden="true">
+          <Image src="/images/content/s10-line.png" alt="" fill sizes="555px" />
+        </div>
       </div>
     </section>
   );
