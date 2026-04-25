@@ -1013,22 +1013,43 @@ img.desktop-only { display: block !important; }
   .s7-btn-about { bottom: 10.5%; }
   .s7-btn-consult { bottom: 3.8%; }
 
-  /* S11 mobile | ref: 11.png (375×1239) — stacked full-width.
-     Card text in the JPG ends at 30.6% / 51.9% / 75.1% from top;
-     buttons sit in the dark gap just below each card. */
-  /* Button positions tuned against `референс перейти блок.png` (1125×3717).
-     The reference bakes visible rounded "Перейти" pills into the art at
-     approximately 26.6% / 54.9% / 87.3% from top. Hit zones sit centered
-     on those pills with a 6% height for a generous tap target. */
+  /* S11 mobile | clean per-language bg without baked "Перейти" pills.
+     Three button PNG overlays from /images/buttons/{lang}/mobile/s11.png
+     are placed at exactly 295×47px on top of each card. Horizontally
+     centered via negative margin (avoids the `transform` slot, which is
+     owned by the scroll-reveal `btnReveal` animation). Vertical bottom %
+     anchors each on its card. */
   .s11-btn-overlay {
-    left: 6.7% !important;
-    width: 86.7% !important;
-    height: 6%;
+    left: 50% !important;
+    margin-left: -147.5px !important;
+    width: 295px !important;
+    height: 47px !important;
     aspect-ratio: auto !important;
+    padding: 0;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    overflow: hidden;
+    opacity: 1;
+    animation: none !important;
   }
-  .s11-btn-1 { bottom: 70%; }
-  .s11-btn-2 { bottom: 42%; }
-  .s11-btn-3 { bottom: 10%; }
+  .s11-btn-overlay::before { display: none !important; }
+  .s11-btn-overlay > img.mobile-only {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    display: block;
+  }
+  /* Button positions — each button sits ~20px below the last text line of
+     its card. Per-language because RU/UA/EN paragraph lengths differ. */
+  .s11-btn-1 { bottom: 63.87%; }
+  .s11-btn-2 { bottom: 37.48%; }
+  .s11-btn-3 { bottom: 9.74%; }
+  .s11-lang-ua .s11-btn-2 { bottom: 39.04% !important; }
+  .s11-lang-ua .s11-btn-3 { bottom: 11.30% !important; }
+  .s11-lang-en .s11-btn-1 { bottom: 66.21% !important; }
+  .s11-lang-en .s11-btn-2 { bottom: 43.29% !important; }
+  .s11-lang-en .s11-btn-3 { bottom: 16.84% !important; }
 
   /* S12 mobile | ref: подвал моб версия референс.png (1125×1800).
      Footer background IS the reference image — book card, social icons,
