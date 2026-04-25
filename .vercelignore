@@ -9,8 +9,18 @@ blocks
 # Keep PNGs inside public/
 !public/**/*.png
 
-# Unused image directories (not referenced in code)
-public/images/content/
+# Unused leftovers in public/images/content/. The folder itself IS needed —
+# S4 stones, S7 Anna photo, S8 DNA, S9 venn diagram all live there. Only
+# the leftover Figma export refs below are excluded.
+public/images/content/17.*
+public/images/content/25-6.*
+public/images/content/autolayouts.*
+public/images/content/frame-*
+public/images/content/image-2-1-1.*
+public/images/content/s7-anna-mob.*
+public/images/content/unity-section.*
+public/images/content/s5-grad-top.png
+public/images/content/s10-line.png
 public/images/blocks/
 
 # Other large unused files
