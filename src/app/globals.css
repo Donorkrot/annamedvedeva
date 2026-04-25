@@ -1587,69 +1587,71 @@ img.desktop-only { display: block !important; }
   background: rgba(51, 32, 0, 0.8);
 }
 
-/* ===== S2 - Problem ===== */
-.s2-tagline {
+/* ===== S2 — Problem (pixel-perfect from Figma 1440×700, node 1:100) ===== */
+#s2.s2-figma { background: #fff5ef; }
+#s2 .s2-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+#s2 .s2-bg img { object-fit: cover; }
+
+#s2 .s2-title {
   position: absolute;
-  top: 18%;
+  top: 21.29%;       /* 149/700 */
   left: 50%;
   transform: translateX(-50%);
+  margin: 0;
   font-family: var(--font-body);
-  font-size: 18px;
   font-weight: 500;
-  color: var(--text-dark);
-  text-align: center;
+  font-size: 18px;
+  line-height: 1;
+  color: #332000;
+  white-space: nowrap;
   z-index: 2;
 }
 
-.s2-grid {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  padding: 0 150px;
-  gap: 40px;
-  position: relative;
+#s2 .s2-card {
+  position: absolute;
   z-index: 2;
-}
-
-.s2-card {
-  max-width: 340px;
-  flex-shrink: 0;
-  padding: 20px;
   border-radius: 20px;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  overflow: hidden;
+  background: transparent;
+  padding: 0;
 }
-
-.s2-card-left {
-  background: linear-gradient(135deg, rgba(206, 234, 255, 0.5) 0%, rgba(171, 190, 205, 0.71) 100%);
+#s2 .s2-card .s2-card__panel {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
 }
-
-.s2-card-right {
-  background: linear-gradient(180deg, rgba(220, 217, 216, 0.5) 0%, rgba(220, 217, 216, 0.67) 100%);
-}
-
-.s2-card h2 {
-  font-family: var(--font-heading);
-  font-size: 36px;
-  font-weight: 600;
-  color: var(--text-dark);
-  margin-bottom: 20px;
-}
-
-.s2-card p {
-  font-family: var(--font-body);
-  font-size: 16px;
-  color: var(--text-dark);
-  line-height: 1.2;
-}
-
-.s2-center {
-  flex: 1;
+#s2 .s2-card .s2-card__panel img { object-fit: cover; }
+#s2 .s2-card .s2-card__inner {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  color: #332000;
 }
+#s2 .s2-card h2 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 33.6px;
+  color: #332000;
+}
+#s2 .s2-card p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.15;
+  color: #332000;
+}
+
+/* "Новое давление" — left card | x:154 y:289 w:323 h:142 */
+#s2 .s2-card--left  { left: 10.69%; top: 41.29%; width: 22.43%; min-height: 20.29%; }
+/* "Новая реальность" — right card | x:957 y:289 w:325 h:218 */
+#s2 .s2-card--right { left: 66.46%; top: 41.29%; width: 22.57%; min-height: 31.14%; }
 
 /* ===== S3 - Old Code ===== */
 .s3-content {
@@ -2911,45 +2913,34 @@ img.desktop-only { display: block !important; }
     line-height: 1.2;
   }
 
-  /* === S2 PROBLEM === */
-  #s2 {
-    min-height: 791px !important;
-  }
-  .s2-tagline {
-    top: auto;
-    position: relative;
-    left: auto;
-    transform: none;
-    text-align: center;
-    padding-top: 40px;
-    font-size: 18px;
-    font-weight: 500;
+  /* === S2 PROBLEM — Figma 375×791, node 1:195 === */
+  #s2 .s2-title {
+    top: 4.93%;       /* 39/791 */
     text-transform: uppercase;
+    letter-spacing: 0.02em;
   }
-  .s2-grid {
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0 24px 40px;
-    gap: 0;
-    height: auto;
+  #s2 .s2-card .s2-card__inner {
+    padding: 18px;
+    gap: 10px;
   }
-  .s2-center {
-    width: 100%;
-    margin: 20px 0 0;
-    order: 1;
-    height: 280px;
+  #s2 .s2-card h2 {
+    font-family: var(--font-heading);
+    font-weight: 500;          /* Cormorant Medium */
+    font-size: 28px;
+    line-height: 1;
   }
-  .s2-card {
-    width: 100%;
-    max-width: 100%;
-    border-radius: 16px;
-    padding: 20px 18px;
+  #s2 .s2-card p {
+    font-size: 16px;
+    line-height: 1.15;
   }
-  .s2-card:first-child { order: 2; margin-bottom: 24px; }
-  .s2-card:last-child { order: 3; }
-  .s2-card h2 { font-size: 26px; margin-bottom: 12px; }
-  .s2-card p { font-size: 16px; }
+  /* Mobile: "Новое давление" — top | x:29 y:357 w:315 h:139 */
+  #s2 .s2-card--left {
+    left: 7.73%; top: 45.13%; width: 84%; min-height: 17.57%;
+  }
+  /* Mobile: "Новая реальность" — bottom | x:29 y:536 w:315 h:214 */
+  #s2 .s2-card--right {
+    left: 7.73%; top: 67.76%; width: 84%; min-height: 27.05%;
+  }
 
   /* === S3 OLD CODE === */
   #s3 {
