@@ -370,6 +370,25 @@ main {
      — using % keeps the layout stable while the section scales with
      the viewport width (aspect-ratio is fixed). */
 }
+/* Copy variant: text positioned exactly over the JPG-baked text. Made
+   transparent so the visual stays the JPG art, but the HTML is fully
+   selectable / copyable / translatable / accessible. */
+.s1-text-layer--copy {
+  pointer-events: auto;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.s1-text-layer--copy * {
+  color: transparent !important;
+  text-shadow: none !important;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.s1-text-layer--copy ::selection {
+  background: rgba(220, 180, 80, 0.35);
+  color: rgba(255, 245, 220, 0.95);
+}
+.s1-text-layer--copy .hero-glow-line-v2 { display: none; }
 .s1-text-layer .hero-tagline {
   position: absolute;
   top: 11.4%;
