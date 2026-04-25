@@ -370,25 +370,49 @@ main {
      — using % keeps the layout stable while the section scales with
      the viewport width (aspect-ratio is fixed). */
 }
-/* Copy variant: text positioned exactly over the JPG-baked text. Made
-   transparent so the visual stays the JPG art, but the HTML is fully
-   selectable / copyable / translatable / accessible. */
+/* Copy variant: HTML hero text exists for SEO / screen readers / Ctrl+A
+   copy, but is visually clipped to a 1px box so it doesn't double-render
+   on top of the baked-in JPG hero text. Mouse drag selection won't show
+   highlights at the wrong position — but Cmd+A → Cmd+C still copies
+   the full hero text. */
 .s1-text-layer--copy {
+  position: absolute !important;
+  inset: auto !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: normal !important;
   pointer-events: auto;
   -webkit-user-select: text;
   user-select: text;
+  z-index: 1;
 }
 .s1-text-layer--copy * {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  inset: auto !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 12px !important;
+  line-height: 1.2 !important;
   color: transparent !important;
   text-shadow: none !important;
+  background: transparent !important;
+  white-space: normal !important;
+  display: block !important;
   -webkit-user-select: text;
   user-select: text;
 }
-.s1-text-layer--copy ::selection {
-  background: rgba(220, 180, 80, 0.35);
-  color: rgba(255, 245, 220, 0.95);
-}
-.s1-text-layer--copy .hero-glow-line-v2 { display: none; }
+.s1-text-layer--copy .hero-glow-line-v2 { display: none !important; }
 .s1-text-layer .hero-tagline {
   position: absolute;
   top: 11.4%;
