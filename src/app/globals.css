@@ -1701,128 +1701,119 @@ img.desktop-only { display: block !important; }
 
 /* S4 transitions removed — sections sit naturally */
 
-/* ===== S4 - Intelligence Evolution ===== */
-.s4-content {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding-top: 100px;
-  position: relative;
-  z-index: 2;
-}
+/* ===== S4 — Intelligence Evolution (Figma 1440×675, node 1:340) ===== */
+#s4.s4-figma { background: #d2b8ac; }
+#s4 .s4-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+#s4 .s4-bg img { object-fit: cover; }
 
-.s4-title {
-  text-align: center;
-  font-family: var(--font-heading);
-  font-size: 36px;
-  font-weight: 600;
-  color: var(--text-dark);
-  margin-bottom: 20px;
-}
-
-.s4-timeline {
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding-right: 50px;
-  gap: 0;
-}
-
-.s4-line {
+#s4 .s4-title {
   position: absolute;
-  top: 180px;
+  top: 14.67%;            /* 99/675 */
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 33.6px;
+  color: #310f00;
+  white-space: nowrap;
+  z-index: 3;
+}
+
+#s4 .s4-line {
+  position: absolute;
+  top: 53.78%;            /* 363/675 */
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--text-dark) 0%, var(--gold-dim) 50%, #E19F7D 100%);
+  z-index: 1;
+  pointer-events: none;
 }
+#s4 .s4-line img { object-fit: cover; }
 
-.s4-item {
-  flex: 1;
+#s4 .s4-col {
+  position: absolute;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 0 20px;
-  text-align: center;
-  position: relative;
+  align-items: flex-start;
+  color: #310f00;
 }
-
-.s4-label {
+#s4 .s4-letter {
+  margin: 0;
   font-family: var(--font-heading);
+  font-weight: 500;
   font-size: 28px;
-  font-weight: 500;
-  color: var(--text-dark);
+  line-height: 1;
+  color: #310f00;
 }
-
-.s4-crystal {
-  width: 120px;
-  height: 120px;
+#s4 .s4-letter--ri {
+  font-weight: 600;
+  font-size: 52px;
+  text-transform: uppercase;
+}
+#s4 .s4-stone {
   position: relative;
-  z-index: 1;
-  min-height: 213px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
+  margin-top: 24px;
 }
-
-.s4-crystal.s4-c1 { width: 102px; height: 113px; }
-.s4-crystal.s4-c2 { width: 127px; height: 155px; }
-.s4-crystal.s4-c3 { width: 117px; height: 189px; }
-.s4-crystal.s4-c4 {
-  width: 319px;
-  height: 213px;
-  min-height: 213px;
-  position: relative;
-}
-
-.s4-crystal-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 4px;
-}
-
-.s4-halo {
-  z-index: -1;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  opacity: 1;
-  transform: translate(-50%, -50%);
-}
-
-@keyframes haloPulse {
-  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
-  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
-}
-
-.s4-item-name {
+#s4 .s4-stone img { object-fit: contain; }
+#s4 .s4-name {
+  margin: 0;
   font-family: var(--font-body);
+  font-weight: 500;
   font-size: 18px;
-  font-weight: 500;
-  color: var(--text-dark);
-  margin-bottom: 20px;
-  z-index: 2;
+  line-height: 1;
+  color: #310f00;
+  white-space: nowrap;
 }
-
-.s4-item-desc {
+#s4 .s4-desc {
+  margin: 0;
   font-family: var(--font-body);
+  font-weight: 400;
   font-size: 12px;
-  color: var(--text-dark);
-  max-width: 200px;
-  line-height: 1.3;
-  z-index: 2;
+  line-height: 1.2;
+  color: #310f00;
+}
+#s4 .s4-accent {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1;
+  color: #de8b23;
+  white-space: nowrap;
 }
 
-.s4-new-lang {
-  color: var(--accent);
-  font-size: 18px;
-  font-weight: 500;
-  margin-top: 22px;
-  z-index: 2;
-}
+/* Column positions (% of 1440×675), 4 columns IQ EQ SQ RI */
+/* IQ:  x:93  top:175  w:210 */
+#s4 .s4-col-iq { left: 6.46%; top: 25.93%; width: 14.58%; }
+#s4 .s4-col-iq .s4-letter { margin-left: 80px; }
+#s4 .s4-col-iq .s4-stone  { width: 102px; height: 113px; margin-left: 34px; }
+#s4 .s4-col-iq .s4-name   { margin-top: 38px; }
+#s4 .s4-col-iq .s4-desc   { margin-top: 20px; }
+
+/* EQ:  x:411 top:170  w:210 */
+#s4 .s4-col-eq { left: 28.54%; top: 25.19%; width: 14.58%; }
+#s4 .s4-col-eq .s4-letter { margin-left: 50px; }
+#s4 .s4-col-eq .s4-stone  { width: 127px; height: 155px; margin-left: 2px; margin-top: 20px; }
+#s4 .s4-col-eq .s4-name   { margin-top: 36px; }
+#s4 .s4-col-eq .s4-desc   { margin-top: 20px; }
+
+/* SQ:  x:729 top:164.5 w:210 */
+#s4 .s4-col-sq { left: 50.63%; top: 24.37%; width: 14.58%; }
+#s4 .s4-col-sq .s4-letter { margin-left: 40px; }
+#s4 .s4-col-sq .s4-stone  { width: 117px; height: 189px; margin-left: 2px; margin-top: 10px; }
+#s4 .s4-col-sq .s4-name   { margin-top: 33px; }
+#s4 .s4-col-sq .s4-desc   { margin-top: 20px; }
+
+/* RI:  x:1020 top:147 w:319 */
+#s4 .s4-col-ri { left: 70.83%; top: 21.78%; width: 22.15%; align-items: center; text-align: center; }
+#s4 .s4-col-ri .s4-letter { margin-left: 0; }
+#s4 .s4-col-ri .s4-stone--ri { width: 319px; max-width: 100%; height: 230px; margin-top: 8px; }
+#s4 .s4-col-ri .s4-name { margin-top: 38px; }
+#s4 .s4-col-ri .s4-desc { margin-top: 20px; max-width: 191px; text-align: center; }
+#s4 .s4-col-ri .s4-accent { margin-top: 20px; }
 
 /* ===== S5 - RI Features ===== */
 .s5-wrap {
@@ -2976,53 +2967,56 @@ img.desktop-only { display: block !important; }
     opacity: 0.8;
   }
 
-  /* === S4 INTELLIGENCE === */
-  .s4-content {
-    padding: 48px 0;
-    justify-content: flex-start;
-  }
-  .s4-title {
+  /* === S4 INTELLIGENCE — Figma 375×1249 (node 1:264) === */
+  #s4 { aspect-ratio: 375 / 1249 !important; }
+  #s4 .s4-line { display: none; }
+  #s4 .s4-title {
+    top: 3.84%;          /* 48/1249 */
+    font-family: var(--font-heading);
+    font-weight: 600;
     font-size: 20px;
     text-transform: uppercase;
-    margin-bottom: 40px;
   }
-  .s4-timeline {
-    flex-direction: column;
+  /* All columns: centered horizontally with stone above text */
+  #s4 .s4-col {
     align-items: center;
-    padding: 0 24px;
-    gap: 20px;
-  }
-  .s4-line {
-    display: none;
-  }
-  .s4-item {
-    flex: none;
+    text-align: center;
     width: 100%;
-    padding: 0;
+    left: 0;
   }
-  .s4-label { margin-bottom: 12px; }
-  .s4-crystal,
-  .s4-crystal.s4-c1,
-  .s4-crystal.s4-c2,
-  .s4-crystal.s4-c3 {
-    width: 120px;
-    height: 120px;
-    min-height: auto;
-    margin-bottom: 16px;
-  }
-  .s4-crystal.s4-c1 { width: unset; height: 78px; }
-  .s4-crystal.s4-c2 { width: unset; height: 135px; }
-  .s4-crystal.s4-c3 { width: unset; height: 115px; }
-  .s4-crystal.s4-c4 {
-    width: 240px;
-    height: 160px;
-    min-height: auto;
-    margin-bottom: 16px;
-  }
-  .s4-halo img { width: 400px !important; height: 400px !important; }
-  .s4-item-name { font-size: 18px; margin-bottom: 5px; }
-  .s4-item-desc { font-size: 12px; max-width: 220px; }
-  .s4-new-lang { font-size: 18px; margin-top: 12px; }
+  #s4 .s4-col .s4-stone   { margin-left: 0; margin-top: 0; position: relative; left: 50%; transform: translateX(-50%); }
+  #s4 .s4-col .s4-letter  { margin-left: 0; }
+  #s4 .s4-col .s4-name,
+  #s4 .s4-col .s4-desc    { margin-top: 12px; max-width: 222px; text-align: center; white-space: normal; }
+
+  /* IQ block | letter top:93, stone top:133.91 (h:87 w:78), text top:237 */
+  #s4 .s4-col-iq { top: 7.45%; height: 14%; }
+  #s4 .s4-col-iq .s4-letter { margin-top: 0; }
+  #s4 .s4-col-iq .s4-stone  { width: 78px; height: 87px; margin-top: 16px; }
+  #s4 .s4-col-iq .s4-name   { margin-top: 22px; }
+  #s4 .s4-col-iq .s4-desc   { margin-top: 5px; }
+
+  /* EQ block | letter 297, stone 338 (h:135 w:111), text 489 */
+  #s4 .s4-col-eq { top: 23.78%; height: 16%; }
+  #s4 .s4-col-eq .s4-letter { }
+  #s4 .s4-col-eq .s4-stone  { width: 111px; height: 135px; margin-top: 16px; }
+  #s4 .s4-col-eq .s4-name   { margin-top: 22px; }
+  #s4 .s4-col-eq .s4-desc   { margin-top: 5px; }
+
+  /* SQ block | letter 563.75, stone 604 rotated (h:115 w:186), text 736 */
+  #s4 .s4-col-sq { top: 45.14%; height: 16%; }
+  #s4 .s4-col-sq .s4-letter { }
+  #s4 .s4-col-sq .s4-stone  { width: 186px; height: 115px; margin-top: 16px; }
+  #s4 .s4-col-sq .s4-name   { margin-top: 22px; }
+  #s4 .s4-col-sq .s4-desc   { margin-top: 5px; }
+
+  /* RI block | letter 826, crystal 790 (h:415 w:347), text 1100 */
+  #s4 .s4-col-ri { top: 63.25%; height: 30%; }
+  #s4 .s4-col-ri .s4-letter--ri { font-size: 52px; }
+  #s4 .s4-col-ri .s4-stone--ri  { width: 347px; max-width: 92%; height: 250px; margin-top: 8px; }
+  #s4 .s4-col-ri .s4-name       { margin-top: 16px; }
+  #s4 .s4-col-ri .s4-desc       { margin-top: 5px; }
+  #s4 .s4-col-ri .s4-accent     { margin-top: 10px; white-space: normal; }
 
   /* === S5 RI FEATURES === */
   .s5-wrap {
