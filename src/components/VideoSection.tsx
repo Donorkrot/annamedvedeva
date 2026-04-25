@@ -15,6 +15,8 @@ export default function VideoSection() {
         <Image src={bgMobile(6, lang)} alt="" fill style={{ objectFit: 'cover', objectPosition: 'center top' }} quality={95} sizes="100vw" />
       </div>
 
+      <div className="s6-gradient desktop-only" aria-hidden="true" />
+
       <a
         href="#s3"
         className="s6-btn"

@@ -42,16 +42,16 @@ export default function Footer() {
         <span className="s12-book__sub">{tr('s12_book')}</span>
       </a>
 
-      {/* Social icons */}
+      {/* Social icons — plain <img> for SVGs (Next/Image disallows SVG by default). */}
       <div className="s12-social">
         <a href="https://instagram.com/medvedieva.anna" target="_blank" rel="noopener noreferrer" className="s12-social__link" aria-label="Instagram">
-          <Image src="/images/icons/social-ig.png" alt="" width={40} height={40} />
+          <img src="/images/icons/instagram.svg" alt="" width={40} height={40} draggable={false} />
         </a>
         <a href="https://www.youtube.com/@medvedievaanna" target="_blank" rel="noopener noreferrer" className="s12-social__link" aria-label="YouTube">
-          <Image src="/images/icons/social-yt.png" alt="" width={40} height={40} />
+          <img src="/images/icons/youtube.svg" alt="" width={40} height={40} draggable={false} />
         </a>
         <a href="https://t.me/wayofsoulanna" target="_blank" rel="noopener noreferrer" className="s12-social__link" aria-label="Telegram">
-          <Image src="/images/icons/social-tg.png" alt="" width={40} height={40} />
+          <img src="/images/icons/telegram.svg" alt="" width={40} height={40} draggable={false} />
         </a>
       </div>
 

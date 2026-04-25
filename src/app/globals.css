@@ -426,6 +426,20 @@ main {
   text-align: center;
   line-height: 1.25;
   opacity: 0.82;
+  margin: 0;
+}
+.s1-text-layer .hero-tagline__line {
+  display: block;
+}
+/* Visible variant — let mouse drag-select the text without breaking the
+   click-through to layers beneath. The layer container stays pointer-events:none
+   (so the section's bg/btn remain clickable), text elements opt back in. */
+.s1-text-layer:not(.s1-text-layer--copy) .hero-tagline,
+.s1-text-layer:not(.s1-text-layer--copy) .hero-title-v2,
+.s1-text-layer:not(.s1-text-layer--copy) .hero-subtitle-v2 {
+  pointer-events: auto;
+  -webkit-user-select: text;
+  user-select: text;
 }
 /* Title splits across two rows with line.png between them. All positions
    are pixel-measured from `главная страница первый блок референс.png`
@@ -520,24 +534,33 @@ img.desktop-only { display: block !important; }
 #s3  { aspect-ratio: 1440 / 670; }
 #s4  { aspect-ratio: 1440 / 675; }
 #s6  { aspect-ratio: 1440 / 804; }
-/* S6 keeps the baked-in beige/sparkle background and the "Метод" button
-   overlay. White video area measured in bg-s6-full.jpg: x=165..1276
-   (11.46%..88.61%), y=27..670 (3.36%..83.33%). The iframe matches the
-   white rectangle exactly so no white edge shows. */
+/* S6 — clean cream/sparkle bg (no baked-in white frame). Iframe is the
+   only video player, sized per Figma 1:419: 1130×577 at (155, 191) within
+   the 1440×804 section. The Метод button sits above the video. */
+#s6 .s6-gradient {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 28.61%;          /* 230/804 — gradient starts here, height 646 */
+  height: 80.35%;       /* 646/804 */
+  background: linear-gradient(to top, #e7dfda 0%, #e7dfda 21.15%, rgba(231, 223, 218, 0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
 #s6 .s6-video-frame {
   position: absolute;
-  left: 11.46%;
-  top: 3.36%;
-  width: 77.15%;
-  height: 79.98%;
+  left: 10.76%;         /* 155/1440 */
+  top: 8.7%;            /* video moved up so the Метод button can sit below */
+  width: 78.47%;        /* 1130/1440 */
+  height: 71.77%;       /* 577/804 */
   overflow: hidden;
   z-index: 5;
   background: #0d0702;
+  border-radius: 6px;
+  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.35);
 }
 /* Cover the YouTube "Watch on YouTube" overlay that sticks to the
-   bottom-right corner of the embed. A small matte rectangle in the
-   section's beige background color hides it cleanly; pointer-events:none
-   keeps the click-to-play target fully interactive. */
+   bottom-right corner of the embed. */
 #s6 .s6-video-frame::after {
   content: '';
   position: absolute;
@@ -558,11 +581,11 @@ img.desktop-only { display: block !important; }
   display: block;
 }
 
-/* S6 — HTML "Метод" button (Figma 1:419 desktop / 1:213 mobile) */
+/* S6 — HTML "Метод" button: positioned below the video frame per request. */
 #s6 .s6-btn {
   position: absolute;
   z-index: 6;
-  top: 8.45%;             /* 74/876 */
+  top: 85.5%;             /* below video (video bottom ≈ 80.47%) */
   left: 50%;
   transform: translateX(-50%);
   width: 325px;
