@@ -355,11 +355,16 @@ main {
   line-height: 1.25;
   opacity: 0.82;
 }
+/* Title splits across two rows with line.png between them. All positions
+   are pixel-measured from `главная страница первый блок референс.png`
+   (1440×700 @ 1×): title bbox 1047×126 at (x=155, y=271), line 1440×10 at
+   (x=0, y=328), subtitle 928×34 at (x=155, y=398). Title and subtitle use
+   their own bboxes (not page-centered) so the content sits exactly where
+   the design puts it. */
 .s1-text-layer .hero-title-v2 {
   position: absolute;
-  top: 36%;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 10.76%;       /* x=155 / 1440 */
+  width: 72.71%;      /* 1047 / 1440 */
   margin: 0;
   font-family: var(--font-heading);
   font-size: clamp(28px, 3.6vw, 54px);
@@ -374,28 +379,25 @@ main {
     0 2px 20px rgba(0, 0, 0, 0.6);
   white-space: nowrap;
 }
+.s1-text-layer .hero-title-row-1 { top: 38.71%; }  /* y271 / 700 */
+.s1-text-layer .hero-title-row-2 { top: 48.57%; }  /* y340 / 700 — bbox ends at y397 */
+
 .s1-text-layer .hero-glow-line-v2 {
   position: absolute;
-  top: 58%;
-  left: 6%;
-  right: 6%;
-  height: 2px;
-  background: linear-gradient(90deg,
-    transparent 0%, rgba(200, 160, 60, 0.3) 10%,
-    rgba(220, 180, 80, 0.9) 30%, #fff8e0 50%,
-    rgba(220, 180, 80, 0.9) 70%, rgba(200, 160, 60, 0.3) 90%, transparent 100%);
-  box-shadow:
-    0 0 12px 4px rgba(220, 180, 80, 0.5),
-    0 0 40px 8px rgba(180, 120, 20, 0.3);
+  top: 46.86%;        /* y328 / 700 */
+  left: 0;
+  right: 0;
+  height: 1.43%;      /* 10 / 700 */
+  background: url('/images/effects/line.png') center/100% 100% no-repeat;
   animation: pulse-glow 4s ease-in-out infinite;
 }
 .s1-text-layer .hero-subtitle-v2 {
   position: absolute;
-  top: 62%;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 56.86%;        /* y398 / 700 */
+  left: 10.76%;       /* x=155 / 1440 */
+  width: 64.44%;      /* 928 / 1440 */
   font-family: var(--font-heading);
-  font-size: clamp(14px, 1.5vw, 24px);
+  font-size: clamp(16px, 1.94vw, 28px);
   font-weight: 300;
   color: var(--cream);
   letter-spacing: 0.01em;
@@ -446,44 +448,42 @@ img.desktop-only { display: block !important; }
 #s3  { aspect-ratio: 1440 / 670; }
 #s4  { aspect-ratio: 1440 / 675; }
 #s6  { aspect-ratio: 1440 / 804; }
-/* S6 is now a video block — 16:9 iframe centered on the warm beige
-   background.  Overrides the baked-image aspect ratio above. */
-#s6.s6-video {
-  aspect-ratio: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 56px 6%;
-  background: #e8ddd4;
-}
-#s6.s6-video .s6-video-frame {
-  position: relative;
-  width: 100%;
-  max-width: 1080px;
-  aspect-ratio: 16 / 9;
-  border-radius: 14px;
+/* S6 keeps the baked-in beige/sparkle background and the "Метод" button
+   overlay. White video area measured in bg-s6-full.jpg: x=165..1276
+   (11.46%..88.61%), y=27..670 (3.36%..83.33%). The iframe matches the
+   white rectangle exactly so no white edge shows. */
+#s6 .s6-video-frame {
+  position: absolute;
+  left: 11.46%;
+  top: 3.36%;
+  width: 77.15%;
+  height: 79.98%;
   overflow: hidden;
-  box-shadow:
-    0 2px 6px rgba(60, 30, 10, 0.18),
-    0 24px 60px -18px rgba(60, 30, 10, 0.35);
+  z-index: 5;
   background: #0d0702;
 }
-#s6.s6-video .s6-video-frame iframe {
+/* Cover the YouTube "Watch on YouTube" overlay that sticks to the
+   bottom-right corner of the embed. A small matte rectangle in the
+   section's beige background color hides it cleanly; pointer-events:none
+   keeps the click-to-play target fully interactive. */
+#s6 .s6-video-frame::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 230px;
+  height: 56px;
+  background: #0d0702;
+  pointer-events: none;
+  z-index: 6;
+}
+#s6 .s6-video-frame iframe {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   border: 0;
   display: block;
-}
-@media (max-width: 768px) {
-  #s6.s6-video {
-    aspect-ratio: auto !important;
-    padding: 28px 4%;
-  }
-  #s6.s6-video .s6-video-frame {
-    border-radius: 10px;
-  }
 }
 #s11 { aspect-ratio: 1440 / 820; }
 #s1  { background: #1a0d05; }
@@ -924,9 +924,7 @@ img.desktop-only { display: block !important; }
   background-image: url('/images/buttons/ru/s12-social.png?v=20260419-footer');
   background-size: 300% 100%;
   background-repeat: no-repeat;
-  animation: s12SocialWave 4s ease-in-out infinite;
   transition: filter 0.5s var(--ease-luxe);
-  will-change: transform;
 }
 @media (max-width: 768px) {
   .s12-social-hit {
@@ -934,9 +932,9 @@ img.desktop-only { display: block !important; }
   }
 }
 
-.s12-ig-hit { background-position:   0% 50%; animation-delay: 0s; }
-.s12-yt-hit { background-position:  50% 50%; animation-delay: -0.67s; }
-.s12-tg-hit { background-position: 100% 50%; animation-delay: -1.33s; }
+.s12-ig-hit { background-position:   0% 50%; }
+.s12-yt-hit { background-position:  50% 50%; }
+.s12-tg-hit { background-position: 100% 50%; }
 
 .s12-social-hit:hover {
   filter:

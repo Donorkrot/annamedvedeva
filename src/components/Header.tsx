@@ -63,12 +63,12 @@ export default function Header() {
             <span /><span /><span />
           </button>
 
-          <button
+          <a
+            href="/consultation"
             className="btn-site header-btn"
-            onClick={() => document.querySelector('#s11')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            {tr('nav_btn')}
-          </button>
+            {tr('nav_consult')}
+          </a>
         </div>
       </header>
 

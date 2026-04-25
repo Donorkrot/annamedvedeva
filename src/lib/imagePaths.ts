@@ -2,7 +2,7 @@ import type { Lang } from './translations';
 
 // Bump this when replacing image assets to force browser cache refresh.
 // Format: YYYYMMDD-sequence
-const ASSET_VERSION = '20260420-footer-ref';
+const ASSET_VERSION = '20260423-s1-lang';
 const v = (p: string) => `${p}?v=${ASSET_VERSION}`;
 
 // Fallback order: use dedicated folder if exists, else fall back to RU (default).

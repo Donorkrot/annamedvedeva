@@ -1,13 +1,22 @@
 'use client';
+import Image from 'next/image';
 import { useTranslation } from '@/components/LanguageProvider';
 import SeoText from '@/components/SeoText';
+import { bgDesktop, bgMobile, btnDesktop } from '@/lib/imagePaths';
 
 export default function VideoSection() {
-  useTranslation();
+  const { lang } = useTranslation();
 
   return (
-    <section id="s6" className="section s6-video">
+    <section id="s6" className="section">
       <SeoText section="s6" />
+      <div className="s10-bg desktop-only">
+        <Image src={bgDesktop(6, lang)} alt="" fill style={{ objectFit: 'cover', objectPosition: 'center center' }} quality={95} />
+      </div>
+      <div className="s10-bg mobile-only">
+        <Image src={bgMobile(6, lang)} alt="" fill style={{ objectFit: 'cover', objectPosition: 'center top' }} quality={95} />
+      </div>
+
       <div className="s6-video-frame">
         <iframe
           src="https://www.youtube-nocookie.com/embed/i6vCzyWnE-o?rel=0&modestbranding=1"
@@ -17,6 +26,10 @@ export default function VideoSection() {
           allowFullScreen
         />
       </div>
+
+      <a href="#s3" className="s6-btn-overlay" onClick={e => { e.preventDefault(); document.querySelector('#s3')?.scrollIntoView({ behavior: 'smooth' }); }}>
+        <img src={btnDesktop(6, lang)} alt="" draggable={false} />
+      </a>
     </section>
   );
 }
