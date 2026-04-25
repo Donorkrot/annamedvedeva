@@ -1815,76 +1815,65 @@ img.desktop-only { display: block !important; }
 #s4 .s4-col-ri .s4-desc { margin-top: 20px; max-width: 191px; text-align: center; }
 #s4 .s4-col-ri .s4-accent { margin-top: 20px; }
 
-/* ===== S5 - RI Features ===== */
-.s5-wrap {
-  position: relative;
+/* ===== S5 — Reality Intelligence (Figma 1440×700, node 1:371) ===== */
+#s5.s5-figma { background: #fff5ef; }
+#s5 .s5-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+#s5 .s5-bg img { object-fit: cover; }
+
+#s5 .s5-card {
+  position: absolute;
   z-index: 2;
-  height: 100%;
+  width: 22.57%;             /* 325/1440 */
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  padding: 100px 80px;
+  gap: 20px;
+  color: #310f00;
 }
-
-@media (min-width: 1200px) {
-  .s5-wrap {
-    padding: 100px 270px;
-  }
+#s5 .s5-card--frosted {
+  background: rgba(251, 234, 224, 0.7);
+  padding: 20px;
+  border-radius: 20px;
 }
+#s5 .s5-card--plain { padding: 0; }
 
-@media (min-width: 1440px) {
-  .s5-grid {
-    grid-template-columns: 390px 390px;
-  }
-}
-
-.s5-title {
-  text-align: center;
+#s5 .s5-card__title {
+  margin: 0;
   font-family: var(--font-heading);
-  font-size: 36px;
-  font-weight: 600;
-  color: var(--text-dark);
-  margin-bottom: 138px;
-}
-
-.s5-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px 120px;
-}
-
-.s5-item-title {
-  font-family: var(--font-heading);
-  font-size: 28px;
   font-weight: 500;
+  font-size: 28px;
+  line-height: 1;
+  color: #310f00;
   text-transform: uppercase;
-  color: var(--text-dark);
-  margin-bottom: 16px;
 }
-
-.s5-item-body {
+#s5 .s5-card__title--ri {
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 33.6px;
+  text-transform: none;
+}
+#s5 .s5-card__body {
+  margin: 0;
   font-family: var(--font-body);
+  font-weight: 400;
   font-size: 16px;
-  color: var(--text-dark);
-  opacity: 0.7;
   line-height: 1.2;
+  color: #310f00;
 }
-
-.s5-item-body-plain {
-  font-family: var(--font-body);
+#s5 .s5-card__body--lead {
+  font-weight: 500;
   font-size: 18px;
   line-height: 1.2;
-  color: var(--text-dark);
-  font-weight: 400;
 }
 
-.s5-item-bordered {
-  padding: 0;
-}
-
-#s5 {
-  background: transparent;
-}
+/* Desktop positions per Figma 1440×700:
+   - RI    | top-left   | x:155 y:99   w:325
+   - Стаб  | bot-left   | x:154 y:399  w:325
+   - Manage| bot-right  | x:960 y:399  w:325
+   - Clear | top-right  | x:959 y:227  w:325 */
+#s5 .s5-card--ri     { left: 10.76%; top: 14.14%; }   /* 155/1440, 99/700 */
+#s5 .s5-card--stab   { left: 10.69%; top: 57.00%; }   /* 154/1440, 399/700 */
+#s5 .s5-card--manage { left: 66.67%; top: 57.00%; }   /* 960/1440, 399/700 */
+#s5 .s5-card--clear  { left: 66.60%; top: 32.43%; }   /* 959/1440, 227/700 */
 
 
 /* ===== S6 - Video ===== */
@@ -3018,26 +3007,48 @@ img.desktop-only { display: block !important; }
   #s4 .s4-col-ri .s4-desc       { margin-top: 5px; }
   #s4 .s4-col-ri .s4-accent     { margin-top: 10px; white-space: normal; }
 
-  /* === S5 RI FEATURES === */
-  .s5-wrap {
-    padding: 48px 24px 48px;
-    justify-content: flex-start;
-  }
-  .s5-title {
-    font-size: 28px;
-    text-align: left;
-    margin-bottom: 24px;
-  }
-  .s5-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
+  /* === S5 RI FEATURES — Figma 375×716 (node 1:289) === */
+  #s5 { aspect-ratio: 375 / 716 !important; }
+  #s5.s5-figma {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
+    padding: 29px;          /* matches Figma left:29 top:29 */
+    gap: 20px;
   }
-  .s5-item:has(.s5-item-body-plain) { order: -1; }
-  .s5-item-title { font-size: 24px; margin-bottom: 10px; text-transform: unset; }
-  .s5-item-body { font-size: 15px; }
-  .s5-item-body-plain { font-size: 16px; }
+  /* Cards become block-flow on mobile */
+  #s5 .s5-card {
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+    width: 100%;
+    z-index: 2;
+  }
+  #s5 .s5-card--frosted { padding: 20px; gap: 20px; }
+  #s5 .s5-card--plain   { padding: 0 20px; gap: 5px; }
+  #s5 .s5-card__title,
+  #s5 .s5-card__title--ri {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1;
+    text-transform: none;
+  }
+  #s5 .s5-card__body,
+  #s5 .s5-card__body--lead {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.2;
+  }
+  /* Re-order: in mobile we want RI, Устойчивость, Управляемая реальность, Ясность решений */
+  #s5 .s5-card--ri     { order: 1; }
+  #s5 .s5-card--stab   { order: 2; }
+  #s5 .s5-card--manage { order: 3; }
+  #s5 .s5-card--clear  { order: 4; }
+  /* Plain bodies on mobile use opacity 0.7 */
+  #s5 .s5-card--plain .s5-card__body { opacity: 0.7; }
+  #s5 .s5-card--manage .s5-card__body { opacity: 0.7; }
 
   /* === S6 VIDEO === */
   #s6 {
