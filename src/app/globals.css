@@ -1653,44 +1653,50 @@ img.desktop-only { display: block !important; }
 /* "Новая реальность" — right card | x:957 y:289 w:325 h:218 */
 #s2 .s2-card--right { left: 66.46%; top: 41.29%; width: 22.57%; min-height: 31.14%; }
 
-/* ===== S3 - Old Code ===== */
-.s3-content {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 100px 150px 0;
-  max-width: 840px;
-  position: relative;
+/* ===== S3 — Old Code (pixel-perfect from Figma 1440×670, node 1:259) ===== */
+#s3.s3-figma { background: #000; }
+#s3 .s3-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+#s3 .s3-bg img { object-fit: cover; }
+
+#s3 .s3-kicker {
+  position: absolute;
+  top: 14.78%;        /* 99/670 */
+  left: 10.76%;       /* 155/1440 */
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1;
+  color: #fff5ef;
+  z-index: 2;
+  white-space: nowrap;
+}
+#s3 .s3-title {
+  position: absolute;
+  top: 29.85%;        /* 200/670 */
+  left: 10.76%;
+  width: 37.43%;      /* 539/1440 */
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 52px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #fff5ef;
   z-index: 2;
 }
-
-.s3-kicker {
-  font-family: var(--font-body);
-  font-size: 18px;
-  color: var(--cream);
-  margin-bottom: 32px;
-}
-
-.s3-title {
-  font-family: var(--font-heading);
-  font-size: 52px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: var(--cream);
-  margin-bottom: 48px;
-  line-height: 1.1;
-}
-
-.s3-body {
+#s3 .s3-body {
   position: absolute;
-  bottom: 70px;
-  left: 150px;
+  top: 70.75%;        /* 474/670 */
+  left: 10.76%;
+  width: 30.56%;      /* 440/1440 */
+  margin: 0;
   font-family: var(--font-body);
+  font-weight: 400;
   font-size: 16px;
-  color: var(--cream);
   line-height: 1.2;
-  max-width: 440px;
+  color: #fff;
+  z-index: 2;
 }
 
 /* S4 transitions removed — sections sit naturally */
@@ -2942,37 +2948,32 @@ img.desktop-only { display: block !important; }
     left: 7.73%; top: 67.76%; width: 84%; min-height: 27.05%;
   }
 
-  /* === S3 OLD CODE === */
-  #s3 {
-    min-height: 635px !important;
-  }
-  .s3-content {
-    padding: 48px 24px;
-    justify-content: space-between;
-    max-width: 100%;
-  }
-  .s3-kicker {
+  /* === S3 OLD CODE — Figma 375×635 (node 1:208) === */
+  #s3 .s3-kicker {
+    top: 6.14%;        /* 39/635 */
+    left: 8%;          /* 30/375 */
+    width: 39.47%;     /* 148/375 */
+    white-space: normal;
+    font-family: var(--font-body);
+    font-weight: 400;
     font-size: 16px;
-    margin-bottom: 0;
-    max-width: 150px;
-    min-height: 125px;
+    opacity: 0.6;
   }
-  .s3-title {
+  #s3 .s3-title {
+    top: 42.20%;       /* 268/635 */
+    left: 8%;
+    width: 62.93%;     /* 236/375 */
+    font-family: var(--font-heading);
+    font-weight: 300;  /* Cormorant Light */
     font-size: 20px;
-    margin-bottom: 0;
-    line-height: 1.1;
+    line-height: 1;
   }
-  .s3-body {
-    position: relative;
-    bottom: auto;
-    left: auto;
-    font-size: 15px;
-    line-height: 1.2;
-    max-width: 90%;
+  #s3 .s3-body {
+    top: 70.39%;       /* 447/635 */
+    left: 8%;
+    width: 84%;        /* 315/375 */
+    font-size: 16px;
     opacity: 0.8;
-    display: flex;
-    align-items: flex-end;
-    min-height: 175px;
   }
 
   /* === S4 INTELLIGENCE === */

@@ -1,21 +1,22 @@
 'use client';
-import Image from "next/image";
+import Image from 'next/image';
 import { useTranslation } from '@/components/LanguageProvider';
-import SeoText from '@/components/SeoText';
-import { bgDesktop, bgMobile } from '@/lib/imagePaths';
 
 export default function OldCodeSection() {
-  const { lang } = useTranslation();
+  const { tr } = useTranslation();
 
   return (
-    <section id="s3" className="section">
-      <SeoText section="s3" />
-      <div className="s10-bg desktop-only">
-        <Image src={bgDesktop(3, lang)} alt="" fill style={{ objectFit: "cover", objectPosition: "center center" }} quality={90} />
+    <section id="s3" className="section s3-figma">
+      <div className="s3-bg desktop-only">
+        <Image src="/images/backgrounds/bg-s3-desktop.jpg" alt="" fill sizes="100vw" />
       </div>
-      <div className="s10-bg mobile-only">
-        <Image src={bgMobile(3, lang)} alt="" fill style={{ objectFit: "cover", objectPosition: "center top" }} quality={90} />
+      <div className="s3-bg mobile-only">
+        <Image src="/images/backgrounds/bg-s3-mobile.jpg" alt="" fill sizes="100vw" style={{ objectPosition: 'center top' }} />
       </div>
+
+      <p className="s3-kicker">{tr('s3_kicker')}</p>
+      <h2 className="s3-title">{tr('s3_title_1')} {tr('s3_title_2')}</h2>
+      <p className="s3-body">{tr('s3_body')}</p>
     </section>
   );
 }
