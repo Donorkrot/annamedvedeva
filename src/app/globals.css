@@ -2673,10 +2673,15 @@ img.desktop-only { display: block !important; }
   position: absolute;
   z-index: 2;
   top: 47.47%;             /* center y = 235/495 */
-  left: 72.74%;            /* center x = 1047.5/1440 */
-  transform: translate(-50%, -50%);
+  /* Left-anchored at the same x as the legal block below so the right
+     column (currency title, body, оферта/privacy) shares a single left
+     edge across RU/UA/EN — centering by translateX shifted the block
+     with text width and visibly misaligned UA/EN. */
+  left: 62.15%;            /* 895/1440 — matches .s12-legal */
+  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 20px;
   color: #fff5ef;
 }

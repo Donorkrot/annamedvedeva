@@ -10,6 +10,10 @@ const v = (p: string) => `${p}?v=${ASSET_VERSION}`;
 const HAS_LANG_ASSETS: Record<Lang, boolean> = { ru: true, ua: true, en: true };
 
 export function bgDesktop(section: number, lang: Lang): string {
+  // s6 has no localized text — the UA/EN exports still carry a baked-in
+  // white "video placeholder" rectangle that doesn't line up with the real
+  // YouTube embed, so always use the clean default bg for that section.
+  if (section === 6) return v(`/images/backgrounds/bg-s${section}-full.jpg`);
   if (lang === 'ua' && HAS_LANG_ASSETS.ua) return v(`/images/backgrounds/ua/bg-s${section}-full.jpg`);
   if (lang === 'en' && HAS_LANG_ASSETS.en) return v(`/images/backgrounds/en/bg-s${section}-full.jpg`);
   return v(`/images/backgrounds/bg-s${section}-full.jpg`);
