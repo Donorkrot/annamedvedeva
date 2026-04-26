@@ -69,8 +69,8 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--dark-brown);
 }
-
 body {
   background: var(--dark-brown);
   color: var(--cream);
@@ -78,6 +78,15 @@ body {
   font-size: 16px;
   overflow-x: clip;
   scroll-behavior: smooth;
+  /* Cap to design width so the layout doesn't break when the viewport
+     CSS-pixels exceed 1440 (e.g., browser zoom-out, ultra-wide monitors).
+     At zoom < 100% the viewport widens past 1440 CSS px — without this
+     cap, sections grow with 100vw but their fixed-px positioned children
+     don't, which made the design "shift" / "break". With max-width the
+     entire content stays at design dimensions and the surplus viewport
+     becomes a centered letterbox in the html bg color. */
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 main {
@@ -559,19 +568,8 @@ img.desktop-only { display: block !important; }
   border-radius: 6px;
   box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.35);
 }
-/* Cover the YouTube "Watch on YouTube" overlay that sticks to the
-   bottom-right corner of the embed. */
-#s6 .s6-video-frame::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 230px;
-  height: 56px;
-  background: #0d0702;
-  pointer-events: none;
-  z-index: 6;
-}
+/* (Black YouTube-overlay cover removed per request — was hiding the
+   "Watch on YouTube" badge in the bottom-right corner of the embed.) */
 #s6 .s6-video-frame iframe {
   position: absolute;
   inset: 0;
@@ -2602,11 +2600,13 @@ img.desktop-only { display: block !important; }
 #s12.s12-figma .s12-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
 #s12.s12-figma .s12-bg img { object-fit: cover; }
 
+/* All footer positions expressed as % of the 1440×495 design so they
+   scale correctly with the section (and survive browser zoom). */
 #s12.s12-figma .s12-headline-block {
   position: absolute;
   z-index: 2;
-  top: calc(50% - 104px);
-  left: calc(50% - 305px);
+  top: 28.99%;             /* center y = 143.5/495 */
+  left: 28.82%;            /* center x = 415/1440 */
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
@@ -2636,8 +2636,8 @@ img.desktop-only { display: block !important; }
 #s12.s12-figma .s12-currency-block {
   position: absolute;
   z-index: 2;
-  top: calc(50% - 12.5px);
-  left: calc(50% + 327.5px);
+  top: 47.47%;             /* center y = 235/495 */
+  left: 72.74%;            /* center x = 1047.5/1440 */
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
@@ -2665,8 +2665,8 @@ img.desktop-only { display: block !important; }
 #s12.s12-figma .s12-book {
   position: absolute;
   z-index: 2;
-  left: 154px;
-  top: 229px;
+  left: 10.69%;            /* 154/1440 */
+  top: 46.26%;             /* 229/495 */
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -2699,8 +2699,8 @@ img.desktop-only { display: block !important; }
 #s12.s12-figma .s12-social {
   position: absolute;
   z-index: 2;
-  left: 889px;
-  top: 315px;
+  left: 61.74%;            /* 889/1440 */
+  top: 63.64%;             /* 315/495 */
   display: flex;
   gap: 44px;
   align-items: center;
@@ -2717,9 +2717,9 @@ img.desktop-only { display: block !important; }
 #s12.s12-figma .s12-legal {
   position: absolute;
   z-index: 2;
-  left: 895px;
-  top: 424px;
-  width: 316px;
+  left: 62.15%;            /* 895/1440 */
+  top: 85.66%;             /* 424/495 */
+  width: 21.94%;           /* 316/1440 */
   display: flex;
   align-items: center;
   gap: 13px;
@@ -2744,8 +2744,8 @@ img.desktop-only { display: block !important; }
 #s12.s12-figma .s12-logo {
   position: absolute;
   z-index: 2;
-  left: 635px;
-  top: 424px;
+  left: 44.10%;            /* 635/1440 */
+  top: 85.66%;             /* 424/495 */
   margin: 0;
   font-family: var(--font-body);
   font-weight: 400;
