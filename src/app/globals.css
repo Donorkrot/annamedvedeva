@@ -3818,6 +3818,45 @@ img.desktop-only { display: block !important; }
   }
 }
 
+/* About-page video embeds — overlaid on top of the JPG placeholders.
+   Box bounds measured pixel-precisely from each background image so the
+   iframe sits exactly inside the placeholder rectangle (no white edges).
+   The wrapper is solid black so any sub-pixel rounding is invisible. */
+.about-video {
+  position: absolute;
+  z-index: 5;
+  background: #000;
+  overflow: hidden;
+  /* Hide the YouTube card "Watch on YouTube" overlay corner if it appears. */
+}
+.about-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  background: #000;
+}
+/* a4 placeholder bounds (measured from public/images/backgrounds/about/a4.jpg). */
+.about-video--a4 {
+  left: 50.74%;
+  top: 25.57%;
+  width: 39.84%;
+  height: 51.29%;
+}
+/* a10 placeholder bounds (measured from public/images/backgrounds/about/a10.jpg). */
+.about-video--a10 {
+  left: 42.71%;
+  top: 24.86%;
+  width: 46.94%;
+  height: 54.29%;
+}
+@media (max-width: 768px) {
+  /* Mobile JPG composite is different — hide desktop video overlays. */
+  .about-video { display: none; }
+}
+
 /* ===== Consultation price-list buttons (c2 section) =====
    Each language's c2.jpg already has "Оплатить" and "Техподдержка" buttons
    drawn inside the image. Overlays below are TRANSPARENT clickable hit-zones
