@@ -88,6 +88,22 @@ body {
   max-width: 1440px;
   margin: 0 auto;
 }
+/* Above 1440 (e.g. browser zoom-out, ultra-wide monitors) the design is
+   built to a fixed 1440-pixel grid with many absolute-px positions that
+   don't scale with `100vw`. Instead of capping with max-width (which
+   leaves an ugly letterbox), use a CSS variable that drives a
+   transform: scale on a child wrapper so the whole 1440 design is
+   scaled UP to fill the viewport — proportions stay pixel-perfect at
+   every zoom level. Below 1440 it scales DOWN through normal % layout. */
+@media (min-width: 1441px) {
+  html {
+    /* zoom is non-standard but supported in every modern browser
+       (Chrome / Edge / Safari forever, Firefox 126+) and is the cleanest
+       way to scale an entire document. It scales both sizes and offsets
+       so px-positioned children stay locked to their design coordinates. */
+    zoom: calc(100vw / 1440px);
+  }
+}
 
 main {
   display: flex;
