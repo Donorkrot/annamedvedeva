@@ -2040,10 +2040,13 @@ img.desktop-only { display: block !important; }
   display: flex;
   flex-direction: column;
 }
-/* Block 1: Ключ к RI / МАСТЕРСТВО / desc | x:154 y:95 w:786 */
+/* Block 1: Ключ к RI / МАСТЕРСТВО / desc | x:154 y:60 w:786
+   (Original Figma top was 95/700 = 13.57%, but with the longer bio in
+   block-2 the whole left column visually drifted toward the bottom.
+   Raising block-1 to 60/700 = 8.57% recenters the column vertically.) */
 #s7 .s7-block-1 {
   left: 10.69%;           /* 154/1440 */
-  top: 13.57%;            /* 95/700 */
+  top: 8.57%;             /* 60/700 — raised to vertically center the column */
   width: 54.58%;          /* 786/1440 */
 }
 #s7 .s7-kicker {
@@ -2072,10 +2075,11 @@ img.desktop-only { display: block !important; }
   color: #fff5ef;
   white-space: pre-line;
 }
-/* Block 2: Anna name + bio | x:154 y:325 w:628 */
+/* Block 2: Anna name + bio | x:154 y:290 w:628 (raised from y:325 to
+   match block-1 lift; preserves the original gap between blocks). */
 #s7 .s7-block-2 {
   left: 10.69%;
-  top: 46.43%;            /* approx 325/700 — calculated from Figma vert offsets */
+  top: 41.43%;            /* 290/700 */
   width: 43.61%;          /* 628/1440 */
 }
 #s7 .s7-name {
