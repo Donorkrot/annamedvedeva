@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import { useTranslation } from '@/components/LanguageProvider';
 import { bgDesktop, bgMobile } from '@/lib/imagePaths';
+import LiteYouTube from '@/components/LiteYouTube';
 
 export default function VideoSection() {
   const { lang, tr } = useTranslation();
@@ -26,13 +27,7 @@ export default function VideoSection() {
       </a>
 
       <div className="s6-video-frame">
-        <iframe
-          src="https://www.youtube-nocookie.com/embed/i6vCzyWnE-o?rel=0&modestbranding=1"
-          title="Метод Reality DNA — Анна Медведева"
-          loading="lazy"
-          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        />
+        <LiteYouTube id="i6vCzyWnE-o" title="Метод Reality DNA — Анна Медведева" />
       </div>
     </section>
   );

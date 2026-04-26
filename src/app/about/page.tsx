@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useTranslation } from '@/components/LanguageProvider';
 import Footer from '@/components/Footer';
+import LiteYouTube from '@/components/LiteYouTube';
 
 const ASSET_VERSION = '20260418-hq3x';
 const v = (p: string) => `${p}?v=${ASSET_VERSION}`;
@@ -72,13 +73,7 @@ export default function AboutPage() {
              (measured from a4.jpg: left:50.74% top:25.57% w:39.84% h:51.29%). */}
           {i === 3 && (
             <div className="about-video about-video--a4">
-              <iframe
-                src="https://www.youtube-nocookie.com/embed/i6vCzyWnE-o?rel=0&modestbranding=1"
-                title="Reality Intelligence"
-                loading="lazy"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
+              <LiteYouTube id="i6vCzyWnE-o" title="Reality Intelligence" />
             </div>
           )}
 
@@ -101,13 +96,7 @@ export default function AboutPage() {
              placeholder (measured from a10.jpg: left:42.71% top:24.86% w:46.94% h:54.29%). */}
           {i === 9 && (
             <div className="about-video about-video--a10">
-              <iframe
-                src="https://www.youtube-nocookie.com/embed/pWpNN4YhNsc?rel=0&modestbranding=1"
-                title="Reality Intelligence — Examples"
-                loading="lazy"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
+              <LiteYouTube id="pWpNN4YhNsc" title="Reality Intelligence — Examples" />
             </div>
           )}
         </section>

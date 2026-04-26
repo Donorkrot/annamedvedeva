@@ -104,6 +104,22 @@ body {
     zoom: calc(100vw / 1440px);
   }
 }
+/* Above 1440 (e.g. browser zoom-out, ultra-wide monitors) the design is
+   built to a fixed 1440-pixel grid with many absolute-px positions that
+   don't scale with `100vw`. Instead of capping with max-width (which
+   leaves an ugly letterbox), use a CSS variable that drives a
+   transform: scale on a child wrapper so the whole 1440 design is
+   scaled UP to fill the viewport — proportions stay pixel-perfect at
+   every zoom level. Below 1440 it scales DOWN through normal % layout. */
+@media (min-width: 1441px) {
+  html {
+    /* zoom is non-standard but supported in every modern browser
+       (Chrome / Edge / Safari forever, Firefox 126+) and is the cleanest
+       way to scale an entire document. It scales both sizes and offsets
+       so px-positioned children stay locked to their design coordinates. */
+    zoom: calc(100vw / 1440px);
+  }
+}
 
 main {
   display: flex;
@@ -3836,6 +3852,70 @@ img.desktop-only { display: block !important; }
        into the mobile JPGs, so hide the desktop HTML overlays. */
     display: none;
   }
+}
+
+/* === LiteYouTube facade ===
+   Click-to-play embed: thumbnail + play button, swapped for the real
+   iframe on first interaction. Defeats YT's "are you a bot?"
+   challenge that was firing on cold loads, and slashes initial JS
+   weight. See src/components/LiteYouTube.tsx for the rationale. */
+.lyt {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+}
+.lyt iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  background: #000;
+}
+.lyt__btn {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  background-color: #000;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.25s ease;
+}
+.lyt__btn::before {
+  /* Subtle gradient so the play button always reads against the poster,
+     even on bright frames. */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.45) 100%);
+  pointer-events: none;
+}
+.lyt__btn:hover { filter: brightness(1.08); }
+.lyt__btn:hover .lyt__play { transform: scale(1.06); }
+.lyt__btn:active .lyt__play { transform: scale(0.97); }
+.lyt__btn:focus-visible {
+  outline: 2px solid #fff5ef;
+  outline-offset: -2px;
+}
+.lyt__play {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.45));
+  transition: transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1);
+  pointer-events: none;
 }
 
 /* About-page video embeds — overlaid on top of the JPG placeholders.
