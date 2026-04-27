@@ -41,16 +41,10 @@ export default function HeroSection() {
 
       {/* ── Mobile: pure HTML hero (Figma node 1-73, 375×716) ── */}
       <div className="s1-mobile-hero mobile-only">
-        {/* Background */}
-        <Image
-          src="/images/backgrounds/bg-s1-mobile-clean.jpg"
-          alt=""
-          fill
-          style={{ objectFit: 'cover', objectPosition: 'center top' }}
-          priority
-          quality={95}
-          sizes="100vw"
-        />
+        {/* Layered animated background — same pattern as desktop */}
+        <div className="s1-m-bg-layer" aria-hidden="true" />
+        <div className="s1-m-detail-layer" aria-hidden="true" />
+        <div className="s1-m-darken" aria-hidden="true" />
 
         {/* "Новый / Интеллект / Реальности" — opacity 70% tagline */}
         <p className="s1-m-tagline">

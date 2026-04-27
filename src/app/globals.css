@@ -1169,7 +1169,73 @@ img.desktop-only { display: block !important; }
     position: absolute;
     inset: 0;
     z-index: 0;
+    overflow: hidden;
+    background: #1a0d05;
   }
+
+  /* Mobile animated hero — layered like desktop:
+     1. .s1-m-bg-layer    — static dark ambient (same s1-hero-bg.jpg as desktop)
+     2. .s1-m-detail-layer — bright lightning PNG, screen-blended, animated
+     3. .s1-m-darken      — radial vignette so text stays readable */
+  .s1-m-bg-layer {
+    position: absolute;
+    inset: 0;
+    background: #1a0d05 url('/images/effects/s1-hero-bg.jpg') center/cover no-repeat;
+    z-index: 0;
+  }
+  .s1-m-detail-layer {
+    position: absolute;
+    /* Detail PNG is wide aspect; on mobile we blow it up so the lightning
+       fills the upper-middle zone behind the headings. */
+    inset: 18% -25% auto -25%;
+    height: 50%;
+    background: url('/images/effects/s1-hero-detail.png') center/contain no-repeat;
+    mix-blend-mode: screen;
+    opacity: 0.92;
+    transform-origin: center 50%;
+    animation:
+      s1DetailBreathX 12s ease-in-out infinite,
+      s1DetailFloat   17s ease-in-out infinite,
+      s1DetailPulse    7s ease-in-out infinite;
+    will-change: transform, filter, opacity;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .s1-m-darken {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        ellipse 75% 50% at 50% 48%,
+        rgba(15, 8, 3, 0.65) 0%,
+        rgba(15, 8, 3, 0.45) 35%,
+        rgba(15, 8, 3, 0.20) 65%,
+        rgba(15, 8, 3, 0)    100%
+      ),
+      linear-gradient(
+        to bottom,
+        rgba(10, 5, 2, 0.40) 0%,
+        rgba(10, 5, 2, 0)    25%,
+        rgba(10, 5, 2, 0)    75%,
+        rgba(10, 5, 2, 0.45) 100%
+      );
+    mix-blend-mode: multiply;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .s1-m-detail-layer { animation: none; }
+  }
+
+  /* All foreground hero text/button must sit above the darken layer (z:2). */
+  .s1-m-tagline,
+  .s1-m-title1,
+  .s1-m-title2,
+  .s1-m-title3,
+  .s1-m-glow-line,
+  .s1-m-subtitle,
+  .s1-m-btn { z-index: 3; }
 
   /* Tagline "Новый / Интеллект / Реальности" — opacity 70%
      Figma: inset top=13.69% left=37.87% right=38.13% bottom=80.45% */
