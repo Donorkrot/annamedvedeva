@@ -4118,83 +4118,51 @@ img.desktop-only { display: block !important; }
   .s11-m-btn { display: flex; align-items: center; justify-content: center; width: 295px; padding: 14px 20px; border: 1px solid #fff5ef; border-radius: 10px; background: transparent; text-decoration: none; transition: background 0.3s; }
   .s11-m-btn span { font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #fff5ef; white-space: nowrap; }
 
-  /* === S12 FOOTER — Figma 375×600 (node 1:469) === */
-  .s12-footer.s12-figma {
-    aspect-ratio: 375 / 600 !important;
-  }
-  #s12.s12-figma .s12-headline-block {
-    top: calc(50% - 244px);
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 315px;
-    white-space: normal;
-  }
-  #s12.s12-figma .s12-headline { font-size: 28px; }
-  #s12.s12-figma .s12-tagline { font-size: 16px; line-height: 1.2; }
+  /* === S12 FOOTER — Figma 375×600 (node 1:469, mobile) === */
+  .s12-footer.s12-figma { aspect-ratio: 375 / 600 !important; background: #000 !important; }
 
-  #s12.s12-figma .s12-currency-block {
-    top: calc(50% - 9px);
-    left: calc(50% + 66.7px);
-    transform: translate(-50%, -50%);
-    width: 182px;
-    gap: 10px;
-  }
-  #s12.s12-figma .s12-currency-title {
-    white-space: normal;
-    font-size: 28px;
-    padding-bottom: 10px;
-  }
-  #s12.s12-figma .s12-currency-body {
-    font-size: 12px;
-    opacity: 0.7;
-  }
+  .s12-mobile-html { position: absolute; inset: 0; z-index: 0; }
 
-  #s12.s12-figma .s12-book {
-    left: 162.2px;
-    top: 377.5px;
-    border: none;
-    padding: 0;
-    background: transparent;
-    flex-direction: column;
-    gap: 0;
-  }
-  #s12.s12-figma .s12-book__title {
-    order: 2;
-    font-family: var(--font-heading);
-    font-weight: 300;       /* Cormorant Light */
-    font-size: 20px;
-    text-transform: uppercase;
-  }
-  #s12.s12-figma .s12-book__sub {
-    order: 1;
-    font-size: 12px;
-  }
+  /* Background */
+  .s12-m-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+  .s12-m-bg-img { width: 100% !important; max-width: none !important; height: 100%; object-fit: cover; object-position: center top; display: block; }
 
-  #s12.s12-figma .s12-social {
-    left: 158.2px;
-    top: 455.5px;
-    width: 190px;
-    gap: 0;
-    justify-content: space-between;
-  }
+  /* Gradient top — h:180/600=30% */
+  .s12-m-grad-top { position: absolute; left: 0; top: 0; width: 100%; height: 30%; background: linear-gradient(to bottom, #111 0%, transparent 100%); z-index: 1; pointer-events: none; }
 
-  #s12.s12-figma .s12-legal {
-    left: 50%;
-    top: 515.5px;
-    transform: translateX(-50%);
-    width: 315px;
-    gap: 25px;
-    justify-content: flex-start;
-  }
-  #s12.s12-figma .s12-legal__sep { display: none; }
+  /* Gradient bottom — starts at y:229/600=38.24%, covers to bottom */
+  .s12-m-grad-bot { position: absolute; left: 0; top: 38.24%; width: 100%; height: 61.76%; background: linear-gradient(to bottom, transparent 0%, #000 100%); z-index: 1; pointer-events: none; }
 
-  #s12.s12-figma .s12-logo {
-    left: 33px;
-    top: 465px;
-    width: 92px;
-    text-align: center;
-  }
-  #s12.s12-figma .s12-logo__year { display: none; }
+  /* Left text block — Figma: centre at (50%, calc(50%−244px)) ≈ y:56px */
+  .s12-m-left { position: absolute; left: 8%; top: calc(50% - 244px); width: 84%; z-index: 2; transform: translateY(-50%); display: flex; flex-direction: column; gap: 20px; }
+  .s12-m-left-heading { margin: 0; font-family: var(--font-heading); font-size: 28px; font-weight: 500; line-height: 1; color: #fff5ef; }
+  .s12-m-left-hl { color: #de8b23; }
+  .s12-m-left-tagline { margin: 0; font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #fff5ef; line-height: normal; }
+
+  /* Right text block — Figma: centre at (calc(50%+66.7px), calc(50%−9px)) */
+  .s12-m-right { position: absolute; left: calc(50% + 66.7px); top: calc(50% - 9px); width: 182px; z-index: 2; transform: translate(-50%, -50%); display: flex; flex-direction: column; gap: 10px; }
+  .s12-m-right-heading { margin: 0; padding-bottom: 10px; font-family: var(--font-heading); font-size: 28px; font-weight: 500; color: #fff5ef; line-height: 1; white-space: pre-wrap; }
+  .s12-m-right-body { margin: 0; font-family: var(--font-body); font-size: 12px; font-weight: 400; color: #fff5ef; opacity: 0.7; line-height: normal; }
+
+  /* Book — x:162.2/375=43.25%, y:377.5/600=62.92% */
+  .s12-m-book { position: absolute; left: 43.25%; top: 62.92%; z-index: 2; display: flex; flex-direction: column; text-decoration: none; }
+  .s12-m-book-label { font-family: var(--font-body); font-size: 12px; font-weight: 400; color: #fff5ef; opacity: 0.5; line-height: normal; }
+  .s12-m-book-title { font-family: var(--font-heading); font-size: 20px; font-weight: 300; color: #fff5ef; text-transform: uppercase; line-height: 1; }
+
+  /* Logo "REALITY DNA" — x:33/375=8.8%, y:465/600=77.5% */
+  .s12-m-logo { position: absolute; left: 8.8%; top: 77.5%; z-index: 2; margin: 0; width: 92px; font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #fff5ef; text-align: center; white-space: nowrap; line-height: normal; }
+
+  /* Social icons — x:158.2/375=42.19%, y:455.5/600=75.92%, w:190px */
+  .s12-m-social { position: absolute; left: 42.19%; top: 75.92%; width: 190px; z-index: 2; display: flex; align-items: center; justify-content: space-between; }
+  .s12-m-social a { display: flex; align-items: center; justify-content: center; }
+  .s12-m-social img { width: 40px !important; height: 40px !important; display: block; }
+
+  /* Legal links — x:30/375=8%, y:515.5/600=85.92%, gap:25px */
+  .s12-m-legal { position: absolute; left: 8%; top: 85.92%; width: 84%; z-index: 2; display: flex; align-items: center; gap: 25px; }
+  .s12-m-legal-link { font-family: var(--font-body); font-size: 12px; font-weight: 400; color: #fff5ef; opacity: 0.5; text-decoration: none; white-space: nowrap; }
+
+  /* Copyright — bottom:9.12% centred */
+  .s12-m-copy { position: absolute; bottom: 3.33%; left: 50%; transform: translateX(-50%); z-index: 2; margin: 0; font-family: var(--font-body); font-size: 12px; font-weight: 400; color: #fff5ef; white-space: nowrap; line-height: normal; }
 
   /* === AUTH MODAL === */
   .auth-modal {
