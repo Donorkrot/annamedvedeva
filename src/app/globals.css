@@ -4049,39 +4049,31 @@ img.desktop-only { display: block !important; }
   /* Caption — x:30 y:869 w:315, Cormorant Light 24px left #332000 */
   .s9-m-caption { position: absolute; left: 30px; top: 869px; width: 315px; margin: 0; font-family: var(--font-heading); font-size: 24px; font-weight: 300; color: #332000; line-height: 23.1px; z-index: 1; }
 
-  /* === S10 UNITY — Figma 375×~970 (node 1:425) === */
-  #s10 { aspect-ratio: 375 / 970 !important; }
-  #s10 .s10-header {
-    top: 4.02%;             /* 39/970 */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 315px;
-    align-items: flex-start;
-    gap: 2px;
-  }
-  #s10 .s10-title {
-    font-size: 36px;
-    line-height: 33.6px;
-    text-transform: uppercase;
-    white-space: normal;
-  }
-  #s10 .s10-step {
-    width: auto;
-    align-items: flex-start;
-    gap: 30px;
-    padding-left: 20px;
-  }
-  #s10 .s10-step__text {
-    width: auto;
-    font-family: var(--font-body);
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.2;
-  }
-  /* Mobile staircase positions per Figma 1:425 */
-  #s10 .s10-step-1 { left: 0; top: 50.21%; width: 352px; }   /* 487/970 */
-  #s10 .s10-step-2 { left: 0; top: 62.27%; width: 301px; }   /* 604/970 */
-  #s10 .s10-step-3 { left: 0; top: 72.37%; width: 245px; }   /* 702/970 */
+  /* === S10 UNITY — Figma 375×788 (node 1:425, HTML mobile) === */
+  #s10 { aspect-ratio: 375 / 788 !important; }
+
+  .s10-mobile-html { position: absolute; inset: 0; z-index: 0; background: #000; }
+
+  /* Image — x:0 y:163 w:375 h:295 */
+  .s10-m-img { position: absolute; left: 0; top: 163px; width: 375px; height: 295px; z-index: 0; overflow: hidden; }
+  .s10-m-img-bg { width: 100% !important; max-width: none !important; height: 100%; object-fit: cover; object-position: center top; display: block; }
+
+  /* Title "СИЛА В ЕДИНСТВЕ" — x:30 y:40 w:315, Cormorant SemiBold 36px uppercase */
+  .s10-m-title { position: absolute; left: 30px; top: 40px; width: 315px; margin: 0; font-family: var(--font-heading); font-size: 36px; font-weight: 600; color: #fff5ef; line-height: 33.6px; text-transform: uppercase; z-index: 1; }
+
+  /* Intro — x:30 y:110 w:315, Raleway Medium 18px */
+  .s10-m-intro { position: absolute; left: 30px; top: 110px; width: 315px; margin: 0; font-family: var(--font-body); font-size: 18px; font-weight: 500; color: #fff5ef; line-height: normal; z-index: 1; }
+
+  /* Items — containers with text + gradient line at bottom */
+  .s10-m-item { position: absolute; left: 0; z-index: 1; }
+  .s10-m-item--1 { top: 488px; width: 352px; height: 87px; }
+  .s10-m-item--2 { top: 605px; width: 301px; height: 68px; }
+  .s10-m-item--3 { top: 703px; width: 245px; height: 68px; }
+
+  .s10-m-item-text { position: absolute; top: 0; left: 20px; right: 0; margin: 0; font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #fff5ef; line-height: 1.3; }
+
+  /* Gradient line — transparent→rgba(49,15,0,.6)→#de8b23→#fff5ef→#de8b23 */
+  .s10-m-line { position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(to right, transparent 0%, rgba(49,15,0,0.6) 13%, #de8b23 36%, #fff5ef 64%, #de8b23 100%); }
 
   /* === S11 PROGRAMS — Figma 375×1239 (node 1:442) === */
   #s11 { aspect-ratio: 375 / 1239 !important; }
