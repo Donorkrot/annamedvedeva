@@ -562,7 +562,7 @@ main {
 img.mobile-only { display: none !important; }
 img.desktop-only { display: block !important; }
 @media (max-width: 768px) {
-  .desktop-only { display: none; }
+  .desktop-only { display: none !important; }
   .mobile-only { display: block; }
   img.desktop-only { display: none !important; }
   img.mobile-only { display: block !important; }
@@ -1158,8 +1158,160 @@ img.desktop-only { display: block !important; }
   #s10 { aspect-ratio: 1125 / 2364 !important; }
   #s11 { aspect-ratio: 1125 / 3717 !important; }
 
-  /* S1 mobile | ref: 1-1.png (375×716) */
-  .s1-btn-overlay { left: 17.3%; width: 65.3%; bottom: 7%; }
+  /* S1 image-overlay button is replaced by .s1-m-btn on mobile */
+  .s1-btn-overlay { display: none !important; }
+
+  /* S1 mobile | HTML hero from Figma node 1-73 (375×716)
+     All positions are % of container height; sizes in vw (ref: 375px wide). */
+
+  /* Container fills the section (same .s10-bg pattern) */
+  .s1-mobile-hero {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* Tagline "Новый / Интеллект / Реальности" — opacity 70%
+     Figma: inset top=13.69% left=37.87% right=38.13% bottom=80.45% */
+  .s1-m-tagline {
+    position: absolute;
+    top: 13.69%;
+    left: 37.87%;
+    right: 38.13%;
+    bottom: 80.45%;
+    margin: 0;
+    opacity: 0.7;
+    font-family: var(--font-body);
+    font-size: 3.2vw;          /* 12px @ 375 */
+    font-weight: 400;
+    color: var(--cream);
+    text-align: center;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    line-height: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0;
+    font-feature-settings: 'lnum' 1, 'pnum' 1;
+  }
+  .s1-m-tagline span { display: block; line-height: normal; }
+
+  /* АКАДЕМИЯ — Cormorant Garamond Medium 28px
+     Figma: top=calc(50%−168px) → 190/716=26.54% */
+  .s1-m-title1 {
+    position: absolute;
+    top: 26.54%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 7.47vw;         /* 28px @ 375 */
+    font-weight: 500;
+    font-style: normal;
+    color: var(--cream);
+    white-space: nowrap;
+    line-height: normal;
+    font-feature-settings: 'lnum' 1, 'pnum' 1;
+  }
+
+  /* УПРАВЛЕНИЯ СОСТОЯНИЕМ — Cormorant Garamond SemiBold 20px, 2 lines
+     Figma: top=calc(50%−128px) → 230/716=32.12% */
+  .s1-m-title2 {
+    position: absolute;
+    top: 32.12%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 5.33vw;         /* 20px @ 375 */
+    font-weight: 600;
+    font-style: normal;
+    color: var(--cream);
+    white-space: pre;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: normal;
+    font-feature-settings: 'lnum' 1, 'pnum' 1;
+  }
+
+  /* Golden glow divider line (same line.png as desktop hero)
+     Sits between СОСТОЯНИЕМ and АННЫ — ~285/716=39.8% */
+  .s1-m-glow-line {
+    position: absolute;
+    top: 39.8%;
+    left: 0;
+    right: 0;
+    height: 1.4%;              /* ~10px @ 716 */
+    background: url('/images/effects/line.png') center / 100% 100% no-repeat;
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+
+  /* АННЫ МЕДВЕДЕВОЙ — Cormorant Garamond Medium 28px
+     Figma: top=calc(50%−61px) → 297/716=41.48% */
+  .s1-m-title3 {
+    position: absolute;
+    top: 41.48%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 7.47vw;         /* 28px @ 375 */
+    font-weight: 500;
+    font-style: normal;
+    color: var(--cream);
+    white-space: nowrap;
+    line-height: normal;
+    font-feature-settings: 'lnum' 1, 'pnum' 1;
+  }
+
+  /* Subtitle — Cormorant Garamond Light 24px, centered, w=315px
+     Figma: top=calc(50%+53px) → 411/716=57.40% */
+  .s1-m-subtitle {
+    position: absolute;
+    top: 57.40%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    width: 84vw;               /* 315/375 */
+    font-family: var(--font-heading);
+    font-size: 6.4vw;          /* 24px @ 375 */
+    font-weight: 300;
+    font-style: normal;
+    color: var(--cream);
+    text-align: center;
+    line-height: 6.16vw;       /* 23.1px @ 375 */
+    font-feature-settings: 'lnum' 1, 'pnum' 1;
+  }
+
+  /* CTA Button — bg #332000, border accent, rounded-10
+     Figma: top=548/716=76.54%, w=315px, py=14px px=20px */
+  .s1-m-btn {
+    position: absolute;
+    top: 76.54%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 84vw;               /* 315/375 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3.73vw 5.33vw;   /* 14px 20px @ 375 */
+    background: #332000;
+    border: 1px solid var(--accent);
+    border-radius: 2.67vw;     /* 10px @ 375 */
+    font-family: var(--font-body);
+    font-size: 4.27vw;         /* 16px @ 375 */
+    font-weight: 400;
+    color: var(--cream);
+    white-space: nowrap;
+    text-decoration: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-feature-settings: 'lnum' 1, 'pnum' 1;
+    transition: opacity 0.25s ease;
+  }
+  .s1-m-btn:hover  { opacity: 0.85; }
+  .s1-m-btn:active { opacity: 0.65; }
 
   /* S6 mobile — centered "Method" button, bigger so it's tappable. */
   .s6-btn-overlay { left: 14%; width: 72%; bottom: 12%; }
@@ -3288,183 +3440,525 @@ img.desktop-only { display: block !important; }
     line-height: 1.2;
   }
 
-  /* === S2 PROBLEM — Figma 375×791, node 1:195 === */
-  #s2 .s2-title {
-    top: 4.93%;       /* 39/791 */
+  /* === S2 PROBLEM — Figma 375×791, node 1:195 (HTML mobile) === */
+
+  /* Container: fills section (same pattern as s1-mobile-hero) */
+  .s2-mobile-html {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* Background — Figma inner img: w=297.35%, h=212.16%, left=−98.67%, top=−32.22%
+     Container clips the overflow to exactly the 375×791 viewport */
+  .s2-m-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .s2-m-bg-img {
+    position: absolute;
+    width:  297.35% !important;  /* override Tailwind max-width:100% reset */
+    max-width: none !important;
+    height: 212.16%;
+    left:   -98.67%;
+    top:    -32.22%;
+    display: block;
+  }
+
+  /* "МЫ НЕ УСПЕВАЕМ" — top:39px (4.93%), Raleway Medium 18px, dark */
+  .s2-m-title {
+    position: absolute;
+    top: 4.93%;            /* 39/791 */
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 500;
+    color: #332000;
+    white-space: nowrap;
     text-transform: uppercase;
     letter-spacing: 0.02em;
-  }
-  #s2 .s2-card .s2-card__inner {
-    padding: 18px;
-    gap: 10px;
-  }
-  #s2 .s2-card h2 {
-    font-family: var(--font-heading);
-    font-weight: 500;          /* Cormorant Medium */
-    font-size: 28px;
-    line-height: 1;
-  }
-  #s2 .s2-card p {
-    font-size: 16px;
-    line-height: 1.15;
-  }
-  /* Mobile: "Новое давление" — top | x:29 y:357 w:315 h:139 */
-  #s2 .s2-card--left {
-    left: 7.73%; top: 45.13%; width: 84%; min-height: 17.57%;
-  }
-  /* Mobile: "Новая реальность" — bottom | x:29 y:536 w:315 h:214 */
-  #s2 .s2-card--right {
-    left: 7.73%; top: 67.76%; width: 84%; min-height: 27.05%;
+    line-height: normal;
+    font-feature-settings: 'lnum' 1, 'pnum' 1;
+    z-index: 1;
   }
 
-  /* === S3 OLD CODE — Figma 375×635 (node 1:208) === */
-  #s3 .s3-kicker {
-    top: 6.14%;        /* 39/635 */
-    left: 8%;          /* 30/375 */
-    width: 39.47%;     /* 148/375 */
-    white-space: normal;
-    font-family: var(--font-body);
-    font-weight: 400;
-    font-size: 16px;
-    opacity: 0.6;
-  }
-  #s3 .s3-title {
-    top: 42.20%;       /* 268/635 */
-    left: 8%;
-    width: 62.93%;     /* 236/375 */
-    font-family: var(--font-heading);
-    font-weight: 300;  /* Cormorant Light */
-    font-size: 20px;
-    line-height: 1;
-  }
-  #s3 .s3-body {
-    top: 70.39%;       /* 447/635 */
-    left: 8%;
-    width: 84%;        /* 315/375 */
-    font-size: 16px;
-    opacity: 0.8;
+  /* Shared card wrapper */
+  .s2-m-card {
+    position: absolute;
+    left: 7.73%;           /* 29/375 */
+    width: 84%;            /* 315/375 */
+    z-index: 1;
+    border-radius: 20px;
+    overflow: hidden;
   }
 
-  /* === S4 INTELLIGENCE — Figma 375×1249 (node 1:264) === */
-  #s4 { aspect-ratio: 375 / 1249 !important; }
-  #s4 .s4-line { display: none; }
-  #s4 .s4-title {
-    top: 3.84%;          /* 48/1249 */
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 20px;
-    text-transform: uppercase;
+  /* Card 1 "Новое давление" — top:357px (45.13%) */
+  .s2-m-card--1 {
+    top: 45.13%;           /* 357/791 */
   }
-  /* All columns: centered horizontally with stone above text */
-  #s4 .s4-col {
-    align-items: center;
-    text-align: center;
+
+  /* Card 2 "Новая реальность" — top:536px (67.76%) */
+  .s2-m-card--2 {
+    top: 67.76%;           /* 536/791 */
+  }
+
+  /* Frosted card background image — fills the card */
+  .s2-m-card__bg {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    left: 0;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+    pointer-events: none;
   }
-  #s4 .s4-col .s4-stone   { margin-left: 0; margin-top: 0; position: relative; left: 50%; transform: translateX(-50%); }
-  #s4 .s4-col .s4-letter  { margin-left: 0; }
-  #s4 .s4-col .s4-name,
-  #s4 .s4-col .s4-desc    { margin-top: 12px; max-width: 222px; text-align: center; white-space: normal; }
 
-  /* IQ block | letter top:93, stone top:133.91 (h:87 w:78), text top:237 */
-  #s4 .s4-col-iq { top: 7.45%; height: 14%; }
-  #s4 .s4-col-iq .s4-letter { margin-top: 0; }
-  #s4 .s4-col-iq .s4-stone  { width: 78px; height: 87px; margin-top: 16px; }
-  #s4 .s4-col-iq .s4-name   { margin-top: 22px; }
-  #s4 .s4-col-iq .s4-desc   { margin-top: 5px; }
-
-  /* EQ block | letter 297, stone 338 (h:135 w:111), text 489 */
-  #s4 .s4-col-eq { top: 23.78%; height: 16%; }
-  #s4 .s4-col-eq .s4-letter { }
-  #s4 .s4-col-eq .s4-stone  { width: 111px; height: 135px; margin-top: 16px; }
-  #s4 .s4-col-eq .s4-name   { margin-top: 22px; }
-  #s4 .s4-col-eq .s4-desc   { margin-top: 5px; }
-
-  /* SQ block | letter 563.75, stone 604 rotated (h:115 w:186), text 736 */
-  #s4 .s4-col-sq { top: 45.14%; height: 16%; }
-  #s4 .s4-col-sq .s4-letter { }
-  #s4 .s4-col-sq .s4-stone  { width: 186px; height: 115px; margin-top: 16px; }
-  #s4 .s4-col-sq .s4-name   { margin-top: 22px; }
-  #s4 .s4-col-sq .s4-desc   { margin-top: 5px; }
-
-  /* RI block | letter 826, crystal 790 (h:415 w:347), text 1100 */
-  #s4 .s4-col-ri { top: 63.25%; height: 30%; }
-  #s4 .s4-col-ri .s4-letter--ri { font-size: 52px; }
-  #s4 .s4-col-ri .s4-stone--ri  { width: 347px; max-width: 92%; height: 250px; margin-top: 8px; }
-  #s4 .s4-col-ri .s4-name       { margin-top: 16px; }
-  #s4 .s4-col-ri .s4-desc       { margin-top: 5px; }
-  #s4 .s4-col-ri .s4-accent     { margin-top: 10px; white-space: normal; }
-
-  /* === S5 RI FEATURES — Figma 375×716 (node 1:289) === */
-  #s5 { aspect-ratio: 375 / 716 !important; }
-  #s5.s5-figma {
+  /* Card text container — padding 18px, gap 10px, Figma spec */
+  .s2-m-card__inner {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    padding: 29px;          /* matches Figma left:29 top:29 */
-    gap: 20px;
+    gap: 10px;
+    padding: 18px;
   }
-  /* Cards become block-flow on mobile */
-  #s5 .s5-card {
-    position: relative;
-    left: auto !important;
-    top: auto !important;
+
+  /* Card title — Cormorant Garamond Medium 28px, color #332000 */
+  .s2-m-card__title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 500;
+    font-style: normal;
+    color: #332000;
+    line-height: 1;
+    font-feature-settings: 'lnum' 1, 'pnum' 1;
+  }
+
+  /* Card body — Raleway Regular 16px, color #332000 */
+  .s2-m-card__body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    color: #332000;
+    line-height: 1.3;
+    font-feature-settings: 'lnum' 1, 'pnum' 1;
+  }
+
+  /* === S3 OLD CODE — Figma 375×635, node 1:208 (HTML mobile) === */
+
+  /* Container — fills section */
+  .s3-mobile-html {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* Background: 105.67%×105.67%, left −0.03%, top −2.83%
+     Image is 750×1270 (@2x of 375×635) — pixel-perfect match */
+  .s3-m-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .s3-m-bg-img {
+    position: absolute;
+    width:     105.67% !important;
+    max-width: none    !important;
+    height:    105.67%;
+    left:      -0.03%;
+    top:       -2.83%;
+    display: block;
+  }
+
+  /* Kicker "Код прошлого устарел"
+     Figma: top:39px (6.14%), left:30px (8%), w:148px (39.47%)
+     Raleway Regular 16px, #fff5ef, opacity 0.6 */
+  .s3-m-kicker {
+    position: absolute;
+    top:    6.14%;     /* 39/635  */
+    left:   8%;        /* 30/375  */
+    width:  39.47%;    /* 148/375 */
+    margin: 0;
+    font-family:  var(--font-body);
+    font-size:    16px;
+    font-weight:  400;
+    color:        var(--cream);
+    opacity:      0.6;
+    line-height:  normal;
+    white-space:  normal;
+    font-feature-settings: 'lnum' 1, 'pnum' 1;
+    z-index: 1;
+  }
+
+  /* Title "ПРОХОДИТЬ ТРАВМУ / НЕ ОБЯЗАТЕЛЬНО"
+     Figma: top:268px (42.20%), left:30px (8%), w:236px (62.93%)
+     Cormorant Garamond Light 20px, #fff5ef */
+  .s3-m-title {
+    position: absolute;
+    top:    42.20%;    /* 268/635 */
+    left:   8%;        /* 30/375  */
+    width:  62.93%;    /* 236/375 */
+    margin: 0;
+    font-family:      var(--font-heading);
+    font-size:        20px;
+    font-weight:      300;
+    font-style:       normal;
+    color:            var(--cream);
+    text-transform:   uppercase;
+    line-height:      1;
+    white-space:      normal;
+    font-feature-settings: 'lnum' 1, 'pnum' 1;
+    z-index: 1;
+  }
+
+  /* Body text
+     Figma: top:447px (70.39%), left:30px (8%), w:315px (84%)
+     Raleway Regular 16px, #ffffff, opacity 0.8 */
+  .s3-m-body {
+    position: absolute;
+    top:    70.39%;    /* 447/635 */
+    left:   8%;        /* 30/375  */
+    width:  84%;       /* 315/375 */
+    margin: 0;
+    font-family:  var(--font-body);
+    font-size:    16px;
+    font-weight:  400;
+    color:        #fff;
+    opacity:      0.8;
+    line-height:  normal;
+    font-feature-settings: 'lnum' 1, 'pnum' 1;
+    z-index: 1;
+  }
+
+  /* === S4 INTELLIGENCE — Figma 375×1219 (node 1:264, HTML mobile) === */
+  #s4 { aspect-ratio: 375 / 1219 !important; }
+
+  .s4-mobile-html {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* Background — 1125×3747 image (3× of 375×1219), object-cover */
+  .s4-m-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .s4-m-bg-img {
+    position: absolute;
+    width:     100% !important;
+    max-width: none !important;
+    height:    100%;
+    left: 0;
+    top:  0;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Title — x:59 y:49(4.02%) w:255, Cormorant SemiBold 20px uppercase #332000 */
+  .s4-m-title {
+    position: absolute;
+    top:   4.02%;   /* 49/1219 */
+    left:  0;
     width: 100%;
+    text-align: center;
+    margin: 0;
+    font-family:    var(--font-heading);
+    font-size:      20px;
+    font-weight:    600;
+    color:          #332000;
+    text-transform: uppercase;
+    line-height:    normal;
+    z-index: 1;
+  }
+
+  /* IQ / EQ / SQ column containers (position: absolute within section) */
+  .s4-m-col {
+    position: absolute;
+    z-index: 1;
+  }
+
+  /* IQ — x:76.5(20.4%) y:94(7.71%) w:222(59.2%) h:184 */
+  .s4-m-col-iq {
+    left:   20.4%;   /* 76.5/375  */
+    top:    7.71%;   /* 94/1219   */
+    width:  59.2%;   /* 222/375   */
+    height: 184px;
+  }
+
+  /* EQ — x:82.5(22%) y:298(24.45%) w:210(56%) h:246 */
+  .s4-m-col-eq {
+    left:   22%;     /* 82.5/375  */
+    top:    24.45%;  /* 298/1219  */
+    width:  56%;     /* 210/375   */
+    height: 246px;
+  }
+
+  /* SQ — x:82.5(22%) y:564.75(46.33%) w:210(56%) h:226.5 — clips stone overflow */
+  .s4-m-col-sq {
+    left:     22%;      /* 82.5/375     */
+    top:      46.33%;   /* 564.75/1219  */
+    width:    56%;      /* 210/375      */
+    height:   226.5px;
+    overflow: hidden;
+  }
+
+  /* Letter IQ / EQ / SQ — Cormorant Medium 28px #332000, centered */
+  .s4-m-letter {
+    position: absolute;
+    top:   0;
+    left:  0;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    font-family:  var(--font-heading);
+    font-size:    28px;
+    font-weight:  500;
+    color:        #332000;
+    line-height:  normal;
     z-index: 2;
   }
-  #s5 .s5-card--frosted { padding: 20px; gap: 20px; }
-  #s5 .s5-card--plain   { padding: 0 20px; gap: 5px; }
-  #s5 .s5-card__title,
-  #s5 .s5-card__title--ri {
-    font-family: var(--font-heading);
-    font-weight: 500;
-    font-size: 28px;
-    line-height: 1;
-    text-transform: none;
+
+  /* Stone base */
+  .s4-m-stone {
+    position: absolute;
+    z-index: 0;
   }
-  #s5 .s5-card__body,
-  #s5 .s5-card__body--lead {
+
+  /* IQ stone — x:71.66 y:40.91 w:78.34 h:87.18 */
+  .s4-m-iq-stone           { left: 71.66px; top: 40.91px; width: 78.34px; height: 87.18px; }
+  .s4-m-iq-stone img       { width: 78.34px !important; height: 87.18px !important; max-width: none !important; display: block; }
+
+  /* EQ stone — x:49.57 y:41.11 w:111.37 h:135.78 */
+  .s4-m-eq-stone           { left: 49.57px; top: 41.11px; width: 111.37px; height: 135.78px; }
+  .s4-m-eq-stone img       { width: 111.37px !important; height: 135.78px !important; max-width: none !important; display: block; }
+
+  /* SQ stone — rotated −90° (CCW)
+     Natural portrait: 115.63×186.7 → visual landscape: 186.7×115.63
+     Figma absoluteBoundingBox in container: left:12.15 top:41.19 w:186.7 h:115.63
+     (node.y=156.81 is the transform-origin, NOT the visual top)
+     Inner is centered inside outer then rotated −90°:
+       inner.left = (186.7−115.63)/2 = 35.54  inner.top = (115.63−186.7)/2 = −35.54 */
+  .s4-m-sq-stone-outer {
+    position: absolute;
+    left:   12.15px;
+    top:    41.19px;
+    width:  186.7px;
+    height: 115.63px;
+    z-index: 0;
+  }
+  .s4-m-sq-stone-inner {
+    position: absolute;
+    left:   35.54px;
+    top:   -35.54px;
+    width:  115.63px;
+    height: 186.7px;
+    transform: rotate(-90deg);
+    transform-origin: center center;
+  }
+  .s4-m-sq-stone-inner img {
+    width:     115.63px !important;
+    height:    186.7px  !important;
+    max-width: none     !important;
+    display: block;
+  }
+
+  /* Text block (name + desc) within IQ / EQ / SQ */
+  .s4-m-text {
+    position: absolute;
+    left:       0;
+    width:      100%;
+    text-align: center;
+    z-index: 1;
+  }
+  .s4-m-col-iq .s4-m-text { top: 144px; }
+  .s4-m-col-eq .s4-m-text { top: 192px; }
+  .s4-m-col-sq .s4-m-text { top: 172.5px; }
+
+  .s4-m-name {
+    margin: 0;
+    font-family:  var(--font-body);
+    font-size:    18px;
+    font-weight:  500;
+    color:        #332000;
+    line-height:  1;
+    text-align:   center;
+  }
+  .s4-m-desc {
+    margin: 5px 0 0;
+    font-family:  var(--font-body);
+    font-size:    12px;
+    font-weight:  400;
+    color:        #332000;
+    line-height:  1.2;
+    text-align:   center;
+  }
+
+  /* RI block — x:14(3.73%) y:791(64.89%) w:347(92.53%) h:415(34.04%) */
+  .s4-m-ri {
+    position: absolute;
+    left:     3.73%;   /* 14/375   */
+    top:      64.89%;  /* 791/1219 */
+    width:    92.53%;  /* 347/375  */
+    height:   34.04%;  /* 415/1219 */
+    overflow: hidden;
+    z-index:  1;
+  }
+
+  /* RI stone fills container */
+  .s4-m-ri-stone {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .s4-m-ri-stone-img {
+    width:      100% !important;
+    max-width:  none !important;
+    height:     100%;
+    object-fit: cover;
+    display:    block;
+  }
+
+  /* RI letter — x:146.5 y:36, Cormorant SemiBold 52px #332000 */
+  .s4-m-ri-letter {
+    position: absolute;
+    top:  36px;
+    left: 146.5px;
+    margin: 0;
+    font-family:  var(--font-heading);
+    font-size:    52px;
+    font-weight:  600;
+    color:        #332000;
+    line-height:  1;
+    z-index: 1;
+  }
+
+  /* RI name + desc — Текст к RI x:68.5 y:310, Название sub-offset x:9.5 → left:78 top:310 w:191 */
+  .s4-m-ri-namewrap {
+    position: absolute;
+    left:  78px;
+    top:   310px;
+    width: 191px;
+    z-index: 1;
+  }
+  .s4-m-ri-name {
+    margin: 0;
+    font-family:  var(--font-body);
+    font-size:    18px;
+    font-weight:  500;
+    color:        #332000;
+    line-height:  1;
+  }
+  .s4-m-ri-desc {
+    margin: 5px 0 0;
+    font-family:  var(--font-body);
+    font-size:    12px;
+    font-weight:  400;
+    color:        #332000;
+    line-height:  1.2;
+  }
+
+  /* RI accent — Текст к RI x:68.5 y:310, accent sub-y:78 → top:388; Raleway 18px #de8b23 */
+  .s4-m-ri-accent {
+    position: absolute;
+    left:  68.5px;
+    top:   388px;
+    width: 210px;
+    margin: 0;
+    font-family:  var(--font-body);
+    font-size:    18px;
+    font-weight:  500;
+    color:        #de8b23;
+    line-height:  1;
+    z-index: 1;
+  }
+
+  /* === S5 RI FEATURES — Figma 375×716 (node 1:289, HTML mobile) === */
+  #s5 { aspect-ratio: 375 / 716 !important; }
+
+  .s5-mobile-html { position: absolute; inset: 0; z-index: 0; }
+
+  /* Background */
+  .s5-m-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+  .s5-m-bg-img { position: absolute; width: 100% !important; max-width: none !important; height: 100%; left: 0; top: 0; object-fit: cover; display: block; }
+
+  /* Gradient overlays */
+  .s5-m-grad-top { position: absolute; top: 0; left: 0; width: 100%; height: 239px; background: linear-gradient(to bottom, #fff5ef 0%, transparent 100%); z-index: 1; pointer-events: none; }
+  .s5-m-grad-bot { position: absolute; bottom: 0; left: 0; width: 100%; height: 373px; background: linear-gradient(to bottom, transparent 0%, #f8e8e0 84%); z-index: 1; pointer-events: none; }
+
+  /* Cards container — left:30 top:30 w:315 h:626 */
+  .s5-m-cards { position: absolute; left: 30px; top: 30px; width: 315px; height: 626px; z-index: 2; }
+
+  /* Individual cards */
+  .s5-m-card { position: absolute; left: 0; width: 315px; border-radius: 20px; overflow: hidden; }
+  .s5-m-card--ri     { top: 0;     height: 189px; background: rgba(251,234,224,0.7); }
+  .s5-m-card--stab   { top: 209px; height: 96px;  background: transparent; }
+  .s5-m-card--manage { top: 325px; height: 204px; background: rgba(251,234,224,0.7); }
+  .s5-m-card--clear  { top: 549px; height: 77px;  background: transparent; }
+
+  /* Card titles */
+  .s5-m-card-title {
+    position: absolute;
+    left: 20px; right: 20px;
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 500;
+    color: #332000;
+    line-height: 1;
+  }
+  .s5-m-card--ri     .s5-m-card-title { top: 20px; }
+  .s5-m-card--stab   .s5-m-card-title { top: 0; }
+  .s5-m-card--manage .s5-m-card-title { top: 20px; }
+  .s5-m-card--clear  .s5-m-card-title { top: 0; }
+
+  /* Card bodies */
+  .s5-m-card-body {
+    position: absolute;
+    left: 20px; right: 20px;
+    margin: 0;
     font-family: var(--font-body);
-    font-weight: 400;
     font-size: 16px;
+    font-weight: 400;
+    color: #332000;
     line-height: 1.2;
   }
-  /* Re-order: in mobile we want RI, Устойчивость, Управляемая реальность, Ясность решений */
-  #s5 .s5-card--ri     { order: 1; }
-  #s5 .s5-card--stab   { order: 2; }
-  #s5 .s5-card--manage { order: 3; }
-  #s5 .s5-card--clear  { order: 4; }
-  /* Plain bodies on mobile use opacity 0.7 */
-  #s5 .s5-card--plain .s5-card__body { opacity: 0.7; }
-  #s5 .s5-card--manage .s5-card__body { opacity: 0.7; }
+  .s5-m-card--ri     .s5-m-card-body { top: 74px; }
+  .s5-m-card--stab   .s5-m-card-body { top: 39px; }
+  .s5-m-card--manage .s5-m-card-body { top: 108px; }
+  .s5-m-card--clear  .s5-m-card-body { top: 39px; }
+  .s5-m-card-body--dim { opacity: 0.7; }
 
-  /* === S6 VIDEO — Figma 375 mobile (node 1:213) === */
-  #s6.s6-video {
-    aspect-ratio: auto !important;
-    padding: 0 !important;
-    min-height: 422px;
-    background: #fff;
-    flex-direction: column;
-    justify-content: flex-start;
-    position: relative;
-  }
-  #s6.s6-video .s6-video-frame {
-    position: absolute;
-    left: 7.73%;          /* 29/375 */
-    top: 0;
-    width: 84%;           /* 315/375 */
-    height: 199px;
-    aspect-ratio: auto;
-    border-radius: 0;
-  }
-  #s6 .s6-btn {
-    position: absolute;
-    top: 238px;
-    width: 84%;           /* 315/375 */
-    max-width: none;
-    background: rgba(255, 245, 239, 0.3);
-  }
+  /* === S6 VIDEO — Figma 375×306 (node 1:213, HTML mobile) === */
+  #s6 { aspect-ratio: 375 / 306 !important; }
+
+  .s6-mobile-html { position: absolute; inset: 0; z-index: 0; }
+  .s6-m-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+  .s6-m-bg-img { position: absolute; width: 100% !important; max-width: none !important; height: 100%; left: 0; top: 0; object-fit: cover; display: block; }
+
+  /* Gradient top — h:189 stops: #f8e8e0(solid) → transparent */
+  .s6-m-grad-top { position: absolute; top: 0; left: 0; width: 100%; height: 189px; background: linear-gradient(to bottom, #f8e8e0 0%, #f8e8e0 15.7%, transparent 100%); z-index: 1; pointer-events: none; }
+
+  /* Video — x:30 y:0 w:315 h:199 */
+  .s6-m-video-wrap { position: absolute; left: 30px; top: 0; width: 315px; height: 199px; z-index: 2; overflow: hidden; }
+
+  /* Button "Метод" — x:30 y:223 w:315 h:47 r:10 stroke:#332000 */
+  .s6-m-btn { position: absolute; left: 30px; top: 223px; width: 315px; height: 47px; z-index: 2; display: flex; align-items: center; justify-content: center; border: 1px solid #332000; border-radius: 10px; background: rgba(255,245,239,0.3); text-decoration: none; cursor: pointer; transition: background 0.25s ease; }
+  .s6-m-btn span { font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #332000; line-height: 1; }
+  .s6-m-btn:hover { background: rgba(255,245,239,0.5); }
 
   /* === S7 ANNA — Figma 375×1043 (node 1:218) === */
   #s7 { aspect-ratio: 375 / 1043 !important; }

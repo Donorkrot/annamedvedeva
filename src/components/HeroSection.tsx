@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useTranslation } from '@/components/LanguageProvider';
-import { bgMobile, btnDesktop } from '@/lib/imagePaths';
+import { btnDesktop } from '@/lib/imagePaths';
 
 export default function HeroSection() {
   const { lang, tr } = useTranslation();
@@ -22,26 +22,67 @@ export default function HeroSection() {
 
   return (
     <section id="s1" className="section">
-      {/* Desktop: clean layered bg (no baked text) so the HTML overlay below
-          is the only visible copy of the hero text — selectable & translatable. */}
+      {/* ── Desktop: layered animated background ── */}
       <div className="s1-bg-layer desktop-only" aria-hidden="true" />
       <div className="s1-detail-layer desktop-only" aria-hidden="true" />
       <div className="s1-darken desktop-only" aria-hidden="true" />
 
-      {/* Mobile: keep the existing baked composite (text already in JPG). */}
-      <div className="s10-bg mobile-only">
-        <Image src={bgMobile(1, lang)} alt="Reality DNA" fill style={{ objectFit: 'cover', objectPosition: 'center top' }} priority quality={95} sizes="100vw" />
-      </div>
-
-      {/* Desktop: visible HTML text overlay. */}
+      {/* Desktop: HTML text overlay */}
       <div className="s1-text-layer desktop-only">{heroTextChildren}</div>
-      {/* Mobile: clipped (1×1px) variant — invisible but selectable for copy/SEO,
-          so it doesn't double-render over the baked-in mobile JPG text. */}
-      <div className="s1-text-layer s1-text-layer--copy mobile-only">{heroTextChildren}</div>
 
-      <a href="#s11" className="s1-btn-overlay" onClick={e => { e.preventDefault(); document.querySelector('#s11')?.scrollIntoView({ behavior: 'smooth' }); }}>
+      {/* Desktop: image CTA button (hidden on mobile — replaced by s1-m-btn) */}
+      <a
+        href="#s11"
+        className="s1-btn-overlay desktop-only"
+        onClick={e => { e.preventDefault(); document.querySelector('#s11')?.scrollIntoView({ behavior: 'smooth' }); }}
+      >
         <img src={btnDesktop(1, lang)} alt="" draggable={false} />
       </a>
+
+      {/* ── Mobile: pure HTML hero (Figma node 1-73, 375×716) ── */}
+      <div className="s1-mobile-hero mobile-only">
+        {/* Background */}
+        <Image
+          src="/images/backgrounds/bg-s1-mobile-clean.jpg"
+          alt=""
+          fill
+          style={{ objectFit: 'cover', objectPosition: 'center top' }}
+          priority
+          quality={95}
+          sizes="100vw"
+        />
+
+        {/* "Новый / Интеллект / Реальности" — opacity 70% tagline */}
+        <p className="s1-m-tagline">
+          <span>{tr('hero_tagline_1')}</span>
+          <span>{tr('hero_tagline_2')}</span>
+          <span>{tr('hero_tagline_3')}</span>
+        </p>
+
+        {/* АКАДЕМИЯ */}
+        <p className="s1-m-title1">{tr('hero_m_line1')}</p>
+
+        {/* УПРАВЛЕНИЯ СОСТОЯНИЕМ */}
+        <p className="s1-m-title2">{tr('hero_m_line2')}</p>
+
+        {/* Golden glow divider line */}
+        <div className="s1-m-glow-line" aria-hidden="true" />
+
+        {/* АННЫ МЕДВЕДЕВОЙ */}
+        <p className="s1-m-title3">{tr('hero_m_line3')}</p>
+
+        {/* Description subtitle */}
+        <p className="s1-m-subtitle">{tr('hero_subtitle')}</p>
+
+        {/* CTA Button */}
+        <a
+          href="#s11"
+          className="s1-m-btn"
+          onClick={e => { e.preventDefault(); document.querySelector('#s11')?.scrollIntoView({ behavior: 'smooth' }); }}
+        >
+          {tr('nav_btn')}
+        </a>
+      </div>
     </section>
   );
 }

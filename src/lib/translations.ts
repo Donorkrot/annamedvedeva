@@ -13,6 +13,10 @@ const t = {
     hero_title: 'Академия Управления\u00A0Состоянием',
     hero_title_2: 'Анны Медведевой',
     hero_subtitle: 'Стабильность и управление реальностью в эпоху AI через квантовую психологию',
+    // Mobile hero — three separate lines (Figma node 1-73)
+    hero_m_line1: 'АКАДЕМИЯ',
+    hero_m_line2: ' УПРАВЛЕНИЯ \nСОСТОЯНИЕМ',
+    hero_m_line3: 'АННЫ МЕДВЕДЕВОЙ',
     hero_caption_hl: 'Reality Intelligence',
     hero_caption: '\u00A0— новый',
     hero_caption2: 'язык отношений, денег и личности.',
@@ -141,6 +145,10 @@ const t = {
     hero_title: 'Академія Управління\u00A0Станом',
     hero_title_2: 'Анни Медведєвої',
     hero_subtitle: 'Стабільність та управління реальністю в епоху AI через квантову психологію',
+    // Mobile hero — three separate lines (Figma node 1-73)
+    hero_m_line1: 'АКАДЕМІЯ',
+    hero_m_line2: ' УПРАВЛІННЯ \nСТАНОМ',
+    hero_m_line3: 'АННИ МЕДВЕДЄВОЇ',
     hero_caption_hl: 'Reality Intelligence',
     hero_caption: '\u00A0— нова',
     hero_caption2: 'мова відносин, грошей і особистості.',
@@ -258,6 +266,10 @@ const t = {
     hero_title: 'State\u00A0Management Academy',
     hero_title_2: 'by Anna Medvedeva',
     hero_subtitle: 'Stability and reality management in the AI era using quantum psychology',
+    // Mobile hero — three separate lines (Figma node 1-73)
+    hero_m_line1: 'ACADEMY',
+    hero_m_line2: ' OF STATE \nMANAGEMENT',
+    hero_m_line3: 'BY ANNA MEDVEDEVA',
     hero_caption_hl: 'Reality Intelligence',
     hero_caption: '\u00A0— a new',
     hero_caption2: 'language of relationships, money and identity.',
