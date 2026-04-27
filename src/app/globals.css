@@ -3960,88 +3960,41 @@ img.desktop-only { display: block !important; }
   .s6-m-btn span { font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #332000; line-height: 1; }
   .s6-m-btn:hover { background: rgba(255,245,239,0.5); }
 
-  /* === S7 ANNA — Figma 375×1043 (node 1:218) === */
-  #s7 { aspect-ratio: 375 / 1043 !important; }
-  #s7 .s7-photo {
-    position: absolute;
-    top: 47.65%;            /* center 50%-66.5/1043 */
-    left: 50%;
-    right: auto;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 27.61%;         /* 288/1043 */
-    z-index: 1;
-  }
-  #s7 .s7-block-1 {
-    left: 7.73%;            /* 29/375 */
-    top: 3.74%;             /* 39/1043 */
-    width: 84%;             /* 315/375 */
-    gap: 10px;
-  }
-  #s7 .s7-kicker { font-size: 18px; margin-bottom: 0; }
-  #s7 .s7-title  {
-    font-family: var(--font-heading);
-    font-weight: 300;       /* Cormorant Light */
-    font-size: 24px;
-    line-height: 23.1px;
-    text-transform: uppercase;
-    margin-bottom: 0;
-  }
-  #s7 .s7-desc   {
-    font-family: var(--font-body);
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.2;
-    margin-top: 5px;
-  }
-  #s7 .s7-block-2 {
-    left: 7.73%;
-    top: 21.57%;            /* 225/1043 */
-    width: 77.6%;           /* 291/375 */
-    gap: 5px;
-  }
-  #s7 .s7-name {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 36px;
-    line-height: 33.6px;
-    color: #de8b23;
-  }
-  #s7 .s7-name__accent { color: #de8b23; }
-  #s7 .s7-name span:not(.s7-name__accent) { display: none; }
-  #s7 .s7-name-title {
-    font-family: var(--font-heading);
-    font-weight: 300;
-    font-size: 24px;
-    line-height: 23.1px;
-    color: #fff5ef;
-  }
-  /* Mobile: bio gets absolutely positioned out of block-2 flow */
-  #s7 .s7-bio {
-    position: absolute;
-    left: 7.73%;
-    top: 58.20%;            /* 607/1043 */
-    width: 84%;
-    margin: 0;
-    font-family: var(--font-body);
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.3;
-    color: #fff5ef;
-    z-index: 2;
-  }
-  /* Buttons stacked vertically | top:884 + top:953 */
-  #s7 .s7-buttons {
-    position: absolute;
-    top: 84.76%;            /* 884/1043 */
-    left: 7.73%;
-    width: 84%;
-    bottom: auto;
-    flex-direction: column;
-    gap: 13px;              /* 953-884-69 ~ 13 */
-  }
-  #s7 .s7-btn { width: 100%; padding: 14px 20px; }
-  #s7 .s7-btn span { font-size: 18px; text-align: center; }
+  /* === S7 ANNA — Figma 375×1019 (node 1:993, HTML mobile) === */
+  #s7 { aspect-ratio: 375 / 1019 !important; }
+
+  .s7-mobile-html { position: absolute; inset: 0; z-index: 0; }
+
+  /* Background — #332000 base + photo at 60% opacity (matches desktop) */
+  .s7-m-bg { position: absolute; inset: 0; background: #332000; overflow: hidden; z-index: 0; }
+  .s7-m-bg-img { position: absolute; width: 100% !important; max-width: none !important; height: 100%; left: 0; top: 0; object-fit: cover; object-position: right center; display: block; opacity: 0.6; }
+
+  /* Title block — x:30 y:40 w:315 h:146 */
+  .s7-m-title-block { position: absolute; left: 30px; top: 40px; width: 315px; z-index: 1; }
+  .s7-m-kicker  { position: absolute; top: 0;    left: 0; width: 315px; margin: 0; font-family: var(--font-body);    font-size: 18px; font-weight: 500; color: #fff5ef; line-height: normal; }
+  .s7-m-heading { position: absolute; top: 31px; left: 0; width: 315px; margin: 0; font-family: var(--font-heading); font-size: 24px; font-weight: 300; color: #fff5ef; line-height: 23.1px; text-transform: uppercase; }
+  .s7-m-desc    { position: absolute; top: 70px; left: 0; width: 315px; margin: 0; font-family: var(--font-body);    font-size: 16px; font-weight: 400; color: #fff5ef; line-height: 1.2; white-space: pre-wrap; }
+
+  /* Subtitle — x:30 y:207 w:291 h:63 */
+  .s7-m-subtitle { position: absolute; left: 30px; top: 207px; width: 291px; z-index: 1; }
+  .s7-m-name { position: absolute; top: 0;    left: 0; margin: 0; font-family: var(--font-heading); font-size: 36px; font-weight: 600; color: #de8b23;  line-height: 33.6px; }
+  .s7-m-role { position: absolute; top: 39px; left: 0; margin: 0; font-family: var(--font-heading); font-size: 24px; font-weight: 300; color: #fff5ef; line-height: 23.1px; }
+
+  /* Photo — x:0 y:298 w:375 h:288 */
+  .s7-m-photo { position: absolute; left: 0; top: 298px; width: 375px; height: 288px; z-index: 1; overflow: hidden; }
+  .s7-m-photo-img { width: 100% !important; max-width: none !important; height: 100%; object-fit: cover; object-position: center; display: block; }
+
+  /* Main text — x:30 y:596 w:315 h:256 */
+  .s7-m-main { position: absolute; left: 30px; top: 596px; width: 315px; z-index: 1; }
+  .s7-m-specialist { position: absolute; top: 0;    left: 0; width: 315px; margin: 0; font-family: var(--font-heading); font-size: 24px; font-weight: 300; color: #fff5ef; line-height: 23.1px; }
+  .s7-m-bio        { position: absolute; top: 85px; left: 0; width: 315px; margin: 0; font-family: var(--font-body);    font-size: 16px; font-weight: 400; color: #fff5ef; line-height: 1.3;    white-space: pre-wrap; }
+
+  /* Buttons — x:30 w:315 h:49 r:10 stroke:#fff5ef */
+  .s7-m-btn { position: absolute; left: 30px; width: 315px; height: 49px; z-index: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #fff5ef; border-radius: 10px; background: transparent; text-decoration: none; cursor: pointer; transition: background 0.25s ease; }
+  .s7-m-btn--about   { top: 870px; }
+  .s7-m-btn--consult { top: 939px; }
+  .s7-m-btn span { font-family: var(--font-body); font-size: 18px; font-weight: 500; color: #fff5ef; line-height: 1; }
+  .s7-m-btn:hover { background: rgba(255,245,239,0.08); }
 
   /* === S8 DNA — Figma 375×~690 (node 1:235) === */
   #s8 { aspect-ratio: 375 / 690 !important; }
