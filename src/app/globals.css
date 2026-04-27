@@ -1235,15 +1235,21 @@ img.desktop-only { display: block !important; }
     font-feature-settings: 'lnum' 1, 'pnum' 1;
   }
 
-  /* Golden glow divider line (same line.png as desktop hero)
+  /* Golden glow divider line — horizontal CSS gradient (replaces slanted line.png)
      Sits between СОСТОЯНИЕМ and АННЫ — ~285/716=39.8% */
   .s1-m-glow-line {
     position: absolute;
     top: 39.8%;
     left: 0;
     right: 0;
-    height: 1.4%;              /* ~10px @ 716 */
-    background: url('/images/effects/line.png') center / 100% 100% no-repeat;
+    height: 1px;
+    background: linear-gradient(to right,
+      transparent 0%,
+      rgba(255, 245, 239, 0.15) 15%,
+      rgba(255, 245, 239, 0.7) 50%,
+      rgba(255, 245, 239, 0.15) 85%,
+      transparent 100%);
+    box-shadow: 0 0 6px rgba(255, 245, 239, 0.35);
     animation: pulse-glow 4s ease-in-out infinite;
   }
 
