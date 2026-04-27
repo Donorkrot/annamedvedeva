@@ -4029,25 +4029,29 @@ img.desktop-only { display: block !important; }
   .s9-m-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
   .s9-m-bg-img { position: absolute; width: 100% !important; max-width: none !important; height: 100%; left: 0; top: 0; object-fit: cover; object-position: center top; display: block; }
 
-  /* Gradient top — h:189, stops: #f8e8e0 solid at 16% → transparent */
-  .s9-m-grad-top { position: absolute; top: 0; left: 0; width: 100%; height: 189px; background: linear-gradient(to bottom, #f8e8e0 0%, #f8e8e0 16%, transparent 100%); z-index: 1; pointer-events: none; }
+  /* Gradient top — h:189/994=19.01% */
+  .s9-m-grad-top { position: absolute; top: 0; left: 0; width: 100%; height: 19.01%; background: linear-gradient(to bottom, #f8e8e0 0%, #f8e8e0 16%, transparent 100%); z-index: 1; pointer-events: none; }
 
-  /* Title — x:30 y:60 w:315, Cormorant SemiBold 36px center #332000 */
-  .s9-m-title { position: absolute; left: 30px; top: 60px; width: 315px; margin: 0; font-family: var(--font-heading); font-size: 36px; font-weight: 600; color: #332000; line-height: 33.6px; text-align: center; z-index: 1; }
+  /* Title — x:30/375=8% y:60/994=6.04% w:315/375=84% */
+  .s9-m-title { position: absolute; left: 8%; top: 6.04%; width: 84%; margin: 0; font-family: var(--font-heading); font-size: 36px; font-weight: 600; color: #332000; line-height: 33.6px; text-align: center; z-index: 1; }
 
-  /* Card — x:24 y:348 w:326 h:294 */
-  .s9-m-card { position: absolute; left: 24px; top: 348px; width: 326px; height: 294px; z-index: 1; }
+  /* Card — x:24/375=6.4% y:348/994=35.01% w:326/375=86.93% h:294/994=29.58% */
+  .s9-m-card { position: absolute; left: 6.4%; top: 35.01%; width: 86.93%; height: 29.58%; z-index: 1; }
   .s9-m-venn-img { position: absolute; inset: 0; width: 100% !important; max-width: none !important; height: 100%; object-fit: contain; display: block; }
 
-  /* Text labels over the card */
+  /* Labels — % within card (326×294):
+     --top  x:91/326=27.91% y:26/294=8.84%  w:145/326=44.48%
+     --c    x:103/326=31.6% y:162/294=55.1% w:121/326=37.12%
+     --bl   x:37/326=11.35% y:200/294=68.03% w:111/326=34.05%
+     --br   x:235/326=72.09% y:200/294=68.03% w:86/326=26.38% */
   .s9-m-label { position: absolute; margin: 0; font-family: var(--font-body); font-size: 12px; font-weight: 400; color: #332000; line-height: 1.4; z-index: 2; }
-  .s9-m-label--top { top: 26px;  left: 91px;  width: 145px; text-align: center; }
-  .s9-m-label--c   { top: 162px; left: 103px; width: 121px; text-align: center; font-size: 16px; }
-  .s9-m-label--bl  { top: 200px; left: 37px;  width: 111px; }
-  .s9-m-label--br  { top: 200px; left: 235px; width: 86px; }
+  .s9-m-label--top { top: 8.84%;  left: 27.91%; width: 44.48%; text-align: center; }
+  .s9-m-label--c   { top: 55.1%;  left: 31.6%;  width: 37.12%; text-align: center; font-size: 16px; }
+  .s9-m-label--bl  { top: 68.03%; left: 11.35%; width: 34.05%; }
+  .s9-m-label--br  { top: 68.03%; left: 72.09%; width: 26.38%; }
 
-  /* Caption — x:30 y:869 w:315, Cormorant Light 24px left #332000 */
-  .s9-m-caption { position: absolute; left: 30px; top: 869px; width: 315px; margin: 0; font-family: var(--font-heading); font-size: 24px; font-weight: 300; color: #332000; line-height: 23.1px; z-index: 1; }
+  /* Caption — x:30/375=8% y:869/994=87.42% w:315/375=84% */
+  .s9-m-caption { position: absolute; left: 8%; top: 87.42%; width: 84%; margin: 0; font-family: var(--font-heading); font-size: 24px; font-weight: 300; color: #332000; line-height: 23.1px; z-index: 1; }
 
   /* === S10 UNITY — Figma 375×788 (node 1:425, HTML mobile) === */
   #s10 { aspect-ratio: 375 / 788 !important; }
