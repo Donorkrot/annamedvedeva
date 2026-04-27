@@ -4039,16 +4039,15 @@ img.desktop-only { display: block !important; }
   .s9-m-card { position: absolute; left: 6.4%; top: 35.01%; width: min(326px, 86.93%); height: min(294px, 29.58%); z-index: 1; }
   .s9-m-venn-img { position: absolute; inset: 0; width: 100% !important; max-width: none !important; height: 100%; object-fit: contain; display: block; }
 
-  /* Labels — fixed px within 326×294 card (Figma exact):
-     --top  x:91 y:26  w:145
-     --c    x:103 y:162 w:121
-     --bl   x:37  y:200 w:111
-     --br   x:235 y:200 w:86 */
+  /* Labels — fixed px within 326×294 card.
+     BL/BR widths reduced from Figma values to stay inside exclusive circle areas:
+     BL exclusive zone ends at x≈109 → left(37)+width(72)=109 ✓
+     BR exclusive zone ends at x≈301 → left(235)+width(63)=298 ✓ */
   .s9-m-label { position: absolute; margin: 0; font-family: var(--font-body); font-size: 12px; font-weight: 400; color: #332000; line-height: 1.4; z-index: 2; }
   .s9-m-label--top { top: 26px;  left: 91px;  width: 145px; text-align: center; }
   .s9-m-label--c   { top: 162px; left: 103px; width: 121px; text-align: center; font-size: 16px; }
-  .s9-m-label--bl  { top: 200px; left: 37px;  width: 111px; }
-  .s9-m-label--br  { top: 200px; left: 235px; width: 86px; }
+  .s9-m-label--bl  { top: 200px; left: 37px;  width: 72px; }
+  .s9-m-label--br  { top: 200px; left: 235px; width: 63px; }
 
   /* Caption — x:30/375=8% y:869/994=87.42% w:315/375=84% */
   .s9-m-caption { position: absolute; left: 8%; top: 87.42%; width: 84%; margin: 0; font-family: var(--font-heading); font-size: 24px; font-weight: 300; color: #332000; line-height: 23.1px; z-index: 1; }
