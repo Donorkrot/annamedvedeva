@@ -4046,7 +4046,7 @@ img.desktop-only { display: block !important; }
   .s9-m-label { position: absolute; margin: 0; font-family: var(--font-body); font-size: 12px; font-weight: 400; color: #332000; line-height: 1.4; z-index: 2; }
   .s9-m-label--top { top: 26px;  left: 91px;  width: 145px; text-align: center; }
   .s9-m-label--c   { top: 162px; left: 103px; width: 121px; text-align: center; font-size: 16px; }
-  .s9-m-label--bl  { top: 200px; left: 37px;  width: 72px; }
+  .s9-m-label--bl  { top: 200px; left: 47px;  width: 72px; }
   .s9-m-label--br  { top: 200px; left: 235px; width: 63px; }
 
   /* Caption — x:30/375=8% y:869/994=87.42% w:315/375=84% */
