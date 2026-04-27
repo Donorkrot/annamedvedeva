@@ -4022,56 +4022,32 @@ img.desktop-only { display: block !important; }
   #s8 .s8-trait-3 { top: 67.54%; }   /* 466/690 */
   #s8 .s8-trait-4 { top: 80.87%; }   /* 558/690 */
 
-  /* === S9 ARCHETYPES — Figma 375×994 (node 1:248) === */
+  /* === S9 ARCHETYPES — Figma 375×994 (node 1:248, HTML mobile) === */
   #s9 { aspect-ratio: 375 / 994 !important; min-height: 0 !important; }
-  #s9 .s9-title {
-    top: calc(50% - 437px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: 315px;
-    text-align: center;
-    font-size: 36px;
-  }
-  /* Venn block on mobile | x:23 top:347 w:326 h:294 */
-  #s9 .s9-venn {
-    top: calc(50% - 150px);
-    left: 50%;
-    width: 326px;
-    height: 294px;
-    transform: translate(-50%, -50%);
-  }
-  #s9 .s9-vlabel--top {
-    top: calc(50% - 121px);
-    width: 145px;
-  }
-  #s9 .s9-vlabel--bl {
-    top: calc(50% + 53px);
-    left: calc(50% - 126px);
-    width: 111px;
-  }
-  #s9 .s9-vlabel--br {
-    top: calc(50% + 53px);
-    left: calc(50% + 72px);
-    width: 86px;
-  }
-  #s9 .s9-vlabel--c {
-    top: calc(50% + 15px);
-    width: 121px;
-    font-size: 16px;
-  }
-  /* Mobile caption | top:calc(50%+372px), w:315 */
-  #s9 .s9-caption {
-    top: calc(50% + 372px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: 315px;
-    max-width: 315px;
-    bottom: auto;
-    font-family: var(--font-heading);
-    font-weight: 300;       /* Cormorant Light */
-    font-size: 24px;
-    line-height: 23.1px;
-  }
+
+  .s9-mobile-html { position: absolute; inset: 0; z-index: 0; }
+  .s9-m-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+  .s9-m-bg-img { position: absolute; width: 100% !important; max-width: none !important; height: 100%; left: 0; top: 0; object-fit: cover; object-position: center top; display: block; }
+
+  /* Gradient top — h:189, stops: #f8e8e0 solid at 16% → transparent */
+  .s9-m-grad-top { position: absolute; top: 0; left: 0; width: 100%; height: 189px; background: linear-gradient(to bottom, #f8e8e0 0%, #f8e8e0 16%, transparent 100%); z-index: 1; pointer-events: none; }
+
+  /* Title — x:30 y:60 w:315, Cormorant SemiBold 36px center #332000 */
+  .s9-m-title { position: absolute; left: 30px; top: 60px; width: 315px; margin: 0; font-family: var(--font-heading); font-size: 36px; font-weight: 600; color: #332000; line-height: 33.6px; text-align: center; z-index: 1; }
+
+  /* Card — x:24 y:348 w:326 h:294 */
+  .s9-m-card { position: absolute; left: 24px; top: 348px; width: 326px; height: 294px; z-index: 1; }
+  .s9-m-venn-img { position: absolute; inset: 0; width: 100% !important; max-width: none !important; height: 100%; object-fit: contain; display: block; }
+
+  /* Text labels over the card */
+  .s9-m-label { position: absolute; margin: 0; font-family: var(--font-body); font-size: 12px; font-weight: 400; color: #332000; line-height: 1.4; z-index: 2; }
+  .s9-m-label--top { top: 26px;  left: 91px;  width: 145px; text-align: center; }
+  .s9-m-label--c   { top: 162px; left: 103px; width: 121px; text-align: center; font-size: 16px; }
+  .s9-m-label--bl  { top: 200px; left: 37px;  width: 111px; }
+  .s9-m-label--br  { top: 200px; left: 235px; width: 86px; }
+
+  /* Caption — x:30 y:869 w:315, Cormorant Light 24px left #332000 */
+  .s9-m-caption { position: absolute; left: 30px; top: 869px; width: 315px; margin: 0; font-family: var(--font-heading); font-size: 24px; font-weight: 300; color: #332000; line-height: 23.1px; z-index: 1; }
 
   /* === S10 UNITY — Figma 375×~970 (node 1:425) === */
   #s10 { aspect-ratio: 375 / 970 !important; }
