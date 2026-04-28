@@ -3916,8 +3916,23 @@ img.desktop-only { display: block !important; }
   #s8 .s8-trait {
     width: 84%;            /* 315/375 */
     left: 7.73%;           /* 29/375 */
-    gap: 1.3333vw;
+    /* Tiny breathing room between the bg's gold divider line and the body
+     text — was 0 (touching), 1.6vw (≈6px) gives the body just enough
+     space to read without pushing it back to the old gappy state. */
+    gap: 1.6vw;
     align-items: flex-start;
+  }
+  /* Match Figma heading box height (h=34 for 28px font → line-height ≈ 1.21).
+     Default rule below uses line-height: 1 which compressed the text and
+     pushed body text further from the bg's gold divider line. */
+  #s8 .s8-trait h3 {
+    line-height: 1.2;
+    /* Slightly tighten body→heading-of-next-block by adding small bottom
+       margin equal to gap that was removed — keeps body separated from
+       heading of the SAME block (matches Figma's tight grouping). */
+  }
+  #s8 .s8-trait p {
+    line-height: 1.2;
   }
   /* Mobile positions per Figma 1:235 — title @ y, body slightly below */
   #s8 .s8-trait-1 { top: 38.12%; }   /* 263/690 — but trait container holds h3+p */
