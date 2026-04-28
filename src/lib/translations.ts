@@ -20,6 +20,11 @@ const t = {
     hero_caption_hl: 'Reality Intelligence',
     hero_caption: '\u00A0— новый',
     hero_caption2: 'язык отношений, денег и личности.',
+    // About a1
+    about_a1_title_name: 'Анна Медведева',
+    about_a1_title_rest: 'Мастер Состояния',
+    about_a1_body_1: 'Работаю не с проблемами.',
+    about_a1_body_2: 'Я работаю с состоянием, из которого строится ваша реальность.',
     // S2
     s2_tagline: 'Мы не успеваем',
     s2_card1_title: 'Новое давление',
@@ -152,6 +157,11 @@ const t = {
     hero_caption_hl: 'Reality Intelligence',
     hero_caption: '\u00A0— нова',
     hero_caption2: 'мова відносин, грошей і особистості.',
+    // About a1
+    about_a1_title_name: 'Анна Медведєва',
+    about_a1_title_rest: 'Майстер Стану',
+    about_a1_body_1: 'Працюю не з проблемами.',
+    about_a1_body_2: 'Я працюю зі станом, з якого будується ваша реальність.',
     s2_tagline: 'Ми не встигаємо',
     s2_card1_title: 'Новий тиск',
     s2_card1_body: 'Люди не встигають адаптуватись, їхня нервова система не справляється',
@@ -273,6 +283,11 @@ const t = {
     hero_caption_hl: 'Reality Intelligence',
     hero_caption: '\u00A0— a new',
     hero_caption2: 'language of relationships, money and identity.',
+    // About a1
+    about_a1_title_name: 'Anna Medvedeva',
+    about_a1_title_rest: 'Master of State',
+    about_a1_body_1: "I don't work with problems.",
+    about_a1_body_2: 'I work with the state from which your reality is built.',
     s2_tagline: "We can't keep up",
     s2_card1_title: 'New pressure',
     s2_card1_body: "People can't adapt fast enough — their nervous system can't cope",

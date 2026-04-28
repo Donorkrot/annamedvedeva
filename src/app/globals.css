@@ -257,282 +257,132 @@ main {
   .s1-particles { animation: none; opacity: 0.4; }
 }
 
-/* ===== S1 hero — layered composition =====
-   Desktop renders three stacked layers so the bright lightning detail
-   can breathe independently of the static background:
-     1. .s1-bg-layer    — dark ambient dust, never moves
-     2. .s1-detail-layer — bright lightning (screen-blended), animated
-     3. .s1-text-layer   — HTML headings / subtitle
-     4. .s1-btn-overlay  — existing CTA image button
-   Mobile keeps its single baked JPG composite unchanged.
+/* ===== S1 hero — Figma node 1-64 (desktop) / 1-73 (mobile) =====
+   No animation. Static Figma assets + HTML text. */
 
-   `--s1-progress` is set 0..1 by HeroSection.tsx on scroll so the
-   detail intensifies and the whole hero gently parallaxes upward as
-   it leaves the viewport. */
-#s1.s1-animated {
-  --s1-progress: 0;
+/* Desktop wrapper */
+.s1-d {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
 }
 
-.s1-layers {
+/* Desktop ambient bg — Figma's 2880/1400 BackgroundImage, vertically centered */
+.s1-d-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
 }
-/* Base layer — static dark ambient. Only a whisper of scroll-driven zoom. */
-.s1-bg-layer {
-  position: absolute;
-  inset: 0;
-  background: #1a0d05 url('/images/effects/s1-hero-bg.jpg') center/cover no-repeat;
-  z-index: 0;
-  transform: scale(calc(1 + var(--s1-progress) * 0.05));
-  opacity: calc(1 - var(--s1-progress) * 0.3);
-  will-change: transform, opacity;
-}
-/* Detail layer — lightning.
-   Outer element carries the scroll-driven dolly-in.
-   Inner ::before carries the PNG and a slow hypnotic breath:
-     - a wide/narrow pulse on scaleX (12s, sine-eased)
-     - a gentle vertical float on translateY (17s, sine-eased)
-     - a brightness/saturation pulse (7s, sine-eased)
-   The three periods are deliberately co-prime-ish so the state never
-   exactly repeats for minutes — the eye reads the motion as organic,
-   never looped. */
-.s1-detail-layer {
+.s1-d-bg img { object-fit: cover; }
+
+/* Desktop lightning audio-wave — Figma's 1440×700 Image, centered */
+.s1-d-light {
   position: absolute;
   inset: 0;
   z-index: 1;
-  transform-origin: center 58%;
-  transform: scale(calc(1 + var(--s1-progress) * 0.07));
   pointer-events: none;
-  will-change: transform;
 }
-.s1-detail-layer::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('/images/effects/s1-hero-detail.png') center/contain no-repeat;
-  mix-blend-mode: screen;
-  opacity: 0.95;
-  transform-origin: center 58%;
-  animation:
-    s1DetailBreathX 12s ease-in-out infinite,
-    s1DetailFloat   17s ease-in-out infinite,
-    s1DetailPulse    7s ease-in-out infinite;
-  will-change: transform, filter, opacity;
-}
-/* Scroll amplification — independent of the pulse so they don't conflict. */
-#s1.s1-animated .s1-detail-layer {
-  --s1-scroll-bright: calc(var(--s1-progress) * 0.45);
-  --s1-scroll-sat:    calc(var(--s1-progress) * 0.25);
-}
-/* Darkening layer — lifts text readability off the bright lightning.
-   Soft radial centered on the title + a gentle top/bottom vignette. */
-.s1-darken {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background:
-    radial-gradient(
-      ellipse 70% 45% at 50% 48%,
-      rgba(15, 8, 3, 0.72) 0%,
-      rgba(15, 8, 3, 0.55) 30%,
-      rgba(15, 8, 3, 0.28) 60%,
-      rgba(15, 8, 3, 0)    100%
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(10, 5, 2, 0.45) 0%,
-      rgba(10, 5, 2, 0)    22%,
-      rgba(10, 5, 2, 0)    78%,
-      rgba(10, 5, 2, 0.35) 100%
-    );
-  mix-blend-mode: multiply;
-}
-/* Three layered, co-prime-ish cycles — scaleX wide/narrow, a gentle
-   vertical float, and a brightness pulse. All ease-in-out (sine-like),
-   all sub-perceptible amplitudes so the motion reads as breath, not
-   animation. */
-@keyframes s1DetailBreathX {
-  0%, 100% { transform: scale(1)       translateY(0); }
-  50%      { transform: scaleX(1.022) scaleY(1.008) translateY(0); }
-}
-@keyframes s1DetailFloat {
-  0%, 100% { translate: 0 0; }
-  35%      { translate: 0 -3px; }
-  70%      { translate: 0 2px;  }
-}
-@keyframes s1DetailPulse {
-  0%, 100% {
-    filter:  brightness(calc(1    + var(--s1-scroll-bright, 0)))
-             saturate(calc(1.02 + var(--s1-scroll-sat, 0)));
-    opacity: 0.92;
-  }
-  50% {
-    filter:  brightness(calc(1.13 + var(--s1-scroll-bright, 0)))
-             saturate(calc(1.17 + var(--s1-scroll-sat, 0)));
-    opacity: 1;
-  }
-}
-#s1.s1-animated .s10-bg {
-  /* mobile composite — light scroll parallax only */
-  transform: scale(calc(1 + var(--s1-progress) * 0.1))
-             translateY(calc(var(--s1-progress) * 4%));
-  opacity: calc(1 - var(--s1-progress) * 0.55);
-  transform-origin: center center;
-  transition: opacity 0.1s linear;
-}
-#s1.s1-animated .s1-text-layer {
-  transform: translateY(calc(var(--s1-progress) * -18px));
-  opacity: calc(1 - var(--s1-progress) * 1.4);
-  transition: opacity 0.12s linear;
-}
+.s1-d-light img { object-fit: contain; object-position: center; }
 
-@media (prefers-reduced-motion: reduce) {
-  #s1.s1-animated .s1-bg-layer,
-  #s1.s1-animated .s1-detail-layer,
-  #s1.s1-animated .s10-bg,
-  #s1.s1-animated .s1-text-layer {
-    transform: none !important;
-    opacity: 1 !important;
-    filter: none !important;
-    animation: none !important;
-  }
-}
-
-/* ===== S1 text layer (desktop only) ===== */
-.s1-text-layer {
+/* Tagline "Новый / Интеллект / Реальности" — top:78px, w:110px, page-centered */
+.s1-d-tagline {
   position: absolute;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-  /* Everything sized relative to the section's 1440×700 design bounds
-     — using % keeps the layout stable while the section scales with
-     the viewport width (aspect-ratio is fixed). */
-}
-/* Copy variant: HTML hero text exists for SEO / screen readers / Ctrl+A
-   copy, but is visually clipped to a 1px box so it doesn't double-render
-   on top of the baked-in JPG hero text. Mouse drag selection won't show
-   highlights at the wrong position — but Cmd+A → Cmd+C still copies
-   the full hero text. */
-.s1-text-layer--copy {
-  position: absolute !important;
-  inset: auto !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 1px !important;
-  height: 1px !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  white-space: normal !important;
-  pointer-events: auto;
-  -webkit-user-select: text;
-  user-select: text;
-  z-index: 1;
-}
-.s1-text-layer--copy * {
-  position: static !important;
-  width: auto !important;
-  height: auto !important;
-  inset: auto !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  transform: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  font-size: 12px !important;
-  line-height: 1.2 !important;
-  color: transparent !important;
-  text-shadow: none !important;
-  background: transparent !important;
-  white-space: normal !important;
-  display: block !important;
-  -webkit-user-select: text;
-  user-select: text;
-}
-.s1-text-layer--copy .hero-glow-line-v2 { display: none !important; }
-.s1-text-layer .hero-tagline {
-  position: absolute;
-  top: 11.4%;
+  z-index: 3;
+  top: 11.14%;            /* 78/700 */
   left: 50%;
   transform: translateX(-50%);
-  font-family: var(--font-body);
-  font-size: clamp(12px, 1.1vw, 16px);
-  font-weight: 300;
-  color: var(--cream);
-  letter-spacing: 0.5px;
-  text-align: center;
-  line-height: 1.25;
-  opacity: 0.82;
+  width: 110px;
   margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--cream);
+  text-align: center;
+  line-height: normal;
+  font-feature-settings: 'lnum' 1, 'pnum' 1;
 }
-.s1-text-layer .hero-tagline__line {
-  display: block;
-}
-/* Visible variant — let mouse drag-select the text without breaking the
-   click-through to layers beneath. The layer container stays pointer-events:none
-   (so the section's bg/btn remain clickable), text elements opt back in. */
-.s1-text-layer:not(.s1-text-layer--copy) .hero-tagline,
-.s1-text-layer:not(.s1-text-layer--copy) .hero-title-v2,
-.s1-text-layer:not(.s1-text-layer--copy) .hero-subtitle-v2 {
-  pointer-events: auto;
-  -webkit-user-select: text;
-  user-select: text;
-}
-/* Title splits across two rows with line.png between them. All positions
-   are pixel-measured from `главная страница первый блок референс.png`
-   (1440×700 @ 1×): title bbox 1047×126 at (x=155, y=271), line 1440×10 at
-   (x=0, y=328), subtitle 928×34 at (x=155, y=398). Title and subtitle use
-   their own bboxes (not page-centered) so the content sits exactly where
-   the design puts it. */
-.s1-text-layer .hero-title-v2 {
+.s1-d-tagline span { display: block; }
+
+/* Title — Cormorant Garamond SemiBold 52px, uppercase, left-aligned at x=155
+   Figma row 1 top y≈271, row 2 top y≈340 (in 700-tall frame) */
+.s1-d-title {
   position: absolute;
-  left: 10.76%;       /* x=155 / 1440 */
-  width: 72.71%;      /* 1047 / 1440 */
+  z-index: 3;
+  left: 10.76%;           /* 155/1440 */
+  width: 72.71%;          /* 1047/1440 */
   margin: 0;
   font-family: var(--font-heading);
-  font-size: clamp(28px, 3.6vw, 54px);
+  font-size: clamp(28px, 3.61vw, 52px);
   font-weight: 600;
   text-transform: uppercase;
   color: var(--cream);
-  text-align: left;
-  letter-spacing: 0.02em;
-  line-height: 1.1;
-  text-shadow:
-    0 0 60px rgba(200, 160, 60, 0.25),
-    0 2px 20px rgba(0, 0, 0, 0.6);
+  letter-spacing: 0;
+  line-height: 1;
   white-space: nowrap;
+  font-feature-settings: 'lnum' 1, 'pnum' 1;
 }
-.s1-text-layer .hero-title-row-1 { top: 38.71%; }  /* y271 / 700 */
-.s1-text-layer .hero-title-row-2 { top: 48.57%; }  /* y340 / 700 — bbox ends at y397 */
+.s1-d-title--row1 { top: 38.71%; }   /* 271/700 */
+.s1-d-title--row2 { top: 48.57%; }   /* 340/700 */
 
-.s1-text-layer .hero-glow-line-v2 {
+/* Glow line — Figma's full-bleed line.png at top:327 (aspect 2880/20 → 1440/10) */
+.s1-d-line {
   position: absolute;
-  top: 46.86%;        /* y328 / 700 */
+  z-index: 2;
   left: 0;
   right: 0;
-  height: 1.43%;      /* 10 / 700 */
-  background: url('/images/effects/line.png') center/100% 100% no-repeat;
-  animation: pulse-glow 4s ease-in-out infinite;
+  top: 46.71%;            /* 327/700 */
+  height: 1.43%;          /* 10/700 */
+  pointer-events: none;
 }
-.s1-text-layer .hero-subtitle-v2 {
+.s1-d-line img { object-fit: cover; }
+
+/* Subtitle — Cormorant Garamond Medium 28px at x=155, y=478
+   (top: calc(50%+48px) = 398, but visually content sits ~478 — using Figma's calc) */
+.s1-d-subtitle {
   position: absolute;
-  top: 56.86%;        /* y398 / 700 */
-  left: 10.76%;       /* x=155 / 1440 */
-  width: 64.44%;      /* 928 / 1440 */
+  z-index: 3;
+  left: 10.76%;           /* 155/1440 */
+  top: 56.86%;            /* 398/700 */
+  margin: 0;
   font-family: var(--font-heading);
   font-size: clamp(16px, 1.94vw, 28px);
-  font-weight: 300;
+  font-weight: 500;
   color: var(--cream);
-  letter-spacing: 0.01em;
-  line-height: 1.3;
-  text-align: left;
+  letter-spacing: 0;
+  line-height: 1;
   white-space: nowrap;
-  opacity: 0.94;
+  font-feature-settings: 'lnum' 1, 'pnum' 1;
 }
+
+/* CTA — Figma node 1:69 — bg #332000, border #de8b23, x=154 y=475 w=325 */
+.s1-d-btn {
+  position: absolute;
+  z-index: 10;
+  left: 10.69%;           /* 154/1440 */
+  top: 67.86%;            /* 475/700 */
+  width: 22.57%;          /* 325/1440 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  background: #332000;
+  border: 1px solid #de8b23;
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: clamp(13px, 1.1vw, 16px);
+  font-weight: 400;
+  color: var(--cream);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-feature-settings: 'lnum' 1, 'pnum' 1;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.s1-d-btn:hover  { background: rgba(255, 245, 239, 0.08); transform: translateY(-1px); }
+.s1-d-btn:active { transform: translateY(0); }
 
 /* ===== SECTION BASE ===== */
 .section {
@@ -1152,119 +1002,56 @@ img.desktop-only { display: block !important; }
   #s4  { aspect-ratio: 1125 / 3657 !important; }
   #s5  { aspect-ratio: 1125 / 2148 !important; }
   #s6  { aspect-ratio: 1125 / 918  !important; }
-  #s7  { aspect-ratio: 1125 / 3129 !important; }
+  #s7  { aspect-ratio: 1125 / 3300 !important; background: #1a0d05 !important; }
   #s8  { aspect-ratio: 1125 / 2070 !important; }
   #s9  { aspect-ratio: 1125 / 2982 !important; }
   #s10 { aspect-ratio: 1125 / 2364 !important; }
   #s11 { aspect-ratio: 1125 / 3717 !important; }
 
-  /* S1 image-overlay button is replaced by .s1-m-btn on mobile */
-  .s1-btn-overlay { display: none !important; }
-
-  /* S1 mobile | HTML hero from Figma node 1-73 (375×716)
-     All positions are % of container height; sizes in vw (ref: 375px wide). */
-
-  /* Container fills the section (same .s10-bg pattern) */
-  .s1-mobile-hero {
+  /* ===== S1 mobile — Figma node 1-73 (375×716) ===== */
+  .s1-m {
     position: absolute;
     inset: 0;
     z-index: 0;
     overflow: hidden;
     background: #1a0d05;
   }
-
-  /* Mobile animated hero — layered like desktop:
-     1. .s1-m-bg-layer    — static dark ambient (same s1-hero-bg.jpg as desktop)
-     2. .s1-m-detail-layer — bright lightning PNG, screen-blended, animated
-     3. .s1-m-darken      — radial vignette so text stays readable */
-  .s1-m-bg-layer {
+  .s1-m-bg {
     position: absolute;
     inset: 0;
-    background: #1a0d05 url('/images/effects/s1-hero-bg.jpg') center/cover no-repeat;
     z-index: 0;
-  }
-  .s1-m-detail-layer {
-    position: absolute;
-    /* Detail PNG is wide aspect; on mobile we blow it up so the lightning
-       fills the upper-middle zone behind the headings. */
-    inset: 18% -25% auto -25%;
-    height: 50%;
-    background: url('/images/effects/s1-hero-detail.png') center/contain no-repeat;
-    mix-blend-mode: screen;
-    opacity: 0.92;
-    transform-origin: center 50%;
-    animation:
-      s1DetailBreathX 12s ease-in-out infinite,
-      s1DetailFloat   17s ease-in-out infinite,
-      s1DetailPulse    7s ease-in-out infinite;
-    will-change: transform, filter, opacity;
-    z-index: 1;
     pointer-events: none;
   }
-  .s1-m-darken {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    background:
-      radial-gradient(
-        ellipse 75% 50% at 50% 48%,
-        rgba(15, 8, 3, 0.65) 0%,
-        rgba(15, 8, 3, 0.45) 35%,
-        rgba(15, 8, 3, 0.20) 65%,
-        rgba(15, 8, 3, 0)    100%
-      ),
-      linear-gradient(
-        to bottom,
-        rgba(10, 5, 2, 0.40) 0%,
-        rgba(10, 5, 2, 0)    25%,
-        rgba(10, 5, 2, 0)    75%,
-        rgba(10, 5, 2, 0.45) 100%
-      );
-    mix-blend-mode: multiply;
-  }
+  .s1-m-bg img { object-fit: cover; }
 
-  @media (prefers-reduced-motion: reduce) {
-    .s1-m-detail-layer { animation: none; }
-  }
-
-  /* All foreground hero text/button must sit above the darken layer (z:2). */
   .s1-m-tagline,
   .s1-m-title1,
   .s1-m-title2,
   .s1-m-title3,
-  .s1-m-glow-line,
+  .s1-m-line,
   .s1-m-subtitle,
   .s1-m-btn { z-index: 3; }
 
-  /* Tagline "Новый / Интеллект / Реальности" — opacity 70%
-     Figma: inset top=13.69% left=37.87% right=38.13% bottom=80.45% */
+  /* Tagline "Новый / Интеллект / Реальности" — opacity 70% */
   .s1-m-tagline {
     position: absolute;
     top: 13.69%;
-    left: 37.87%;
-    right: 38.13%;
-    bottom: 80.45%;
+    left: 50%;
+    transform: translateX(-50%);
     margin: 0;
     opacity: 0.7;
     font-family: var(--font-body);
-    font-size: 3.2vw;          /* 12px @ 375 */
+    font-size: 3.2vw;
     font-weight: 400;
     color: var(--cream);
     text-align: center;
     text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     line-height: normal;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 0;
     font-feature-settings: 'lnum' 1, 'pnum' 1;
   }
   .s1-m-tagline span { display: block; line-height: normal; }
 
-  /* АКАДЕМИЯ — Cormorant Garamond Medium 28px
-     Figma: top=calc(50%−168px) → 190/716=26.54% */
+  /* АКАДЕМИЯ — Cormorant Garamond Medium 28px, top: 26.54% */
   .s1-m-title1 {
     position: absolute;
     top: 26.54%;
@@ -1272,17 +1059,15 @@ img.desktop-only { display: block !important; }
     transform: translateX(-50%);
     margin: 0;
     font-family: var(--font-heading);
-    font-size: 7.47vw;         /* 28px @ 375 */
+    font-size: 7.47vw;
     font-weight: 500;
-    font-style: normal;
     color: var(--cream);
     white-space: nowrap;
     line-height: normal;
     font-feature-settings: 'lnum' 1, 'pnum' 1;
   }
 
-  /* УПРАВЛЕНИЯ СОСТОЯНИЕМ — Cormorant Garamond SemiBold 20px, 2 lines
-     Figma: top=calc(50%−128px) → 230/716=32.12% */
+  /* УПРАВЛЕНИЯ \n СОСТОЯНИЕМ — Cormorant Garamond SemiBold 20px, 2 lines */
   .s1-m-title2 {
     position: absolute;
     top: 32.12%;
@@ -1290,9 +1075,8 @@ img.desktop-only { display: block !important; }
     transform: translateX(-50%);
     margin: 0;
     font-family: var(--font-heading);
-    font-size: 5.33vw;         /* 20px @ 375 */
+    font-size: 5.33vw;
     font-weight: 600;
-    font-style: normal;
     color: var(--cream);
     white-space: pre;
     text-transform: uppercase;
@@ -1301,9 +1085,8 @@ img.desktop-only { display: block !important; }
     font-feature-settings: 'lnum' 1, 'pnum' 1;
   }
 
-  /* Golden glow divider line — horizontal CSS gradient (replaces slanted line.png)
-     Sits between СОСТОЯНИЕМ and АННЫ — ~285/716=39.8% */
-  .s1-m-glow-line {
+  /* Divider line between СОСТОЯНИЕМ and АННЫ — soft horizontal gradient */
+  .s1-m-line {
     position: absolute;
     top: 39.8%;
     left: 0;
@@ -1316,11 +1099,9 @@ img.desktop-only { display: block !important; }
       rgba(255, 245, 239, 0.15) 85%,
       transparent 100%);
     box-shadow: 0 0 6px rgba(255, 245, 239, 0.35);
-    animation: pulse-glow 4s ease-in-out infinite;
   }
 
-  /* АННЫ МЕДВЕДЕВОЙ — Cormorant Garamond Medium 28px
-     Figma: top=calc(50%−61px) → 297/716=41.48% */
+  /* АННЫ МЕДВЕДЕВОЙ */
   .s1-m-title3 {
     position: absolute;
     top: 41.48%;
@@ -1328,36 +1109,32 @@ img.desktop-only { display: block !important; }
     transform: translateX(-50%);
     margin: 0;
     font-family: var(--font-heading);
-    font-size: 7.47vw;         /* 28px @ 375 */
+    font-size: 7.47vw;
     font-weight: 500;
-    font-style: normal;
     color: var(--cream);
     white-space: nowrap;
     line-height: normal;
     font-feature-settings: 'lnum' 1, 'pnum' 1;
   }
 
-  /* Subtitle — Cormorant Garamond Light 24px, centered, w=315px
-     Figma: top=calc(50%+53px) → 411/716=57.40% */
+  /* Subtitle */
   .s1-m-subtitle {
     position: absolute;
     top: 57.40%;
     left: 50%;
     transform: translateX(-50%);
     margin: 0;
-    width: 84vw;               /* 315/375 */
+    width: 84vw;
     font-family: var(--font-heading);
-    font-size: 6.4vw;          /* 24px @ 375 */
+    font-size: 6.4vw;
     font-weight: 300;
-    font-style: normal;
     color: var(--cream);
     text-align: center;
-    line-height: 6.16vw;       /* 23.1px @ 375 */
+    line-height: 6.16vw;
     font-feature-settings: 'lnum' 1, 'pnum' 1;
   }
 
-  /* CTA Button — bg #332000, border accent, rounded-10
-     Figma: top=548/716=76.54%, w=315px, py=14px px=20px */
+  /* CTA — bg #332000, border accent, top:548/716=76.54% */
   .s1-m-btn {
     position: absolute;
     top: 76.54%;
@@ -3882,10 +3659,10 @@ img.desktop-only { display: block !important; }
   /* RI block — x:14(3.73%) y:791(64.89%) w:347(92.53%) h:415(34.04%) */
   .s4-m-ri {
     position: absolute;
-    left:     3.73%;   /* 14/375   */
+    left:     3.73%;   /* 14/375 */
     top:      64.89%;  /* 791/1219 */
-    width:    92.53%;  /* 347/375  */
-    height:   34.04%;  /* 415/1219 */
+    width:    92.53%;  /* 347/375 */
+    aspect-ratio: 347 / 415;
     overflow: hidden;
     z-index:  1;
   }
@@ -3904,11 +3681,11 @@ img.desktop-only { display: block !important; }
     display:    block;
   }
 
-  /* RI letter — x:146.5 y:36, Cormorant SemiBold 52px #332000 */
+  /* RI letter — % of 347×415 block (aspect-locked) */
   .s4-m-ri-letter {
     position: absolute;
-    top:  36px;
-    left: 146.5px;
+    top:  8.67%;       /* 36/415 */
+    left: 42.22%;      /* 146.5/347 */
     margin: 0;
     font-family:  var(--font-heading);
     font-size:    52px;
@@ -3918,13 +3695,16 @@ img.desktop-only { display: block !important; }
     z-index: 1;
   }
 
-  /* RI name + desc — Текст к RI x:68.5 y:310, Название sub-offset x:9.5 → left:78 top:310 w:191 */
+  /* RI name + desc + accent — flex column anchored at bottom-left of block */
   .s4-m-ri-namewrap {
     position: absolute;
-    left:  78px;
-    top:   310px;
-    width: 191px;
+    left:   19.74%;    /* 68.5/347 */
+    bottom: 6%;        /* small bottom gap */
+    width:  60.52%;    /* 210/347 — wider so desc wraps less */
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
   .s4-m-ri-name {
     margin: 0;
@@ -3943,19 +3723,14 @@ img.desktop-only { display: block !important; }
     line-height:  1.2;
   }
 
-  /* RI accent — Текст к RI x:68.5 y:310, accent sub-y:78 → top:388; Raleway 18px #de8b23 */
+  /* RI accent — flows inside namewrap (now flex column) */
   .s4-m-ri-accent {
-    position: absolute;
-    left:  68.5px;
-    top:   388px;
-    width: 210px;
-    margin: 0;
+    margin: 8px 0 0;
     font-family:  var(--font-body);
     font-size:    18px;
     font-weight:  500;
     color:        #de8b23;
-    line-height:  1;
-    z-index: 1;
+    line-height:  1.1;
   }
 
   /* === S5 RI FEATURES — Figma 375×716 (node 1:289, HTML mobile) === */
@@ -4032,8 +3807,8 @@ img.desktop-only { display: block !important; }
   .s6-m-btn span { font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #332000; line-height: 1; }
   .s6-m-btn:hover { background: rgba(255,245,239,0.5); }
 
-  /* === S7 ANNA — Figma 375×1019 (node 1:993, HTML mobile) === */
-  #s7 { aspect-ratio: 375 / 1019 !important; }
+  /* === S7 ANNA — Figma 375×1019 (node 1:993, HTML mobile); +50px bottom margin so consult button doesn't touch the next section */
+  #s7 { aspect-ratio: 375 / 1069 !important; background: #1a0d05 !important; }
 
   .s7-mobile-html { position: absolute; inset: 0; z-index: 0; }
 
@@ -4062,7 +3837,7 @@ img.desktop-only { display: block !important; }
   .s7-m-bio        { position: absolute; top: 85px; left: 0; width: 315px; margin: 0; font-family: var(--font-body);    font-size: 16px; font-weight: 400; color: #fff5ef; line-height: 1.3;    white-space: pre-wrap; }
 
   /* Buttons — x:30 w:315 h:49 r:10 stroke:#fff5ef */
-  .s7-m-btn { position: absolute; left: 30px; width: 315px; height: 49px; z-index: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #fff5ef; border-radius: 10px; background: transparent; text-decoration: none; cursor: pointer; transition: background 0.25s ease; }
+  .s7-m-btn { position: absolute; left: 30px; width: 315px; height: 49px; z-index: 2; display: flex; align-items: center; justify-content: center; border: 1px solid #fff5ef; border-radius: 10px; background: transparent; text-decoration: none; cursor: pointer; transition: background 0.25s ease; }
   .s7-m-btn--about   { top: 870px; }
   .s7-m-btn--consult { top: 939px; }
   .s7-m-btn span { font-family: var(--font-body); font-size: 18px; font-weight: 500; color: #fff5ef; line-height: 1; }
@@ -4107,19 +3882,16 @@ img.desktop-only { display: block !important; }
   /* Title — x:30/375=8% y:60/994=6.04% w:315/375=84% */
   .s9-m-title { position: absolute; left: 8%; top: 6.04%; width: 84%; margin: 0; font-family: var(--font-heading); font-size: 36px; font-weight: 600; color: #332000; line-height: 33.6px; text-align: center; z-index: 1; }
 
-  /* Card — x:24/375=6.4% y:348/994=35.01% — fixed 326×294px so labels never reflow */
-  .s9-m-card { position: absolute; left: 6.4%; top: 35.01%; width: min(326px, 86.93%); height: min(294px, 29.58%); z-index: 1; }
+  /* Card — x:24/375=6.4% y:348/994=35.01% — keep aspect 326/294 so labels track the circles */
+  .s9-m-card { position: absolute; left: 6.4%; top: 35.01%; width: min(326px, 86.93%); aspect-ratio: 326 / 294; height: auto; z-index: 1; }
   .s9-m-venn-img { position: absolute; inset: 0; width: 100% !important; max-width: none !important; height: 100%; object-fit: contain; display: block; }
 
-  /* Labels — fixed px within 326×294 card.
-     BL/BR widths reduced from Figma values to stay inside exclusive circle areas:
-     BL exclusive zone ends at x≈109 → left(37)+width(72)=109 ✓
-     BR exclusive zone ends at x≈301 → left(235)+width(63)=298 ✓ */
+  /* Labels — % of 326×294 card (aspect-locked) so they track the circles at any width */
   .s9-m-label { position: absolute; margin: 0; font-family: var(--font-body); font-size: 12px; font-weight: 400; color: #332000; line-height: 1.4; z-index: 2; }
-  .s9-m-label--top { top: 26px;  left: 91px;  width: 145px; text-align: center; }
-  .s9-m-label--c   { top: 162px; left: 103px; width: 121px; text-align: center; font-size: 16px; }
-  .s9-m-label--bl  { top: 200px; left: 47px;  width: 72px; }
-  .s9-m-label--br  { top: 200px; left: 235px; width: 63px; }
+  .s9-m-label--top { top: 8.84%;  left: 27.91%; width: 44.48%; text-align: center; }
+  .s9-m-label--c   { top: 55.10%; left: 31.60%; width: 37.12%; text-align: center; font-size: 16px; }
+  .s9-m-label--bl  { top: 68.03%; left: 14.42%; width: 22.09%; }
+  .s9-m-label--br  { top: 68.03%; left: 72.09%; width: 19.33%; }
 
   /* Caption — x:30/375=8% y:869/994=87.42% w:315/375=84% */
   .s9-m-caption { position: absolute; left: 8%; top: 87.42%; width: 84%; margin: 0; font-family: var(--font-heading); font-size: 24px; font-weight: 300; color: #332000; line-height: 23.1px; z-index: 1; }
@@ -4208,8 +3980,8 @@ img.desktop-only { display: block !important; }
   /* Gradient bottom — starts at y:229/600=38.24%, covers to bottom */
   .s12-m-grad-bot { position: absolute; left: 0; top: 38.24%; width: 100%; height: 61.76%; background: linear-gradient(to bottom, transparent 0%, #000 100%); z-index: 1; pointer-events: none; }
 
-  /* Left text block — Figma: centre at (50%, calc(50%−244px)) ≈ y:56px */
-  .s12-m-left { position: absolute; left: 8%; top: calc(50% - 244px); width: 84%; z-index: 2; transform: translateY(-50%); display: flex; flex-direction: column; gap: 20px; }
+  /* Left text block — Figma: top:16px (no centre transform — heading wraps and goes above section on small viewports) */
+  .s12-m-left { position: absolute; left: 8%; top: 16px; width: 84%; z-index: 2; display: flex; flex-direction: column; gap: 16px; }
   .s12-m-left-heading { margin: 0; font-family: var(--font-heading); font-size: 28px; font-weight: 500; line-height: 1; color: #fff5ef; }
   .s12-m-left-hl { color: #de8b23; }
   .s12-m-left-tagline { margin: 0; font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #fff5ef; line-height: normal; }
@@ -4254,6 +4026,140 @@ img.desktop-only { display: block !important; }
   overflow: hidden;
   margin: 0;
   padding: 0;
+}
+
+/* ===== About a1 — Figma node 1-2008 (desktop) / 1-1804 (mobile) =====
+   Clean Figma assets + HTML text so it's selectable / copyable. */
+.a1-figma { background: #1a0d05 !important; }
+
+/* Desktop layout: bg fills 1189px on left, photo 595px on right (1440×700) */
+.a1-d {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.a1-d-bg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 82.57%;          /* 1189/1440 */
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+.a1-d-bg img { object-fit: cover; object-position: bottom; }
+.a1-d-photo {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 41.32%;          /* 595/1440 */
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+.a1-d-photo img { object-fit: cover; object-position: center 40%; }
+
+.a1-d-text {
+  position: absolute;
+  left: 10.76%;            /* 155/1440 */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 39.93%;           /* 575/1440 */
+  z-index: 2;
+  color: var(--cream);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Title — Cormorant Garamond SemiBold 36px; "Анна Медведева" in accent gold */
+.a1-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 2.5vw, 36px);
+  font-weight: 600;
+  line-height: 0.93;       /* 33.6/36 */
+  font-feature-settings: 'lnum' 1, 'pnum' 1;
+}
+.a1-title__name { color: #de8b23; }
+.a1-title__sep,
+.a1-title__rest { color: var(--cream); }
+
+/* Body — Raleway Medium 18px, two paragraphs */
+.a1-body {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.25vw, 18px);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--cream);
+  font-feature-settings: 'lnum' 1, 'pnum' 1;
+}
+.a1-body p { margin: 0; }
+.a1-body p + p { margin-top: 0.4em; }
+
+/* Mobile (Figma 375×854): texture top 378px, photo bottom 476px, text inside texture */
+@media (max-width: 768px) {
+  .consult-section.a1-figma { aspect-ratio: 375 / 854 !important; }
+
+  /* Override generic .consult-section .mobile-only relative positioning */
+  .consult-section.a1-figma .a1-m.mobile-only {
+    position: absolute !important;
+    inset: 0;
+    width: auto !important;
+    height: auto !important;
+    z-index: 0;
+  }
+  .consult-section.a1-figma .a1-m img {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .a1-m-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 44.26%;        /* 378/854 */
+    pointer-events: none;
+    z-index: 0;
+  }
+  .a1-m-bg img { object-fit: cover; object-position: bottom; }
+
+  .a1-m-photo {
+    position: absolute;
+    left: 0;
+    top: 44.26%;
+    width: 100%;
+    height: 55.74%;        /* 476/854 */
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .a1-m-photo img { object-fit: cover; object-position: center 30%; }
+
+  .a1-m-text {
+    position: absolute;
+    left: 8vw;             /* 30/375 */
+    top: 14.05%;           /* (50% - 225px in 854) */
+    width: 84vw;           /* 315/375 */
+    z-index: 2;
+    color: var(--cream);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+  .a1-m-text .a1-title {
+    font-size: 9.6vw;      /* 36/375 */
+    line-height: 33.6px;
+  }
+  .a1-m-text .a1-body {
+    font-size: 4.8vw;      /* 18/375 */
+  }
 }
 
 /* About-page HTML button overlays — text/copy is baked into the JPG bg, but
@@ -4428,8 +4334,16 @@ img.desktop-only { display: block !important; }
   height: 54.29%;
 }
 @media (max-width: 768px) {
-  /* Mobile JPG composite is different — hide desktop video overlays. */
-  .about-video { display: none; }
+  /* Mobile JPG composite is different — hide a4 desktop video overlay. */
+  .about-video--a4 { display: none; }
+
+  /* a10 mobile placeholder (Figma node 1-1909): left:0, top:311, w:375, h:211 in 375×696 frame */
+  .about-video--a10 {
+    left: 0;
+    top: 44.68%;          /* 311/696 */
+    width: 100%;
+    height: 30.32%;       /* 211/696 */
+  }
 }
 
 /* ===== Consultation price-list buttons (c2 section) =====

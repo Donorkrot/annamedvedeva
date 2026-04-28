@@ -36,38 +36,83 @@ const DESKTOP_BGS = [
 ];
 
 export default function AboutPage() {
-  const { lang } = useTranslation();
+  const { lang, tr } = useTranslation();
 
   return (
     <main>
       {Array.from({ length: 10 }, (_, i) => i + 1).map((n, i) => (
         <section
           key={`a${n}`}
-          className="consult-section"
+          className={`consult-section${i === 0 ? ' a1-figma' : ''}`}
           style={{ aspectRatio: DESKTOP_RATIOS[i], background: DESKTOP_BGS[i] }}
         >
-          <div className="s10-bg desktop-only">
-            <Image
-              src={aboutPath('desk', n, lang)}
-              alt=""
-              fill
-              sizes="100vw"
-              style={{ objectFit: 'cover', objectPosition: 'center center' }}
-              quality={90}
-              {...(i === 0 ? { priority: true } : {})}
-            />
-          </div>
-          <div className="s10-bg mobile-only">
-            <Image
-              src={aboutPath('mob', n, lang)}
-              alt=""
-              fill
-              sizes="100vw"
-              style={{ objectFit: 'cover', objectPosition: 'center top' }}
-              quality={90}
-              {...(i === 0 ? { priority: true } : {})}
-            />
-          </div>
+          {i === 0 ? (
+            <>
+              {/* Desktop a1 — Figma node 1-2008 (1440×700): clean bg + photo + HTML text */}
+              <div className="a1-d desktop-only">
+                <div className="a1-d-bg" aria-hidden="true">
+                  <Image src="/images/about/a1-d-bg.png" alt="" fill sizes="83vw" priority />
+                </div>
+                <div className="a1-d-photo" aria-hidden="true">
+                  <Image src="/images/about/a1-d-photo.png" alt="" fill sizes="42vw" priority />
+                </div>
+                <div className="a1-d-text">
+                  <h2 className="a1-title">
+                    <span className="a1-title__name">{tr('about_a1_title_name')}</span>
+                    <span className="a1-title__sep">{' — '}</span>
+                    <span className="a1-title__rest">{tr('about_a1_title_rest')}</span>
+                  </h2>
+                  <div className="a1-body">
+                    <p>{tr('about_a1_body_1')}</p>
+                    <p>{tr('about_a1_body_2')}</p>
+                  </div>
+                </div>
+              </div>
+              {/* Mobile a1 — Figma node 1-1804 (375×854): bg(top) + photo(bottom) + HTML text */}
+              <div className="a1-m mobile-only">
+                <div className="a1-m-bg" aria-hidden="true">
+                  <Image src="/images/about/a1-m-bg.png" alt="" fill sizes="100vw" priority />
+                </div>
+                <div className="a1-m-photo" aria-hidden="true">
+                  <Image src="/images/about/a1-m-photo.png" alt="" fill sizes="100vw" priority />
+                </div>
+                <div className="a1-m-text">
+                  <h2 className="a1-title">
+                    <span className="a1-title__name">{tr('about_a1_title_name')}</span>
+                    <br />
+                    <span className="a1-title__rest">{tr('about_a1_title_rest')}</span>
+                  </h2>
+                  <div className="a1-body">
+                    <p>{tr('about_a1_body_1')}</p>
+                    <p>{tr('about_a1_body_2')}</p>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="s10-bg desktop-only">
+                <Image
+                  src={aboutPath('desk', n, lang)}
+                  alt=""
+                  fill
+                  sizes="100vw"
+                  style={{ objectFit: 'cover', objectPosition: 'center center' }}
+                  quality={90}
+                />
+              </div>
+              <div className="s10-bg mobile-only">
+                <Image
+                  src={aboutPath('mob', n, lang)}
+                  alt=""
+                  fill
+                  sizes="100vw"
+                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
+                  quality={90}
+                />
+              </div>
+            </>
+          )}
 
           {/* a4 — RI block. Embed YouTube video into the white placeholder
              (measured from a4.jpg: left:50.74% top:25.57% w:39.84% h:51.29%). */}

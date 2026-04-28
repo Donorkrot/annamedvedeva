@@ -127,13 +127,12 @@ export default function IntelligenceSection() {
           </div>
           {/* Letter RI — x:146.5 y:36, Cormorant SemiBold 52px */}
           <p className="s4-m-ri-letter">RI</p>
-          {/* Name + Desc — Текст к RI x:68.5 y:310 + Название offset x:9.5 → x:78 y:310 w:191 */}
+          {/* Name + Desc + Accent — single column anchored to bottom of block so text never clips */}
           <div className="s4-m-ri-namewrap">
             <p className="s4-m-ri-name">{tr('s4_ri_name')}</p>
             <p className="s4-m-ri-desc">{tr('s4_ri_desc_1')}<br />{tr('s4_ri_desc_2')}</p>
+            <p className="s4-m-ri-accent">{tr('s4_ri_new_lang')}</p>
           </div>
-          {/* Accent — x:68.5 y:388 (Текст к RI y:310 + accent y:78) */}
-          <p className="s4-m-ri-accent">{tr('s4_ri_new_lang')}</p>
         </div>
 
       </div>
