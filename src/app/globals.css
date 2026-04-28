@@ -3964,15 +3964,16 @@ img.desktop-only { display: block !important; }
   .s12-m-bg-img { width: 100% !important; max-width: none !important; height: 100%; object-fit: cover; object-position: center top; display: block; }
 
   /* Gradient top — h:180/600=30% */
-  .s12-m-grad-top { position: absolute; left: 0; top: 0; width: 100%; height: 30%; background: linear-gradient(to bottom, #111 0%, transparent 100%); z-index: 1; pointer-events: none; }
+  .s12-m-grad-top { position: absolute; left: 0; top: 0; width: 100%; height: 22%; background: linear-gradient(to bottom, #111 0%, transparent 100%); z-index: 1; pointer-events: none; }
 
   /* Gradient bottom — starts at y:229/600=38.24%, covers to bottom */
-  .s12-m-grad-bot { position: absolute; left: 0; top: 38.24%; width: 100%; height: 61.76%; background: linear-gradient(to bottom, transparent 0%, #000 100%); z-index: 1; pointer-events: none; }
+  .s12-m-grad-bot { position: absolute; left: 0; top: 70%; width: 100%; height: 30%; background: linear-gradient(to bottom, transparent 0%, #000 100%); z-index: 1; pointer-events: none; }
 
   /* Left text block — Figma: top:16px (no centre transform — heading wraps and goes above section on small viewports) */
   .s12-m-left { position: absolute; left: 8%; top: 16px; width: 84%; z-index: 2; display: flex; flex-direction: column; gap: 16px; }
-  .s12-m-left-heading { margin: 0; font-family: var(--font-heading); font-size: 28px; font-weight: 500; line-height: 1; color: #fff5ef; }
+  .s12-m-left-heading { margin: 0; font-family: var(--font-heading); font-size: 28px; font-weight: 500; line-height: 1.1; color: #fff5ef; text-transform: uppercase; }
   .s12-m-left-hl { color: #de8b23; }
+  .s12-m-left-rest { color: #fff5ef; }
   .s12-m-left-tagline { margin: 0; font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #fff5ef; line-height: normal; }
 
   /* Right text block — Figma: centre at (calc(50%+66.7px), calc(50%−9px)) */

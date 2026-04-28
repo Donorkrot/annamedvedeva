@@ -79,7 +79,8 @@ export default function Footer() {
         <div className="s12-m-left">
           <p className="s12-m-left-heading">
             <span className="s12-m-left-hl">{tr('s12_headline_hl')}</span>
-            {' '}{tr('s12_headline')}
+            <br />
+            <span className="s12-m-left-rest">{tr('s12_headline')}</span>
           </p>
           <p className="s12-m-left-tagline">{tr('s12_tagline')}</p>
         </div>
