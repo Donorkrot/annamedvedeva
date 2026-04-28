@@ -1012,6 +1012,24 @@ img.desktop-only { display: block !important; }
     pointer-events: none;
   }
   .s1-m-bg img { object-fit: cover; }
+  /* Darkening overlay — Figma 1:82 has a noticeably dimmer bg than the
+     raw audio-wave export. Sits above the bg image (z:1) but below all
+     text/line/button layers (z:3) so the title and subtitle keep
+     legible contrast over the bright lightning streaks. */
+  .s1-m-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(26, 13, 5, 0.55) 0%,
+      rgba(26, 13, 5, 0.35) 35%,
+      rgba(26, 13, 5, 0.45) 60%,
+      rgba(26, 13, 5, 0.65) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
 
   .s1-m-tagline,
   .s1-m-title1,
@@ -1080,14 +1098,14 @@ img.desktop-only { display: block !important; }
     top: 39.8%;
     left: 0;
     right: 0;
-    height: 1px;
+    height: 3px;
     background: linear-gradient(to right,
-      transparent 0%,
-      rgba(255, 245, 239, 0.15) 15%,
-      rgba(255, 245, 239, 0.7) 50%,
-      rgba(255, 245, 239, 0.15) 85%,
-      transparent 100%);
-    box-shadow: 0 0 6px rgba(255, 245, 239, 0.35);
+      rgba(255, 245, 239, 0.85) 0%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 245, 239, 0.85) 100%);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 1),
+                0 0 18px rgba(255, 245, 239, 0.85),
+                0 0 36px rgba(255, 245, 239, 0.55);
   }
 
   /* АННЫ МЕДВЕДЕВОЙ */
@@ -1247,11 +1265,18 @@ img.desktop-only { display: block !important; }
   top: 0;
   left: 0;
   right: 0;
-  height: 64px;
+  /* Respect notch / dynamic-island safe-area on iPhone X+ — without this,
+     the burger and lang-switcher slide under the system UI on notched
+     devices but stay flush on older iPhones (SE/8), making the same site
+     look different across hardware. env() returns 0 on phones that don't
+     need it, so this is a no-op there. */
+  padding-top: env(safe-area-inset-top);
+  height: calc(64px + env(safe-area-inset-top));
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
+  padding-left: max(40px, env(safe-area-inset-left));
+  padding-right: max(40px, env(safe-area-inset-right));
   z-index: 100;
   background: transparent;
   transition: background 0.3s ease;
@@ -1352,8 +1377,14 @@ img.desktop-only { display: block !important; }
     background: rgba(49, 15, 0, 0.2) !important;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    padding: 0 16px;
-    height: 56px;
+    /* Mobile padding — preserve safe-area-inset (notch) on iPhone X+. The
+     16px floor matches Figma 1:37; on phones with insets > 16px the bar
+     gets pushed in further so controls don't sit under the dynamic island
+     in landscape. */
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+    padding-top: env(safe-area-inset-top);
+    height: calc(56px + env(safe-area-inset-top));
   }
   /* Slight extra darkening once user scrolls past the hero so the bar
      reads cleanly over light cream sections like s2/s4. */
@@ -3986,9 +4017,12 @@ img.desktop-only { display: block !important; }
   .s11-m-card-body  { margin: 0; font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #fff5ef; line-height: normal; }
   .s11-m-card-sub   { margin: 0; font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #fff5ef; line-height: normal; }
 
-  /* Button — w:295, border #fff5ef, r:10 */
-  .s11-m-btn { display: flex; align-items: center; justify-content: center; width: 295px; padding: 14px 20px; border: 1px solid #fff5ef; border-radius: 10px; background: transparent; text-decoration: none; transition: background 0.3s; }
-  .s11-m-btn span { font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #fff5ef; white-space: nowrap; }
+  /* Button — Figma 295×47 (1:453/460/467). Explicit line-height:1 on the
+     label so the button stays exactly 47px (was rendering 54px because
+     Raleway's default line-height pushed text +7px and shifted the next
+     card down). */
+  .s11-m-btn { display: flex; align-items: center; justify-content: center; width: 295px; height: 47px; padding: 0 20px; border: 1px solid #fff5ef; border-radius: 10px; background: transparent; text-decoration: none; transition: background 0.3s; box-sizing: border-box; }
+  .s11-m-btn span { font-family: var(--font-body); font-size: 16px; font-weight: 400; line-height: 1; color: #fff5ef; white-space: nowrap; }
 
   /* === S12 FOOTER — Figma 375×600 (node 1:469, mobile) === */
   .s12-footer.s12-figma { aspect-ratio: 375 / 600 !important; background: #000 !important; }
@@ -4031,8 +4065,17 @@ img.desktop-only { display: block !important; }
   .s12-m-social img { width: 40px !important; height: 40px !important; display: block; }
 
   /* Legal links — x:30/375=8%, y:515.5/600=85.92%, gap:25px */
-  /* Footer Links — Figma 1:830, 315×14 at (30.2, 516.5), gap between texts = 16px */
-  .s12-m-legal { position: absolute; left: 8%; top: 86.08%; width: 84%; height: 14px; z-index: 2; display: flex; align-items: center; gap: 16px; }
+  /* Footer Links — Figma 1:830 (UA) / 1:1157 (EN). Container 315×14 at
+     (30.2, 516.5). The second link ("Privacy Policy" / "Політика конф...")
+     is anchored to x=136 in BOTH locales — only its visual gap to the
+     first link changes (16px in UA where "Публічна пропозиція" is wider,
+     71px in EN where "Public Offer" is short). flex+gap couldn't express
+     this so the first link sits at left:0 and the second at left:43.17%
+     (136/315) absolutely. */
+  .s12-m-legal { position: absolute; left: 8%; top: 86.08%; width: 84%; height: 14px; z-index: 2; }
+  .s12-m-legal-link { position: absolute; top: 0; }
+  .s12-m-legal-link:nth-of-type(1) { left: 0; }
+  .s12-m-legal-link:nth-of-type(2) { left: 43.17%; }
   .s12-m-legal-link { font-family: var(--font-body); font-size: 12px; font-weight: 400; color: #fff5ef; opacity: 0.5; text-decoration: none; white-space: nowrap; }
 
   /* Copyright — bottom:9.12% centred */

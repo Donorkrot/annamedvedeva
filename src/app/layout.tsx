@@ -48,7 +48,7 @@ export default function RootLayout({
             meta on each fire was causing the page to twitch. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){var m=document.querySelector('meta[name=viewport]');if(!m){m=document.createElement('meta');m.name='viewport';document.head.appendChild(m);}var lastW=0;function set(){var w=window.innerWidth;if(w===lastW)return;lastW=w;m.content=w<=768?'width=375, initial-scale='+(w/375).toFixed(4)+', maximum-scale='+(w/375).toFixed(4)+', user-scalable=no':'width=device-width, initial-scale=1, maximum-scale=1';}set();window.addEventListener('orientationchange',function(){lastW=0;set();});window.addEventListener('resize',set);})();`,
+            __html: `(function(){var m=document.querySelector('meta[name=viewport]');if(!m){m=document.createElement('meta');m.name='viewport';document.head.appendChild(m);}var lastW=0;function set(){var w=window.innerWidth;if(w===lastW)return;lastW=w;m.content=w<=768?'width=375, initial-scale='+(w/375).toFixed(4)+', maximum-scale='+(w/375).toFixed(4)+', user-scalable=no, viewport-fit=cover':'width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover';}set();window.addEventListener('orientationchange',function(){lastW=0;set();});window.addEventListener('resize',set);})();`,
           }}
         />
       </head>
