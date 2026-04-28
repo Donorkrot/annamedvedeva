@@ -28,7 +28,12 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
+  // maximumScale removed — WCAG 1.4.4 requires that users can pinch-zoom for
+  // reflow. The fluid vw layout already gives identical proportions on every
+  // viewport, so there's no design reason to lock zoom. Auto-zoom on input
+  // focus is prevented by setting all input font-size to 16px, not by
+  // capping max scale.
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -39,18 +44,12 @@ export default function RootLayout({
   return (
     <html lang="ru" className={`${cormorant.variable} ${raleway.variable}`}>
       <head>
-        {/* Mobile viewport lock — site is built pixel-perfect at Figma's 375
-            base. Fixed `width=375` makes the browser render at 375 logical px
-            and natively scale to fit any phone (360–430). Desktop keeps
-            device-width. We only re-write the meta tag when the WIDTH (not
-            height) actually changes — iOS Safari fires `resize` on every
-            URL-bar collapse/expand during scroll, and re-writing the viewport
-            meta on each fire was causing the page to twitch. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){var m=document.querySelector('meta[name=viewport]');if(!m){m=document.createElement('meta');m.name='viewport';document.head.appendChild(m);}var lastW=0;function set(){var w=window.innerWidth;if(w===lastW)return;lastW=w;m.content=w<=768?'width=375, initial-scale='+(w/375).toFixed(4)+', maximum-scale='+(w/375).toFixed(4)+', user-scalable=no, viewport-fit=cover':'width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover';}set();window.addEventListener('orientationchange',function(){lastW=0;set();});window.addEventListener('resize',set);})();`,
-          }}
-        />
+        {/* Mobile is now truly fluid: every px value inside
+            `@media (max-width: 768px)` was converted to vw relative to the
+            375 Figma base (scripts/px-to-vw.mjs). The dynamic viewport meta
+            lock is no longer needed — content scales by CSS units alone, so
+            iPhone 16 / Pro Max / small Android all see identical proportions
+            without depending on viewport-meta tricks. */}
       </head>
       <body><LanguageProvider><Header />{children}</LanguageProvider></body>
     </html>

@@ -78,6 +78,10 @@ body {
   font-size: 16px;
   overflow-x: clip;
   scroll-behavior: smooth;
+  /* Reserve space for the iPhone X+ home indicator so the very bottom of
+     the footer (© 2026) isn't hidden behind it. env() returns 0 on phones
+     without an indicator. */
+  padding-bottom: env(safe-area-inset-bottom);
   /* Cap to design width so the layout doesn't break when the viewport
      CSS-pixels exceed 1440 (e.g., browser zoom-out, ultra-wide monitors).
      At zoom < 100% the viewport widens past 1440 CSS px — without this
@@ -389,7 +393,7 @@ main {
   scroll-margin-top: 72px;
 }
 @media (max-width: 768px) {
-  .section { scroll-margin-top: 56px; }
+  .section { scroll-margin-top: 14.9333vw; }
 }
 
 /* Desktop / Mobile image switching */
@@ -510,12 +514,12 @@ img.desktop-only { display: block !important; }
 @media (max-width: 768px) {
   .s4s5s6-wrapper #s4 .s10-bg img,
   .s4s5s6-wrapper #s5 .s10-bg img {
-    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 60px), transparent 100%);
-            mask-image: linear-gradient(to bottom, #000 calc(100% - 60px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 16vw), transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 calc(100% - 16vw), transparent 100%);
   }
   .s4s5s6-wrapper #s5 .s10-bg img {
-    -webkit-mask-image: linear-gradient(to top, #000 calc(100% - 60px), transparent 100%);
-            mask-image: linear-gradient(to top, #000 calc(100% - 60px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to top, #000 calc(100% - 16vw), transparent 100%);
+            mask-image: linear-gradient(to top, #000 calc(100% - 16vw), transparent 100%);
   }
 }
 .s12-footer { aspect-ratio: 1440 / 495; background: #000; }
@@ -1052,13 +1056,13 @@ img.desktop-only { display: block !important; }
     font-weight: 400;
     color: var(--cream);
     text-align: center;
-    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    text-shadow: 0 1.0667vw 1.0667vw rgba(0, 0, 0, 0.25);
     line-height: normal;
     font-feature-settings: 'lnum' 1, 'pnum' 1;
   }
   .s1-m-tagline span { display: block; line-height: normal; }
 
-  /* АКАДЕМИЯ — Cormorant Garamond Medium 28px, top: 26.54% */
+  /* АКАДЕМИЯ — Cormorant Garamond Medium 7.4667vw, top: 26.54% */
   .s1-m-title1 {
     position: absolute;
     top: 26.54%;
@@ -1074,7 +1078,7 @@ img.desktop-only { display: block !important; }
     font-feature-settings: 'lnum' 1, 'pnum' 1;
   }
 
-  /* УПРАВЛЕНИЯ \n СОСТОЯНИЕМ — Cormorant Garamond SemiBold 20px, 2 lines */
+  /* УПРАВЛЕНИЯ \n СОСТОЯНИЕМ — Cormorant Garamond SemiBold 5.3333vw, 2 lines */
   .s1-m-title2 {
     position: absolute;
     top: 32.12%;
@@ -1098,13 +1102,13 @@ img.desktop-only { display: block !important; }
     top: 39.8%;
     left: 0;
     right: 0;
-    height: 1.5px;
+    height: 0.4vw;
     background: linear-gradient(to right,
       rgba(255, 245, 239, 0.6) 0%,
       rgba(255, 255, 255, 0.9) 50%,
       rgba(255, 245, 239, 0.6) 100%);
-    box-shadow: 0 0 6px rgba(255, 245, 239, 0.5),
-                0 0 14px rgba(255, 245, 239, 0.3);
+    box-shadow: 0 0 1.6vw rgba(255, 245, 239, 0.5),
+                0 0 3.7333vw rgba(255, 245, 239, 0.3);
   }
 
   /* АННЫ МЕДВЕДЕВОЙ */
@@ -1150,12 +1154,12 @@ img.desktop-only { display: block !important; }
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 3.73vw 5.33vw;   /* 14px 20px @ 375 */
+    padding: 3.73vw 5.33vw;   /* 3.7333vw 5.3333vw @ 375 */
     background: #332000;
     border: 1px solid var(--accent);
-    border-radius: 2.67vw;     /* 10px @ 375 */
+    border-radius: 2.67vw;     /* 2.6667vw @ 375 */
     font-family: var(--font-body);
-    font-size: 4.27vw;         /* 16px @ 375 */
+    font-size: 4.27vw;         /* 4.2667vw @ 375 */
     font-weight: 400;
     color: var(--cream);
     white-space: nowrap;
@@ -1178,20 +1182,20 @@ img.desktop-only { display: block !important; }
 
   /* S11 mobile | clean per-language bg without baked "Перейти" pills.
      Three button PNG overlays from /images/buttons/{lang}/mobile/s11.png
-     are placed at exactly 295×47px on top of each card. Horizontally
+     are placed at exactly 295×12.5333vw on top of each card. Horizontally
      centered via negative margin (avoids the `transform` slot, which is
      owned by the scroll-reveal `btnReveal` animation). Vertical bottom %
      anchors each on its card. */
   .s11-btn-overlay {
     left: 50% !important;
-    margin-left: -147.5px !important;
-    width: 295px !important;
-    height: 47px !important;
+    margin-left: -39.3333vw !important;
+    width: 78.6667vw !important;
+    height: 12.5333vw !important;
     aspect-ratio: auto !important;
     padding: 0;
     border: none;
     background: transparent;
-    border-radius: 10px;
+    border-radius: 2.6667vw;
     overflow: hidden;
     opacity: 1;
     animation: none !important;
@@ -1203,7 +1207,7 @@ img.desktop-only { display: block !important; }
     object-fit: contain !important;
     display: block;
   }
-  /* Button positions — each button sits ~20px below the last text line of
+  /* Button positions — each button sits ~5.3333vw below the last text line of
      its card. Per-language because RU/UA/EN paragraph lengths differ. */
   .s11-btn-1 { bottom: 63.87%; }
   .s11-btn-2 { bottom: 37.48%; }
@@ -1240,7 +1244,7 @@ img.desktop-only { display: block !important; }
   /* Social icons — right half of the REALITY DNA / icons row (~69-74%). */
   .s12-social-block  { left: 45%; width: 50%; top: 69%; bottom: auto; height: 5.5%; }
   /* Legal links — full-width row at ~78-81%. */
-  /* Legal hit zone is ~20px tall at the baked text row — too small for a
+  /* Legal hit zone is ~5.3333vw tall at the baked text row — too small for a
      reliable mobile tap. Expand vertically around the text so taps just
      above or below the text still register. */
   .s12-legal-block   { left: 0%;  width: 100%; top: 74.5%; bottom: auto; height: 10%; aspect-ratio: auto; }
@@ -1374,16 +1378,16 @@ img.desktop-only { display: block !important; }
   .site-header,
   .site-header.scrolled {
     background: rgba(49, 15, 0, 0.2) !important;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(1.3333vw);
+    -webkit-backdrop-filter: blur(1.3333vw);
     /* Mobile padding — preserve safe-area-inset (notch) on iPhone X+. The
-     16px floor matches Figma 1:37; on phones with insets > 16px the bar
+     4.2667vw floor matches Figma 1:37; on phones with insets > 4.2667vw the bar
      gets pushed in further so controls don't sit under the dynamic island
      in landscape. */
-    padding-left: max(16px, env(safe-area-inset-left));
-    padding-right: max(16px, env(safe-area-inset-right));
+    padding-left: max(4.2667vw, env(safe-area-inset-left));
+    padding-right: max(4.2667vw, env(safe-area-inset-right));
     padding-top: env(safe-area-inset-top);
-    height: calc(56px + env(safe-area-inset-top));
+    height: calc(14.9333vw + env(safe-area-inset-top));
   }
   /* Slight extra darkening once user scrolls past the hero so the bar
      reads cleanly over light cream sections like s2/s4. */
@@ -1401,7 +1405,7 @@ img.desktop-only { display: block !important; }
   }
   .site-header .header-logo img { display: none; }
   .site-header .header-logo-text {
-    font-size: 12px;
+    font-size: 3.2vw;
     letter-spacing: 0;
     color: var(--cream);
     font-family: var(--font-body);
@@ -1409,11 +1413,11 @@ img.desktop-only { display: block !important; }
   }
   .site-header .header-right {
     margin-left: auto;
-    gap: 14px;
+    gap: 3.7333vw;
   }
   .lang-switcher {
-    font-size: 11px;
-    gap: 10px;
+    font-size: 2.9333vw;
+    gap: 2.6667vw;
   }
 }
 
@@ -3177,7 +3181,11 @@ img.desktop-only { display: block !important; }
   padding: 13px 16px;
   color: var(--cream);
   font-family: var(--font-body);
-  font-size: 14px;
+  /* 16px is the iOS Safari auto-zoom threshold — anything smaller and the
+     viewport zooms in when an input gets focus. Keeping ≥16px is required
+     now that we removed `maximum-scale=1` from viewport meta (re-enabling
+     pinch-zoom for WCAG 1.4.4 reflow accessibility). */
+  font-size: 16px;
   outline: none;
   transition: border-color 0.2s;
 }
@@ -3254,27 +3262,27 @@ img.desktop-only { display: block !important; }
 
   /* === HEADER === */
   .site-header {
-    padding: 0 16px;
-    height: 56px;
+    padding: 0 4.2667vw;
+    height: 14.9333vw;
   }
   .header-login,
   .header-btn {
     display: none !important;
   }
   .lang-switcher {
-    gap: 12px;
-    font-size: 14px;
+    gap: 3.2vw;
+    font-size: 3.7333vw;
   }
   .header-right {
-    gap: 12px;
+    gap: 3.2vw;
   }
   .header-logo img {
-    width: 36px !important;
-    height: 24px !important;
+    width: 9.6vw !important;
+    height: 6.4vw !important;
   }
   .header-logo-text {
-    font-size: 7px;
-    letter-spacing: 2px;
+    font-size: 1.8667vw;
+    letter-spacing: 0.5333vw;
   }
 
   /* === SIDE MENU === */
@@ -3282,50 +3290,50 @@ img.desktop-only { display: block !important; }
     width: 100%;
   }
   .sidemenu-close {
-    right: 16px;
-    top: 16px;
+    right: 4.2667vw;
+    top: 4.2667vw;
     position: absolute;
   }
 
   /* === S1 HERO === */
   #s1 {
-    height: 716px !important;
+    height: 190.9333vw !important;
   }
   .hero-tagline {
-    top: 100px;
-    font-size: 12px;
+    top: 26.6667vw;
+    font-size: 3.2vw;
     line-height: 1.2;
     font-weight: 200;
   }
   .hero-title {
-    top: 212px;
-    left: 24px;
-    font-size: 24px;
+    top: 56.5333vw;
+    left: 6.4vw;
+    font-size: 6.4vw;
     white-space: normal;
-    max-width: calc(100% - 48px);
+    max-width: calc(100% - 12.8vw);
     line-height: 1.15;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 2.1333vw;
     font-weight: 400;
   }
   .hero-glow-line {
-    top: 286px;
+    top: 76.2667vw;
   }
   .hero-subtitle {
-    top: 310px;
-    left: 30px;
-    font-size: 24px;
+    top: 82.6667vw;
+    left: 8vw;
+    font-size: 6.4vw;
     white-space: normal;
-    max-width: calc(100% - 40px);
+    max-width: calc(100% - 10.6667vw);
     font-weight: 200;
     line-height: 1.1;
   }
   .hero-caption {
-    bottom: 100px;
-    left: 30px;
-    font-size: 18px;
-    max-width: calc(100% - 40px);
+    bottom: 26.6667vw;
+    left: 8vw;
+    font-size: 4.8vw;
+    max-width: calc(100% - 10.6667vw);
     line-height: 1.2;
   }
 
@@ -3357,7 +3365,7 @@ img.desktop-only { display: block !important; }
     display: block;
   }
 
-  /* "МЫ НЕ УСПЕВАЕМ" — top:39px (4.93%), Raleway Medium 18px, dark */
+  /* "МЫ НЕ УСПЕВАЕМ" — top:10.4vw (4.93%), Raleway Medium 4.8vw, dark */
   .s2-m-title {
     position: absolute;
     top: 4.93%;            /* 39/791 */
@@ -3365,7 +3373,7 @@ img.desktop-only { display: block !important; }
     transform: translateX(-50%);
     margin: 0;
     font-family: var(--font-body);
-    font-size: 18px;
+    font-size: 4.8vw;
     font-weight: 500;
     color: #332000;
     white-space: nowrap;
@@ -3382,16 +3390,16 @@ img.desktop-only { display: block !important; }
     left: 7.73%;           /* 29/375 */
     width: 84%;            /* 315/375 */
     z-index: 1;
-    border-radius: 20px;
+    border-radius: 5.3333vw;
     overflow: hidden;
   }
 
-  /* Card 1 "Новое давление" — top:357px (45.13%) */
+  /* Card 1 "Новое давление" — top:95.2vw (45.13%) */
   .s2-m-card--1 {
     top: 45.13%;           /* 357/791 */
   }
 
-  /* Card 2 "Новая реальность" — top:536px (67.76%) */
+  /* Card 2 "Новая реальность" — top:142.9333vw (67.76%) */
   .s2-m-card--2 {
     top: 67.76%;           /* 536/791 */
   }
@@ -3404,25 +3412,25 @@ img.desktop-only { display: block !important; }
     height: 100%;
     object-fit: cover;
     display: block;
-    border-radius: 20px;
+    border-radius: 5.3333vw;
     pointer-events: none;
   }
 
-  /* Card text container — padding 18px, gap 10px, Figma spec */
+  /* Card text container — padding 4.8vw, gap 2.6667vw, Figma spec */
   .s2-m-card__inner {
     position: relative;
     z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 18px;
+    gap: 2.6667vw;
+    padding: 4.8vw;
   }
 
-  /* Card title — Cormorant Garamond Medium 28px, color #332000 */
+  /* Card title — Cormorant Garamond Medium 7.4667vw, color #332000 */
   .s2-m-card__title {
     margin: 0;
     font-family: var(--font-heading);
-    font-size: 28px;
+    font-size: 7.4667vw;
     font-weight: 500;
     font-style: normal;
     color: #332000;
@@ -3430,11 +3438,11 @@ img.desktop-only { display: block !important; }
     font-feature-settings: 'lnum' 1, 'pnum' 1;
   }
 
-  /* Card body — Raleway Regular 16px, color #332000 */
+  /* Card body — Raleway Regular 4.2667vw, color #332000 */
   .s2-m-card__body {
     margin: 0;
     font-family: var(--font-body);
-    font-size: 16px;
+    font-size: 4.2667vw;
     font-weight: 400;
     color: #332000;
     line-height: 1.3;
@@ -3470,8 +3478,8 @@ img.desktop-only { display: block !important; }
   }
 
   /* Kicker "Код прошлого устарел"
-     Figma: top:39px (6.14%), left:30px (8%), w:148px (39.47%)
-     Raleway Regular 16px, #fff5ef, opacity 0.6 */
+     Figma: top:10.4vw (6.14%), left:8vw (8%), w:39.4667vw (39.47%)
+     Raleway Regular 4.2667vw, #fff5ef, opacity 0.6 */
   .s3-m-kicker {
     position: absolute;
     top:    6.14%;     /* 39/635  */
@@ -3479,7 +3487,7 @@ img.desktop-only { display: block !important; }
     width:  39.47%;    /* 148/375 */
     margin: 0;
     font-family:  var(--font-body);
-    font-size:    16px;
+    font-size:    4.2667vw;
     font-weight:  400;
     color:        var(--cream);
     opacity:      0.6;
@@ -3490,8 +3498,8 @@ img.desktop-only { display: block !important; }
   }
 
   /* Title "ПРОХОДИТЬ ТРАВМУ / НЕ ОБЯЗАТЕЛЬНО"
-     Figma: top:268px (42.20%), left:30px (8%), w:236px (62.93%)
-     Cormorant Garamond Light 20px, #fff5ef */
+     Figma: top:71.4667vw (42.20%), left:8vw (8%), w:62.9333vw (62.93%)
+     Cormorant Garamond Light 5.3333vw, #fff5ef */
   .s3-m-title {
     position: absolute;
     top:    42.20%;    /* 268/635 */
@@ -3499,7 +3507,7 @@ img.desktop-only { display: block !important; }
     width:  62.93%;    /* 236/375 */
     margin: 0;
     font-family:      var(--font-heading);
-    font-size:        20px;
+    font-size:        5.3333vw;
     font-weight:      300;
     font-style:       normal;
     color:            var(--cream);
@@ -3511,8 +3519,8 @@ img.desktop-only { display: block !important; }
   }
 
   /* Body text
-     Figma: top:447px (70.39%), left:30px (8%), w:315px (84%)
-     Raleway Regular 16px, #ffffff, opacity 0.8 */
+     Figma: top:119.2vw (70.39%), left:8vw (8%), w:84vw (84%)
+     Raleway Regular 4.2667vw, #ffffff, opacity 0.8 */
   .s3-m-body {
     position: absolute;
     top:    70.39%;    /* 447/635 */
@@ -3520,7 +3528,7 @@ img.desktop-only { display: block !important; }
     width:  84%;       /* 315/375 */
     margin: 0;
     font-family:  var(--font-body);
-    font-size:    16px;
+    font-size:    4.2667vw;
     font-weight:  400;
     color:        #fff;
     opacity:      0.8;
@@ -3557,7 +3565,7 @@ img.desktop-only { display: block !important; }
     display: block;
   }
 
-  /* Title — x:59 y:49(4.02%) w:255, Cormorant SemiBold 20px uppercase #332000 */
+  /* Title — x:59 y:49(4.02%) w:255, Cormorant SemiBold 5.3333vw uppercase #332000 */
   .s4-m-title {
     position: absolute;
     top:   4.02%;   /* 49/1219 */
@@ -3566,7 +3574,7 @@ img.desktop-only { display: block !important; }
     text-align: center;
     margin: 0;
     font-family:    var(--font-heading);
-    font-size:      20px;
+    font-size:      5.3333vw;
     font-weight:    600;
     color:          #332000;
     text-transform: uppercase;
@@ -3585,7 +3593,7 @@ img.desktop-only { display: block !important; }
     left:   20.4%;   /* 76.5/375  */
     top:    7.71%;   /* 94/1219   */
     width:  59.2%;   /* 222/375   */
-    height: 184px;
+    height: 49.0667vw;
   }
 
   /* EQ — x:82.5(22%) y:298(24.45%) w:210(56%) h:246 */
@@ -3593,7 +3601,7 @@ img.desktop-only { display: block !important; }
     left:   22%;     /* 82.5/375  */
     top:    24.45%;  /* 298/1219  */
     width:  56%;     /* 210/375   */
-    height: 246px;
+    height: 65.6vw;
   }
 
   /* SQ — x:82.5(22%) y:564.75(46.33%) w:210(56%) h:226.5 — clips stone overflow */
@@ -3601,11 +3609,11 @@ img.desktop-only { display: block !important; }
     left:     22%;      /* 82.5/375     */
     top:      46.33%;   /* 564.75/1219  */
     width:    56%;      /* 210/375      */
-    height:   226.5px;
+    height:   60.4vw;
     overflow: hidden;
   }
 
-  /* Letter IQ / EQ / SQ — Cormorant Medium 28px #332000, centered */
+  /* Letter IQ / EQ / SQ — Cormorant Medium 7.4667vw #332000, centered */
   .s4-m-letter {
     position: absolute;
     top:   0;
@@ -3614,7 +3622,7 @@ img.desktop-only { display: block !important; }
     text-align: center;
     margin: 0;
     font-family:  var(--font-heading);
-    font-size:    28px;
+    font-size:    7.4667vw;
     font-weight:  500;
     color:        #332000;
     line-height:  normal;
@@ -3628,12 +3636,12 @@ img.desktop-only { display: block !important; }
   }
 
   /* IQ stone — x:71.66 y:40.91 w:78.34 h:87.18 */
-  .s4-m-iq-stone           { left: 71.66px; top: 40.91px; width: 78.34px; height: 87.18px; }
-  .s4-m-iq-stone img       { width: 78.34px !important; height: 87.18px !important; max-width: none !important; display: block; }
+  .s4-m-iq-stone           { left: 19.1093vw; top: 10.9093vw; width: 20.8907vw; height: 23.248vw; }
+  .s4-m-iq-stone img       { width: 20.8907vw !important; height: 23.248vw !important; max-width: none !important; display: block; }
 
   /* EQ stone — x:49.57 y:41.11 w:111.37 h:135.78 */
-  .s4-m-eq-stone           { left: 49.57px; top: 41.11px; width: 111.37px; height: 135.78px; }
-  .s4-m-eq-stone img       { width: 111.37px !important; height: 135.78px !important; max-width: none !important; display: block; }
+  .s4-m-eq-stone           { left: 13.2187vw; top: 10.9627vw; width: 29.6987vw; height: 36.208vw; }
+  .s4-m-eq-stone img       { width: 29.6987vw !important; height: 36.208vw !important; max-width: none !important; display: block; }
 
   /* SQ stone — rotated −90° (CCW)
      Natural portrait: 115.63×186.7 → visual landscape: 186.7×115.63
@@ -3643,24 +3651,24 @@ img.desktop-only { display: block !important; }
        inner.left = (186.7−115.63)/2 = 35.54  inner.top = (115.63−186.7)/2 = −35.54 */
   .s4-m-sq-stone-outer {
     position: absolute;
-    left:   12.15px;
-    top:    41.19px;
-    width:  186.7px;
-    height: 115.63px;
+    left:   3.24vw;
+    top:    10.984vw;
+    width:  49.7867vw;
+    height: 30.8347vw;
     z-index: 0;
   }
   .s4-m-sq-stone-inner {
     position: absolute;
-    left:   35.54px;
-    top:   -35.54px;
-    width:  115.63px;
-    height: 186.7px;
+    left:   9.4773vw;
+    top:   -9.4773vw;
+    width:  30.8347vw;
+    height: 49.7867vw;
     transform: rotate(-90deg);
     transform-origin: center center;
   }
   .s4-m-sq-stone-inner img {
-    width:     115.63px !important;
-    height:    186.7px  !important;
+    width:     30.8347vw !important;
+    height:    49.7867vw  !important;
     max-width: none     !important;
     display: block;
   }
@@ -3673,23 +3681,23 @@ img.desktop-only { display: block !important; }
     text-align: center;
     z-index: 1;
   }
-  .s4-m-col-iq .s4-m-text { top: 144px; }
-  .s4-m-col-eq .s4-m-text { top: 192px; }
-  .s4-m-col-sq .s4-m-text { top: 172.5px; }
+  .s4-m-col-iq .s4-m-text { top: 38.4vw; }
+  .s4-m-col-eq .s4-m-text { top: 51.2vw; }
+  .s4-m-col-sq .s4-m-text { top: 46vw; }
 
   .s4-m-name {
     margin: 0;
     font-family:  var(--font-body);
-    font-size:    18px;
+    font-size:    4.8vw;
     font-weight:  500;
     color:        #332000;
     line-height:  1;
     text-align:   center;
   }
   .s4-m-desc {
-    margin: 5px 0 0;
+    margin: 1.3333vw 0 0;
     font-family:  var(--font-body);
-    font-size:    12px;
+    font-size:    3.2vw;
     font-weight:  400;
     color:        #332000;
     line-height:  1.2;
@@ -3728,7 +3736,7 @@ img.desktop-only { display: block !important; }
     left: 42.22%;      /* 146.5/347 */
     margin: 0;
     font-family:  var(--font-heading);
-    font-size:    52px;
+    font-size:    13.8667vw;
     font-weight:  600;
     color:        #332000;
     line-height:  1;
@@ -3744,20 +3752,20 @@ img.desktop-only { display: block !important; }
     z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 1.0667vw;
   }
   .s4-m-ri-name {
     margin: 0;
     font-family:  var(--font-body);
-    font-size:    18px;
+    font-size:    4.8vw;
     font-weight:  500;
     color:        #332000;
     line-height:  1;
   }
   .s4-m-ri-desc {
-    margin: 5px 0 0;
+    margin: 1.3333vw 0 0;
     font-family:  var(--font-body);
-    font-size:    12px;
+    font-size:    3.2vw;
     font-weight:  400;
     color:        #332000;
     line-height:  1.2;
@@ -3765,9 +3773,9 @@ img.desktop-only { display: block !important; }
 
   /* RI accent — flows inside namewrap (now flex column) */
   .s4-m-ri-accent {
-    margin: 8px 0 0;
+    margin: 2.1333vw 0 0;
     font-family:  var(--font-body);
-    font-size:    18px;
+    font-size:    4.8vw;
     font-weight:  500;
     color:        #de8b23;
     line-height:  1.1;
@@ -3783,50 +3791,50 @@ img.desktop-only { display: block !important; }
   .s5-m-bg-img { position: absolute; width: 100% !important; max-width: none !important; height: 100%; left: 0; top: 0; object-fit: cover; display: block; }
 
   /* Gradient overlays */
-  .s5-m-grad-top { position: absolute; top: 0; left: 0; width: 100%; height: 239px; background: linear-gradient(to bottom, #fff5ef 0%, transparent 100%); z-index: 1; pointer-events: none; }
-  .s5-m-grad-bot { position: absolute; bottom: 0; left: 0; width: 100%; height: 373px; background: linear-gradient(to bottom, transparent 0%, #f8e8e0 84%); z-index: 1; pointer-events: none; }
+  .s5-m-grad-top { position: absolute; top: 0; left: 0; width: 100%; height: 63.7333vw; background: linear-gradient(to bottom, #fff5ef 0%, transparent 100%); z-index: 1; pointer-events: none; }
+  .s5-m-grad-bot { position: absolute; bottom: 0; left: 0; width: 100%; height: 99.4667vw; background: linear-gradient(to bottom, transparent 0%, #f8e8e0 84%); z-index: 1; pointer-events: none; }
 
   /* Cards container — left:30 top:30 w:315 h:626 */
-  .s5-m-cards { position: absolute; left: 30px; top: 30px; width: 315px; height: 626px; z-index: 2; }
+  .s5-m-cards { position: absolute; left: 8vw; top: 8vw; width: 84vw; height: 166.9333vw; z-index: 2; }
 
   /* Individual cards */
-  .s5-m-card { position: absolute; left: 0; width: 315px; border-radius: 20px; overflow: hidden; }
-  .s5-m-card--ri     { top: 0;     height: 189px; background: rgba(251,234,224,0.7); }
-  .s5-m-card--stab   { top: 209px; height: 96px;  background: transparent; }
-  .s5-m-card--manage { top: 325px; height: 204px; background: rgba(251,234,224,0.7); }
-  .s5-m-card--clear  { top: 549px; height: 77px;  background: transparent; }
+  .s5-m-card { position: absolute; left: 0; width: 84vw; border-radius: 5.3333vw; overflow: hidden; }
+  .s5-m-card--ri     { top: 0;     height: 50.4vw; background: rgba(251,234,224,0.7); }
+  .s5-m-card--stab   { top: 55.7333vw; height: 25.6vw;  background: transparent; }
+  .s5-m-card--manage { top: 86.6667vw; height: 54.4vw; background: rgba(251,234,224,0.7); }
+  .s5-m-card--clear  { top: 146.4vw; height: 20.5333vw;  background: transparent; }
 
   /* Card titles */
   .s5-m-card-title {
     position: absolute;
-    left: 20px; right: 20px;
+    left: 5.3333vw; right: 5.3333vw;
     margin: 0;
     font-family: var(--font-heading);
-    font-size: 28px;
+    font-size: 7.4667vw;
     font-weight: 500;
     color: #332000;
     line-height: 1;
   }
-  .s5-m-card--ri     .s5-m-card-title { top: 20px; }
+  .s5-m-card--ri     .s5-m-card-title { top: 5.3333vw; }
   .s5-m-card--stab   .s5-m-card-title { top: 0; }
-  .s5-m-card--manage .s5-m-card-title { top: 20px; }
+  .s5-m-card--manage .s5-m-card-title { top: 5.3333vw; }
   .s5-m-card--clear  .s5-m-card-title { top: 0; }
 
   /* Card bodies */
   .s5-m-card-body {
     position: absolute;
-    left: 20px; right: 20px;
+    left: 5.3333vw; right: 5.3333vw;
     margin: 0;
     font-family: var(--font-body);
-    font-size: 16px;
+    font-size: 4.2667vw;
     font-weight: 400;
     color: #332000;
     line-height: 1.2;
   }
-  .s5-m-card--ri     .s5-m-card-body { top: 74px; }
-  .s5-m-card--stab   .s5-m-card-body { top: 39px; }
-  .s5-m-card--manage .s5-m-card-body { top: 108px; }
-  .s5-m-card--clear  .s5-m-card-body { top: 39px; }
+  .s5-m-card--ri     .s5-m-card-body { top: 19.7333vw; }
+  .s5-m-card--stab   .s5-m-card-body { top: 10.4vw; }
+  .s5-m-card--manage .s5-m-card-body { top: 28.8vw; }
+  .s5-m-card--clear  .s5-m-card-body { top: 10.4vw; }
   .s5-m-card-body--dim { opacity: 0.7; }
 
   /* === S6 VIDEO — Figma 375×306 (node 1:213, HTML mobile) === */
@@ -3837,22 +3845,22 @@ img.desktop-only { display: block !important; }
   .s6-m-bg-img { position: absolute; width: 100% !important; max-width: none !important; height: 100%; left: 0; top: 0; object-fit: cover; display: block; }
 
   /* Gradient top — h:189 stops: #f8e8e0(solid) → transparent */
-  .s6-m-grad-top { position: absolute; top: 0; left: 0; width: 100%; height: 189px; background: linear-gradient(to bottom, #f8e8e0 0%, #f8e8e0 15.7%, transparent 100%); z-index: 1; pointer-events: none; }
+  .s6-m-grad-top { position: absolute; top: 0; left: 0; width: 100%; height: 50.4vw; background: linear-gradient(to bottom, #f8e8e0 0%, #f8e8e0 15.7%, transparent 100%); z-index: 1; pointer-events: none; }
 
   /* Video — x:30 y:0 w:315 h:199 */
-  .s6-m-video-wrap { position: absolute; left: 30px; top: 0; width: 315px; height: 199px; z-index: 2; overflow: hidden; }
+  .s6-m-video-wrap { position: absolute; left: 8vw; top: 0; width: 84vw; height: 53.0667vw; z-index: 2; overflow: hidden; }
 
   /* Button "Метод" — x:30 y:223 w:315 h:47 r:10 stroke:#332000 */
-  .s6-m-btn { position: absolute; left: 30px; top: 223px; width: 315px; height: 47px; z-index: 2; display: flex; align-items: center; justify-content: center; border: 1px solid #332000; border-radius: 10px; background: rgba(255,245,239,0.3); text-decoration: none; cursor: pointer; transition: background 0.25s ease; }
-  .s6-m-btn span { font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #332000; line-height: 1; }
+  .s6-m-btn { position: absolute; left: 8vw; top: 59.4667vw; width: 84vw; height: 12.5333vw; z-index: 2; display: flex; align-items: center; justify-content: center; border: 1px solid #332000; border-radius: 2.6667vw; background: rgba(255,245,239,0.3); text-decoration: none; cursor: pointer; transition: background 0.25s ease; }
+  .s6-m-btn span { font-family: var(--font-body); font-size: 4.2667vw; font-weight: 400; color: #332000; line-height: 1; }
   .s6-m-btn:hover { background: rgba(255,245,239,0.5); }
 
-  /* === S7 ANNA — Figma 375×1019 (node 1:993, HTML mobile); +50px bottom margin so consult button doesn't touch the next section */
+  /* === S7 ANNA — Figma 375×1019 (node 1:993, HTML mobile); +13.3333vw bottom margin so consult button doesn't touch the next section */
   /* Section height bumped from 1069 → 1095 so the longer EN bio (which
      wraps to more lines than RU/UA) doesn't push the buttons against the
      text. Figma EN frame 1:993 is 1019 with bio h=171, but the live rendered
-     EN bio runs ~187px due to web-font line-height — we add ~26px headroom
-     so all three locales keep ~18px breathing room before "About the Master". */
+     EN bio runs ~49.8667vw due to web-font line-height — we add ~6.9333vw headroom
+     so all three locales keep ~4.8vw breathing room before "About the Master". */
   #s7 { aspect-ratio: 375 / 1095 !important; background: #1a0d05 !important; }
 
   .s7-mobile-html { position: absolute; inset: 0; z-index: 0; }
@@ -3862,53 +3870,53 @@ img.desktop-only { display: block !important; }
   .s7-m-bg-img { position: absolute; width: 100% !important; max-width: none !important; height: 100%; left: 0; top: 0; object-fit: cover; object-position: right center; display: block; opacity: 0.6; }
 
   /* Title block — x:30 y:40 w:315 h:146 */
-  .s7-m-title-block { position: absolute; left: 30px; top: 40px; width: 315px; z-index: 1; }
-  .s7-m-kicker  { position: absolute; top: 0;    left: 0; width: 315px; margin: 0; font-family: var(--font-body);    font-size: 18px; font-weight: 500; color: #fff5ef; line-height: normal; }
-  .s7-m-heading { position: absolute; top: 31px; left: 0; width: 315px; margin: 0; font-family: var(--font-heading); font-size: 24px; font-weight: 300; color: #fff5ef; line-height: 23.1px; text-transform: uppercase; }
-  .s7-m-desc    { position: absolute; top: 70px; left: 0; width: 315px; margin: 0; font-family: var(--font-body);    font-size: 16px; font-weight: 400; color: #fff5ef; line-height: 1.2; white-space: pre-wrap; }
+  .s7-m-title-block { position: absolute; left: 8vw; top: 10.6667vw; width: 84vw; z-index: 1; }
+  .s7-m-kicker  { position: absolute; top: 0;    left: 0; width: 84vw; margin: 0; font-family: var(--font-body);    font-size: 4.8vw; font-weight: 500; color: #fff5ef; line-height: normal; }
+  .s7-m-heading { position: absolute; top: 8.2667vw; left: 0; width: 84vw; margin: 0; font-family: var(--font-heading); font-size: 6.4vw; font-weight: 300; color: #fff5ef; line-height: 6.16vw; text-transform: uppercase; }
+  .s7-m-desc    { position: absolute; top: 18.6667vw; left: 0; width: 84vw; margin: 0; font-family: var(--font-body);    font-size: 4.2667vw; font-weight: 400; color: #fff5ef; line-height: 1.2; white-space: pre-wrap; }
 
   /* Subtitle — x:30 y:207 w:291 h:63 */
-  .s7-m-subtitle { position: absolute; left: 30px; top: 207px; width: 291px; z-index: 1; }
-  .s7-m-name { position: absolute; top: 0;    left: 0; margin: 0; font-family: var(--font-heading); font-size: 36px; font-weight: 600; color: #de8b23;  line-height: 33.6px; }
-  .s7-m-role { position: absolute; top: 39px; left: 0; margin: 0; font-family: var(--font-heading); font-size: 24px; font-weight: 300; color: #fff5ef; line-height: 23.1px; }
+  .s7-m-subtitle { position: absolute; left: 8vw; top: 55.2vw; width: 77.6vw; z-index: 1; }
+  .s7-m-name { position: absolute; top: 0;    left: 0; margin: 0; font-family: var(--font-heading); font-size: 9.6vw; font-weight: 600; color: #de8b23;  line-height: 8.96vw; }
+  .s7-m-role { position: absolute; top: 10.4vw; left: 0; margin: 0; font-family: var(--font-heading); font-size: 6.4vw; font-weight: 300; color: #fff5ef; line-height: 6.16vw; }
 
   /* Photo — x:0 y:298 w:375 h:288 */
-  .s7-m-photo { position: absolute; left: 0; top: 298px; width: 375px; height: 288px; z-index: 1; overflow: hidden; }
+  .s7-m-photo { position: absolute; left: 0; top: 79.4667vw; width: 100vw; height: 76.8vw; z-index: 1; overflow: hidden; }
   .s7-m-photo-img { width: 100% !important; max-width: none !important; height: 100%; object-fit: cover; object-position: center; display: block; }
 
   /* Main text — x:30 y:596 w:315 h:256 */
-  .s7-m-main { position: absolute; left: 30px; top: 596px; width: 315px; z-index: 1; }
-  .s7-m-specialist { position: absolute; top: 0;    left: 0; width: 315px; margin: 0; font-family: var(--font-heading); font-size: 24px; font-weight: 300; color: #fff5ef; line-height: 23.1px; }
-  .s7-m-bio        { position: absolute; top: 85px; left: 0; width: 315px; margin: 0; font-family: var(--font-body);    font-size: 16px; font-weight: 400; color: #fff5ef; line-height: 1.3;    white-space: pre-wrap; }
+  .s7-m-main { position: absolute; left: 8vw; top: 158.9333vw; width: 84vw; z-index: 1; }
+  .s7-m-specialist { position: absolute; top: 0;    left: 0; width: 84vw; margin: 0; font-family: var(--font-heading); font-size: 6.4vw; font-weight: 300; color: #fff5ef; line-height: 6.16vw; }
+  .s7-m-bio        { position: absolute; top: 22.6667vw; left: 0; width: 84vw; margin: 0; font-family: var(--font-body);    font-size: 4.2667vw; font-weight: 400; color: #fff5ef; line-height: 1.3;    white-space: pre-wrap; }
 
   /* Buttons — x:30 w:315 h:49 r:10 stroke:#fff5ef */
-  .s7-m-btn { position: absolute; left: 30px; width: 315px; height: 49px; z-index: 2; display: flex; align-items: center; justify-content: center; border: 1px solid #fff5ef; border-radius: 10px; background: transparent; text-decoration: none; cursor: pointer; transition: background 0.25s ease; }
-  /* Buttons pushed down 26px (Figma had y:870 / 939 for a 1019 frame; we use
-     1095 so EN bio fits → buttons at 896 / 965 keep the same Figma 18px gap
-     from main text on EN and ~30px on RU/UA). */
-  .s7-m-btn--about   { top: 896px; }
-  .s7-m-btn--consult { top: 965px; }
-  .s7-m-btn span { font-family: var(--font-body); font-size: 18px; font-weight: 500; color: #fff5ef; line-height: 1; }
+  .s7-m-btn { position: absolute; left: 8vw; width: 84vw; height: 13.0667vw; z-index: 2; display: flex; align-items: center; justify-content: center; border: 1px solid #fff5ef; border-radius: 2.6667vw; background: transparent; text-decoration: none; cursor: pointer; transition: background 0.25s ease; }
+  /* Buttons pushed down 6.9333vw (Figma had y:870 / 939 for a 1019 frame; we use
+     1095 so EN bio fits → buttons at 896 / 965 keep the same Figma 4.8vw gap
+     from main text on EN and ~8vw on RU/UA). */
+  .s7-m-btn--about   { top: 238.9333vw; }
+  .s7-m-btn--consult { top: 257.3333vw; }
+  .s7-m-btn span { font-family: var(--font-body); font-size: 4.8vw; font-weight: 500; color: #fff5ef; line-height: 1; }
   .s7-m-btn:hover { background: rgba(255,245,239,0.08); }
 
   /* === S8 DNA — Figma 375×~690 (node 1:235) === */
   #s8 { aspect-ratio: 375 / 690 !important; }
   #s8 .s8-title {
     top: 2.75%;            /* 19/690 */
-    left: calc(50% - 39.5px);
+    left: calc(50% - 10.5333vw);
     transform: none;
   }
   #s8 .s8-dna {
-    top: calc(50% - 180px - 96px);  /* center-180 then -h/2(96) */
+    top: calc(50% - 48vw - 25.6vw);  /* center-180 then -h/2(96) */
     left: 0;
     width: 100%;
-    height: 192px;
+    height: 51.2vw;
     transform: none;
   }
   #s8 .s8-trait {
     width: 84%;            /* 315/375 */
     left: 7.73%;           /* 29/375 */
-    gap: 5px;
+    gap: 1.3333vw;
     align-items: flex-start;
   }
   /* Mobile positions per Figma 1:235 — title @ y, body slightly below */
@@ -3928,21 +3936,21 @@ img.desktop-only { display: block !important; }
   .s9-m-grad-top { position: absolute; top: 0; left: 0; width: 100%; height: 19.01%; background: linear-gradient(to bottom, #f8e8e0 0%, #f8e8e0 16%, transparent 100%); z-index: 1; pointer-events: none; }
 
   /* Title — x:30/375=8% y:60/994=6.04% w:315/375=84% */
-  .s9-m-title { position: absolute; left: 8%; top: 6.04%; width: 84%; margin: 0; font-family: var(--font-heading); font-size: 36px; font-weight: 600; color: #332000; line-height: 33.6px; text-align: center; z-index: 1; }
+  .s9-m-title { position: absolute; left: 8%; top: 6.04%; width: 84%; margin: 0; font-family: var(--font-heading); font-size: 9.6vw; font-weight: 600; color: #332000; line-height: 8.96vw; text-align: center; z-index: 1; }
 
   /* Card — x:24/375=6.4% y:348/994=35.01% — keep aspect 326/294 so labels track the circles */
-  .s9-m-card { position: absolute; left: 6.4%; top: 35.01%; width: min(326px, 86.93%); aspect-ratio: 326 / 294; height: auto; z-index: 1; }
+  .s9-m-card { position: absolute; left: 6.4%; top: 35.01%; width: min(86.9333vw, 86.93%); aspect-ratio: 326 / 294; height: auto; z-index: 1; }
   .s9-m-venn-img { position: absolute; inset: 0; width: 100% !important; max-width: none !important; height: 100%; object-fit: contain; display: block; }
 
   /* Labels — % of 326×294 card (aspect-locked) so they track the circles at any width */
-  .s9-m-label { position: absolute; margin: 0; font-family: var(--font-body); font-size: 12px; font-weight: 400; color: #332000; line-height: 1.4; z-index: 2; }
+  .s9-m-label { position: absolute; margin: 0; font-family: var(--font-body); font-size: 3.2vw; font-weight: 400; color: #332000; line-height: 1.4; z-index: 2; }
   .s9-m-label--top { top: 8.84%;  left: 27.91%; width: 44.48%; text-align: center; }
-  .s9-m-label--c   { top: 55.10%; left: 31.60%; width: 37.12%; text-align: center; font-size: 16px; }
+  .s9-m-label--c   { top: 55.10%; left: 31.60%; width: 37.12%; text-align: center; font-size: 4.2667vw; }
   .s9-m-label--bl  { top: 68.03%; left: 14.42%; width: 22.09%; }
   .s9-m-label--br  { top: 68.03%; left: 72.09%; width: 19.33%; }
 
   /* Caption — x:30/375=8% y:869/994=87.42% w:315/375=84% */
-  .s9-m-caption { position: absolute; left: 8%; top: 87.42%; width: 84%; margin: 0; font-family: var(--font-heading); font-size: 24px; font-weight: 300; color: #332000; line-height: 23.1px; z-index: 1; }
+  .s9-m-caption { position: absolute; left: 8%; top: 87.42%; width: 84%; margin: 0; font-family: var(--font-heading); font-size: 6.4vw; font-weight: 300; color: #332000; line-height: 6.16vw; z-index: 1; }
 
   /* === S10 UNITY — Figma 375×788 (node 1:425, HTML mobile) === */
   #s10 { aspect-ratio: 375 / 788 !important; }
@@ -3953,29 +3961,29 @@ img.desktop-only { display: block !important; }
   .s10-m-img { position: absolute; left: 0; top: 20.69%; width: 100%; height: 37.44%; z-index: 0; overflow: hidden; }
   .s10-m-img-bg { width: 100% !important; max-width: none !important; height: 100%; object-fit: cover; object-position: center top; display: block; }
 
-  /* Title "СИЛА В ЕДИНСТВЕ" — x:30 y:40 w:315, Cormorant SemiBold 36px uppercase */
-  .s10-m-title { position: absolute; left: 8%; top: 5.08%; width: 84%; margin: 0; font-family: var(--font-heading); font-size: 36px; font-weight: 600; color: #fff5ef; line-height: 33.6px; text-transform: uppercase; z-index: 1; }
+  /* Title "СИЛА В ЕДИНСТВЕ" — x:30 y:40 w:315, Cormorant SemiBold 9.6vw uppercase */
+  .s10-m-title { position: absolute; left: 8%; top: 5.08%; width: 84%; margin: 0; font-family: var(--font-heading); font-size: 9.6vw; font-weight: 600; color: #fff5ef; line-height: 8.96vw; text-transform: uppercase; z-index: 1; }
 
-  /* Intro — x:30 y:110 w:315, Raleway Medium 18px */
-  .s10-m-intro { position: absolute; left: 8%; top: 13.96%; width: 84%; margin: 0; font-family: var(--font-body); font-size: 18px; font-weight: 500; color: #fff5ef; line-height: normal; z-index: 1; }
+  /* Intro — x:30 y:110 w:315, Raleway Medium 4.8vw */
+  .s10-m-intro { position: absolute; left: 8%; top: 13.96%; width: 84%; margin: 0; font-family: var(--font-body); font-size: 4.8vw; font-weight: 500; color: #fff5ef; line-height: normal; z-index: 1; }
 
   /* Items — containers with text + gradient line at bottom, % tops to prevent clipping */
   .s10-m-item { position: absolute; left: 0; z-index: 1; }
-  .s10-m-item--1 { top: 61.93%; width: 93.87%; height: 87px; } /* y:488 w:352 */
-  .s10-m-item--2 { top: 76.78%; width: 80.27%; height: 68px; } /* y:605 w:301 */
-  .s10-m-item--3 { top: 89.21%; width: 65.33%; height: 68px; } /* y:703 w:245 */
+  .s10-m-item--1 { top: 61.93%; width: 93.87%; height: 23.2vw; } /* y:488 w:352 */
+  .s10-m-item--2 { top: 76.78%; width: 80.27%; height: 18.1333vw; } /* y:605 w:301 */
+  .s10-m-item--3 { top: 89.21%; width: 65.33%; height: 18.1333vw; } /* y:703 w:245 */
 
   /* Text — Figma widths per item (item3 text intentionally wider than container) */
-  .s10-m-item-text { position: absolute; top: 0; left: 20px; margin: 0; font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #fff5ef; line-height: 1.3; }
-  .s10-m-item--1 .s10-m-item-text { width: 203px; }
-  .s10-m-item--2 .s10-m-item-text { width: 200px; }
-  .s10-m-item--3 .s10-m-item-text { width: 272px; }
+  .s10-m-item-text { position: absolute; top: 0; left: 5.3333vw; margin: 0; font-family: var(--font-body); font-size: 4.2667vw; font-weight: 400; color: #fff5ef; line-height: 1.3; }
+  .s10-m-item--1 .s10-m-item-text { width: 54.1333vw; }
+  .s10-m-item--2 .s10-m-item-text { width: 53.3333vw; }
+  .s10-m-item--3 .s10-m-item-text { width: 72.5333vw; }
 
   /* Gradient line — solid gold anchored to the LEFT edge (the "wall" the
      lines lean against in Figma 1:425), softly fading to transparent on
      the right. Mirrors the visual in 1:441/437/433 where the line origin
      is the section's left edge and the line dissipates into the bg. */
-  .s10-m-line { position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(to right, #de8b23 0%, #de8b23 18%, #fff5ef 50%, #de8b23 82%, rgba(49,15,0,0.4) 96%, transparent 100%); }
+  .s10-m-line { position: absolute; bottom: 0; left: 0; width: 100%; height: 0.5333vw; background: linear-gradient(to right, #de8b23 0%, #de8b23 18%, #fff5ef 50%, #de8b23 82%, rgba(49,15,0,0.4) 96%, transparent 100%); }
 
   /* === S11 PROGRAMS — Figma 375×1239 (node 1:442, mobile) === */
   #s11 { aspect-ratio: 375 / 1239 !important; }
@@ -3993,35 +4001,35 @@ img.desktop-only { display: block !important; }
   /* Gradient bottom — h:71/1239=5.73% */
   .s11-m-grad-bot { position: absolute; left: 0; bottom: 0; width: 100%; height: 5.73%; background: linear-gradient(to top, #111 0%, transparent 100%); z-index: 1; pointer-events: none; }
 
-  /* Title — top:82/1239=6.62%, Cormorant SemiBold 36px center */
-  .s11-m-title { position: absolute; top: 6.62%; left: 50%; transform: translateX(-50%); width: 315px; margin: 0; font-family: var(--font-heading); font-size: 36px; font-weight: 600; line-height: 33.6px; color: #fff5ef; text-align: center; z-index: 2; }
+  /* Title — top:82/1239=6.62%, Cormorant SemiBold 9.6vw center */
+  .s11-m-title { position: absolute; top: 6.62%; left: 50%; transform: translateX(-50%); width: 84vw; margin: 0; font-family: var(--font-heading); font-size: 9.6vw; font-weight: 600; line-height: 8.96vw; color: #fff5ef; text-align: center; z-index: 2; }
 
-  /* Cards container — top:174/1239=14.04%, 20px gap between cards
-     (Figma 1:454/1:461 are at y:325 and y:650 respectively → 20px gap) */
-  .s11-m-cards { position: absolute; top: 14.04%; left: 0; width: 100%; z-index: 2; display: flex; flex-direction: column; gap: 20px; }
+  /* Cards container — top:174/1239=14.04%, 5.3333vw gap between cards
+     (Figma 1:454/1:461 are at y:325 and y:650 respectively → 5.3333vw gap) */
+  .s11-m-cards { position: absolute; top: 14.04%; left: 0; width: 100%; z-index: 2; display: flex; flex-direction: column; gap: 5.3333vw; }
 
   /* Card base — fixed heights from Figma (Container 1/2 = 305, Container 3 = 324)
-     so the section's allotted 1239px height is filled and there's no dead
+     so the section's allotted 330.4vw height is filled and there's no dead
      scrolling band below the last card. */
-  .s11-m-card { width: 100%; padding: 30px 40px; display: flex; flex-direction: column; gap: 20px; box-sizing: border-box; min-height: 305px; }
-  .s11-m-card--3 { min-height: 324px; }
+  .s11-m-card { width: 100%; padding: 8vw 10.6667vw; display: flex; flex-direction: column; gap: 5.3333vw; box-sizing: border-box; min-height: 81.3333vw; }
+  .s11-m-card--3 { min-height: 86.4vw; }
 
   /* Card gradient backgrounds (exact Figma values) */
   .s11-m-card--1 { background: linear-gradient(180deg, rgba(219,132,59,0) 0%, rgba(219,132,59,0.3) 33.05%, rgba(219,132,59,0.3) 74.02%, rgba(219,132,59,0.21) 84%, rgba(219,132,59,0) 100%); }
   .s11-m-card--2 { background: linear-gradient(180deg, rgba(243,181,25,0) 0%, rgba(243,181,25,0.3) 33.69%, rgba(243,181,25,0.3) 68%, rgba(243,181,25,0.21) 84.39%, rgba(243,181,25,0) 100%); }
   .s11-m-card--3 { background: linear-gradient(180deg, rgba(255,216,74,0) 0%, rgba(255,216,74,0.5) 29.23%, rgba(255,216,74,0.5) 71.87%, rgba(255,216,74,0.35) 84%, rgba(255,216,74,0) 100%); }
 
-  /* Card text — Cormorant Medium 28px title, Raleway 16px body/sub */
-  .s11-m-card-title { margin: 0; font-family: var(--font-heading); font-size: 28px; font-weight: 500; color: #fff5ef; line-height: 1; }
-  .s11-m-card-body  { margin: 0; font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #fff5ef; line-height: normal; }
-  .s11-m-card-sub   { margin: 0; font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #fff5ef; line-height: normal; }
+  /* Card text — Cormorant Medium 7.4667vw title, Raleway 4.2667vw body/sub */
+  .s11-m-card-title { margin: 0; font-family: var(--font-heading); font-size: 7.4667vw; font-weight: 500; color: #fff5ef; line-height: 1; }
+  .s11-m-card-body  { margin: 0; font-family: var(--font-body); font-size: 4.2667vw; font-weight: 400; color: #fff5ef; line-height: normal; }
+  .s11-m-card-sub   { margin: 0; font-family: var(--font-body); font-size: 4.2667vw; font-weight: 400; color: #fff5ef; line-height: normal; }
 
   /* Button — Figma 295×47 (1:453/460/467). Explicit line-height:1 on the
-     label so the button stays exactly 47px (was rendering 54px because
-     Raleway's default line-height pushed text +7px and shifted the next
+     label so the button stays exactly 12.5333vw (was rendering 14.4vw because
+     Raleway's default line-height pushed text +1.8667vw and shifted the next
      card down). */
-  .s11-m-btn { display: flex; align-items: center; justify-content: center; width: 295px; height: 47px; padding: 0 20px; border: 1px solid #fff5ef; border-radius: 10px; background: transparent; text-decoration: none; transition: background 0.3s; box-sizing: border-box; }
-  .s11-m-btn span { font-family: var(--font-body); font-size: 16px; font-weight: 400; line-height: 1; color: #fff5ef; white-space: nowrap; }
+  .s11-m-btn { display: flex; align-items: center; justify-content: center; width: 78.6667vw; height: 12.5333vw; padding: 0 5.3333vw; border: 1px solid #fff5ef; border-radius: 2.6667vw; background: transparent; text-decoration: none; transition: background 0.3s; box-sizing: border-box; }
+  .s11-m-btn span { font-family: var(--font-body); font-size: 4.2667vw; font-weight: 400; line-height: 1; color: #fff5ef; white-space: nowrap; }
 
   /* === S12 FOOTER — Figma 375×600 (node 1:469, mobile) === */
   .s12-footer.s12-figma { aspect-ratio: 375 / 600 !important; background: #000 !important; }
@@ -4038,53 +4046,53 @@ img.desktop-only { display: block !important; }
   /* Gradient bottom — starts at y:229/600=38.24%, covers to bottom */
   .s12-m-grad-bot { position: absolute; left: 0; top: 70%; width: 100%; height: 30%; background: linear-gradient(to bottom, transparent 0%, #000 100%); z-index: 1; pointer-events: none; }
 
-  /* Left text block — Figma: top:16px (no centre transform — heading wraps and goes above section on small viewports) */
-  .s12-m-left { position: absolute; left: 8%; top: 16px; width: 84%; z-index: 2; display: flex; flex-direction: column; gap: 16px; }
-  .s12-m-left-heading { margin: 0; font-family: var(--font-heading); font-size: 28px; font-weight: 500; line-height: 1.1; color: #fff5ef; text-transform: uppercase; }
+  /* Left text block — Figma: top:4.2667vw (no centre transform — heading wraps and goes above section on small viewports) */
+  .s12-m-left { position: absolute; left: 8%; top: 4.2667vw; width: 84%; z-index: 2; display: flex; flex-direction: column; gap: 4.2667vw; }
+  .s12-m-left-heading { margin: 0; font-family: var(--font-heading); font-size: 7.4667vw; font-weight: 500; line-height: 1.1; color: #fff5ef; text-transform: uppercase; }
   .s12-m-left-hl { color: #de8b23; }
   .s12-m-left-rest { color: #fff5ef; }
-  .s12-m-left-tagline { margin: 0; font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #fff5ef; line-height: normal; }
+  .s12-m-left-tagline { margin: 0; font-family: var(--font-body); font-size: 4.2667vw; font-weight: 400; color: #fff5ef; line-height: normal; }
 
-  /* Right text block — Figma: centre at (calc(50%+66.7px), calc(50%−9px)) */
-  .s12-m-right { position: absolute; left: calc(50% + 66.7px); top: calc(50% - 9px); width: 182px; z-index: 2; transform: translate(-50%, -50%); display: flex; flex-direction: column; gap: 10px; }
-  .s12-m-right-heading { margin: 0; padding-bottom: 10px; font-family: var(--font-heading); font-size: 28px; font-weight: 500; color: #fff5ef; line-height: 1; white-space: pre-wrap; }
-  .s12-m-right-body { margin: 0; font-family: var(--font-body); font-size: 12px; font-weight: 400; color: #fff5ef; opacity: 0.7; line-height: normal; }
+  /* Right text block — Figma: centre at (calc(50%+17.7867vw), calc(50%−2.4vw)) */
+  .s12-m-right { position: absolute; left: calc(50% + 17.7867vw); top: calc(50% - 2.4vw); width: 48.5333vw; z-index: 2; transform: translate(-50%, -50%); display: flex; flex-direction: column; gap: 2.6667vw; }
+  .s12-m-right-heading { margin: 0; padding-bottom: 2.6667vw; font-family: var(--font-heading); font-size: 7.4667vw; font-weight: 500; color: #fff5ef; line-height: 1; white-space: pre-wrap; }
+  .s12-m-right-body { margin: 0; font-family: var(--font-body); font-size: 3.2vw; font-weight: 400; color: #fff5ef; opacity: 0.7; line-height: normal; }
 
   /* Book — x:162.2/375=43.25%, y:377.5/600=62.92% */
   .s12-m-book { position: absolute; left: 43.25%; top: 62.92%; z-index: 2; display: flex; flex-direction: column; text-decoration: none; }
-  .s12-m-book-label { font-family: var(--font-body); font-size: 12px; font-weight: 400; color: #fff5ef; opacity: 0.5; line-height: normal; }
-  .s12-m-book-title { font-family: var(--font-heading); font-size: 20px; font-weight: 300; color: #fff5ef; text-transform: uppercase; line-height: 1; }
+  .s12-m-book-label { font-family: var(--font-body); font-size: 3.2vw; font-weight: 400; color: #fff5ef; opacity: 0.5; line-height: normal; }
+  .s12-m-book-title { font-family: var(--font-heading); font-size: 5.3333vw; font-weight: 300; color: #fff5ef; text-transform: uppercase; line-height: 1; }
 
   /* Logo "REALITY DNA" — x:33/375=8.8%, y:465/600=77.5% */
-  .s12-m-logo { position: absolute; left: 8.8%; top: 77.5%; z-index: 2; margin: 0; width: 92px; font-family: var(--font-body); font-size: 16px; font-weight: 400; color: #fff5ef; text-align: center; white-space: nowrap; line-height: normal; }
+  .s12-m-logo { position: absolute; left: 8.8%; top: 77.5%; z-index: 2; margin: 0; width: 24.5333vw; font-family: var(--font-body); font-size: 4.2667vw; font-weight: 400; color: #fff5ef; text-align: center; white-space: nowrap; line-height: normal; }
 
-  /* Social icons — x:158.2/375=42.19%, y:455.5/600=75.92%, w:190px */
-  .s12-m-social { position: absolute; left: 42.19%; top: 75.92%; width: 190px; z-index: 2; display: flex; align-items: center; justify-content: space-between; }
+  /* Social icons — x:158.2/375=42.19%, y:455.5/600=75.92%, w:50.6667vw */
+  .s12-m-social { position: absolute; left: 42.19%; top: 75.92%; width: 50.6667vw; z-index: 2; display: flex; align-items: center; justify-content: space-between; }
   .s12-m-social a { display: flex; align-items: center; justify-content: center; }
-  .s12-m-social img { width: 40px !important; height: 40px !important; display: block; }
+  .s12-m-social img { width: 10.6667vw !important; height: 10.6667vw !important; display: block; }
 
-  /* Legal links — x:30/375=8%, y:515.5/600=85.92%, gap:25px */
+  /* Legal links — x:30/375=8%, y:515.5/600=85.92%, gap:6.6667vw */
   /* Footer Links — Figma 1:830 (UA) / 1:1157 (EN). Container 315×14 at
      (30.2, 516.5). The second link ("Privacy Policy" / "Політика конф...")
      is anchored to x=136 in BOTH locales — only its visual gap to the
-     first link changes (16px in UA where "Публічна пропозиція" is wider,
-     71px in EN where "Public Offer" is short). flex+gap couldn't express
+     first link changes (4.2667vw in UA where "Публічна пропозиція" is wider,
+     18.9333vw in EN where "Public Offer" is short). flex+gap couldn't express
      this so the first link sits at left:0 and the second at left:43.17%
      (136/315) absolutely. */
-  .s12-m-legal { position: absolute; left: 8%; top: 86.08%; width: 84%; height: 14px; z-index: 2; }
+  .s12-m-legal { position: absolute; left: 8%; top: 86.08%; width: 84%; height: 3.7333vw; z-index: 2; }
   .s12-m-legal-link { position: absolute; top: 0; }
   .s12-m-legal-link:nth-of-type(1) { left: 0; }
   .s12-m-legal-link:nth-of-type(2) { left: 43.17%; }
-  .s12-m-legal-link { font-family: var(--font-body); font-size: 12px; font-weight: 400; color: #fff5ef; opacity: 0.5; text-decoration: none; white-space: nowrap; }
+  .s12-m-legal-link { font-family: var(--font-body); font-size: 3.2vw; font-weight: 400; color: #fff5ef; opacity: 0.5; text-decoration: none; white-space: nowrap; }
 
   /* Copyright — bottom:9.12% centred */
-  .s12-m-copy { position: absolute; bottom: 3.33%; left: 50%; transform: translateX(-50%); z-index: 2; margin: 0; font-family: var(--font-body); font-size: 12px; font-weight: 400; color: #fff5ef; white-space: nowrap; line-height: normal; }
+  .s12-m-copy { position: absolute; bottom: 3.33%; left: 50%; transform: translateX(-50%); z-index: 2; margin: 0; font-family: var(--font-body); font-size: 3.2vw; font-weight: 400; color: #fff5ef; white-space: nowrap; line-height: normal; }
 
   /* === AUTH MODAL === */
   .auth-modal {
     max-width: 100%;
-    margin: 0 12px;
-    padding: 28px 20px;
+    margin: 0 3.2vw;
+    padding: 7.4667vw 5.3333vw;
   }
 }
 
@@ -4212,19 +4220,19 @@ img.desktop-only { display: block !important; }
   .a1-m-text {
     position: absolute;
     left: 8vw;             /* 30/375 */
-    top: 14.05%;           /* (50% - 225px in 854) */
+    top: 14.05%;           /* (50% - 60vw in 854) */
     width: 84vw;           /* 315/375 */
     z-index: 2;
     color: var(--cream);
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 8.5333vw;
     -webkit-user-select: text;
     user-select: text;
   }
   .a1-m-text .a1-title {
     font-size: 9.6vw;      /* 36/375 */
-    line-height: 33.6px;
+    line-height: 8.96vw;
   }
   .a1-m-text .a1-body {
     font-size: 4.8vw;      /* 18/375 */
