@@ -13,22 +13,39 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    // Hide when scrolling DOWN, reveal when scrolling UP. Threshold-based
+    // so iOS Safari momentum scrolling (which fires events with sub-pixel
+    // deltas) doesn't make the header flicker. lastY only resets on a
+    // confirmed direction change of ≥ 8px. requestAnimationFrame coalesces
+    // multiple scroll events per frame so the React state updates stay
+    // smooth even when the OS fires scroll at 120Hz.
     let lastY = window.scrollY;
-    const onScroll = () => {
+    let ticking = false;
+
+    const update = () => {
       const y = window.scrollY;
       setScrolled(y > 60);
-      // Auto-hide on scroll down past the hero, re-show on scroll up.
-      // Avoids the sticky header "chasing" over baked-in block content
-      // on mobile. Stays pinned at the very top (< 80px).
+
       if (y < 80) {
         setHidden(false);
-      } else if (y > lastY + 4) {
+        lastY = y;
+      } else if (y > lastY + 8) {
         setHidden(true);
-      } else if (y < lastY - 4) {
+        lastY = y;
+      } else if (y < lastY - 8) {
         setHidden(false);
+        lastY = y;
       }
-      lastY = y;
+      ticking = false;
     };
+
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);

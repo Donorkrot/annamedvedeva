@@ -49,9 +49,11 @@ export default function HeroSection() {
 
       {/* ── Mobile — Figma node 1-73 (375×716) ── */}
       <div className="s1-m mobile-only">
-        {/* Single mobile bg with lightning baked in */}
+        {/* Clean audio-wave bg from Figma 255:299 — line is rendered as a
+            separate `s1-m-line` layer below to avoid the double-line bug
+            (the previous bg-s1-m-figma.png had the divider baked in). */}
         <div className="s1-m-bg" aria-hidden="true">
-          <Image src="/images/backgrounds/bg-s1-m-figma.png" alt="" fill sizes="100vw" priority />
+          <Image src="/images/backgrounds/bg-s1-m-clean.webp" alt="" fill sizes="100vw" priority />
         </div>
 
         <p className="s1-m-tagline">
