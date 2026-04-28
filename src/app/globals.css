@@ -105,19 +105,10 @@ body {
   }
 }
 
-/* MOBILE — scale entire 375-px Figma design to fit any phone width.
-   Phones range from ~360 (small Android) to ~430 (iPhone Pro Max). The
-   mobile layout is built pixel-perfect at 375 base with many absolute
-   px positions; without scaling, content is letterboxed on wider phones
-   (dark body bg shows on sides) or overflows on narrower ones. Zoom on
-   html stretches the 375 design proportionally so every device shows
-   the same pixel-perfect layout. Same technique as the >1440 desktop
-   rule above, just inverted to phones. */
-@media (max-width: 768px) {
-  html {
-    zoom: calc(100vw / 375px);
-  }
-}
+/* Mobile scaling is handled by a viewport-meta swap in layout.tsx (sets
+   `width=375` on phones so the browser natively scales the 375 base
+   design to fit). CSS `zoom` was tried first but iOS Safari handles it
+   inconsistently with vw units, so we use the native viewport approach. */
 
 main {
   display: flex;

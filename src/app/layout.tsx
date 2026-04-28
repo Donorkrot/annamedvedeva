@@ -38,6 +38,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className={`${cormorant.variable} ${raleway.variable}`}>
+      <head>
+        {/* Mobile viewport lock — site is built pixel-perfect at Figma's 375
+            base. Fixed `width=375` makes the browser render at 375 logical px
+            and natively scale to fit any phone (360–430). More reliable than
+            CSS `zoom` which has iOS Safari quirks. Desktop keeps device-width. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var m=document.querySelector('meta[name=viewport]');if(!m){m=document.createElement('meta');m.name='viewport';document.head.appendChild(m);}function set(){var w=window.innerWidth;m.content=w<=768?'width=375, initial-scale='+(w/375).toFixed(4)+', maximum-scale='+(w/375).toFixed(4)+', user-scalable=no':'width=device-width, initial-scale=1, maximum-scale=1';}set();window.addEventListener('resize',set);window.addEventListener('orientationchange',set);})();`,
+          }}
+        />
+      </head>
       <body><LanguageProvider><Header />{children}</LanguageProvider></body>
     </html>
   );
