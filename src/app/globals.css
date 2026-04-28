@@ -1360,9 +1360,22 @@ img.desktop-only { display: block !important; }
   .site-header.scrolled {
     background: rgba(49, 15, 0, 0.45) !important;
   }
-  .site-header .header-logo,
-  .site-header .header-btn {
-    display: none;
+  /* Mobile: show "REALITY DNA" wordmark on the LEFT of the header per
+     Figma 1:37/1:82. Hide the Консультация CTA — it would push past the
+     burger on a 375 viewport. */
+  .site-header .header-btn { display: none; }
+  .site-header .header-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  .site-header .header-logo img { display: none; }
+  .site-header .header-logo-text {
+    font-size: 12px;
+    letter-spacing: 0;
+    color: var(--cream);
+    font-family: var(--font-body);
+    font-weight: 400;
   }
   .site-header .header-right {
     margin-left: auto;
