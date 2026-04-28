@@ -11,11 +11,11 @@ export default function HeroSection() {
       <div className="s1-d desktop-only">
         {/* Ambient particle background — full bleed, centered vertically */}
         <div className="s1-d-bg" aria-hidden="true">
-          <Image src="/images/backgrounds/bg-s1-d-ambient.png" alt="" fill sizes="100vw" priority />
+          <Image src="/images/backgrounds/bg-s1-d-ambient.webp" alt="" fill sizes="100vw" priority />
         </div>
         {/* Lightning audio-wave overlay — 1440×700, centered */}
         <div className="s1-d-light" aria-hidden="true">
-          <Image src="/images/backgrounds/bg-s1-d-lightning.png" alt="" fill sizes="100vw" priority />
+          <Image src="/images/backgrounds/bg-s1-d-lightning.webp" alt="" fill sizes="100vw" priority />
         </div>
 
         {/* Tagline "Новый / Интеллект / Реальности" — page-centered top */}
