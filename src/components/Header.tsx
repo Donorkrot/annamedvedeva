@@ -13,28 +13,41 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    // Hide when scrolling DOWN, reveal when scrolling UP. Threshold-based
-    // so iOS Safari momentum scrolling (which fires events with sub-pixel
-    // deltas) doesn't make the header flicker. lastY only resets on a
-    // confirmed direction change of ≥ 8px. requestAnimationFrame coalesces
-    // multiple scroll events per frame so the React state updates stay
-    // smooth even when the OS fires scroll at 120Hz.
+    // Hide on scroll-down, reveal on scroll-up. Asymmetric thresholds with
+    // direction-accumulators eliminate the flicker the previous "± 8px from
+    // lastY" logic produced: momentum scrolls and trackpad bounce often emit
+    // brief reverse-deltas mid-flight, which used to flip the hidden state
+    // back on for a frame. Now the accumulator resets when direction changes
+    // and only triggers state changes once the user has deliberately moved
+    // 5px down (hide fast) or 30px up (reveal only on intent).
     let lastY = window.scrollY;
+    let accDown = 0;
+    let accUp = 0;
     let ticking = false;
 
     const update = () => {
       const y = window.scrollY;
+      const dy = y - lastY;
+      lastY = y;
       setScrolled(y > 60);
 
-      if (y < 80) {
+      // At the very top of the page the header is always visible.
+      if (y <= 0) {
+        accDown = 0;
+        accUp = 0;
         setHidden(false);
-        lastY = y;
-      } else if (y > lastY + 8) {
-        setHidden(true);
-        lastY = y;
-      } else if (y < lastY - 8) {
-        setHidden(false);
-        lastY = y;
+        ticking = false;
+        return;
+      }
+
+      if (dy > 0) {
+        accDown += dy;
+        accUp = 0;
+        if (accDown > 5) setHidden(true);
+      } else if (dy < 0) {
+        accUp += -dy;
+        accDown = 0;
+        if (accUp > 30) setHidden(false);
       }
       ticking = false;
     };
