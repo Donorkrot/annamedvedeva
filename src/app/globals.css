@@ -2376,8 +2376,8 @@ img.desktop-only { display: block !important; }
 
 /* S10 — Figma 1440×700, node 1:156 */
 #s10.s10-figma { background: #000; }
-#s10 .s10-bg-img { position: absolute; top: 2%; left: 0; right: 0; pointer-events: none; z-index: 0; }
-#s10 .s10-bg-img img { width: 100%; height: auto; display: block; }
+#s10 .s10-bg-img { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+#s10 .s10-bg-img img { position: absolute; top: 2.05%; left: -0.13%; height: 97%; width: 100%; object-fit: cover; display: block; }
 #s10 .s10-header {
   position: absolute;
   z-index: 2;
@@ -2437,7 +2437,7 @@ img.desktop-only { display: block !important; }
 /* Figma S10 staircase — 3 steps overlapping */
 #s10 .s10-step-1 { left: 39px;  top: 46.14%; }   /* 323/700 */
 #s10 .s10-step-2 { left: 154px; top: 60.71%; }   /* 425/700 */
-#s10 .s10-step-3 { left: 269px; top: 75.29%; }   /* 527/700 */
+#s10 .s10-step-3 { left: 259px; top: 75.29%; }   /* 527/700 */
 
 /* ===== S11 — Programs (Figma 1440×820, node 1:170) ===== */
 #s11.s11-figma { background: #000; }
