@@ -2447,8 +2447,8 @@ img.desktop-only { display: block !important; }
   flex-shrink: 0;
 }
 
-/* staircase positions (Figma 1440×700) */
-#s10 .s10-d-step--1 { left: 2.71vw;  top: 49.14%; }  /* 39/1440,  344/700 */
+/* staircase positions (Figma 1440×700, node 1:156) */
+#s10 .s10-d-step--1 { left: 2.71vw;  top: 46.14%; }  /* 39/1440,  323/700 */
 #s10 .s10-d-step--2 { left: 10.69vw; top: 60.71%; }  /* 154/1440, 425/700 */
 #s10 .s10-d-step--3 { left: 17.99vw; top: 75.29%; }  /* 259/1440, 527/700 */
 
