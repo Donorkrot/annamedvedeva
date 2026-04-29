@@ -1,4 +1,5 @@
 'use client';
+import { useEffect } from "react";
 import Image from "next/image";
 import { useTranslation } from '@/components/LanguageProvider';
 import Footer from '@/components/Footer';
@@ -18,6 +19,17 @@ const SECTIONS = [
 
 export default function OfferPage() {
   const { lang } = useTranslation();
+
+  // The offer JPEG has a light cream background, so the global transparent-on-top
+  // header (white text) becomes invisible. Force the dark header background only
+  // while this page is mounted; cleanup restores normal behaviour on navigation.
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.setAttribute('data-offer-header-fix', '');
+    style.textContent = '.site-header { background: rgba(26, 13, 5, 0.95) !important; }';
+    document.head.appendChild(style);
+    return () => { style.remove(); };
+  }, []);
 
   return (
     <main>
