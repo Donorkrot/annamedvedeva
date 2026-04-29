@@ -2660,18 +2660,20 @@ img.desktop-only { display: block !important; }
 #s12.s12-figma .s12-bg img { object-fit: cover; }
 
 /* Top gradient overlay — Figma nodes 1:519 + 1:520 (two stacked 201px gradients,
-   black at top fading to transparent ~40.6% of section height). Double-stacked
-   linear-gradient backgrounds reproduce Figma's stronger darkening. */
-#s12.s12-figma::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 40.61%;            /* 201/495 */
-  background:
-    linear-gradient(to bottom, #000 0%, rgba(0,0,0,0) 100%),
-    linear-gradient(to bottom, #000 0%, rgba(0,0,0,0) 100%);
-  pointer-events: none;
-  z-index: 1;
+   black at top fading to transparent ~40.6% of section height). Desktop only —
+   mobile footer keeps its own .s12-m-grad-top element. */
+@media (min-width: 769px) {
+  #s12.s12-figma::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 40.61%;            /* 201/495 */
+    background:
+      linear-gradient(to bottom, #000 0%, rgba(0,0,0,0) 100%),
+      linear-gradient(to bottom, #000 0%, rgba(0,0,0,0) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
 }
 
 /* All footer positions expressed as % of the 1440×495 design so they

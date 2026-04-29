@@ -19,13 +19,13 @@ export default function Footer() {
       <div className="s12-headline-block desktop-only">
         <h2 className="s12-headline">
           <span className="s12-headline__hl">{tr('s12_headline_hl')}</span>
-          <span className="s12-headline__rest">{tr('s12_headline')}</span>
+          <span className="s12-headline__rest">{' — ' + tr('s12_headline')}</span>
         </h2>
         <p className="s12-tagline">{tr('s12_tagline')}</p>
       </div>
 
       <div className="s12-currency-block desktop-only">
-        <h3 className="s12-currency-title">{tr('s12_currency_title')}</h3>
+        <h3 className="s12-currency-title">{tr('s12_currency_title').replace('\n', ' — ')}</h3>
         <p className="s12-currency-body">{tr('s12_currency_body')}</p>
       </div>
 
