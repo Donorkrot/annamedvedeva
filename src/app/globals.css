@@ -1886,7 +1886,7 @@ img.desktop-only { display: block !important; }
   z-index: 1;
   pointer-events: none;
 }
-#s4 .s4-line img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+#s4 .s4-line img { object-fit: cover; }
 
 #s4 .s4-col {
   position: absolute;
@@ -2362,76 +2362,82 @@ img.desktop-only { display: block !important; }
   line-height: 1.2;
 }
 
-/* ===== S10 — Unity (Figma 1440×700, node 1:156) ===== */
-#s10 { background: #000; }
+/* ===== S10 - Unity ===== */
+#s10 {
+  background: #000;
+}
+
+.s10-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* S10 — Figma 1440×700, node 1:156 */
 #s10.s10-figma { background: #000; }
-
-/* — desktop wrapper — */
-#s10 .s10-d { position: absolute; inset: 0; }
-
-/* — background image (Figma node 314:433, asset matches section aspect 1440/700) — */
-#s10 .s10-d-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
-#s10 .s10-d-bg img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
+#s10 .s10-bg-img { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+#s10 .s10-bg-img img { position: absolute; top: 2.05%; left: -0.13%; height: 97%; width: 100%; object-fit: cover; display: block; }
+#s10 .s10-header {
+  position: absolute;
+  z-index: 2;
+  top: 14.29%;             /* 100/700 */
+  left: 10.76%;            /* 155/1440 */
+  width: 33.06%;           /* 476/1440 */
+  height: 14.86%;          /* 104/700 */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #fff5ef;
 }
-
-/* — title (Figma node 314:444) — */
-#s10 .s10-d-title {
-  position: absolute; z-index: 2;
-  top: 14.14%;                       /* 99/700 */
-  left: calc(50% - 23.92vw);        /* calc(50% - 344.5/1440*100) */
-  display: flex; flex-direction: column; gap: 0.69vw; /* 10/1440 */
+#s10 .s10-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 52px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #fff5ef;
+  white-space: nowrap;
 }
-#s10 .s10-d-h2 {
-  margin: 0; font-family: var(--font-heading); font-weight: 600;
-  font-size: 3.61vw; line-height: 1; /* 52/1440 */
-  text-transform: uppercase; white-space: nowrap; color: #fff5ef;
+#s10 .s10-intro {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1;
+  color: #fff5ef;
 }
-#s10 .s10-d-intro {
-  margin: 0; font-family: var(--font-body); font-weight: 500;
-  font-size: 1.25vw; line-height: 1; color: #fff5ef; /* 18/1440 */
-}
-
-/* — staircase steps (Figma nodes 314:441 / 314:438 / 314:434) — */
-#s10 .s10-d-step {
-  position: absolute; z-index: 2;
-  display: flex; flex-direction: column;
-  gap: 1.39vw;                       /* 20/1440 */
-}
-#s10 .s10-d-text {
-  margin: 0; width: 22.57vw;        /* 325/1440 */
-  font-family: var(--font-body); font-weight: 500;
-  font-size: 1.25vw; line-height: 1.2; color: #fff5ef; /* 18/1440 */
-}
-#s10 .s10-d-line {
-  position: relative; width: 100%; aspect-ratio: 1110/4; flex-shrink: 0;
-}
-#s10 .s10-d-line img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-
-/* steps 1 & 2 — width 555, text centered in wrapper */
-#s10 .s10-d-step--1,
-#s10 .s10-d-step--2 {
-  width: 38.54vw;                    /* 555/1440 */
+#s10 .s10-step {
+  position: absolute;
+  z-index: 2;
+  width: 38.54vw;        /* 555/1440 */
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 1.39vw;           /* 20/1440 */
 }
-
-/* step 3 — width 1062, items-start; inner text wrapper centers text in 555 */
-#s10 .s10-d-step--3 {
-  width: 73.75vw;                    /* 1062/1440 */
-  align-items: flex-start;
+#s10 .s10-step__text {
+  margin: 0;
+  width: 22.57vw;        /* 325/1440 */
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.25vw;     /* 18/1440 */
+  line-height: 1.2;
+  color: #fff5ef;
+  text-align: left;
 }
-#s10 .s10-d-step--3 .s10-d-text-wrap {
-  display: flex; flex-direction: column; align-items: center;
-  width: 38.54vw;                    /* 555/1440 */
+#s10 .s10-step__line {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1110 / 4;
   flex-shrink: 0;
 }
-
-/* staircase positions (Figma 1440×700) */
-#s10 .s10-d-step--1 { left: 2.71vw;  top: 49.14%; }  /* 39/1440,  344/700 */
-#s10 .s10-d-step--2 { left: 10.69vw; top: 60.71%; }  /* 154/1440, 425/700 */
-#s10 .s10-d-step--3 { left: 17.99vw; top: 75.29%; }  /* 259/1440, 527/700 */
+#s10 .s10-step__line img { object-fit: cover; }
+/* Figma S10 staircase — all px → vw so steps scale with the section */
+#s10 .s10-step-1 { left: 2.71vw;  top: 46.14%; }   /* 39/1440,  323/700 */
+#s10 .s10-step-2 { left: 10.69vw; top: 60.71%; }   /* 154/1440, 425/700 */
+#s10 .s10-step-3 { left: 17.99vw; top: 75.29%; }   /* 259/1440, 527/700 */
 
 /* ===== S11 — Programs (Figma 1440×820, node 1:170) ===== */
 #s11.s11-figma { background: #000; }
@@ -2659,29 +2665,14 @@ img.desktop-only { display: block !important; }
 #s12.s12-figma .s12-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
 #s12.s12-figma .s12-bg img { object-fit: cover; }
 
-/* Top gradient overlay — Figma nodes 1:519 + 1:520 (two stacked 201px gradients,
-   black at top fading to transparent ~40.6% of section height). Double-stacked
-   linear-gradient backgrounds reproduce Figma's stronger darkening. */
-#s12.s12-figma::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 40.61%;            /* 201/495 */
-  background:
-    linear-gradient(to bottom, #000 0%, rgba(0,0,0,0) 100%),
-    linear-gradient(to bottom, #000 0%, rgba(0,0,0,0) 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
 /* All footer positions expressed as % of the 1440×495 design so they
    scale correctly with the section (and survive browser zoom). */
 #s12.s12-figma .s12-headline-block {
   position: absolute;
   z-index: 2;
   top: 28.99%;             /* center y = 143.5/495 */
-  left: 10.69%;            /* 154/1440 — same left edge as the book button below */
-  transform: translateY(-50%);
+  left: 28.82%;            /* center x = 415/1440 */
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   gap: 20px;

@@ -16,8 +16,7 @@ export default function IntelligenceSection() {
       <h2 className="s4-title desktop-only">{tr('s4_title')}</h2>
 
       <div className="s4-line desktop-only" aria-hidden="true">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/content/s4-line.svg" alt="" />
+        <Image src="/images/content/s4-line.png" alt="" fill sizes="100vw" />
       </div>
 
       <article className="s4-col s4-col-iq desktop-only">
