@@ -2381,11 +2381,14 @@ img.desktop-only { display: block !important; }
   object-fit: cover; display: block;
 }
 
-/* — title (Figma node 314:444) — */
+/* — title (Figma node 1:167) — Figma has `-translate-x-1/2` on the
+   container, so left: calc(50% - 327px) is the *center* anchor, not the
+   left edge. Mirror that with translateX(-50%). */
 #s10 .s10-d-title {
   position: absolute; z-index: 2;
   top: 14.14%;                       /* 99/700 */
-  left: calc(50% - 23.92vw);        /* calc(50% - 344.5/1440*100) */
+  left: calc(50% - 22.71vw);        /* 327/1440 — center anchor */
+  transform: translateX(-50%);
   display: flex; flex-direction: column; gap: 0.69vw; /* 10/1440 */
 }
 #s10 .s10-d-h2 {
@@ -2409,10 +2412,22 @@ img.desktop-only { display: block !important; }
   font-family: var(--font-body); font-weight: 500;
   font-size: 1.25vw; line-height: 1.2; color: #fff5ef; /* 18/1440 */
 }
+/* Lines: render the Figma SVG gradient (node 1:166/1:163/314:411 fill)
+   as a CSS linear-gradient so the warm-orange stops stay vivid at any
+   render size. The PNG asset loses gradient fidelity when scaled down
+   to 2-4px tall on production. */
 #s10 .s10-d-line {
   position: relative; width: 100%; aspect-ratio: 1110/4; flex-shrink: 0;
+  background: linear-gradient(to right,
+    #C3BBB6 0%,
+    rgba(49,15,0,0.6) 13.58%,
+    #DE8B23 26.04%,
+    #FFF5EF 39.22%,
+    #DE8B23 64.42%,
+    rgba(49,15,0,0.6) 81.65%,
+    #CFC1B6 100%);
 }
-#s10 .s10-d-line img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+#s10 .s10-d-line img { display: none; }
 
 /* steps 1 & 2 — width 555, text centered in wrapper */
 #s10 .s10-d-step--1,
