@@ -137,6 +137,14 @@ export default function AboutPage() {
             </div>
           )}
 
+          {/* a9 — Почему именно я (Figma 1:2091). "Запись на консультацию"
+              button at right column, x:1035/1440 y:577/700 w:325/1440 h:47/700. */}
+          {i === 8 && (
+            <a href="/consultation" className="about-btn-consult">
+              <span>Запись на консультацию</span>
+            </a>
+          )}
+
           {/* a10 — "Примеры работы" block. Embed YouTube video into the grey
              placeholder (measured from a10.jpg: left:42.71% top:24.86% w:46.94% h:54.29%). */}
           {i === 9 && (

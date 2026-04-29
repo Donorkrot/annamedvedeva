@@ -4332,6 +4332,34 @@ img.desktop-only { display: block !important; }
 .about-btn-book:hover { background: #fff0e0; transform: translateY(-1px); }
 .about-btn-book:active { transform: translateY(0); }
 
+/* a9 "Почему именно я" — single Запись на консультацию button on dark stone bg.
+   Position from Figma 1:2115 inside 1:2091 (1440×700 frame). */
+.about-btn-consult {
+  position: absolute;
+  z-index: 5;
+  top: 82.43%;             /* 577/700 */
+  left: 71.88%;            /* 1035/1440 */
+  width: 22.57%;           /* 325/1440 */
+  height: 6.71%;           /* 47/700 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #fff5ef;
+  border-radius: 10px;
+  background: rgba(255, 245, 239, 0);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+  color: #fff5ef;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.about-btn-consult:hover { background: rgba(255, 245, 239, 0.1); transform: translateY(-1px); }
+.about-btn-consult:active { transform: translateY(0); }
+
 @media (max-width: 768px) {
   .about-btn-method,
   .about-btn-book-group {
@@ -4339,6 +4367,19 @@ img.desktop-only { display: block !important; }
        into the mobile JPGs, so hide the desktop HTML overlays. */
     display: none;
   }
+  /* a9 mobile JPG ends with "Записаться на консультацию" text but no button —
+     keep the overlay visible and reposition near the bottom of the section. */
+  .about-btn-consult {
+    top: auto;
+    bottom: 6%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: auto;
+    padding: 14px 20px;
+  }
+  .about-btn-consult:hover { transform: translateX(-50%) translateY(-1px); }
+  .about-btn-consult:active { transform: translateX(-50%) translateY(0); }
 }
 
 /* === LiteYouTube facade ===
