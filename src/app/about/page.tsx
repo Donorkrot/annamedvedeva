@@ -132,7 +132,7 @@ export default function AboutPage() {
           {/* a6 — Книга: ДНК Реальности (Figma 1:2064). Two stacked buttons at left:500/1440, top:531/685, w:440. */}
           {i === 5 && (
             <div className="about-btn-book-group">
-              <a href="#" className="about-btn-book"><span>Читать книгу</span></a>
+              <a href="https://drive.google.com/drive/folders/1V5KF6JG-TGjbRFOk_Y0n7wxdmd0SG49V" target="_blank" rel="noopener noreferrer" className="about-btn-book"><span>Читать книгу</span></a>
               <a href="#" className="about-btn-book"><span>Слушать книгу</span></a>
             </div>
           )}
