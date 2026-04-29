@@ -10,7 +10,8 @@ export default function UnitySection() {
 
       {/* ── Desktop ── */}
       <div className="s10-bg-img desktop-only">
-        <Image src="/images/backgrounds/bg-s10-desktop.jpg" alt="" fill sizes="100vw" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/backgrounds/bg-s10-desktop.jpg" alt="" />
       </div>
 
       <div className="s10-header desktop-only">
