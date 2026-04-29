@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import { useTranslation } from '@/components/LanguageProvider';
 
 export default function UnitySection() {
@@ -8,33 +7,38 @@ export default function UnitySection() {
   return (
     <section id="s10" className="section s10-figma">
 
-      {/* ── Desktop ── */}
-      <div className="s10-bg-img desktop-only">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/backgrounds/bg-s10-desktop.jpg" alt="" />
-      </div>
-
-      <div className="s10-header desktop-only">
-        <h2 className="s10-title">{tr('s10_title_1')} {tr('s10_title_2')}</h2>
-        <p className="s10-intro">{tr('s10_intro')}</p>
-      </div>
-
-      <div className="s10-step s10-step-1 desktop-only">
-        <p className="s10-step__text">{tr('s10_item1')}</p>
-        <div className="s10-step__line" aria-hidden="true">
-          <Image src="/images/content/s10-line.png" alt="" fill sizes="555px" />
+      {/* ── Desktop (Figma 1440×700, node 1:156) ── */}
+      <div className="s10-d desktop-only">
+        <div className="s10-d-bg" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/backgrounds/bg-s10-desktop.jpg" alt="" />
         </div>
-      </div>
-      <div className="s10-step s10-step-2 desktop-only">
-        <p className="s10-step__text">{tr('s10_item2')}</p>
-        <div className="s10-step__line" aria-hidden="true">
-          <Image src="/images/content/s10-line.png" alt="" fill sizes="555px" />
+        <div className="s10-d-title">
+          <h2 className="s10-d-h2">{tr('s10_title_1')} {tr('s10_title_2')}</h2>
+          <p className="s10-d-intro">{tr('s10_intro')}</p>
         </div>
-      </div>
-      <div className="s10-step s10-step-3 desktop-only">
-        <p className="s10-step__text">{tr('s10_item3')}</p>
-        <div className="s10-step__line" aria-hidden="true">
-          <Image src="/images/content/s10-line.png" alt="" fill sizes="555px" />
+        <div className="s10-d-step s10-d-step--1">
+          <p className="s10-d-text">{tr('s10_item1')}</p>
+          <div className="s10-d-line" aria-hidden="true">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/content/s10-line.png" alt="" />
+          </div>
+        </div>
+        <div className="s10-d-step s10-d-step--2">
+          <p className="s10-d-text">{tr('s10_item2')}</p>
+          <div className="s10-d-line" aria-hidden="true">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/content/s10-line.png" alt="" />
+          </div>
+        </div>
+        <div className="s10-d-step s10-d-step--3">
+          <div className="s10-d-text-wrap">
+            <p className="s10-d-text">{tr('s10_item3')}</p>
+          </div>
+          <div className="s10-d-line" aria-hidden="true">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/content/s10-line.png" alt="" />
+          </div>
         </div>
       </div>
 
