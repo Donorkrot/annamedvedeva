@@ -1,4 +1,5 @@
 'use client';
+import { useEffect } from "react";
 import Image from "next/image";
 import { useTranslation } from '@/components/LanguageProvider';
 import Footer from '@/components/Footer';
@@ -13,6 +14,26 @@ function privacyPath(lang: string): string {
 
 export default function PrivacyPage() {
   const { lang } = useTranslation();
+
+  // Privacy JPEG bg is light cream so the global transparent header is invisible —
+  // force a dark bg AND shrink the header so it doesn't eat half the page on
+  // mobile. Scoped to /privacy only via mount/unmount.
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.setAttribute('data-privacy-header-fix', '');
+    style.textContent = `
+      .site-header {
+        background: rgba(26, 13, 5, 0.95) !important;
+        height: calc(32px + env(safe-area-inset-top)) !important;
+      }
+      .site-header .header-logo-text { font-size: 10px !important; letter-spacing: 1.5px !important; }
+      .site-header .header-btn { padding: 4px 12px !important; font-size: 10px !important; }
+      .site-header .lang-switcher a { font-size: 10px !important; }
+      .site-header .header-burger { transform: scale(0.7); }
+    `;
+    document.head.appendChild(style);
+    return () => { style.remove(); };
+  }, []);
 
   return (
     <main>
