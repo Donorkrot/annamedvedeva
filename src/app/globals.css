@@ -2411,33 +2411,33 @@ img.desktop-only { display: block !important; }
 #s10 .s10-step {
   position: absolute;
   z-index: 2;
-  width: 555px;
+  width: 38.54vw;        /* 555/1440 */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 1.39vw;           /* 20/1440 */
 }
 #s10 .s10-step__text {
   margin: 0;
-  width: 325px;
+  width: 22.57vw;        /* 325/1440 */
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 18px;
+  font-size: 1.25vw;     /* 18/1440 */
   line-height: 1.2;
   color: #fff5ef;
   text-align: left;
 }
 #s10 .s10-step__line {
   position: relative;
-  width: 100%;          /* 555px in Figma */
+  width: 100%;
   aspect-ratio: 1110 / 4;
   flex-shrink: 0;
 }
 #s10 .s10-step__line img { object-fit: cover; }
-/* Figma S10 staircase — 3 steps overlapping */
-#s10 .s10-step-1 { left: 39px;  top: 46.14%; }   /* 323/700 */
-#s10 .s10-step-2 { left: 154px; top: 60.71%; }   /* 425/700 */
-#s10 .s10-step-3 { left: 259px; top: 75.29%; }   /* 527/700 */
+/* Figma S10 staircase — all px → vw so steps scale with the section */
+#s10 .s10-step-1 { left: 2.71vw;  top: 46.14%; }   /* 39/1440,  323/700 */
+#s10 .s10-step-2 { left: 10.69vw; top: 60.71%; }   /* 154/1440, 425/700 */
+#s10 .s10-step-3 { left: 17.99vw; top: 75.29%; }   /* 259/1440, 527/700 */
 
 /* ===== S11 — Programs (Figma 1440×820, node 1:170) ===== */
 #s11.s11-figma { background: #000; }
