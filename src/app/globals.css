@@ -1039,7 +1039,6 @@ img.desktop-only { display: block !important; }
   .s1-m-title1,
   .s1-m-title2,
   .s1-m-title3,
-  .s1-m-line,
   .s1-m-subtitle,
   .s1-m-btn { z-index: 3; }
 
@@ -1094,21 +1093,6 @@ img.desktop-only { display: block !important; }
     text-align: center;
     line-height: normal;
     font-feature-settings: 'lnum' 1, 'pnum' 1;
-  }
-
-  /* Divider line between СОСТОЯНИЕМ and АННЫ — soft horizontal gradient */
-  .s1-m-line {
-    position: absolute;
-    top: 39.8%;
-    left: 0;
-    right: 0;
-    height: 0.4vw;
-    background: linear-gradient(to right,
-      rgba(255, 245, 239, 0.6) 0%,
-      rgba(255, 255, 255, 0.9) 50%,
-      rgba(255, 245, 239, 0.6) 100%);
-    box-shadow: 0 0 1.6vw rgba(255, 245, 239, 0.5),
-                0 0 3.7333vw rgba(255, 245, 239, 0.3);
   }
 
   /* АННЫ МЕДВЕДЕВОЙ */

@@ -65,8 +65,6 @@ export default function HeroSection() {
         <p className="s1-m-title1">{tr('hero_m_line1')}</p>
         <p className="s1-m-title2">{tr('hero_m_line2')}</p>
 
-        <div className="s1-m-line" aria-hidden="true" />
-
         <p className="s1-m-title3">{tr('hero_m_line3')}</p>
 
         <p className="s1-m-subtitle">{tr('hero_subtitle')}</p>
