@@ -1971,6 +1971,10 @@ img.desktop-only { display: block !important; }
 #s4 .s4-col-ri { left: 70.83%; top: 21.78%; width: 22.15%; align-items: center; }
 #s4 .s4-col-ri .s4-letter { margin-left: 0; }
 #s4 .s4-col-ri .s4-stone--ri { width: 319px; max-width: 100%; height: 230px; margin-top: 24px; }
+/* Override the global .s4-stone `object-fit: contain` for RI: Figma uses
+   default object-fit (fill) with bottom anchor — the 1024×1024 source is
+   stretched to fill the full 319×230 column (matches Figma node 1:365). */
+#s4 .s4-col-ri .s4-stone--ri img { object-fit: fill; object-position: bottom; }
 #s4 .s4-col-ri .s4-name   { margin-top: 0; width: 210px; max-width: 100%; text-align: left; }
 #s4 .s4-col-ri .s4-desc   { margin-top: 20px; width: 210px; max-width: 100%; text-align: left; }
 #s4 .s4-col-ri .s4-accent { margin-top: 20px; width: 210px; max-width: 100%; text-align: left; white-space: normal; }
