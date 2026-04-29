@@ -29,12 +29,12 @@ export default function OfferPage() {
     style.textContent = `
       .site-header {
         background: rgba(26, 13, 5, 0.95) !important;
-        height: calc(44px + env(safe-area-inset-top)) !important;
+        height: calc(32px + env(safe-area-inset-top)) !important;
       }
-      .site-header .header-logo-text { font-size: 12px !important; letter-spacing: 2px !important; }
-      .site-header .header-btn { padding: 6px 16px !important; font-size: 12px !important; }
-      .site-header .lang-switcher a { font-size: 11px !important; }
-      .site-header .header-burger { transform: scale(0.85); }
+      .site-header .header-logo-text { font-size: 10px !important; letter-spacing: 1.5px !important; }
+      .site-header .header-btn { padding: 4px 12px !important; font-size: 10px !important; }
+      .site-header .lang-switcher a { font-size: 10px !important; }
+      .site-header .header-burger { transform: scale(0.7); }
     `;
     document.head.appendChild(style);
     return () => { style.remove(); };
