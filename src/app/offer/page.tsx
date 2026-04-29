@@ -20,13 +20,22 @@ const SECTIONS = [
 export default function OfferPage() {
   const { lang } = useTranslation();
 
-  // The offer JPEG has a light cream background, so the global transparent-on-top
-  // header (white text) becomes invisible. Force the dark header background only
-  // while this page is mounted; cleanup restores normal behaviour on navigation.
+  // Offer JPEG bg is light cream so the global transparent header is invisible —
+  // force a dark bg AND shrink the header so it doesn't eat half the page on
+  // mobile. Scoped to /offer only via mount/unmount.
   useEffect(() => {
     const style = document.createElement('style');
     style.setAttribute('data-offer-header-fix', '');
-    style.textContent = '.site-header { background: rgba(26, 13, 5, 0.95) !important; }';
+    style.textContent = `
+      .site-header {
+        background: rgba(26, 13, 5, 0.95) !important;
+        height: calc(44px + env(safe-area-inset-top)) !important;
+      }
+      .site-header .header-logo-text { font-size: 12px !important; letter-spacing: 2px !important; }
+      .site-header .header-btn { padding: 6px 16px !important; font-size: 12px !important; }
+      .site-header .lang-switcher a { font-size: 11px !important; }
+      .site-header .header-burger { transform: scale(0.85); }
+    `;
     document.head.appendChild(style);
     return () => { style.remove(); };
   }, []);
