@@ -2377,7 +2377,7 @@ img.desktop-only { display: block !important; }
 /* S10 — Figma 1440×700, node 1:156 */
 #s10.s10-figma { background: #000; }
 #s10 .s10-bg-img { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-#s10 .s10-bg-img img { object-fit: cover; }
+#s10 .s10-bg-img img { object-fit: cover; object-position: center center; }
 #s10 .s10-header {
   position: absolute;
   z-index: 2;
