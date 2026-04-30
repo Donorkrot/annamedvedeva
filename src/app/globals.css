@@ -1246,6 +1246,70 @@ img.desktop-only { display: block !important; }
   object-fit: cover;
 }
 
+/* ===== Legal pages mobile HTML (offer / privacy) — Figma 367:408 / 368:430 =====
+   Desktop keeps the JPG layout; mobile renders selectable HTML on a cream
+   card so the text isn't a tiny baked-in image. */
+.legal-mobile {
+  background: #fbece3;
+  color: #000;
+  /* Clear the 64px fixed header + iOS notch */
+  padding: calc(80px + env(safe-area-inset-top)) 16px 24px;
+  font-family: var(--font-body);
+}
+.legal-mobile-card {
+  background: rgba(251, 234, 224, 0.7);
+  border-radius: 20px;
+  padding: 20px;
+}
+.legal-mobile-title {
+  margin: 0 0 16px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #000;
+}
+.legal-mobile-body {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #000;
+}
+.legal-mobile-body h2 {
+  margin: 16px 0 4px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #000;
+}
+.legal-mobile-body h2:first-child { margin-top: 0; }
+.legal-mobile-body h3 {
+  margin: 10px 0 4px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #000;
+}
+.legal-mobile-body p {
+  margin: 0 0 4px;
+}
+.legal-mobile-body ul {
+  margin: 4px 0 8px;
+  padding-left: 24px;
+  list-style: disc;
+}
+.legal-mobile-body ul ul {
+  margin: 4px 0;
+  padding-left: 24px;
+}
+.legal-mobile-body li {
+  margin: 0 0 2px;
+}
+
 /* ===== FIXED HEADER ===== */
 .site-header {
   position: fixed;
