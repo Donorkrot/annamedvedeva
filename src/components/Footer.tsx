@@ -36,13 +36,13 @@ export default function Footer() {
 
       <div className="s12-social desktop-only">
         <a href="https://instagram.com/medvedieva.anna" target="_blank" rel="noopener noreferrer" className="s12-social__link" aria-label="Instagram">
-          <img src="/images/icons/instagram.svg" alt="" width={40} height={40} draggable={false} />
+          <img loading="lazy" decoding="async" src="/images/icons/instagram.svg" alt="" width={40} height={40} draggable={false} />
         </a>
         <a href="https://www.youtube.com/@medvedievaanna" target="_blank" rel="noopener noreferrer" className="s12-social__link" aria-label="YouTube">
-          <img src="/images/icons/youtube.svg" alt="" width={40} height={40} draggable={false} />
+          <img loading="lazy" decoding="async" src="/images/icons/youtube.svg" alt="" width={40} height={40} draggable={false} />
         </a>
         <a href="https://t.me/wayofsoulanna" target="_blank" rel="noopener noreferrer" className="s12-social__link" aria-label="Telegram">
-          <img src="/images/icons/telegram.svg" alt="" width={40} height={40} draggable={false} />
+          <img loading="lazy" decoding="async" src="/images/icons/telegram.svg" alt="" width={40} height={40} draggable={false} />
         </a>
       </div>
 
@@ -60,7 +60,7 @@ export default function Footer() {
         {/* Background image */}
         <div className="s12-m-bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/backgrounds/bg-s12-mobile.jpg"
             alt=""
             className="s12-m-bg-img"
@@ -105,15 +105,15 @@ export default function Footer() {
         <div className="s12-m-social">
           <a href="https://instagram.com/medvedieva.anna" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/icons/instagram.svg" alt="" width={40} height={40} draggable={false} />
+            <img loading="lazy" decoding="async" src="/images/icons/instagram.svg" alt="" width={40} height={40} draggable={false} />
           </a>
           <a href="https://www.youtube.com/@medvedievaanna" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/icons/youtube.svg" alt="" width={40} height={40} draggable={false} />
+            <img loading="lazy" decoding="async" src="/images/icons/youtube.svg" alt="" width={40} height={40} draggable={false} />
           </a>
           <a href="https://t.me/wayofsoulanna" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/icons/telegram.svg" alt="" width={40} height={40} draggable={false} />
+            <img loading="lazy" decoding="async" src="/images/icons/telegram.svg" alt="" width={40} height={40} draggable={false} />
           </a>
         </div>
 

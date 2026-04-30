@@ -39,7 +39,7 @@ export default function RIFeaturesSection() {
         {/* Background */}
         <div className="s5-m-bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/backgrounds/bg-s5-mobile.jpg"
             alt=""
             className="s5-m-bg-img"

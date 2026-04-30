@@ -17,7 +17,7 @@ export default function IntelligenceSection() {
 
       <div className="s4-line desktop-only" aria-hidden="true">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/content/s4-line.svg" alt="" />
+        <img loading="lazy" decoding="async" src="/images/content/s4-line.svg" alt="" />
       </div>
 
       <article className="s4-col s4-col-iq desktop-only">
@@ -58,7 +58,7 @@ export default function IntelligenceSection() {
         {/* Background */}
         <div className="s4-m-bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/backgrounds/s4-bg-mobile-clean.jpg"
             alt=""
             className="s4-m-bg-img"
@@ -74,7 +74,7 @@ export default function IntelligenceSection() {
           {/* Stone — x:71.66 y:40.91 w:78.34 h:87.18 */}
           <div className="s4-m-stone s4-m-iq-stone">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/content/s4-iq-clean.png" alt="" draggable={false} />
+            <img loading="lazy" decoding="async" src="/images/content/s4-iq-clean.png" alt="" draggable={false} />
           </div>
           {/* Letter IQ — x:95 y:0, Cormorant Medium 28px */}
           <p className="s4-m-letter">IQ</p>
@@ -90,7 +90,7 @@ export default function IntelligenceSection() {
           {/* Stone — x:49.57 y:41.11 w:111.37 h:135.78 */}
           <div className="s4-m-stone s4-m-eq-stone">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/content/s4-eq-clean.png" alt="" draggable={false} />
+            <img loading="lazy" decoding="async" src="/images/content/s4-eq-clean.png" alt="" draggable={false} />
           </div>
           {/* Letter EQ — x:87 y:0 */}
           <p className="s4-m-letter">EQ</p>
@@ -107,7 +107,7 @@ export default function IntelligenceSection() {
           <div className="s4-m-sq-stone-outer">
             <div className="s4-m-sq-stone-inner">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/content/s4-sq-clean.png" alt="" draggable={false} />
+              <img loading="lazy" decoding="async" src="/images/content/s4-sq-clean.png" alt="" draggable={false} />
             </div>
           </div>
           {/* Letter SQ — x:87 y:0 */}
@@ -124,7 +124,7 @@ export default function IntelligenceSection() {
           {/* Stone fills container — x:0 y:0 w:347 h:415 */}
           <div className="s4-m-ri-stone">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/content/s4-ri-clean.png" alt="" className="s4-m-ri-stone-img" draggable={false} />
+            <img loading="lazy" decoding="async" src="/images/content/s4-ri-clean.png" alt="" className="s4-m-ri-stone-img" draggable={false} />
           </div>
           {/* Letter RI — x:146.5 y:36, Cormorant SemiBold 52px */}
           <p className="s4-m-ri-letter">RI</p>

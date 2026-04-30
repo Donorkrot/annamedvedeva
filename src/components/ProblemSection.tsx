@@ -41,7 +41,7 @@ export default function ProblemSection() {
         {/* Background — exact Figma crop: 297.35% × 212.16%, offset −98.67% / −32.22% */}
         <div className="s2-m-bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/backgrounds/s2-bg-mobile-clean.jpg"
             alt=""
             className="s2-m-bg-img"
@@ -55,7 +55,7 @@ export default function ProblemSection() {
         {/* Card 1: Новое давление — left:29px top:357px w:315px h:139px */}
         <div className="s2-m-card s2-m-card--1">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/backgrounds/s2-card1-bg.png"
             alt=""
             className="s2-m-card__bg"
@@ -70,7 +70,7 @@ export default function ProblemSection() {
         {/* Card 2: Новая реальность — left:29px top:536px w:315px h:214px */}
         <div className="s2-m-card s2-m-card--2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/backgrounds/s2-card2-bg.png"
             alt=""
             className="s2-m-card__bg"

@@ -46,7 +46,7 @@ export default function ProgramsSection() {
         {/* Background image */}
         <div className="s11-m-bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/backgrounds/bg-s11-mobile.jpg"
             alt=""
             className="s11-m-bg-img"

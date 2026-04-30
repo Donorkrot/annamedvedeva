@@ -41,7 +41,7 @@ export default function ArchetypesSection() {
         {/* Background — x:0 y:0 w:375 h:994 */}
         <div className="s9-m-bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/backgrounds/bg-s9-mobile.jpg"
             alt=""
             className="s9-m-bg-img"
@@ -59,7 +59,7 @@ export default function ArchetypesSection() {
         <div className="s9-m-card">
           {/* Venn diagram image */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/content/s9-venn-mobile.png"
             alt=""
             className="s9-m-venn-img"

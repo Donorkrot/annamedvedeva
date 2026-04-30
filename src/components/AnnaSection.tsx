@@ -43,7 +43,7 @@ export default function AnnaSection() {
         {/* Background — x:0 y:0 w:375 h:1019, #332000 dark overlay + 60% photo */}
         <div className="s7-m-bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/backgrounds/bg-s7-mobile.jpg"
             alt=""
             className="s7-m-bg-img"
@@ -73,7 +73,7 @@ export default function AnnaSection() {
         {/* Photo — x:0 y:298 w:375 h:288 (Figma node 1:995) */}
         <div className="s7-m-photo">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/content/s7-photo-mobile.jpg"
             alt="Анна Медведева"
             className="s7-m-photo-img"

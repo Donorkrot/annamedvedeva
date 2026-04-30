@@ -4,16 +4,23 @@ import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import Header from "@/components/Header";
 
+// Weight lists were grepped against globals.css — drop unused weights so the
+// browser doesn't pull woff2 files it never renders. Audit:
+//   --font-heading (Cormorant) actual uses: 300, 400, 500, 600
+//   --font-body    (Raleway)   actual uses: 200, 300, 400, 500, 600
+// Re-audit before adding new weighty styles.
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   subsets: ["latin", "cyrillic"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600"],
+  display: "swap",
 });
 
 const raleway = Raleway({
   variable: "--font-raleway",
   subsets: ["latin", "cyrillic"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["200", "300", "400", "500", "600"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {

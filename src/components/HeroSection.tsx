@@ -9,13 +9,20 @@ export default function HeroSection() {
     <section id="s1" className="section">
       {/* ── Desktop — Figma node 1-64 (1440×700) ── */}
       <div className="s1-d desktop-only">
-        {/* Ambient particle background — full bleed, centered vertically */}
+        {/* Ambient particle background — full bleed, centered vertically.
+            NB: no `priority` here. With `priority`, Next.js emits a
+            <link rel="preload"> in <head> that ignores the parent's
+            display:none, so mobile users would download these desktop
+            assets too (~970 KB wasted before LCP on mobile). Without
+            priority, the IntersectionObserver still fires immediately on
+            desktop because the element is above the fold, so desktop LCP
+            is barely affected. */}
         <div className="s1-d-bg" aria-hidden="true">
-          <Image src="/images/backgrounds/bg-s1-d-ambient.webp" alt="" fill sizes="100vw" priority />
+          <Image src="/images/backgrounds/bg-s1-d-ambient.webp" alt="" fill sizes="100vw" />
         </div>
         {/* Lightning audio-wave overlay — 1440×700, centered */}
         <div className="s1-d-light" aria-hidden="true">
-          <Image src="/images/backgrounds/bg-s1-d-lightning.webp" alt="" fill sizes="100vw" priority />
+          <Image src="/images/backgrounds/bg-s1-d-lightning.webp" alt="" fill sizes="100vw" />
         </div>
 
         {/* Tagline "Новый / Интеллект / Реальности" — page-centered top */}

@@ -23,7 +23,7 @@ export default function OldCodeSection() {
         {/* Background — 105.67% × 105.67%, offset left −0.03%, top −2.83% */}
         <div className="s3-m-bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/backgrounds/s3-bg-mobile-clean.jpg"
             alt=""
             className="s3-m-bg-img"

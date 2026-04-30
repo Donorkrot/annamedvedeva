@@ -11,7 +11,7 @@ export default function UnitySection() {
       <div className="s10-d desktop-only">
         <div className="s10-d-bg" aria-hidden="true">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/backgrounds/bg-s10-desktop.jpg" alt="" />
+          <img loading="lazy" decoding="async" src="/images/backgrounds/bg-s10-desktop.jpg" alt="" />
         </div>
         <div className="s10-d-title">
           <h2 className="s10-d-h2">{tr('s10_title_1')} {tr('s10_title_2')}</h2>
@@ -21,14 +21,14 @@ export default function UnitySection() {
           <p className="s10-d-text">{tr('s10_item1')}</p>
           <div className="s10-d-line" aria-hidden="true">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/content/s10-line.png" alt="" />
+            <img loading="lazy" decoding="async" src="/images/content/s10-line.png" alt="" />
           </div>
         </div>
         <div className="s10-d-step s10-d-step--2">
           <p className="s10-d-text">{tr('s10_item2')}</p>
           <div className="s10-d-line" aria-hidden="true">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/content/s10-line.png" alt="" />
+            <img loading="lazy" decoding="async" src="/images/content/s10-line.png" alt="" />
           </div>
         </div>
         <div className="s10-d-step s10-d-step--3">
@@ -37,7 +37,7 @@ export default function UnitySection() {
           </div>
           <div className="s10-d-line" aria-hidden="true">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/content/s10-line.png" alt="" />
+            <img loading="lazy" decoding="async" src="/images/content/s10-line.png" alt="" />
           </div>
         </div>
       </div>
@@ -48,7 +48,7 @@ export default function UnitySection() {
         {/* Image — x:0 y:163 w:375 h:295 (Figma node 1:429) */}
         <div className="s10-m-img">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/backgrounds/bg-s10-mobile.jpg"
             alt=""
             className="s10-m-img-bg"

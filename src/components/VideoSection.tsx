@@ -35,7 +35,7 @@ export default function VideoSection() {
         {/* Background — fills full frame */}
         <div className="s6-m-bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/mobile/s6.jpg"
             alt=""
             className="s6-m-bg-img"
