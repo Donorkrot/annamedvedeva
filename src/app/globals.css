@@ -4367,19 +4367,19 @@ img.desktop-only { display: block !important; }
        into the mobile JPGs, so hide the desktop HTML overlays. */
     display: none;
   }
-  /* a9 mobile JPG ends with "Записаться на консультацию" text but no button —
-     keep the overlay visible and reposition near the bottom of the section. */
+  /* a9 mobile per Figma 1:1881 — button at x:30/375 y:1343/1430 w:320/375 h:47.
+     Frame is 375×1430, button position 8%/93.92% w:85.33% h:3.29%. */
   .about-btn-consult {
-    top: auto;
-    bottom: 6%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: auto;
-    padding: 14px 20px;
+    top: 93.92%;
+    bottom: auto;
+    left: 8%;
+    transform: none;
+    width: 85.33%;
+    height: 3.29%;
+    padding: 0;
   }
-  .about-btn-consult:hover { transform: translateX(-50%) translateY(-1px); }
-  .about-btn-consult:active { transform: translateX(-50%) translateY(0); }
+  .about-btn-consult:hover { transform: translateY(-1px); }
+  .about-btn-consult:active { transform: translateY(0); }
 }
 
 /* === LiteYouTube facade ===
