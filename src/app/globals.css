@@ -4544,10 +4544,101 @@ img.desktop-only { display: block !important; }
   width: 46.94%;
   height: 54.29%;
 }
-@media (max-width: 768px) {
-  /* Mobile JPG composite is different — hide a4 desktop video overlay. */
-  .about-video--a4 { display: none; }
+/* a4 mobile video — Figma 1:1844: left:0, top:584, w:375, h:234 in 375×818 frame.
+   Specificity bumped above the `@media (max-width:768px) .consult-section .mobile-only`
+   rule that sets `position: relative; width: 100%`. */
+.consult-section .about-video--a4-m.mobile-only {
+  position: absolute;
+  left: 0;
+  top: 71.39%;            /* 584/818 */
+  width: 100%;
+  height: 28.61%;         /* 234/818 */
+}
 
+/* ===== About a4 — copyable text overlay (Figma desktop 1:2049, mobile 1:1837)
+   The baked-in text in a4.jpg remains visible; this HTML mirrors it with
+   color: transparent so users can select & copy the text. Positions match
+   the Figma frame exactly. ===== */
+.about-text-a4,
+.consult-section .about-text-a4-m.mobile-only {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  color: transparent;
+  pointer-events: auto;
+  margin: 0;
+}
+.about-text-a4 *,
+.about-text-a4-m * { margin: 0; color: transparent; }
+
+.about-text-a4__title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 8.286%;            /* 58/700 */
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 3.611vw;     /* 52/1440 */
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.about-text-a4__subtitle {
+  position: absolute;
+  left: 10.764%;          /* 155/1440 */
+  top: 25.571%;           /* 179/700 */
+  width: 30.556%;         /* 440/1440 */
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 1.944vw;     /* 28/1440 */
+  line-height: 1;
+}
+.about-text-a4__body {
+  position: absolute;
+  left: 10.764%;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.111vw;     /* 16/1440 */
+  line-height: 1;
+}
+.about-text-a4__body--1 { top: 62.714%; width: 38.542%; }   /* 439/700, 555/1440 */
+.about-text-a4__body--2 { top: 71%;     width: 33.125%; }   /* 497/700, 477/1440 */
+
+.about-text-a4-m__title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 9.78%;             /* 80/818 */
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 13.867vw;    /* 52/375 */
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.about-text-a4-m__subtitle {
+  position: absolute;
+  left: 8%;               /* 30/375 */
+  top: 19.927%;           /* 163/818 */
+  width: 84%;             /* 315/375 */
+  font-family: var(--font-heading);
+  font-weight: 300;
+  font-size: 6.4vw;       /* 24/375 */
+  line-height: 23.1px;
+}
+.about-text-a4-m__body {
+  position: absolute;
+  left: 8%;
+  width: 84%;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 4.267vw;     /* 16/375 */
+  line-height: 1;
+}
+.about-text-a4-m__body--1 { top: 47.799%; }                /* 391/818 */
+.about-text-a4-m__body--2 { top: 59.535%; }                /* 487/818 */
+
+@media (max-width: 768px) {
   /* a10 mobile placeholder (Figma node 1-1909): left:0, top:311, w:375, h:211 in 375×696 frame */
   .about-video--a10 {
     left: 0;

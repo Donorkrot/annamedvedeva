@@ -115,11 +115,44 @@ export default function AboutPage() {
           )}
 
           {/* a4 — RI block. Embed YouTube video into the white placeholder
-             (measured from a4.jpg: left:50.74% top:25.57% w:39.84% h:51.29%). */}
+             (measured from a4.jpg: left:50.74% top:25.57% w:39.84% h:51.29%).
+             HTML text overlays the baked-in text in the bg image (color is
+             transparent so the printed text remains visible) — this makes the
+             text on the page selectable / copyable. Figma desktop 1:2049,
+             mobile 1:1837. */}
           {i === 3 && (
-            <div className="about-video about-video--a4">
-              <LiteYouTube id="i6vCzyWnE-o" title="Reality Intelligence" />
-            </div>
+            <>
+              <div className="about-text-a4 desktop-only">
+                <h2 className="about-text-a4__title">RI</h2>
+                <p className="about-text-a4__subtitle">
+                  Reality Intelligence — это новый язык взаимодействия с реальностью.
+                </p>
+                <p className="about-text-a4__body about-text-a4__body--1">
+                  Это момент, когда становится очевидно: реальность не нужно «притягивать». С ней можно взаимодействовать напрямую.
+                </p>
+                <p className="about-text-a4__body about-text-a4__body--2">
+                  RI — это про то, как человек начинает считывать, чувствовать и двигать свою реальность из контакта с собой.
+                </p>
+              </div>
+              <div className="about-text-a4-m mobile-only">
+                <h2 className="about-text-a4-m__title">RI</h2>
+                <p className="about-text-a4-m__subtitle">
+                  Reality Intelligence — это новый язык взаимодействия с реальностью.
+                </p>
+                <p className="about-text-a4-m__body about-text-a4-m__body--1">
+                  Это момент, когда становится очевидно: реальность не нужно «притягивать». С ней можно взаимодействовать напрямую.
+                </p>
+                <p className="about-text-a4-m__body about-text-a4-m__body--2">
+                  RI — это про то, как человек начинает считывать, чувствовать и двигать свою реальность из контакта с собой.
+                </p>
+              </div>
+              <div className="about-video about-video--a4 desktop-only">
+                <LiteYouTube id="i6vCzyWnE-o" title="Reality Intelligence" />
+              </div>
+              <div className="about-video about-video--a4-m mobile-only">
+                <LiteYouTube id="i6vCzyWnE-o" title="Reality Intelligence" />
+              </div>
+            </>
           )}
 
           {/* a5 — Метод: ДНК Реальности (Figma 1:2056). Single button at top:550 / 700, centered. */}
