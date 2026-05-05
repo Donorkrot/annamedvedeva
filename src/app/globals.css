@@ -2921,6 +2921,47 @@ img.desktop-only { display: block !important; }
 }
 #s12.s12-figma .s12-logo__year { display: inline; }
 
+/* Tablet (769–1100px) — Figma 131:476 keeps the 1440×495 horizontal layout
+   but the fixed-px fonts (28/20/16/12) and 44px social gap cause the right
+   column ("Состояние — Новая валюта" + body) and the bottom row (logo +
+   legal links) to overflow off the right edge as the section shrinks.
+   Scale typography and the social gap proportionally to viewport width
+   while leaving the % positions intact, so the design intent (two columns,
+   row of icons, centered logo) is preserved at tablet sizes. */
+@media (min-width: 769px) and (max-width: 1100px) {
+  #s12.s12-figma .s12-headline,
+  #s12.s12-figma .s12-currency-title {
+    font-size: 2.8vw;        /* ≈22.96px @820, 28px @1000 */
+  }
+  #s12.s12-figma .s12-tagline,
+  #s12.s12-figma .s12-currency-body,
+  #s12.s12-figma .s12-book__sub,
+  #s12.s12-figma .s12-logo {
+    font-size: 1.6vw;        /* ≈13.12px @820, 16px @1000 */
+  }
+  #s12.s12-figma .s12-book__title {
+    font-size: 2vw;          /* ≈16.4px @820, 20px @1000 */
+  }
+  #s12.s12-figma .s12-book {
+    padding: 1vw 1.4vw;
+    gap: 0.4vw;
+    border-radius: 1vw;
+  }
+  #s12.s12-figma .s12-legal__link,
+  #s12.s12-figma .s12-legal__sep {
+    font-size: 1.2vw;        /* ≈9.84px @820, 12px @1000 */
+  }
+  #s12.s12-figma .s12-legal { gap: 1.3vw; }
+  #s12.s12-figma .s12-social { gap: 4.4vw; }    /* 44px @1000 */
+  #s12.s12-figma .s12-social__link,
+  #s12.s12-figma .s12-social__link img {
+    width: 4vw;              /* ≈32.8px @820, 40px @1000 */
+    height: 4vw;
+  }
+  #s12.s12-figma .s12-headline-block,
+  #s12.s12-figma .s12-currency-block { gap: 2vw; }
+}
+
 /* ===== S12 - Footer (legacy) ===== */
 .s12-footer {
   position: relative;
@@ -4133,8 +4174,10 @@ img.desktop-only { display: block !important; }
   .s12-m-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
   .s12-m-bg-img { width: 100% !important; max-width: none !important; height: 100%; object-fit: cover; object-position: center top; display: block; }
 
-  /* Gradient top — h:180/600=30% */
-  .s12-m-grad-top { position: absolute; left: 0; top: 0; width: 100%; height: 22%; background: linear-gradient(to bottom, #111 0%, transparent 100%); z-index: 1; pointer-events: none; }
+  /* Gradient top — Figma 131:732: container h:298/600≈49.67%, with a near-
+     solid dark cap at the top fading to transparent over the lower ~60% of
+     the container (so heading text reads against a clean dark backdrop). */
+  .s12-m-grad-top { position: absolute; left: 0; top: 0; width: 100%; height: 49.67%; background: linear-gradient(to bottom, #111 0%, #111 4%, rgba(17,17,17,0) 62%); z-index: 1; pointer-events: none; }
 
   /* Gradient bottom — starts at y:229/600=38.24%, covers to bottom */
   .s12-m-grad-bot { position: absolute; left: 0; top: 70%; width: 100%; height: 30%; background: linear-gradient(to bottom, transparent 0%, #000 100%); z-index: 1; pointer-events: none; }
@@ -4312,25 +4355,488 @@ img.desktop-only { display: block !important; }
 
   .a1-m-text {
     position: absolute;
-    left: 8vw;             /* 30/375 */
-    top: 14.05%;           /* (50% - 60vw in 854) */
-    width: 84vw;           /* 315/375 */
+    left: 14.933vw;        /* 56/375 */
+    top: calc(50% - 27.87%); /* calc(50% - 238/854*100%) — центр блока, не верх */
+    transform: translateY(-50%);
+    width: 75.2vw;         /* 282/375 */
     z-index: 2;
     color: var(--cream);
     display: flex;
     flex-direction: column;
-    gap: 8.5333vw;
+    gap: 10.667vw;         /* 40/375 */
     -webkit-user-select: text;
     user-select: text;
   }
   .a1-m-text .a1-title {
     font-size: 9.6vw;      /* 36/375 */
-    line-height: 8.96vw;
+    line-height: 8.96vw;   /* 33.6/375 */
   }
   .a1-m-text .a1-body {
     font-size: 4.8vw;      /* 18/375 */
+    line-height: normal;
   }
 }
+
+/* ===== About a2 "Путь" — Figma 1:2022 (desktop 1440×807) / 1:1813 (mobile 375×1460) =====
+   Clean Figma assets + HTML text so it's selectable / copyable. */
+.a2-figma { background: #e0d0c4 !important; }
+
+/* ── a2 "Путь" — Desktop (Figma 1:2022, 1440×807) ─────────────────────── */
+.a2-d {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.a2-d-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.a2-d-bg img { object-fit: cover; object-position: center; }
+
+/* Photo: Figma centered at 50%, top=150px, w=440px, h=582px */
+.a2-d-photo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 18.59%;            /* 150/807 */
+  width: 30.56%;          /* 440/1440 */
+  height: 72.12%;         /* 582/807 */
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+/* Figma: img 113.76% tall, top -13.81% — exactly replicates Figma node */
+.a2-d-photo__img {
+  position: absolute;
+  top: -13.81%;
+  left: 0;
+  width: 100%;
+  height: 113.76%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Title "Путь": Figma x=375 y=66 → left=26.04% top=8.18% */
+.a2-d-title {
+  position: absolute;
+  left: 26.04%;           /* 375/1440 */
+  top: 8.18%;             /* 66/807 */
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 2.5vw, 36px);
+  font-weight: 600;
+  line-height: 0.933;
+  color: #332000;
+  white-space: nowrap;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Cards column: Figma x=155 y=237 w=326 h=415 justify-between */
+.a2-d-cards {
+  position: absolute;
+  left: 10.76%;           /* 155/1440 */
+  top: 29.37%;            /* 237/807 */
+  width: 22.64%;          /* 326/1440 */
+  height: 51.43%;         /* 415/807 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 2;
+}
+
+/* Card: Figma h=98px w=326px rounded=20px.
+   Все внутренние размеры оборачиваем в min(Xvw, Ypx), чтобы при viewport > 1440
+   они капались на design-значения (body уже max-width: 1440), и текст не вылезал
+   за края карточки. */
+.a2-d-card {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  height: min(6.806vw, 98px);   /* 98/1440 */
+  overflow: hidden;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Фоновая подложка */
+.a2-d-card__bg {
+  position: absolute;
+  inset: 0;
+  border-radius: min(1.389vw, 20px);
+  background: rgba(251, 234, 224, 0.7);
+}
+
+/* ── Card 1: "9 лет" + "практики" в одну строку, baseline-aligned ── */
+.a2-dc1-tg {
+  position: absolute;
+  left: min(1.389vw, 20px);
+  top: min(2.222vw, 32px);
+  display: flex;
+  align-items: baseline;
+  gap: min(0.764vw, 11px);
+  white-space: nowrap;
+}
+.a2-dc1-num {
+  position: static;
+  font-family: var(--font-heading);
+  font-size: min(2.5vw, 36px);
+  font-weight: 600;
+  line-height: 0.933;     /* 33.6/36 */
+  color: #46211a;
+}
+.a2-dc1-sub {
+  position: static;
+  font-family: var(--font-body);
+  font-size: min(1.111vw, 16px);
+  font-weight: 400;
+  line-height: 1;
+  color: #332000;
+}
+
+/* ── Card 2: "7 лет" + "личной терапии" в одну строку (baseline) + note ниже ── */
+.a2-dc2-tg {
+  position: absolute;
+  left: min(1.389vw, 20px);
+  top: min(1.736vw, 25px);
+  width: min(21.25vw, 306px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: min(0.486vw, 7px);
+}
+.a2-dc2-row {
+  position: static;
+  display: flex;
+  align-items: baseline;
+  gap: min(0.764vw, 11px);
+  white-space: nowrap;
+}
+.a2-dc2-num {
+  position: static;
+  font-family: var(--font-heading);
+  font-size: min(2.5vw, 36px);
+  font-weight: 600;
+  line-height: 0.933;
+  color: #46211a;
+}
+.a2-dc2-sub {
+  position: static;
+  font-family: var(--font-body);
+  font-size: min(1.111vw, 16px);
+  font-weight: 400;
+  line-height: 1;
+  color: #332000;
+}
+.a2-dc2-note {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: min(0.833vw, 12px);
+  font-weight: 400;
+  line-height: normal;
+  color: #000;
+}
+
+/* ── Card 3: «более» абсолютом сверху, «$100 тыс» + «вложено в обучение» в одну строку ── */
+.a2-dc3-tg {
+  position: absolute;
+  left: min(1.389vw, 20px);
+  top: min(0.972vw, 14px);
+  /* Резерв сверху под "более" — равен его собственной высоте строки (font-size).
+     Раньше было 33.6px, что опускало num+sub вниз. */
+  padding-top: min(1.389vw, 20px);
+  display: flex;
+  align-items: baseline;
+  gap: min(0.486vw, 7px);
+  white-space: nowrap;
+}
+.a2-dc3-pre {
+  /* "более" — абсолютом над flex-строкой, line-height сжата до font-size */
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: var(--font-heading);
+  font-size: min(1.389vw, 20px);
+  font-weight: 300;
+  line-height: 1;
+  color: #332000;
+}
+.a2-dc3-num {
+  position: static;
+  font-family: var(--font-heading);
+  font-size: min(2.5vw, 36px);
+  font-weight: 600;
+  line-height: min(2.333vw, 33.6px);
+  color: #46211a;
+}
+.a2-dc3-sub {
+  position: static;
+  font-family: var(--font-body);
+  font-size: min(1.111vw, 16px);
+  font-weight: 400;
+  line-height: 1;
+  color: #332000;
+}
+
+/* Right text block: Figma x=960, top=calc(50%-133.5px), w=325 */
+.a2-d-text {
+  position: absolute;
+  left: 66.67%;           /* 960/1440 */
+  top: calc(50% - 16.54%); /* calc(50% - 133.5/807*100%) */
+  width: 22.57%;          /* 325/1440 */
+  z-index: 2;
+  font-family: var(--font-body);
+  font-size: clamp(10px, 1.11vw, 16px);
+  font-weight: 400;
+  color: #000;
+  line-height: normal;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.a2-d-text p { margin: 0; line-height: normal; }
+/* Пустая строка между группами — одна нормальная строка, как blank <p>​</p> в Figma */
+.a2-d-text__sep { display: block; height: 1em; line-height: normal; }
+.a2-d-text__sep::before { content: '\200B'; }
+
+/* ── a2 "Путь" — Mobile (Figma 1:1813, 375×1460) ──────────────────────── */
+@media (max-width: 768px) {
+  .consult-section.a2-figma { aspect-ratio: 375 / 1460 !important; }
+
+  /* Override generic .consult-section .mobile-only relative positioning */
+  .consult-section.a2-figma .a2-m.mobile-only {
+    position: absolute !important;
+    inset: 0;
+    width: auto !important;
+    height: auto !important;
+    z-index: 0;
+  }
+  .consult-section.a2-figma .a2-m img {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .a2-m {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .a2-m-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .a2-m-bg img { object-fit: cover; object-position: center; }
+
+  /* Title — Figma left=calc(50%-157.5px)=30, top=80, w=315, 28px Cormorant Medium,
+     2 строки (без стрелки) */
+  .a2-m-title {
+    position: absolute;
+    left: 8vw;             /* 30/375 */
+    top: 5.48%;            /* 80/1460 */
+    width: 84vw;           /* 315/375 */
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 7.467vw;    /* 28/375 */
+    font-weight: 500;
+    line-height: normal;   /* leading-[normal] в Figma */
+    color: #332000;
+    z-index: 2;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  /* Cards: Figma left=30, top=168, w=315, gap=20 */
+  .a2-m-cards {
+    position: absolute;
+    left: 8vw;             /* 30/375 */
+    top: 11.507%;          /* 168/1460 */
+    width: 84vw;           /* 315/375 */
+    display: flex;
+    flex-direction: column;
+    gap: 5.333vw;          /* 20/375 */
+    z-index: 2;
+  }
+
+  .a2-m-card {
+    position: relative;    /* anchor для абсолютных детей */
+    height: 26.133vw;      /* 98/375 */
+    border-radius: 5.333vw;/* 20/375 */
+    background: rgba(251, 234, 224, 0.7);
+    -webkit-user-select: text;
+    user-select: text;
+  }
+  /* Все тексты карточек позиционируются абсолютом по Figma px → vw (frame 375) */
+  .a2-m-card__num,
+  .a2-m-card__sub,
+  .a2-m-card__note,
+  .a2-m-card__pre {
+    position: absolute;
+    white-space: nowrap;
+  }
+  .a2-m-card__num {
+    font-family: var(--font-heading);
+    font-size: 9.6vw;      /* 36/375 */
+    font-weight: 600;
+    line-height: 8.96vw;   /* 33.6/375 */
+    color: #332000;
+  }
+  .a2-m-card__sub {
+    font-family: var(--font-body);
+    font-size: 4.267vw;    /* 16/375 */
+    font-weight: 400;
+    line-height: normal;
+    color: #332000;
+  }
+  .a2-m-card__note {
+    font-family: var(--font-body);
+    font-size: 3.2vw;      /* 12/375 */
+    font-weight: 400;
+    line-height: normal;
+    color: #000;
+  }
+  .a2-m-card__pre {
+    font-family: var(--font-heading);
+    font-size: 5.333vw;    /* 20/375 */
+    font-weight: 300;
+    line-height: normal;
+    color: #332000;
+  }
+
+  /* Card 1 (1:1818): "9 лет" центр top=25, "практики" left=122 top=59 */
+  .a2-m-card--1 .a2-m-card__num {
+    left: 50%; transform: translateX(-50%);
+    top: 6.667vw;          /* 25/375 */
+  }
+  .a2-m-card--1 .a2-m-card__sub {
+    left: 32.533vw;        /* 122/375 */
+    top: 15.733vw;         /* 59/375 */
+  }
+
+  /* Card 2 (1:1822): "7 лет" центр top=18.5, "личной терапии" left=99 top=52.5,
+     "Я начинала..." центр top=71.5 */
+  .a2-m-card--2 .a2-m-card__num {
+    left: 50%; transform: translateX(-50%);
+    top: 4.933vw;          /* 18.5/375 */
+  }
+  .a2-m-card--2 .a2-m-card__sub {
+    left: 26.4vw;          /* 99/375 */
+    top: 14vw;             /* 52.5/375 */
+  }
+  .a2-m-card--2 .a2-m-card__note {
+    left: 50%; transform: translateX(-50%);
+    top: 19.067vw;         /* 71.5/375 */
+  }
+
+  /* Card 3 (1:1827): "более" центр top=12, "$100 тыс" центр top=29,
+     "вложено в обучение" left=78 top=63 */
+  .a2-m-card--3 .a2-m-card__pre {
+    left: 50%; transform: translateX(-50%);
+    top: 3.2vw;            /* 12/375 */
+  }
+  .a2-m-card--3 .a2-m-card__num {
+    left: 50%; transform: translateX(-50%);
+    top: 7.733vw;          /* 29/375 */
+  }
+  .a2-m-card--3 .a2-m-card__sub {
+    left: 20.8vw;          /* 78/375 */
+    top: 16.8vw;           /* 63/375 */
+  }
+
+  /* Photo: Figma top=542, w=375, h=496 — full-width 100% */
+  .a2-m-photo {
+    position: absolute;
+    left: 0;
+    top: 37.123%;          /* 542/1460 */
+    width: 100%;
+    height: 33.973%;       /* 496/1460 */
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .a2-m-photo img { object-fit: cover; object-position: center top; }
+
+  /* Text: Figma left=30, top=calc(50%+348)=1078, w=315, 16px Raleway leading-[normal] */
+  .a2-m-text {
+    position: absolute;
+    left: 8vw;             /* 30/375 */
+    top: 73.836%;          /* 1078/1460 */
+    width: 84vw;           /* 315/375 */
+    z-index: 2;
+    font-family: var(--font-body);
+    font-size: 4.267vw;    /* 16/375 */
+    font-weight: 400;
+    line-height: normal;
+    color: #000;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+  .a2-m-text p { margin: 0; line-height: normal; }
+  .a2-m-text__sep { display: block; height: 1em; line-height: normal; }
+  .a2-m-text__sep::before { content: '\200B'; }
+}
+
+/* ── a3 «Роль: Мастер состояния» — Desktop (Figma 1:2045, 1440×700) ─────── */
+.a3-figma { background: #f5ead8 !important; }
+
+.a3-d {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.a3-d-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+/* Figma: img top=-5.72% h=115.29% — слегка выходит за рамки секции */
+.a3-d-bg img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Title «Роль: Мастер состояния» — Figma left=calc(50%-565px)=155, top=218 */
+.a3-d-title {
+  position: absolute;
+  left: 10.76%;            /* 155/1440 */
+  top: 31.14%;             /* 218/700 */
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 2.5vw, 36px);
+  font-weight: 600;
+  line-height: 0.933;      /* 33.6/36 */
+  color: #332000;
+  white-space: nowrap;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Body text — Figma left=155, top=292, w=440 */
+.a3-d-text {
+  position: absolute;
+  left: 10.76%;            /* 155/1440 */
+  top: 41.71%;             /* 292/700 */
+  width: 30.56%;           /* 440/1440 */
+  z-index: 2;
+  font-family: var(--font-body);
+  font-size: clamp(10px, 1.11vw, 16px);
+  font-weight: 400;
+  color: #000;
+  line-height: normal;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.a3-d-text p { margin: 0; line-height: normal; }
+/* Пустая строка между группами — как blank <p>​</p> в Figma */
+.a3-d-text__sep { display: block; height: 1em; line-height: normal; }
+.a3-d-text__sep::before { content: '\200B'; }
 
 /* About-page HTML button overlays — text/copy is baked into the JPG bg, but
    the buttons need to be clickable. Positions per Figma exports.
@@ -4396,6 +4902,20 @@ img.desktop-only { display: block !important; }
 .about-btn-book:hover { background: #fff0e0; transform: translateY(-1px); }
 .about-btn-book:active { transform: translateY(0); }
 
+/* Tablet (769–1100px): a6 keeps the desktop aspect-ratio (1440/685), so the
+   section shrinks proportionally with viewport width. The button group has a
+   fixed pixel height (~112px = 2 × 46px + 20px gap), so at narrow desktop /
+   tablet widths the original `top: 77.52%` pushes it below the section edge.
+   Anchor from the bottom instead — this lifts the buttons up and leaves a
+   relevant gap to the section's bottom edge, mirroring the mobile breathing
+   room below the buttons. */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .about-btn-book-group {
+    top: auto;
+    bottom: 10%;
+  }
+}
+
 /* a9 "Почему именно я" — single Запись на консультацию button on dark stone bg.
    Position from Figma 1:2115 inside 1:2091 (1440×700 frame). */
 .about-btn-consult {
@@ -4425,12 +4945,29 @@ img.desktop-only { display: block !important; }
 .about-btn-consult:active { transform: translateY(0); }
 
 @media (max-width: 768px) {
-  .about-btn-method,
+  /* a6 mobile per Figma 1:1854 — book section background image (1125×4680
+     for 376×1562 frame) has the title and body baked in, with an empty cream
+     band where the buttons sit. Group: top 826/1562, left 30/376, width
+     315/376, gap 20px between the two buttons. */
   .about-btn-book-group {
-    /* On mobile the layout/photo composite is different — buttons are baked
-       into the mobile JPGs, so hide the desktop HTML overlays. */
-    display: none;
+    top: 52.88%;             /* 826/1562 */
+    left: 7.98%;             /* 30/376 */
+    width: 83.78%;           /* 315/376 */
   }
+  .about-btn-book {
+    width: 100%;
+  }
+  /* a5 mobile: кнопка прижата к низу секции (секция сжата до 375/720),
+     чтобы пустого фона снизу было ~30px вместо 80px Figma-кадра */
+  .about-btn-method {
+    top: 88.6%;              /* button top ≈ 638px в 720-сечении */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 84vw;             /* 315/375 */
+    max-width: none;
+  }
+  .about-btn-method:hover  { transform: translateX(-50%) translateY(-1px); }
+  .about-btn-method:active { transform: translateX(-50%) translateY(0); }
   /* a9 mobile per Figma 1:1881 — button at x:30/375 y:1343/1430 w:320/375 h:47.
      Frame is 375×1430, button position 8%/93.92% w:85.33% h:3.29%. */
   .about-btn-consult {
@@ -4555,88 +5092,807 @@ img.desktop-only { display: block !important; }
   height: 28.61%;         /* 234/818 */
 }
 
-/* ===== About a4 — copyable text overlay (Figma desktop 1:2049, mobile 1:1837)
-   The baked-in text in a4.jpg remains visible; this HTML mirrors it with
-   color: transparent so users can select & copy the text. Positions match
-   the Figma frame exactly. ===== */
-.about-text-a4,
-.consult-section .about-text-a4-m.mobile-only {
+/* ── a4 «RI / Reality Intelligence» — Desktop (Figma 1:2049, 1440×700) ─── */
+.a4-figma { background: #e8ddd4 !important; }
+
+.a4-d {
   position: absolute;
   inset: 0;
-  z-index: 4;
-  color: transparent;
-  pointer-events: auto;
-  margin: 0;
+  z-index: 0;
 }
-.about-text-a4 *,
-.about-text-a4-m * { margin: 0; color: transparent; }
+.a4-d-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.a4-d-bg img {
+  object-fit: cover;
+  object-position: center bottom;
+}
 
-.about-text-a4__title {
+/* "RI" — Figma left=calc(50%-27px) top=58, 52px Cormorant Garamond SemiBold UPPERCASE */
+.a4-d-h1 {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 8.286%;            /* 58/700 */
+  top: 8.286%;             /* 58/700 */
+  margin: 0;
   font-family: var(--font-heading);
+  font-size: clamp(28px, 3.611vw, 52px);
   font-weight: 600;
-  font-size: 3.611vw;     /* 52/1440 */
   line-height: 1;
   text-transform: uppercase;
+  letter-spacing: 0;
+  color: #332000;
+  white-space: nowrap;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Subtitle — Figma left=155, top=179, w=440, 28px Cormorant Garamond Medium */
+.a4-d-subtitle {
+  position: absolute;
+  left: 10.764%;           /* 155/1440 */
+  top: 25.571%;            /* 179/700 */
+  width: 30.556%;          /* 440/1440 */
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(16px, 1.944vw, 28px);
+  font-weight: 500;
+  line-height: normal;
+  color: #000;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Body paragraphs — Figma left=155, 16px Raleway Regular */
+.a4-d-p {
+  position: absolute;
+  left: 10.764%;           /* 155/1440 */
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: clamp(10px, 1.111vw, 16px);
+  font-weight: 400;
+  line-height: normal;
+  color: #000;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.a4-d-p--1 { top: 62.714%; width: 38.542%; }   /* 439/700, 555/1440 */
+.a4-d-p--2 { top: 71%;     width: 33.125%; }   /* 497/700, 477/1440 */
+
+/* ── a5 «Метод: ДНК Реальности» — Desktop (Figma 1:2056, 1440×700) ─────── */
+.a5-figma { background: #e8ddd4 !important; }
+
+.a5-d {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.a5-d-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.a5-d-bg img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Title — Figma left=calc(50%-181px) top=100, 36px Cormorant SemiBold */
+.a5-d-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 14.286%;            /* 100/700 */
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 2.5vw, 36px);
+  font-weight: 600;
+  line-height: 0.933;       /* 33.6/36 */
+  color: #332000;
+  white-space: nowrap;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Intro (2 paragraphs) — Figma left=155 top=154, 16px Raleway */
+.a5-d-intro {
+  position: absolute;
+  left: 10.764%;           /* 155/1440 */
+  top: 22%;                /* 154/700 */
+  font-family: var(--font-body);
+  font-size: clamp(10px, 1.111vw, 16px);
+  font-weight: 400;
+  line-height: normal;
+  color: #332000;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
   white-space: nowrap;
 }
-.about-text-a4__subtitle {
-  position: absolute;
-  left: 10.764%;          /* 155/1440 */
-  top: 25.571%;           /* 179/700 */
-  width: 30.556%;         /* 440/1440 */
-  font-family: var(--font-heading);
-  font-weight: 500;
-  font-size: 1.944vw;     /* 28/1440 */
-  line-height: 1;
-}
-.about-text-a4__body {
+.a5-d-intro p { margin: 0; line-height: normal; }
+
+/* "Метод позволяет:" — Figma left=155 top=272, 28px Cormorant Medium */
+.a5-d-list-title {
   position: absolute;
   left: 10.764%;
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 1.111vw;     /* 16/1440 */
-  line-height: 1;
+  top: 38.857%;            /* 272/700 */
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(16px, 1.944vw, 28px);
+  font-weight: 500;
+  line-height: normal;
+  color: #332000;
+  white-space: nowrap;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
 }
-.about-text-a4__body--1 { top: 62.714%; width: 38.542%; }   /* 439/700, 555/1440 */
-.about-text-a4__body--2 { top: 71%;     width: 33.125%; }   /* 497/700, 477/1440 */
 
-.about-text-a4-m__title {
+/* List of 4 items — Figma left=155 top=316, 16px Raleway */
+.a5-d-list {
+  position: absolute;
+  left: 10.764%;
+  top: 45.143%;            /* 316/700 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-body);
+  font-size: clamp(10px, 1.111vw, 16px);
+  font-weight: 400;
+  line-height: normal;
+  color: #332000;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+  white-space: nowrap;
+}
+.a5-d-list li { margin: 0; line-height: normal; }
+
+/* Body (2 paragraphs) — Figma left=155 top=432, 16px Raleway */
+.a5-d-body {
+  position: absolute;
+  left: 10.764%;
+  top: 61.714%;            /* 432/700 */
+  font-family: var(--font-body);
+  font-size: clamp(10px, 1.111vw, 16px);
+  font-weight: 400;
+  line-height: normal;
+  color: #332000;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+  white-space: nowrap;
+}
+.a5-d-body p { margin: 0; line-height: normal; }
+
+/* ── a5 «Метод: ДНК Реальности» — Mobile (Figma 1:1846, 375×766) ────────── */
+@media (max-width: 768px) {
+  /* Aspect 375/720: подгоняем секцию под низ кнопки + ~30px фона.
+     Figma-кадр 766 оставляет ~80px пустоты после кнопки, что визуально
+     создаёт «странный переход» к следующей секции. */
+  .consult-section.a5-figma { aspect-ratio: 375 / 720 !important; }
+
+  /* Override generic mobile-only relative positioning */
+  .consult-section.a5-figma .a5-m.mobile-only {
+    position: absolute !important;
+    inset: 0;
+    width: auto !important;
+    height: auto !important;
+    z-index: 0;
+  }
+  .consult-section.a5-figma .a5-m img {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .a5-m { position: absolute; inset: 0; z-index: 0; }
+  .a5-m-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .a5-m-bg img { object-fit: cover; object-position: center; }
+
+  /* Title — Figma left=calc(50%-158.5px)=29 top=80, 28px Cormorant Medium */
+  .a5-m-title {
+    position: absolute;
+    left: 7.733vw;         /* 29/375 */
+    top: 10.444%;          /* 80/766 */
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 7.467vw;    /* 28/375 */
+    font-weight: 500;
+    line-height: normal;
+    color: #332000;
+    white-space: nowrap;
+    z-index: 2;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  /* Intro — Figma left=29 top=134 w=316, 16px Raleway, 2 параграфа подряд */
+  .a5-m-intro {
+    position: absolute;
+    left: 7.733vw;         /* 29/375 */
+    top: 17.493%;          /* 134/766 */
+    width: 84.267vw;       /* 316/375 */
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 4.267vw;    /* 16/375 */
+    font-weight: 400;
+    line-height: normal;
+    color: #332000;
+    z-index: 2;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+  .a5-m-intro p { margin: 0; line-height: normal; }
+
+  /* "Метод позволяет:" — Figma left=29 top=269, 24px Cormorant Light */
+  .a5-m-list-title {
+    position: absolute;
+    left: 7.733vw;         /* 29/375 */
+    top: 35.117%;          /* 269/766 */
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 6.4vw;      /* 24/375 */
+    font-weight: 300;
+    line-height: 6.16vw;   /* 23.1/375 */
+    color: #332000;
+    white-space: nowrap;
+    z-index: 2;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  /* List of 4 — Figma left=29 top=313 w=316, 16px Raleway */
+  .a5-m-list {
+    position: absolute;
+    left: 7.733vw;
+    top: 40.862%;          /* 313/766 */
+    width: 84.267vw;       /* 316/375 */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--font-body);
+    font-size: 4.267vw;
+    font-weight: 400;
+    line-height: normal;
+    color: #332000;
+    z-index: 2;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+  .a5-m-list li { margin: 0; line-height: normal; }
+
+  /* Body — Figma left=30 top=485 w=315, 16px Raleway, 2 параграфа подряд */
+  .a5-m-body {
+    position: absolute;
+    left: 8vw;             /* 30/375 */
+    top: 63.316%;          /* 485/766 */
+    width: 84vw;           /* 315/375 */
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 4.267vw;
+    font-weight: 400;
+    line-height: normal;
+    color: #332000;
+    z-index: 2;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+  .a5-m-body p { margin: 0; line-height: normal; }
+
+  /* The cropped bg has a visible wall/floor seam right under the body text,
+     directly behind the «Подробнее о методе» button — it reads as a hard
+     horizontal line. Fade the lower part of the bg to the same warm wall
+     cream (#fbf6e6, matches the wall area above) so the seam disappears
+     and the button sits on a clean, soft surface. */
+  .consult-section.a5-figma::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 20%;
+    background: linear-gradient(
+      to bottom,
+      rgba(251, 246, 230, 0) 0%,
+      rgba(251, 246, 230, 0.55) 40%,
+      rgba(251, 246, 230, 0.95) 80%,
+      #fbf6e6 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+/* ── a6 «Книга: ДНК Реальности» — Desktop (Figma 1:2064, 1440×685) ──────── */
+.a6-figma { background: #fff5ef !important; }
+
+.a6-d {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.a6-d-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.a6-d-bg img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Title — Figma left=calc(50%-220px) top=100, 36px Cormorant SemiBold (центрирован) */
+.a6-d-title {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 9.78%;             /* 80/818 */
+  top: 14.598%;            /* 100/685 */
+  margin: 0;
   font-family: var(--font-heading);
+  font-size: clamp(20px, 2.5vw, 36px);
   font-weight: 600;
-  font-size: 13.867vw;    /* 52/375 */
-  line-height: 1;
-  text-transform: uppercase;
+  line-height: 0.933;       /* 33.6/36 */
+  color: #332000;
+  white-space: nowrap;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Body text — Figma left=500 top=170 w=440, 16px Raleway */
+.a6-d-text {
+  position: absolute;
+  left: 34.722%;           /* 500/1440 */
+  top: 24.818%;            /* 170/685 */
+  width: 30.556%;          /* 440/1440 */
+  font-family: var(--font-body);
+  font-size: clamp(10px, 1.111vw, 16px);
+  font-weight: 400;
+  line-height: normal;
+  color: #000;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.a6-d-text p { margin: 0; line-height: normal; }
+.a6-d-text__sep { display: block; height: 1em; line-height: normal; }
+.a6-d-text__sep::before { content: '\200B'; }
+
+/* ── a7 «С какими запросами приходят» — Desktop (Figma 1:2071, 1440×700) ── */
+.a7-figma { background: #1a0d05 !important; }
+
+.a7-d {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.a7-d-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.a7-d-bg img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Title — Figma left=calc(50%-565px)=155, top=100, 36px Cormorant SemiBold, color #fff5ef */
+.a7-d-title {
+  position: absolute;
+  left: 10.764%;           /* 155/1440 */
+  top: 14.286%;            /* 100/700 */
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 2.5vw, 36px);
+  font-weight: 600;
+  line-height: 0.933;       /* 33.6/36 */
+  color: #fff5ef;
+  white-space: nowrap;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* List of 5 items — Figma left=175 top=214 w=684, gap=20px, 16px Raleway, color #fff5ef */
+.a7-d-list {
+  position: absolute;
+  left: 12.153%;           /* 175/1440 */
+  top: 30.571%;            /* 214/700 */
+  width: 47.5%;            /* 684/1440 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.389vw, 20px);
+  font-family: var(--font-body);
+  font-size: clamp(10px, 1.111vw, 16px);
+  font-weight: 400;
+  line-height: normal;
+  color: #fff5ef;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.a7-d-list li { margin: 0; line-height: normal; }
+
+/* Bottom highlighted quote — Figma left=175 top=429, 18px Raleway Medium, color #de8b23 */
+.a7-d-quote {
+  position: absolute;
+  left: 12.153%;
+  top: 61.286%;            /* 429/700 */
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: clamp(12px, 1.25vw, 18px);
+  font-weight: 500;
+  line-height: normal;
+  color: #de8b23;
+  white-space: nowrap;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* ── a8 «Как проходит работа» — Desktop (Figma 1:2081, 1440×700) ────────── */
+.a8-figma { background: #f1e8df !important; }
+
+.a8-d {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.a8-d-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.a8-d-bg img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Title — Figma left=calc(50%-565px)=155, top=100, 36px Cormorant SemiBold */
+.a8-d-title {
+  position: absolute;
+  left: 10.764%;           /* 155/1440 */
+  top: 14.286%;            /* 100/700 */
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 2.5vw, 36px);
+  font-weight: 600;
+  line-height: 0.933;       /* 33.6/36 */
+  color: #332000;
+  white-space: nowrap;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Body text blocks — Figma left=155, w=325, 16px Raleway */
+.a8-d-text {
+  position: absolute;
+  left: 10.764%;           /* 155/1440 */
+  width: 22.569%;          /* 325/1440 */
+  font-family: var(--font-body);
+  font-size: clamp(10px, 1.111vw, 16px);
+  font-weight: 400;
+  line-height: normal;
+  color: #332000;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.a8-d-text p { margin: 0; line-height: normal; }
+.a8-d-text__sep { display: block; height: 1em; line-height: normal; }
+.a8-d-text__sep::before { content: '\200B'; }
+.a8-d-text--1 { top: 30.571%; }   /* 214/700 */
+.a8-d-text--2 { top: 49.857%; }   /* 349/700 */
+
+/* Venn-diagram labels — 28px Cormorant Medium, color #332000 (на круге #fff5ef) */
+.a8-d-d {
+  position: absolute;
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(16px, 1.944vw, 28px);
+  font-weight: 500;
+  line-height: normal;
+  color: #332000;
+  white-space: nowrap;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+/* "Экологично"   — Figma left=918  top=91  */
+.a8-d-d--ekol { left: 63.75%;  top: 13%; }
+/* "Бережно"      — Figma left=1212 top=333 */
+.a8-d-d--bere { left: 84.167%; top: 47.571%; }
+/* "Без давления" — Figma left=912  top=548 */
+.a8-d-d--bezd { left: 63.333%; top: 78.286%; }
+/* "Глубоко"      — Figma left=662  top=333, color #fff5ef (на тёмном круге) */
+.a8-d-d--glub { left: 45.972%; top: 47.571%; color: #fff5ef; }
+
+/* "ВАШ / РЕЗУЛЬТАТ" — Figma -translate-x-1/2, left=984.5, top=325, 24px Light, #fff5ef */
+.a8-d-result {
+  position: absolute;
+  left: 68.368%;           /* 984.5/1440 */
+  top: 46.429%;            /* 325/700 */
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(14px, 1.667vw, 24px);
+  font-weight: 300;
+  line-height: 0.9625;      /* 23.1/24 */
+  color: #fff5ef;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.a8-d-result span { display: block; }
+
+/* ── a9 «Почему именно я» — Desktop (Figma 1:2091, 1440×700) ────────────── */
+.a9-figma { background: #1a0d05 !important; }
+
+.a9-d {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+/* Background image (правая половина): Figma right=0, top=50%, w=960, h=700 */
+.a9-d-bg {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 66.667%;          /* 960/1440 */
+  height: 100%;            /* 700/700 */
+  z-index: 0;
+  pointer-events: none;
+}
+.a9-d-bg img { object-fit: cover; object-position: center; }
+
+/* Photo (слева): Figma bottom=0, left=0, w=480, h=720 (overflows top by 20px) */
+.a9-d-photo {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 33.333%;          /* 480/1440 */
+  height: 102.857%;        /* 720/700 */
+  z-index: 1;
+  pointer-events: none;
+}
+.a9-d-photo img { object-fit: cover; object-position: center; }
+
+/* Title "Почему именно я" — Figma left=calc(50%+113px)=833, top=80 */
+.a9-d-title {
+  position: absolute;
+  left: 57.847%;           /* 833/1440 */
+  top: 11.429%;            /* 80/700 */
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 2.5vw, 36px);
+  font-weight: 600;
+  line-height: 0.933;       /* 33.6/36 */
+  color: #fff5ef;
+  white-space: nowrap;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Stats block — Figma left=560 top=174 w=302 (Опыт + 3 строки статов) */
+.a9-d-stats {
+  position: absolute;
+  left: 38.889%;           /* 560/1440 */
+  top: 24.857%;            /* 174/700 */
+  width: 20.972%;          /* 302/1440 */
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.389vw, 20px);
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.a9-d-stats__heading {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(16px, 1.944vw, 28px);   /* 28px Cormorant Medium */
+  font-weight: 500;
+  line-height: normal;
+  color: #fff5ef;
   white-space: nowrap;
 }
-.about-text-a4-m__subtitle {
-  position: absolute;
-  left: 8%;               /* 30/375 */
-  top: 19.927%;           /* 163/818 */
-  width: 84%;             /* 315/375 */
-  font-family: var(--font-heading);
-  font-weight: 300;
-  font-size: 6.4vw;       /* 24/375 */
-  line-height: 23.1px;
+.a9-d-stats__list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.389vw, 20px);
 }
-.about-text-a4-m__body {
+.a9-d-stat {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(4px, 0.486vw, 7px);
+  white-space: nowrap;
+}
+.a9-d-stat__num {
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 2.5vw, 36px);     /* 36px Cormorant SemiBold */
+  font-weight: 600;
+  line-height: 0.933;
+  color: #de8b23;
+}
+.a9-d-stat__sub {
+  font-family: var(--font-body);
+  font-size: clamp(10px, 1.111vw, 16px);   /* 16px Raleway */
+  font-weight: 400;
+  line-height: 1;
+  color: #fff5ef;
+}
+
+/* Right text block — Figma left=1035 top=174 w=325, gap=20 */
+.a9-d-right {
   position: absolute;
-  left: 8%;
-  width: 84%;
+  left: 71.875%;           /* 1035/1440 */
+  top: 24.857%;            /* 174/700 */
+  width: 22.569%;          /* 325/1440 */
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.389vw, 20px);
+  font-family: var(--font-body);
+  font-size: clamp(10px, 1.111vw, 16px);
+  font-weight: 400;
+  line-height: normal;
+  color: #fff5ef;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.a9-d-right p { margin: 0; line-height: normal; }
+/* Statement block — внутри (gap=10), R4 = 18px Medium, R5 = 16px Regular */
+.a9-d-right__statement {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 0.694vw, 10px);
+}
+.a9-d-right__r4 {
+  font-family: var(--font-body);
+  font-size: clamp(12px, 1.25vw, 18px);
+  font-weight: 500;
+  line-height: normal;
+}
+
+/* CTA title "Записаться на консультацию" — Figma left=calc(50%-158px)=562, top=503 */
+.a9-d-cta-title {
+  position: absolute;
+  left: 39.028%;           /* 562/1440 */
+  top: 71.857%;            /* 503/700 */
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 2.5vw, 36px);
+  font-weight: 600;
+  line-height: 0.933;
+  color: #fff5ef;
+  white-space: nowrap;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* CTA subtitle (mixed weights) — Figma left=562, top=579, w=439 */
+.a9-d-cta-sub {
+  position: absolute;
+  left: 39.028%;           /* 562/1440 */
+  top: 82.714%;            /* 579/700 */
+  width: 30.486%;          /* 439/1440 */
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: clamp(10px, 1.111vw, 16px);
+  font-weight: 400;
+  line-height: normal;
+  color: #fff5ef;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.a9-d-cta-sub__em {
+  font-weight: 500;
+  font-size: clamp(13px, 1.389vw, 20px);
+}
+
+/* ── a10 «Примеры работы» — Desktop (Figma 1:2117, 1440×700) ────────────── */
+.a10-figma { background: #1a0d05 !important; }
+
+.a10-d {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.a10-d-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.a10-d-bg img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Title — Figma left=calc(50%-565px)=155, top=174, 36px Cormorant SemiBold */
+.a10-d-title {
+  position: absolute;
+  left: 10.764%;           /* 155/1440 */
+  top: 24.857%;            /* 174/700 */
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 2.5vw, 36px);
+  font-weight: 600;
+  line-height: 0.933;       /* 33.6/36 */
+  color: #fff5ef;
+  white-space: nowrap;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Left text block — Figma left=155 top=calc(50%-102px) w=325, 16px Raleway */
+.a10-d-text {
+  position: absolute;
+  left: 10.764%;           /* 155/1440 */
+  top: calc(50% - 14.571%); /* calc(50% - 102/700*100%) */
+  width: 22.569%;          /* 325/1440 */
+  font-family: var(--font-body);
+  font-size: clamp(10px, 1.111vw, 16px);
+  font-weight: 400;
+  line-height: normal;
+  color: #fff;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.a10-d-text p { margin: 0; line-height: normal; }
+.a10-d-text__sep { display: block; height: 1em; line-height: normal; }
+.a10-d-text__sep::before { content: '\200B'; }
+
+/* "Как смотреть" block — Figma left=615 top=574 w=345, opacity 0.5, color #fff */
+.a10-d-how {
+  position: absolute;
+  left: 42.708%;           /* 615/1440 */
+  top: 82%;                /* 574/700 */
+  width: 23.958%;          /* 345/1440 */
+  opacity: 0.5;
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 4.267vw;     /* 16/375 */
-  line-height: 1;
+  line-height: normal;
+  color: #fff;
+  z-index: 2;
+  -webkit-user-select: text;
+  user-select: text;
 }
-.about-text-a4-m__body--1 { top: 47.799%; }                /* 391/818 */
-.about-text-a4-m__body--2 { top: 59.535%; }                /* 487/818 */
+.a10-d-how p { margin: 0; line-height: normal; }
+.a10-d-how__title { font-size: clamp(10px, 1.111vw, 16px); }
+.a10-d-how__body  { font-size: clamp(8px, 0.833vw, 12px); margin-top: 1em !important; }
 
 @media (max-width: 768px) {
   /* a10 mobile placeholder (Figma node 1-1909): left:0, top:311, w:375, h:211 in 375×696 frame */
@@ -4647,6 +5903,37 @@ img.desktop-only { display: block !important; }
     height: 30.32%;       /* 211/696 */
   }
 }
+
+/* ===== About page text overlays (a2–a10) =====
+   Each <p> is positioned exactly over the corresponding text in the
+   background image (pixel coords taken from Figma). Transparent color
+   keeps visuals intact; gold ::selection makes selection visible.
+   Buttons/video stay above via z-index:5. ===== */
+.ao-block {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  overflow: hidden;
+  pointer-events: none; /* container is transparent to events */
+}
+.ao-block p {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  color: transparent !important;
+  user-select: text;
+  -webkit-user-select: text;
+  pointer-events: auto;  /* each text node catches mouse */
+  cursor: text;
+  line-height: 1.4;
+  font-size: 16px;
+  font-family: inherit;
+}
+.ao-block p::selection {
+  background: rgba(220, 180, 80, 0.35);
+  color: rgba(255, 245, 220, 0.95);
+}
+
 
 /* ===== Consultation price-list buttons (c2 section) =====
    Each language's c2.jpg already has "Оплатить" and "Техподдержка" buttons
