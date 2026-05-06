@@ -377,6 +377,20 @@ main {
 .s1-d-btn:hover  { background: rgba(255, 245, 239, 0.08); transform: translateY(-1px); }
 .s1-d-btn:active { transform: translateY(0); }
 
+/* Tablet (769–1100px) — s1 hero. Section keeps the desktop 1440/700
+   aspect-ratio, so on narrow viewports the section is short (~390-487px)
+   while the fixed-height header (~64px) stays the same. The desktop
+   tagline at top:11.14% (~44-54px) ends up inside the header zone, where
+   it visually crowds the RU/UA/EN switcher and the burger button. Push
+   the tagline below the header strip and slightly downsize it so it
+   reads as a quiet sub-line, not a header sibling. */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .s1-d-tagline {
+    top: 18%;
+    font-size: 13px;
+  }
+}
+
 /* ===== SECTION BASE ===== */
 .section {
   position: relative;
@@ -1873,6 +1887,34 @@ img.desktop-only { display: block !important; }
 /* "Новая реальность" — right card | x:957 y:289 w:325 h:218 */
 #s2 .s2-card--right { left: 66.46%; top: 41.29%; width: 22.57%; min-height: 31.14%; }
 
+/* Tablet (769–1100px) — s2 keeps the desktop 1440/700 aspect-ratio per
+   Figma 1:100, so card widths (22.43%/22.57%) scale to ~184px on a 820px
+   viewport while the fixed-px typography (36px h2, 16px body, 18px
+   tagline, 20px padding/gap) stays the same. The 36px card titles wrap
+   ugly mid-word inside a 184px box and crowd the body. Scale typography
+   and inner spacing proportionally in vw so the cards keep their Figma
+   proportions across tablet widths. */
+@media (min-width: 769px) and (max-width: 1100px) {
+  #s2 .s2-title {
+    font-size: 1.8vw;        /* ≈14.76px @820, 18px @1000 */
+  }
+  #s2 .s2-card h2 {
+    /* «Новая реальность» (16 chars) is the longest title; sized to fit on
+       one line inside the 22.57% card width minus inner padding across the
+       whole tablet range, matching Figma 1:100 where both cards keep their
+       title on a single line. */
+    font-size: 2.3vw;        /* ≈18.87px @820, 23px @1000 */
+    line-height: 1.1;
+  }
+  #s2 .s2-card p {
+    font-size: 1.6vw;        /* ≈13.12px @820, 16px @1000 */
+  }
+  #s2 .s2-card .s2-card__inner {
+    padding: 1.6vw;          /* ≈13.12px @820, 16px @1000 */
+    gap: 1.4vw;
+  }
+}
+
 /* ===== S3 — Old Code (pixel-perfect from Figma 1440×670, node 1:259) ===== */
 #s3.s3-figma { background: #000; }
 #s3 .s3-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
@@ -1917,6 +1959,27 @@ img.desktop-only { display: block !important; }
   line-height: 1.2;
   color: #fff;
   z-index: 2;
+}
+
+/* Tablet (769–1100px) — s3 keeps the desktop 1440/670 aspect-ratio per
+   Figma 1:259, so the section shrinks to ~379-484px tall on tablet while
+   the fixed-px 52px title (Cormorant SemiBold) takes 3 lines instead of
+   the Figma's 2, and the 16px body wraps to 8 lines and overflows past
+   the section bottom. Scale typography in vw and pull the body up so the
+   layout matches the macOS reference at every tablet size. */
+@media (min-width: 769px) and (max-width: 1100px) {
+  #s3 .s3-kicker {
+    font-size: 1.6vw;        /* ≈13.12px @820, 16px @1000 */
+  }
+  #s3 .s3-title {
+    font-size: 3.6vw;        /* ≈29.5px @820, 36px @1000 — keeps title on 2 lines */
+    width: 40%;              /* mild widening so «ПРОХОДИТЬ ТРАВМУ» fits one row */
+  }
+  #s3 .s3-body {
+    top: 60%;                /* was 70.75% — extra body lines need vertical room */
+    font-size: 1.5vw;        /* ≈12.3px @820, 15px @1000 */
+    width: 36%;              /* widen so wrapping isn't too aggressive */
+  }
 }
 
 /* S4 transitions removed — sections sit naturally */
@@ -2043,6 +2106,46 @@ img.desktop-only { display: block !important; }
 #s4 .s4-col-ri .s4-desc   { margin-top: 20px; width: 210px; max-width: 100%; text-align: left; }
 #s4 .s4-col-ri .s4-accent { margin-top: 20px; width: 210px; max-width: 100%; text-align: left; white-space: normal; }
 
+/* Tablet (769–1100px) — s4 keeps the desktop 1440/675 aspect-ratio per
+   Figma 1:340, so the section shrinks to ~355-484px tall on tablet, but
+   the four columns use FIXED-px stone sizes (102-189px tall) and FIXED
+   vertical margins (82/59/49.5/24px above stones, 22-52px between stone
+   and label). At 820 the columns end up 342-443px tall and overflow into
+   the next section. Scale typography, stone dimensions, vertical gaps,
+   and the letter/stone left-offsets in vw so the four-column row keeps
+   its Figma proportions across the whole tablet range. */
+@media (min-width: 769px) and (max-width: 1100px) {
+  #s4 .s4-title  { font-size: 2.6vw; }      /* ≈21.3px @820, 26px @1000 */
+  #s4 .s4-letter { font-size: 2.2vw; }
+  #s4 .s4-letter--ri { font-size: 4vw; }
+  #s4 .s4-name   { font-size: 1.5vw; }
+  #s4 .s4-desc   { font-size: 1.1vw; line-height: 1.25; }
+  #s4 .s4-accent { font-size: 1.5vw; }
+
+  /* IQ — letter offset 80px → 5.5vw, stone 102×113 → ~7×7.8vw, margins compressed */
+  #s4 .s4-col-iq .s4-letter { margin-left: 5.5vw; }
+  #s4 .s4-col-iq .s4-stone  { width: 7vw; height: 7.8vw; margin-left: 2.3vw; margin-top: 4.5vw; }
+  #s4 .s4-col-iq .s4-name   { margin-top: 3.5vw; }
+  #s4 .s4-col-iq .s4-desc   { margin-top: 1.4vw; }
+
+  /* EQ — letter offset 50→3.4vw, stone 127×155 → ~8.7×10.6vw */
+  #s4 .s4-col-eq .s4-letter { margin-left: 3.4vw; }
+  #s4 .s4-col-eq .s4-stone  { width: 8.7vw; height: 10.6vw; margin-left: 0.14vw; margin-top: 3.2vw; }
+  #s4 .s4-col-eq .s4-name   { margin-top: 2.8vw; }
+  #s4 .s4-col-eq .s4-desc   { margin-top: 1.4vw; }
+
+  /* SQ — letter offset 40→2.7vw, stone 117×189 → ~8×13vw */
+  #s4 .s4-col-sq .s4-letter { margin-left: 2.7vw; }
+  #s4 .s4-col-sq .s4-stone  { width: 8vw; height: 13vw; margin-left: 0.14vw; margin-top: 2.7vw; }
+  #s4 .s4-col-sq .s4-name   { margin-top: 1.6vw; }
+  #s4 .s4-col-sq .s4-desc   { margin-top: 1.4vw; }
+
+  /* RI — column is wider (22.15%); stone fills column at ~16vw tall */
+  #s4 .s4-col-ri .s4-stone--ri { width: 100%; height: 16vw; margin-top: 1.6vw; }
+  #s4 .s4-col-ri .s4-desc      { margin-top: 1.2vw; }
+  #s4 .s4-col-ri .s4-accent    { margin-top: 1.2vw; }
+}
+
 /* ===== S5 — Reality Intelligence (Figma 1440×700, node 1:371) ===== */
 #s5.s5-figma { background: #fff5ef; }
 #s5 .s5-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
@@ -2102,6 +2205,42 @@ img.desktop-only { display: block !important; }
 #s5 .s5-card--stab   { left: 10.69%; top: 57.00%; }   /* 154/1440, 399/700 */
 #s5 .s5-card--manage { left: 66.67%; top: 57.00%; }   /* 960/1440, 399/700 */
 #s5 .s5-card--clear  { left: 66.60%; top: 32.43%; }   /* 959/1440, 227/700 */
+
+/* Tablet (769–1100px) — s5 keeps the desktop 1440/700 aspect-ratio per
+   Figma 1:371, so card widths (22.57%) shrink to ~174-248px while the
+   fixed-px typography (36/28/18/16) and 20px padding/gap stay constant.
+   The frosted hero card («Reality Intelligence» + long body) and the
+   bottom-right Manage card («УПРАВЛЯЕМАЯ РЕАЛЬНОСТЬ» + long body) end
+   up 408-514px tall on a 396-tall section and overflow into s6. Scale
+   typography and inner spacing in vw so each card keeps its Figma
+   proportions and stays inside the section across all tablet widths. */
+@media (min-width: 769px) and (max-width: 1100px) {
+  /* Widen cards from 22.57% → 25% so longer body lines («Умение
+     управлять своим состоянием так, чтобы не сносило штормами…»)
+     don't blow the card height up to 9-10 lines. The crystal in the
+     middle still has ~30% horizontal breathing room. */
+  #s5 .s5-card { width: 25%; gap: 1vw; }
+  #s5 .s5-card--frosted {
+    padding: 1.4vw;
+    border-radius: 1.6vw;
+  }
+  #s5 .s5-card__title {
+    font-size: 2.2vw;        /* ≈18px @820, 22px @1000 */
+    line-height: 1.1;
+  }
+  #s5 .s5-card__title--ri {
+    font-size: 2.6vw;        /* ≈21.3px @820, 26px @1000 */
+    line-height: 1.05;
+  }
+  #s5 .s5-card__body {
+    font-size: 1.2vw;        /* ≈9.84px @820, 12px @1000 */
+    line-height: 1.25;
+  }
+  #s5 .s5-card__body--lead {
+    font-size: 1.4vw;        /* ≈11.5px @820, 14px @1000 */
+    line-height: 1.2;
+  }
+}
 
 
 /* ===== S6 - Video ===== */
@@ -2269,6 +2408,31 @@ img.desktop-only { display: block !important; }
   white-space: nowrap;
 }
 
+/* Tablet (769–1100px) — s7 keeps the 1440/700 aspect-ratio per Figma
+   1:113, so the section shrinks to ~371-487px tall on tablet while the
+   fixed-px typography (52/36/20/18/16) and 20px vertical margins stay
+   constant. At 820: title takes 2 lines (104px), bio wraps to 9 lines
+   (~166px), block-2 ends 481px (overflows section bottom by 85px) and
+   visually overlaps block-1. Scale typography and the inter-element
+   margins in vw, tighten button padding and lift them slightly so the
+   left column fits between the photo and the section bottom. */
+@media (min-width: 769px) and (max-width: 1100px) {
+  /* Block 1 — kicker / Мастерство Состояния / desc */
+  #s7 .s7-kicker     { font-size: 1.6vw; margin-bottom: 1vw; }
+  #s7 .s7-title      { font-size: 3.6vw; margin-bottom: 1vw; line-height: 1.05; }
+  #s7 .s7-desc       { font-size: 1.5vw; line-height: 1.25; }
+
+  /* Block 2 — Anna name + bio */
+  #s7 .s7-name       { font-size: 2.6vw; margin-bottom: 1vw; line-height: 1.05; }
+  #s7 .s7-name-title { font-size: 1.5vw; margin-bottom: 1vw; line-height: 1.25; }
+  #s7 .s7-bio        { font-size: 1.2vw; line-height: 1.3; }
+
+  /* Buttons — narrower padding + scaled label so the row fits the column */
+  #s7 .s7-buttons    { gap: 1.6vw; bottom: 5%; width: 50%; }
+  #s7 .s7-btn        { padding: 1vw 1.6vw; border-radius: 1vw; }
+  #s7 .s7-btn span   { font-size: 1.6vw; }
+}
+
 /* ===== S8 — DNA (Figma 1440×700, node 1:129) ===== */
 #s8.s8-figma { background: #e0d0c4; }
 #s8 .s8-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
@@ -2334,6 +2498,38 @@ img.desktop-only { display: block !important; }
 #s8 .s8-trait-2 { left: 66.74%; top: 22.71%; }
 #s8 .s8-trait-3 { left: 10.76%; top: 69.43%; }
 #s8 .s8-trait-4 { left: 66.74%; top: 69.71%; }
+
+/* Tablet (769–1100px) — s8 keeps the desktop 1440/700 aspect-ratio per
+   Figma 1:129, so column widths (22.43%) shrink to ~172-247px and the
+   bottom traits (КРАСИВО / СТРУКТУРНО, top:69.43%) overflow the section
+   bottom by ~24px because the body wraps to 3-4 lines at fixed 16px.
+   Scale typography and inter-element gap in vw so each trait keeps
+   Figma proportions and fits inside the section across all tablets. */
+@media (min-width: 769px) and (max-width: 1100px) {
+  #s8 .s8-title { font-size: 2.8vw; }     /* ≈22.96px @820, 28px @1000 */
+  #s8 .s8-trait { gap: 1.2vw; }
+  #s8 .s8-trait h3 {
+    font-size: 2.3vw;                      /* ≈18.86px @820, 23px @1000 */
+    line-height: 1.05;
+  }
+  #s8 .s8-trait p {
+    font-size: 1.4vw;                      /* ≈11.48px @820, 14px @1000 */
+    line-height: 1.25;
+  }
+  /* DNA spiral image — desktop container is 52.92% wide (319-1081 in 1440)
+     and on desktop the image (1.95:1 aspect) sits at native size with empty
+     space inside the container, so the trait columns at left:66.74% don't
+     visually overlap the spiral. On tablet the container shrinks
+     proportionally and the image fills the full container width via
+     object-fit:contain — the spiral's right edge ends up at ~75% (611px @820)
+     while trait-2/4 columns start at 66.74% (543px @820), a 68px overlap.
+     Narrow the DNA container to 28% centered so the spiral sits cleanly
+     between the two text columns at every tablet width. */
+  #s8 .s8-dna {
+    left: 36%;
+    width: 28%;
+  }
+}
 
 /* ===== S9 — Archetypes (Figma 1440×700, node 1:145) ===== */
 #s9.s9-figma { background: #fff5ef; }
@@ -2430,6 +2626,67 @@ img.desktop-only { display: block !important; }
   line-height: 1.2;
 }
 
+/* Tablet (769–1100px) — s9 desktop uses calc(50% ± Npx) absolute pixel
+   offsets that assume a 1440-wide section. At narrow tablets:
+   - Title at calc(50%+240px) puts «Основные архетипы RI» right edge at
+     995px on 820vw — overflows 175px past viewport.
+   - Caption at calc(50%-565px) lands at left:-158px — entirely off-screen.
+   - Venn (398×358 fixed) takes ~50% width on 820 and almost full section
+     height, leaving no room for the caption below.
+   Re-anchor everything in % / vw: title centered top, venn centered with
+   scaled px positions for labels, caption bottom-left within viewport. */
+@media (min-width: 769px) and (max-width: 1100px) {
+  /* Title — Figma puts «Основные архетипы RI» in the top-RIGHT area
+     (calc(50%+240px)), clear of the hand+rose graphic in the top-left.
+     A centered title at top:8% sits directly over the hand. Anchor it
+     from the right edge so it stays in the clean upper-right zone at
+     every tablet width, matching the macOS layout. */
+  #s9 .s9-title {
+    top: 8%;
+    left: auto;
+    right: 6%;
+    transform: none;
+    font-size: 2.6vw;        /* ≈21.3px @820, 26px @1000 */
+  }
+  #s9 .s9-caption {
+    top: auto;
+    bottom: 6%;
+    left: 5%;
+    width: 30%;
+    font-size: 1.4vw;        /* ≈11.5px @820, 14px @1000 */
+    line-height: 1.25;
+  }
+  #s9 .s9-venn {
+    width: 30vw;             /* ≈246px @820, 300px @1000 */
+    height: 27vw;            /* keep 398/358 aspect */
+  }
+  /* Convert px label offsets (relative to 398×358 venn) to % so they
+     scale with the new vw-sized container. Font size matches Figma's
+     width:font ratio (~12:1 for body labels, ~6.7:1 for the centered
+     "Структурная магия") so the text wraps to the same line-count as
+     the macOS reference (3 lines / 3 / 3 / 2). */
+  #s9 .s9-vlabel { font-size: 0.9vw; line-height: 1.2; }
+  #s9 .s9-vlabel--top {
+    top: 10.6%;              /* (358/2 - 141) / 358 */
+    width: 36.4%;            /* 145/398 */
+  }
+  #s9 .s9-vlabel--bl {
+    top: 71.8%;              /* (358/2 + 78) / 358 */
+    left: 13.8%;             /* (398/2 - 144) / 398 */
+    width: 27.9%;            /* 111/398 */
+  }
+  #s9 .s9-vlabel--br {
+    top: 71.8%;
+    left: 71.6%;             /* (398/2 + 86) / 398 */
+    width: 21.6%;            /* 86/398 */
+  }
+  #s9 .s9-vlabel--c {
+    top: 54.2%;              /* (358/2 + 15) / 358 */
+    font-size: 1.35vw;
+    width: 30.4%;            /* 121/398 */
+  }
+}
+
 /* ===== S10 — Unity (Figma 1440×700, node 1:156) ===== */
 #s10 { background: #000; }
 #s10.s10-figma { background: #000; }
@@ -2520,6 +2777,25 @@ img.desktop-only { display: block !important; }
 #s11.s11-figma { background: #000; }
 #s11 .s11-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
 #s11 .s11-bg img { object-fit: cover; }
+
+/* Top darkening gradient — matches the visual treatment in Figma 1:170
+   where the top edge fades to solid black for a soft transition from
+   the previous section. Sits above the bg image but under the title and
+   cards (z-index 1). */
+#s11.s11-figma::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 25%;
+  background: linear-gradient(
+    to bottom,
+    #000 0%,
+    rgba(0, 0, 0, 0.85) 40%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
 
 #s11 .s11-title {
   position: absolute;
@@ -2617,6 +2893,59 @@ img.desktop-only { display: block !important; }
   line-height: 1;
   color: #fff5ef;
   white-space: nowrap;
+}
+
+/* Tablet (769–1100px) — s11 desktop has fixed-pixel sizing throughout
+   that breaks at narrow widths:
+   - Title at calc(50%-582px) → left:-172px @820 (off-screen).
+   - Grid width:1165px → overflows viewport by ~345px @820.
+   - Cards 375×500px fixed → don't scale with section.
+   - Card font-sizes 28/18/16 + padding 80/40 + gap 40 — content
+     overflows the smaller card box.
+   Re-anchor title to 5% left, scale grid and cards in vw, switch card
+   to aspect-ratio so it stays proportional to its width. */
+@media (min-width: 769px) and (max-width: 1100px) {
+  #s11 .s11-title {
+    top: 8%;
+    left: 5%;
+    font-size: 2.6vw;            /* ≈21.3px @820, 26px @1000 */
+  }
+  #s11 .s11-grid {
+    top: 18%;
+    left: 5%;
+    transform: none;
+    width: 90%;
+    height: auto;
+    gap: 1.5vw;
+  }
+  #s11 .s11-card {
+    width: calc((100% - 3vw) / 3);
+    height: auto;
+    aspect-ratio: 375 / 500;
+    padding: 5vw 3vw 3vw;         /* was 80px 40px 40px */
+    gap: 2vw;                     /* was 40px */
+    border-radius: 1vw;
+  }
+  #s11 .s11-card__title {
+    font-size: 2.3vw;             /* ≈18.86px @820, 23px @1000 */
+    line-height: 1.05;
+  }
+  #s11 .s11-card__body {
+    font-size: 1.4vw;             /* ≈11.5px @820, 14px @1000 */
+    line-height: 1.25;
+  }
+  #s11 .s11-card__sub {
+    font-size: 1.3vw;             /* ≈10.66px @820, 13px @1000 */
+    line-height: 1.25;
+  }
+  #s11 .s11-card .s11-btn {
+    width: 100%;
+    padding: 1vw 1.5vw;
+    border-radius: 0.8vw;
+  }
+  #s11 .s11-card .s11-btn span {
+    font-size: 1.4vw;
+  }
 }
 
 /* Legacy s11 grid kept for backward compat — won't apply since we use s11-grid above */
