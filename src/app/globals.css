@@ -2114,13 +2114,23 @@ img.desktop-only { display: block !important; }
    the next section. Scale typography, stone dimensions, vertical gaps,
    and the letter/stone left-offsets in vw so the four-column row keeps
    its Figma proportions across the whole tablet range. */
-@media (min-width: 769px) and (max-width: 1100px) {
+@media (min-width: 769px) and (max-width: 1300px) {
   #s4 .s4-title  { font-size: 2.6vw; }      /* ≈21.3px @820, 26px @1000 */
   #s4 .s4-letter { font-size: 2.2vw; }
   #s4 .s4-letter--ri { font-size: 4vw; }
   #s4 .s4-name   { font-size: 1.5vw; }
   #s4 .s4-desc   { font-size: 1.1vw; line-height: 1.25; }
   #s4 .s4-accent { font-size: 1.5vw; }
+
+  /* По запросу — выравниваем верха всех 4 колонок на одну Y-линию.
+     Десктопный код использует разные top для IQ/EQ/SQ/RI чтобы
+     совмещать нижние края букв (RI letter 52px, остальные 28px), но
+     визуально это даёт «прыжок» RI вверх. Опускаем первые 3 к уровню
+     RI (top:21.78%) — все буквы на одной линии. */
+  #s4 .s4-col-iq,
+  #s4 .s4-col-eq,
+  #s4 .s4-col-sq,
+  #s4 .s4-col-ri { top: 21.78%; }
 
   /* IQ — letter offset 80px → 5.5vw, stone 102×113 → ~7×7.8vw, margins compressed */
   #s4 .s4-col-iq .s4-letter { margin-left: 5.5vw; }
