@@ -2542,19 +2542,20 @@ img.desktop-only { display: block !important; }
     font-size: 1.4vw;                      /* ≈11.48px @820, 14px @1000 */
     line-height: 1.25;
   }
-  /* DNA spiral image — desktop container is 52.92% wide (319-1081 in 1440)
-     and on desktop the image (1.95:1 aspect) sits at native size with empty
-     space inside the container, so the trait columns at left:66.74% don't
-     visually overlap the spiral. On tablet the container shrinks
-     proportionally and the image fills the full container width via
-     object-fit:contain — the spiral's right edge ends up at ~75% (611px @820)
-     while trait-2/4 columns start at 66.74% (543px @820), a 68px overlap.
-     Narrow the DNA container to 28% centered so the spiral sits cleanly
-     between the two text columns at every tablet width. */
+  /* DNA spiral image — desktop container is 52.92%×55.57% (matches Figma
+     762×389 ≈ image's 1.95 aspect-ratio so spiral fills container).
+     On tablet keep 28% width to avoid overlap with trait columns at
+     left/right (66.74%/10.76%), but switch height to vw-based so
+     container matches the image's natural aspect — без этого спираль
+     рендерится только в верхней половине 28%×55.57% контейнера, низ
+     пустой. Получается заметно мельче чем визуальная пропорция Figma. */
   #s8 .s8-dna {
     left: 36%;
     width: 28%;
+    height: auto;
+    aspect-ratio: 762 / 389;     /* совпадает с Figma 1:131 контейнером */
   }
+  #s8 .s8-dna img { object-fit: cover; }
 }
 
 /* ===== S9 — Archetypes (Figma 1440×700, node 1:145) ===== */
