@@ -2122,32 +2122,27 @@ img.desktop-only { display: block !important; }
   #s4 .s4-desc   { font-size: 1.1vw; line-height: 1.25; }
   #s4 .s4-accent { font-size: 1.5vw; }
 
-  /* По запросу — выравниваем верха всех 4 колонок на одну Y-линию.
-     Десктопный код использует разные top для IQ/EQ/SQ/RI чтобы
-     совмещать нижние края букв (RI letter 52px, остальные 28px), но
-     визуально это даёт «прыжок» RI вверх. Опускаем первые 3 к уровню
-     RI (top:21.78%) — все буквы на одной линии. */
-  #s4 .s4-col-iq,
-  #s4 .s4-col-eq,
-  #s4 .s4-col-sq,
-  #s4 .s4-col-ri { top: 21.78%; }
 
   /* IQ — letter offset 80px → 5.5vw, stone 102×113 → ~7×7.8vw, margins compressed */
   #s4 .s4-col-iq .s4-letter { margin-left: 5.5vw; }
   #s4 .s4-col-iq .s4-stone  { width: 7vw; height: 7.8vw; margin-left: 2.3vw; margin-top: 4.5vw; }
-  #s4 .s4-col-iq .s4-name   { margin-top: 3.5vw; }
+  /* name margin-top увеличен (было 3.5vw) чтобы Y «Эпоха индустриализации»
+     совпала с Y «Эпоха AI» — компенсирует меньшую высоту stone IQ. */
+  #s4 .s4-col-iq .s4-name   { margin-top: 5.1vw; }
   #s4 .s4-col-iq .s4-desc   { margin-top: 1.4vw; }
 
   /* EQ — letter offset 50→3.4vw, stone 127×155 → ~8.7×10.6vw */
   #s4 .s4-col-eq .s4-letter { margin-left: 3.4vw; }
   #s4 .s4-col-eq .s4-stone  { width: 8.7vw; height: 10.6vw; margin-left: 0.14vw; margin-top: 3.2vw; }
-  #s4 .s4-col-eq .s4-name   { margin-top: 2.8vw; }
+  /* name margin-top увеличен (было 2.8vw) чтобы выровнять Y с RI. */
+  #s4 .s4-col-eq .s4-name   { margin-top: 4vw; }
   #s4 .s4-col-eq .s4-desc   { margin-top: 1.4vw; }
 
   /* SQ — letter offset 40→2.7vw, stone 117×189 → ~8×13vw */
   #s4 .s4-col-sq .s4-letter { margin-left: 2.7vw; }
   #s4 .s4-col-sq .s4-stone  { width: 8vw; height: 13vw; margin-left: 0.14vw; margin-top: 2.7vw; }
-  #s4 .s4-col-sq .s4-name   { margin-top: 1.6vw; }
+  /* name margin-top увеличен (было 1.6vw) чтобы выровнять Y с RI. */
+  #s4 .s4-col-sq .s4-name   { margin-top: 2.5vw; }
   #s4 .s4-col-sq .s4-desc   { margin-top: 1.4vw; }
 
   /* RI — column is wider (22.15%); stone fills column at ~16vw tall */
