@@ -2542,22 +2542,27 @@ img.desktop-only { display: block !important; }
     font-size: 1.4vw;                      /* ≈11.48px @820, 14px @1000 */
     line-height: 1.25;
   }
-  /* DNA spiral image — desktop container 52.92%×55.57% (Figma 762×389).
-     На планшете контейнер 28% был визуально мелким + смещался вверх
-     (top:26.43%) из-за десктопного offset. Расширяем до 30% (макс
-     допустимый без overlap с trait колонками 10.76%+22.43%=33.19% слева
-     и 66.74% справа — gap ~17px), и вертикально центрируем по середине
-     секции, чтобы спираль читалась как акцент в центре между четырёх
-     трейтов. */
+  /* DNA spiral image — расширяем до 36% (20% больше предыдущих 30%
+     по запросу). Чтобы не было overlap с trait колонками, сжимаем
+     trait-1/3 (left columns) до 18% width и сдвигаем trait-2/4
+     (right columns) к 70% left — даёт DNA свободные 32-68% и зазоры
+     по 2% (~17px на 820) до текстовых колонок. Spiral centered
+     vertically для визуального акцента между 4 трейтами. */
   #s8 .s8-dna {
-    left: 35%;
-    width: 30%;
+    left: 32%;
+    width: 36%;
     top: 50%;
     transform: translateY(-50%);
     height: auto;
-    aspect-ratio: 762 / 389;     /* совпадает с Figma 1:131 контейнером */
+    aspect-ratio: 762 / 389;     /* Figma 1:131 контейнер */
   }
   #s8 .s8-dna img { object-fit: cover; }
+
+  /* Сужаем left-колонки и двигаем right-колонки чтобы дать DNA место. */
+  #s8 .s8-trait-1,
+  #s8 .s8-trait-3 { width: 18%; }
+  #s8 .s8-trait-2 { left: 70%; width: 18%; }
+  #s8 .s8-trait-4 { left: 70%; width: 18%; }
 }
 
 /* ===== S9 — Archetypes (Figma 1440×700, node 1:145) ===== */
