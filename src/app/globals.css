@@ -2316,13 +2316,11 @@ img.desktop-only { display: block !important; }
   display: flex;
   flex-direction: column;
 }
-/* Block 1: Ключ к RI / МАСТЕРСТВО / desc | x:154 y:60 w:786
-   (Original Figma top was 95/700 = 13.57%, but with the longer bio in
-   block-2 the whole left column visually drifted toward the bottom.
-   Raising block-1 to 60/700 = 8.57% recenters the column vertically.) */
+/* Block 1: Ключ к RI / МАСТЕРСТВО / desc | x:154 y:95 w:786 (Figma 1:113).
+   top:13.57% (95/700) — Figma пропорция (более воздуха сверху над «Ключ к RI»). */
 #s7 .s7-block-1 {
   left: 10.69%;           /* 154/1440 */
-  top: 8.57%;             /* 60/700 — raised to vertically center the column */
+  top: 13.57%;            /* 95/700 — Figma proportion */
   width: 54.58%;          /* 786/1440 */
 }
 #s7 .s7-kicker {
@@ -2380,16 +2378,20 @@ img.desktop-only { display: block !important; }
   font-family: var(--font-body);
   font-weight: 400;
   font-size: 16px;
-  line-height: 1.3;
+  line-height: 1.2;
   color: #fff5ef;
   white-space: pre-line;
 }
-/* Buttons row | top:~595 (95+40+block content); 2 buttons w:324 + 23 gap */
+/* Buttons row | 2 buttons w:324 + 23 gap.
+   На десктопе block-2 (Анна + bio) высокий (~230px из-за 6-строчного bio
+   с line-height 1.2). bottom: 9% кладёт кнопки ниже к краю секции, давая
+   достаточный визуальный зазор b2→кнопки (~50-65px на 1300-1700) при
+   разумном нижнем отступе (~60-70px). */
 #s7 .s7-buttons {
   position: absolute;
   z-index: 2;
   left: 10.69%;
-  bottom: 7%;             /* approx — bottom area */
+  bottom: 9%;
   display: flex;
   gap: 23px;
   width: 46.6%;           /* 671/1440 */
@@ -2416,16 +2418,21 @@ img.desktop-only { display: block !important; }
   white-space: nowrap;
 }
 
-/* Tablet (769–1100px) — s7 keeps the 1440/700 aspect-ratio per Figma
-   1:113, so the section shrinks to ~371-487px tall on tablet while the
-   fixed-px typography (52/36/20/18/16) and 20px vertical margins stay
-   constant. At 820: title takes 2 lines (104px), bio wraps to 9 lines
-   (~166px), block-2 ends 481px (overflows section bottom by 85px) and
-   visually overlaps block-1. Scale typography and the inter-element
-   margins in vw, tighten button padding and lift them slightly so the
-   left column fits between the photo and the section bottom. */
-@media (min-width: 769px) and (max-width: 1100px) {
-  /* Block 1 — kicker / Мастерство Состояния / desc */
+/* Tablet (769–1300px) — s7 keeps the 1440/700 aspect-ratio per Figma
+   1:113, so the section shrinks to ~371-632px tall on tablet/narrow
+   desktop while the fixed-px typography (52/36/20/18/16) and 20px
+   vertical margins stay constant. At 820: title takes 2 lines (104px),
+   bio wraps to 9 lines (~166px), block-2 ends 481px (overflows section
+   bottom by 85px) and visually overlaps block-1. Range extends to
+   1300px because at 1100-1300 viewports the desktop layout still
+   crowds — Анна Медведева row touches the desc row above. Scale
+   typography and the inter-element margins in vw, tighten button
+   padding and lift them slightly so the left column fits between the
+   photo and the section bottom across all tablet sizes. */
+@media (min-width: 769px) and (max-width: 1300px) {
+  /* Block 1 — kicker / Мастерство Состояния / desc.
+     top:13% — близко к Figma's 13.57% (95/700). */
+  #s7 .s7-block-1    { top: 13%; }
   #s7 .s7-kicker     { font-size: 1.6vw; margin-bottom: 1vw; }
   #s7 .s7-title      { font-size: 3.6vw; margin-bottom: 1vw; line-height: 1.05; }
   #s7 .s7-desc       { font-size: 1.5vw; line-height: 1.25; }
@@ -2435,10 +2442,21 @@ img.desktop-only { display: block !important; }
   #s7 .s7-name-title { font-size: 1.5vw; margin-bottom: 1vw; line-height: 1.25; }
   #s7 .s7-bio        { font-size: 1.2vw; line-height: 1.3; }
 
-  /* Buttons — narrower padding + scaled label so the row fits the column */
-  #s7 .s7-buttons    { gap: 1.6vw; bottom: 5%; width: 50%; }
+  /* Buttons */
+  #s7 .s7-buttons    { gap: 1.6vw; bottom: 8%; width: 50%; }
   #s7 .s7-btn        { padding: 1vw 1.6vw; border-radius: 1vw; }
   #s7 .s7-btn span   { font-size: 1.6vw; }
+}
+
+/* Wider tablet / narrow desktop (1101-1300px) — section is taller
+   (~535-632px), приближаем к Figma proportions: top:95/700=13.57%,
+   bottom:151/700=21.57%. Block-2 bio wraps to 8 lines на этом
+   диапазоне, ограничивая максимально-возможный bottom padding.
+   Top:13.5% и bottom:12% — лучший компромисс с положительным gap к
+   блоку-2 на всём диапазоне 1101-1300. */
+@media (min-width: 1101px) and (max-width: 1300px) {
+  #s7 .s7-block-1    { top: 13.5%; }
+  #s7 .s7-buttons    { bottom: 12%; }
 }
 
 /* ===== S8 — DNA (Figma 1440×700, node 1:129) ===== */
@@ -2908,16 +2926,16 @@ img.desktop-only { display: block !important; }
   white-space: nowrap;
 }
 
-/* Tablet (769–1100px) — s11 desktop has fixed-pixel sizing throughout
+/* Tablet (769–1300px) — s11 desktop has fixed-pixel sizing throughout
    that breaks at narrow widths:
    - Title at calc(50%-582px) → left:-172px @820 (off-screen).
-   - Grid width:1165px → overflows viewport by ~345px @820.
+   - Grid width:1165px → overflows viewport at narrow tablets.
    - Cards 375×500px fixed → don't scale with section.
-   - Card font-sizes 28/18/16 + padding 80/40 + gap 40 — content
-     overflows the smaller card box.
-   Re-anchor title to 5% left, scale grid and cards in vw, switch card
-   to aspect-ratio so it stays proportional to its width. */
-@media (min-width: 769px) and (max-width: 1100px) {
+   - At 1180 (iPad Pro landscape): cards extend 209px BELOW section
+     bottom because section height (669) < card height + grid top.
+   Range extends to 1300px to cover all common landscape tablets
+   (iPad Pro 11"/12.9" landscape ≤1366, but 1300 catches most). */
+@media (min-width: 769px) and (max-width: 1300px) {
   #s11 .s11-title {
     top: 8%;
     left: 5%;
@@ -2951,13 +2969,19 @@ img.desktop-only { display: block !important; }
     font-size: 1.3vw;             /* ≈10.66px @820, 13px @1000 */
     line-height: 1.25;
   }
+  /* Кнопки «Перейти» — на планшете делаем явно видимыми: толще
+     border, заметная фоновая заливка, более крупный шрифт. */
   #s11 .s11-card .s11-btn {
     width: 100%;
-    padding: 1vw 1.5vw;
+    padding: 1.4vw 1.5vw;
     border-radius: 0.8vw;
+    border-width: 1.5px;
+    background: rgba(255, 245, 239, 0.06);
   }
   #s11 .s11-card .s11-btn span {
-    font-size: 1.4vw;
+    font-size: 1.6vw;          /* было 1.4vw — крупнее, чтобы точно читалось */
+    font-weight: 500;
+    letter-spacing: 0.02em;
   }
 }
 
@@ -3263,14 +3287,16 @@ img.desktop-only { display: block !important; }
 }
 #s12.s12-figma .s12-logo__year { display: inline; }
 
-/* Tablet (769–1100px) — Figma 131:476 keeps the 1440×495 horizontal layout
+/* Tablet (700–1100px) — Figma 131:476 keeps the 1440×495 horizontal layout
    but the fixed-px fonts (28/20/16/12) and 44px social gap cause the right
    column ("Состояние — Новая валюта" + body) and the bottom row (logo +
    legal links) to overflow off the right edge as the section shrinks.
    Scale typography and the social gap proportionally to viewport width
    while leaving the % positions intact, so the design intent (two columns,
-   row of icons, centered logo) is preserved at tablet sizes. */
-@media (min-width: 769px) and (max-width: 1100px) {
+   row of icons, centered logo) is preserved at tablet sizes.
+   Range extends down to 700px to cover iPad mini portrait (768) and
+   smaller tablets, where we force the desktop-style footer above. */
+@media (min-width: 700px) and (max-width: 1100px) {
   #s12.s12-figma .s12-headline,
   #s12.s12-figma .s12-currency-title {
     font-size: 2.8vw;        /* ≈22.96px @820, 28px @1000 */
@@ -6430,4 +6456,24 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   main[data-lang="ua"] .cons-col-2.cons-support { top: 51.34%; }
   main[data-lang="ua"] .cons-col-3.cons-pay     { top: 81.26%; }
   main[data-lang="ua"] .cons-col-3.cons-support { top: 83.34%; }
+}
+
+/* ====================================================================
+   Tablet portrait footer override (700-768px)
+   ====================================================================
+   Глобальный breakpoint .mobile-only/.desktop-only переключается на
+   ≤768px и показывает вертикальный мобильный футер. На планшетах в
+   портрете (iPad mini 768, etc.) пользователь хочет видеть горизонтальный
+   десктопный футер как на Figma 131:476. Объявляем после всех остальных
+   `@media (max-width: 768)` блоков, чтобы override победил по cascade
+   order при равной specificity. */
+@media (min-width: 700px) and (max-width: 768px) {
+  .s12-footer .desktop-only { display: block !important; }
+  .s12-footer .mobile-only { display: none !important; }
+  .s12-footer.s12-figma {
+    aspect-ratio: 1440 / 495 !important;
+    background: #000 !important;
+  }
+  /* Bg image desktop-only div */
+  .s12-footer .s12-bg.desktop-only { display: block !important; }
 }
