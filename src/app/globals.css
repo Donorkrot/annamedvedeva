@@ -2542,16 +2542,18 @@ img.desktop-only { display: block !important; }
     font-size: 1.4vw;                      /* ≈11.48px @820, 14px @1000 */
     line-height: 1.25;
   }
-  /* DNA spiral image — desktop container is 52.92%×55.57% (matches Figma
-     762×389 ≈ image's 1.95 aspect-ratio so spiral fills container).
-     On tablet keep 28% width to avoid overlap with trait columns at
-     left/right (66.74%/10.76%), but switch height to vw-based so
-     container matches the image's natural aspect — без этого спираль
-     рендерится только в верхней половине 28%×55.57% контейнера, низ
-     пустой. Получается заметно мельче чем визуальная пропорция Figma. */
+  /* DNA spiral image — desktop container 52.92%×55.57% (Figma 762×389).
+     На планшете контейнер 28% был визуально мелким + смещался вверх
+     (top:26.43%) из-за десктопного offset. Расширяем до 30% (макс
+     допустимый без overlap с trait колонками 10.76%+22.43%=33.19% слева
+     и 66.74% справа — gap ~17px), и вертикально центрируем по середине
+     секции, чтобы спираль читалась как акцент в центре между четырёх
+     трейтов. */
   #s8 .s8-dna {
-    left: 36%;
-    width: 28%;
+    left: 35%;
+    width: 30%;
+    top: 50%;
+    transform: translateY(-50%);
     height: auto;
     aspect-ratio: 762 / 389;     /* совпадает с Figma 1:131 контейнером */
   }
