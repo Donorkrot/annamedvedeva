@@ -2177,9 +2177,12 @@ img.desktop-only { display: block !important; }
   text-transform: uppercase;
 }
 #s5 .s5-card__title--ri {
+  /* Размер унифицирован с обычным title — все 4 заголовка одного
+     размера (28px). Отличие — weight (SemiBold) и регистр (без uppercase
+     — RI это «Reality Intelligence», не all-caps). */
   font-weight: 600;
-  font-size: 36px;
-  line-height: 33.6px;
+  font-size: 28px;
+  line-height: 1;
   text-transform: none;
 }
 #s5 .s5-card__body {
@@ -2191,8 +2194,10 @@ img.desktop-only { display: block !important; }
   color: #310f00;
 }
 #s5 .s5-card__body--lead {
+  /* Размер унифицирован с обычным body — всё body на 4 карточках одного
+     размера. Отличие только в font-weight (Medium вместо Regular). */
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.2;
 }
 
@@ -2206,15 +2211,18 @@ img.desktop-only { display: block !important; }
 #s5 .s5-card--manage { left: 66.67%; top: 57.00%; }   /* 960/1440, 399/700 */
 #s5 .s5-card--clear  { left: 66.60%; top: 32.43%; }   /* 959/1440, 227/700 */
 
-/* Tablet (769–1100px) — s5 keeps the desktop 1440/700 aspect-ratio per
-   Figma 1:371, so card widths (22.57%) shrink to ~174-248px while the
-   fixed-px typography (36/28/18/16) and 20px padding/gap stay constant.
-   The frosted hero card («Reality Intelligence» + long body) and the
-   bottom-right Manage card («УПРАВЛЯЕМАЯ РЕАЛЬНОСТЬ» + long body) end
-   up 408-514px tall on a 396-tall section and overflow into s6. Scale
-   typography and inner spacing in vw so each card keeps its Figma
-   proportions and stays inside the section across all tablet widths. */
-@media (min-width: 769px) and (max-width: 1100px) {
+/* Tablet (769–1300px) — s5 keeps the desktop 1440/700 aspect-ratio per
+   Figma 1:371, so card widths (22.57%) shrink and the fixed-px typography
+   (36/28/18/16) + 20px padding/gap stay constant. The frosted hero card
+   («Reality Intelligence» + long body) and the bottom-right Manage card
+   («УПРАВЛЯЕМАЯ РЕАЛЬНОСТЬ» + long body) overflow downward and visually
+   collide with the bottom-row cards (Стаб / Manage at top:57%). Range
+   extends to 1300px because the desktop layout only stops crowding above
+   that width — at 1100-1300 viewports the body still wraps to 7-8 lines
+   and the RI card spills onto Стаб below. Scale typography and inner
+   spacing in vw so each card keeps its Figma proportions across all
+   tablet sizes. */
+@media (min-width: 769px) and (max-width: 1300px) {
   /* Widen cards from 22.57% → 25% so longer body lines («Умение
      управлять своим состоянием так, чтобы не сносило штормами…»)
      don't blow the card height up to 9-10 lines. The crystal in the
@@ -2224,21 +2232,21 @@ img.desktop-only { display: block !important; }
     padding: 1.4vw;
     border-radius: 1.6vw;
   }
-  #s5 .s5-card__title {
-    font-size: 2.2vw;        /* ≈18px @820, 22px @1000 */
+  /* Все 4 заголовка одного размера на планшете для визуального ритма
+     (по запросу пользователя — Figma даёт RI 36px и остальные 28px,
+     но user предпочитает однородность). */
+  #s5 .s5-card__title,
+  #s5 .s5-card__title--ri {
+    font-size: 2.2vw;        /* ≈18px @820, 22px @1000, 28px @1280 */
     line-height: 1.1;
   }
-  #s5 .s5-card__title--ri {
-    font-size: 2.6vw;        /* ≈21.3px @820, 26px @1000 */
-    line-height: 1.05;
-  }
-  #s5 .s5-card__body {
-    font-size: 1.2vw;        /* ≈9.84px @820, 12px @1000 */
-    line-height: 1.25;
-  }
+  /* Все body одного размера — RI body--lead унифицирован с остальными
+     тремя карточками (по запросу пользователя — единая визуальная шкала
+     текста на всех 4 карточках). */
+  #s5 .s5-card__body,
   #s5 .s5-card__body--lead {
-    font-size: 1.4vw;        /* ≈11.5px @820, 14px @1000 */
-    line-height: 1.2;
+    font-size: 1.2vw;        /* ≈9.84px @820, 12px @1000, 15.4px @1280 */
+    line-height: 1.25;
   }
 }
 
@@ -2781,20 +2789,25 @@ img.desktop-only { display: block !important; }
 /* Top darkening gradient — matches the visual treatment in Figma 1:170
    where the top edge fades to solid black for a soft transition from
    the previous section. Sits above the bg image but under the title and
-   cards (z-index 1). */
-#s11.s11-figma::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 25%;
-  background: linear-gradient(
-    to bottom,
-    #000 0%,
-    rgba(0, 0, 0, 0.85) 40%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  pointer-events: none;
-  z-index: 1;
+   cards (z-index 1). Desktop+tablet only — on mobile the title and
+   cards live inside .s11-mobile-html (z-index:0), so a z-index:1
+   gradient at the section level paints OVER them and dims the title.
+   The mobile JPG already has its own dark fade baked in. */
+@media (min-width: 769px) {
+  #s11.s11-figma::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 25%;
+    background: linear-gradient(
+      to bottom,
+      #000 0%,
+      rgba(0, 0, 0, 0.85) 40%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
 }
 
 #s11 .s11-title {
@@ -4464,8 +4477,10 @@ img.desktop-only { display: block !important; }
   /* Gradient bottom — h:71/1239=5.73% */
   .s11-m-grad-bot { position: absolute; left: 0; bottom: 0; width: 100%; height: 5.73%; background: linear-gradient(to top, #111 0%, transparent 100%); z-index: 1; pointer-events: none; }
 
-  /* Title — top:82/1239=6.62%, Cormorant SemiBold 9.6vw center */
-  .s11-m-title { position: absolute; top: 6.62%; left: 50%; transform: translateX(-50%); width: 84vw; margin: 0; font-family: var(--font-heading); font-size: 9.6vw; font-weight: 600; line-height: 8.96vw; color: #fff5ef; text-align: center; z-index: 2; }
+  /* Title — top:82/1239=6.62%, Cormorant SemiBold 9.6vw center.
+     Soft dark text-shadow keeps the title readable even where the bg
+     image's orange crack texture sits behind it. */
+  .s11-m-title { position: absolute; top: 6.62%; left: 50%; transform: translateX(-50%); width: 84vw; margin: 0; font-family: var(--font-heading); font-size: 9.6vw; font-weight: 600; line-height: 1.1; color: #fff5ef; text-align: center; z-index: 2; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7), 0 0 16px rgba(0, 0, 0, 0.5); }
 
   /* Cards container — top:174/1239=14.04%, 5.3333vw gap between cards
      (Figma 1:454/1:461 are at y:325 and y:650 respectively → 5.3333vw gap) */
