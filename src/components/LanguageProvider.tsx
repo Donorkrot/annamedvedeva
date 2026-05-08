@@ -13,6 +13,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     if (saved && ['ru', 'ua', 'en'].includes(saved)) setLangState(saved);
   }, []);
 
+  // Sync lang to <html> data-lang so CSS can target language-specific
+  // overrides (e.g. mobile s8 trait spacing depends on body line count
+  // which differs per language).
+  useEffect(() => {
+    document.documentElement.setAttribute('data-lang', lang);
+  }, [lang]);
+
   const setLang = (l: Lang) => {
     setLangState(l);
     localStorage.setItem('lang', l);

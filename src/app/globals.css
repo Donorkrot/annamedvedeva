@@ -2514,6 +2514,32 @@ img.desktop-only { display: block !important; }
 #s8.s8-figma { background: #e0d0c4; }
 #s8 .s8-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
 #s8 .s8-bg img { object-fit: cover; }
+
+/* Mobile: плавный переход между s8 (#e0d0c4) и s9 (#fff5ef).
+   Обе стороны рисуют широкий градиент, встречаются на промежуточном тоне
+   #f0e2da — границы не видно, нет четкой линии шва. */
+/* s8::after сидит над bg-картинкой s8 (z:0), под traits-stack (z:2) и
+   s8-title (z:3) — текст s8 сверху градиента. Цель встречи s8↔s9 —
+   промежуточный тон #f0e2da. Парный градиент сверху s9 задаётся через
+   модификацию .s9-m-grad-top (см. ниже в @media), который существует
+   внутри stacking context .s9-mobile-html и не перекрывает текст s9. */
+@media (max-width: 768px) {
+  #s8.s8-figma::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 22%;
+    background: linear-gradient(
+      to bottom,
+      rgba(240, 226, 218, 0) 0%,
+      rgba(240, 226, 218, 0.4) 40%,
+      rgba(240, 226, 218, 0.8) 75%,
+      #f0e2da 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+}
 #s8 .s8-dna {
   position: absolute;
   z-index: 1;
@@ -2538,6 +2564,11 @@ img.desktop-only { display: block !important; }
   line-height: 33.6px;
   color: #332000;
   white-space: nowrap;
+}
+
+/* Desktop — wrapper не влияет, traits позиционируются absolute как раньше */
+#s8 .s8-traits-stack {
+  display: contents;
 }
 
 #s8 .s8-trait {
@@ -4459,14 +4490,41 @@ img.desktop-only { display: block !important; }
     height: 51.2vw;
     transform: none;
   }
+  /* Mobile s8 — wrapper flex-stacks 4 traits with uniform gap,
+     язык-независимо (RU/UA/EN body line counts varying не влияет).
+     Bg image теперь bg-s8-desktop.jpg (без baked-in линий), а золотые
+     линии под заголовками рисуются CSS ::after на h3, поэтому всегда
+     совпадают с heading-ом в любой ширине / языке. */
+  #s8 .s8-traits-stack {
+    position: absolute;
+    top: 38.12%;
+    left: 7.73%;
+    width: 84%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 6vw;
+  }
   #s8 .s8-trait {
-    width: 84%;            /* 315/375 */
-    left: 7.73%;           /* 29/375 */
-    /* Tiny breathing room between the bg's gold divider line and the body
-     text — was 0 (touching), 1.6vw (≈6px) gives the body just enough
-     space to read without pushing it back to the old gappy state. */
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100%;
     gap: 1.6vw;
     align-items: flex-start;
+  }
+  /* Золотая линия под заголовком — раньше была baked в bg-s8-mobile.jpg.
+     Теперь CSS pseudo, привязан к h3 → следует за heading-ом в любых
+     раскладках и языках. Solid #c48235 (gold/янтарный из дизайна),
+     2px высота для чёткой видимости. */
+  #s8 .s8-trait h3::after {
+    content: '';
+    display: block;
+    width: 38vw;          /* ширина чуть больше — бросается в глаза */
+    height: 2px;
+    margin-top: 1vw;
+    background: #c48235;
+    border-radius: 1px;
   }
   /* Match Figma heading box height (h=34 for 28px font → line-height ≈ 1.21).
      Default rule below uses line-height: 1 which compressed the text and
@@ -4493,8 +4551,11 @@ img.desktop-only { display: block !important; }
   .s9-m-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
   .s9-m-bg-img { position: absolute; width: 100% !important; max-width: none !important; height: 100%; left: 0; top: 0; object-fit: cover; object-position: center top; display: block; }
 
-  /* Gradient top — h:189/994=19.01% */
-  .s9-m-grad-top { position: absolute; top: 0; left: 0; width: 100%; height: 19.01%; background: linear-gradient(to bottom, #f8e8e0 0%, #f8e8e0 16%, transparent 100%); z-index: 1; pointer-events: none; }
+  /* Gradient top — расширен и перекрашен в #f0e2da, чтобы стыковаться
+     встык с s8::after (тоже фейдит в #f0e2da). Sits внутри
+     .s9-mobile-html stacking context, z:1 — выше bg (z:0), но пишется
+     раньше .s9-m-title (z:1) по DOM-порядку, поэтому текст сверху. */
+  .s9-m-grad-top { position: absolute; top: 0; left: 0; width: 100%; height: 22%; background: linear-gradient(to bottom, #f0e2da 0%, #f0e2da 8%, rgba(240, 226, 218, 0.6) 45%, rgba(240, 226, 218, 0.25) 75%, transparent 100%); z-index: 1; pointer-events: none; }
 
   /* Title — x:30/375=8% y:60/994=6.04% w:315/375=84% */
   .s9-m-title { position: absolute; left: 8%; top: 6.04%; width: 84%; margin: 0; font-family: var(--font-heading); font-size: 9.6vw; font-weight: 600; color: #332000; line-height: 8.96vw; text-align: center; z-index: 1; }
