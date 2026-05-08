@@ -4520,7 +4520,7 @@ img.desktop-only { display: block !important; }
   #s8 .s8-trait h3::after {
     content: '';
     display: block;
-    width: 38vw;          /* ширина чуть больше — бросается в глаза */
+    width: 100%;          /* по ширине h3 (heading shrinks to text via fit-content) */
     height: 2px;
     margin-top: 1vw;
     background: #c48235;
@@ -4528,12 +4528,13 @@ img.desktop-only { display: block !important; }
   }
   /* Match Figma heading box height (h=34 for 28px font → line-height ≈ 1.21).
      Default rule below uses line-height: 1 which compressed the text and
-     pushed body text further from the bg's gold divider line. */
+     pushed body text further from the bg's gold divider line.
+     width:fit-content — h3 ужимается до ширины текста, чтобы линия ::after
+     (width:100%) тоже была по ширине заголовка, а не на весь блок. */
   #s8 .s8-trait h3 {
     line-height: 1.2;
-    /* Slightly tighten body→heading-of-next-block by adding small bottom
-       margin equal to gap that was removed — keeps body separated from
-       heading of the SAME block (matches Figma's tight grouping). */
+    width: fit-content;
+    max-width: 100%;
   }
   #s8 .s8-trait p {
     line-height: 1.2;
