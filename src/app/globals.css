@@ -2818,24 +2818,27 @@ img.desktop-only { display: block !important; }
   object-fit: cover; display: block;
 }
 
-/* — title (Figma node 1:167) — Figma has `-translate-x-1/2` on the
-   container, so left: calc(50% - 327px) is the *center* anchor, not the
-   left edge. Mirror that with translateX(-50%). */
+/* — title (Figma node 1:167) — px-юниты вместо vw, потому что html имеет
+   zoom: calc(100vw/1440px) при viewport>1440. vw даёт двойное масштабирование
+   (vw из исходного viewport + zoom сверху), и заголовок раздувается. С px
+   zoom масштабирует один раз и пиксели остаются по дизайну. */
 #s10 .s10-d-title {
   position: absolute; z-index: 2;
   top: 14.14%;                       /* 99/700 */
-  left: calc(50% - 22.71vw);        /* 327/1440 — center anchor */
-  transform: translateX(-50%);
-  display: flex; flex-direction: column; gap: 0.69vw; /* 10/1440 */
+  left: 67px;                        /* 67/1440 */
+  width: 520px;                      /* оригинальная ширина блока в макете */
+  display: flex; flex-direction: column; gap: 10px;
 }
 #s10 .s10-d-h2 {
   margin: 0; font-family: var(--font-heading); font-weight: 600;
-  font-size: 3.61vw; line-height: 1; /* 52/1440 */
-  text-transform: uppercase; white-space: nowrap; color: #fff5ef;
+  font-size: 52px; line-height: 1;
+  text-transform: uppercase; color: #fff5ef;
+  width: 100%;
+  overflow-wrap: break-word;
 }
 #s10 .s10-d-intro {
   margin: 0; font-family: var(--font-body); font-weight: 500;
-  font-size: 1.25vw; line-height: 1; color: #fff5ef; /* 18/1440 */
+  font-size: 18px; line-height: 1; color: #fff5ef;
 }
 
 /* — staircase steps (Figma nodes 314:441 / 314:438 / 314:434) — */
@@ -4732,6 +4735,325 @@ img.desktop-only { display: block !important; }
   padding: 0;
 }
 
+/* ===== Consultation c1 — Figma node 1:1316 (1440×700) =====
+   Чистый copper-фон (c1-bg.png) + отдельное фото справа (c1-photo.png) +
+   HTML-текст слева. Все размеры и позиции — из Figma node-id 1:1319. */
+.c1-d-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* Figma underlay: linear-gradient(rgba(0,0,0,0.3)) over #310F00 */
+  background: #310F00;
+}
+.c1-d-bg img { object-fit: cover; }
+
+.c1-d-photo {
+  position: absolute;
+  left: 63.75%;            /* 918/1440 */
+  bottom: 0;
+  width: 36.88%;           /* 531/1440 */
+  height: 100%;            /* высота секции — без выхода за низ */
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+/* object-position bottom — фигура полностью в кадре до низа секции,
+   обрезается только верх (арки/статуи), как в макете Figma. */
+.c1-d-photo img { object-fit: cover; object-position: center bottom; }
+
+.c1-text {
+  position: absolute;
+  z-index: 2;
+  left: 10.76%;            /* 155/1440 */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 47.08%;           /* 678/1440 */
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  color: #fff5ef;
+  -webkit-user-select: text;
+  user-select: text;
+  pointer-events: auto;
+}
+/* Cormorant Garamond SemiBold 52px, uppercase, white (Figma node 1:1320).
+   nowrap чтобы заголовок шёл в одну строку как в макете. */
+.c1-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: clamp(28px, 3.61vw, 52px);   /* 52/1440 base */
+  line-height: 1;
+  text-transform: uppercase;
+  color: #fff5ef;
+  white-space: nowrap;
+  font-feature-settings: 'lnum' 1, 'pnum' 1;
+}
+/* Raleway Medium 20px, прозрачный беж rgba(194,187,182,0.84), width 462px (Figma) */
+.c1-body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(14px, 1.39vw, 20px);   /* 20/1440 base */
+  line-height: 1.2;
+  color: rgba(194, 187, 182, 0.84);
+  max-width: 462px;
+  font-feature-settings: 'lnum' 1, 'pnum' 1;
+}
+
+/* ===== Consultation c2 — Figma node 1:1323 (1440×963) =====
+   Чистый фон + 3 HTML карточки (селектируемый текст). Координаты и
+   размеры пиксель-в-пиксель из Figma. */
+.c2-d-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #310F00;
+}
+.c2-d-bg img { object-fit: cover; }
+
+/* Grid с align-items:stretch — все 3 карточки одинаковой высоты,
+   позиции (155/557/959) задаются через padding+grid-template. */
+.c2-d-cards {
+  position: absolute;
+  top: 12.67%;            /* 122/963 */
+  left: 10.76%;           /* 155/1440 */
+  width: 78.40%;          /* 1129/1440 — от left:155 до right edge card 3 */
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 77px;       /* фиксированный gap как в Figma */
+  align-items: stretch;
+}
+.c2-card {
+  padding: 21px;
+  border: 2px solid #C3BBB6;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, rgba(34,11,1,0) 0%, #220b01 53.755%);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow: hidden;
+  color: #fff5ef;
+  font-feature-settings: 'lnum' 1, 'pnum' 1;
+}
+
+/* Title и body имеют ФИКСИРОВАННУЮ высоту (как в Figma h-[68]/h-[114])
+   чтобы блок "Стоимость → кнопки → Длительность" во всех 3 карточках
+   находился на одной горизонтали. */
+/* white-space: pre-line + JSX-замена пробела на \n гарантирует 2 строки. */
+.c2-card-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.1;
+  text-align: center;
+  color: #fff5ef;
+  height: 68px;
+  display: grid;
+  place-items: center;
+  white-space: pre-line;
+}
+/* height: 140px чтобы вместить самый длинный body (card 3 — 7 строк
+   при 16px / line-height 1.2 = 134px). Все 3 body равны, "Стоимость"
+   во всех карточках выравнивается на одной горизонтали. Короткие
+   тексты вертикально центрируются внутри body (justify-center в Figma). */
+.c2-card-body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.2;
+  opacity: 0.9;
+  color: #fff5ef;
+  text-align: left;
+  height: 140px;
+  display: flex;
+  align-items: center;
+}
+.c2-card-desc {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.35;
+  opacity: 0.9;
+  color: #fff5ef;
+}
+/* Золотистый horizontal divider (#de8b23) — как в Figma imgLine5. */
+.c2-line {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg,
+    rgba(222, 139, 35, 0) 0%,
+    rgba(222, 139, 35, 0.85) 50%,
+    rgba(222, 139, 35, 0) 100%);
+}
+.c2-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: var(--font-body);
+  color: #fff5ef;
+}
+.c2-row-label {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1;
+}
+.c2-row-val {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+}
+.c2-price {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 33.6px;
+  color: #de8b23;
+  text-align: right;
+}
+.c2-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.c2-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  border: 1px solid #fff5ef;
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+  color: #fff5ef;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: transparent;
+  transition: background-color 0.25s ease, color 0.25s ease,
+              border-color 0.25s ease, opacity 0.25s ease;
+}
+/* Primary "Оплатить" — на hover заливается светлым cream, текст темнеет */
+.c2-btn-primary:hover {
+  background-color: #fff5ef;
+  color: #310F00;
+  border-color: #fff5ef;
+}
+/* Secondary "Техподдержка" — opacity 0.5 → 1 на hover + лёгкая заливка */
+.c2-btn-secondary { opacity: 0.5; }
+.c2-btn-secondary:hover {
+  opacity: 1;
+  background-color: rgba(255, 245, 239, 0.1);
+}
+.c2-feelings {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: 0.9;
+  color: #fff5ef;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.c2-feelings-f { margin-top: 0.5em; }
+
+/* ===== Consultation c3 — Figma node 1:1380 (1440×732) =====
+   Чистый stone-фон (c3-bg.png) + фото слева (c3-photo.png) + HTML текст
+   справа. Координаты и размеры — из Figma node 1:1384. */
+.c3-d-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #fff5ef;
+}
+.c3-d-bg img { object-fit: cover; }
+
+.c3-d-photo {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 41.32%;           /* 595/1440 */
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.c3-d-photo img { object-fit: cover; object-position: center bottom; }
+
+/* Text block: left:720, vertically centered, width:572, gap:40 */
+.c3-text {
+  position: absolute;
+  z-index: 2;
+  left: 50%;               /* 720/1440 */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 39.72%;           /* 572/1440 */
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  color: #fff5ef;
+  -webkit-user-select: text;
+  user-select: text;
+  pointer-events: auto;
+  font-feature-settings: 'lnum' 1, 'pnum' 1;
+}
+
+/* Heading с pl:30 (Figma) и Cormorant SemiBold 36px */
+.c3-title {
+  margin: 0;
+  padding-left: 30px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 33.6px;
+  color: #fff5ef;
+  white-space: nowrap;
+}
+
+/* Bulleted list: Raleway Medium 18px, gap 16px */
+.c3-bullets {
+  margin: 0;
+  padding: 0 0 0 27px;     /* ms-[27px] Figma indent */
+  list-style: disc;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #fff5ef;
+}
+.c3-bullets li { padding-left: 8px; }
+
+/* Notes: pl:30, gap:20, opacity 0.7, Raleway Regular 16px */
+.c3-notes {
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  opacity: 0.7;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25;
+  color: #fff5ef;
+}
+.c3-notes p { margin: 0; }
+
 /* ===== About a1 — Figma node 1-2008 (desktop) / 1-1804 (mobile) =====
    Clean Figma assets + HTML text so it's selectable / copyable. */
 .a1-figma { background: #1a0d05 !important; }
@@ -6446,6 +6768,12 @@ img.desktop-only { display: block !important; }
   /* ancestor .s10-bg has pointer-events:none — restore it here
      (pointer-events doesn't inherit to children). */
   pointer-events: auto;
+}
+/* На desktop hit-zones c2 не нужны (есть HTML кнопки .c2-btn) —
+   жёстко прячем, чтобы они не ловили hover поверх настоящих кнопок. */
+.cons-hit.mobile-only { display: none !important; }
+@media (max-width: 768px) {
+  .cons-hit.mobile-only { display: block !important; }
 }
 
 /* Soft cream wash — a warm fill slowly lights up INSIDE the drawn button's
