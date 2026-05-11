@@ -30,7 +30,7 @@ export default function ConsultationPage() {
       {[1, 2, 3].map((n, i) => (
         <section
           key={`c${n}`}
-          className="consult-section"
+          className={`consult-section consult-section--c${n}`}
           style={{ aspectRatio: DESKTOP_RATIOS[i], background: DESKTOP_BGS[i] }}
         >
           {/* Desktop bg:

@@ -4814,17 +4814,24 @@ img.desktop-only { display: block !important; }
 }
 .c2-d-bg img { object-fit: cover; }
 
-/* Grid с align-items:stretch — все 3 карточки одинаковой высоты,
-   позиции (155/557/959) задаются через padding+grid-template. */
+/* c2 секция растёт по контенту — снимаем фиксированный aspect-ratio,
+   используем paddings + relative-поток для cards. Так карточки никогда
+   не обрезаются на узких viewport (1280 / tablet / etc). */
+.consult-section--c2 {
+  aspect-ratio: auto !important;
+  min-height: 0 !important;
+  padding-top: 8.47%;     /* 122/1440 — соблюдаем top:122 Figma */
+  padding-bottom: 4.5%;
+}
 .c2-d-cards {
-  position: absolute;
-  top: 12.67%;            /* 122/963 */
-  left: 10.76%;           /* 155/1440 */
+  position: relative;
+  margin: 0 auto;
   width: 78.40%;          /* 1129/1440 — от left:155 до right edge card 3 */
+  max-width: 1131px;
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  column-gap: 77px;       /* фиксированный gap как в Figma */
+  column-gap: clamp(20px, 5.35vw, 77px);
   align-items: stretch;
 }
 .c2-card {
@@ -4968,6 +4975,36 @@ img.desktop-only { display: block !important; }
   gap: 0;
 }
 .c2-feelings-f { margin-top: 0.5em; }
+
+/* На узком desktop / tablet текст в карточках переносится больше.
+   ФИКСИРУЕМ height для title и body (не min-height), чтобы блок
+   "Стоимость → кнопки → Длительность" во всех 3 карточках был на
+   одной горизонтали независимо от длины текста. */
+@media (min-width: 769px) and (max-width: 1280px) {
+  .c2-card-title {
+    /* 28px font wraps to 2 lines, fixed height фиксированный */
+    height: 62px;
+    font-size: 22px;
+  }
+  .c2-card-body {
+    /* Самая длинная карточка (3) в 14px на узкой ширине занимает
+       ~9-10 строк по 17px = ~170. Берём 180 чтобы все вмещались
+       и кнопки шли в одну линию. */
+    height: 180px;
+    font-size: 14px;
+  }
+  .c2-card-desc { font-size: 11px; }
+  .c2-feelings  { font-size: 11px; }
+}
+
+/* Узкий tablet portrait — карточки еще уже, текст еще больше переносится.
+   Поднимаем body чтобы вместить самый длинный, и уменьшаем шрифт еще. */
+@media (min-width: 769px) and (max-width: 980px) {
+  .c2-card-title { height: 60px; font-size: 20px; }
+  .c2-card-body  { height: 230px; font-size: 13px; }
+  .c2-card-desc  { font-size: 11px; }
+  .c2-feelings   { font-size: 11px; }
+}
 
 /* ===== Consultation c3 — Figma node 1:1380 (1440×732) =====
    Чистый stone-фон (c3-bg.png) + фото слева (c3-photo.png) + HTML текст
