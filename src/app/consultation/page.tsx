@@ -1,6 +1,7 @@
 'use client';
 import Image from "next/image";
 import { useTranslation } from '@/components/LanguageProvider';
+import type { TranslationKey } from '@/lib/translations';
 import Footer from '@/components/Footer';
 
 const ASSET_VERSION = '20260420-c2-ref';
@@ -134,10 +135,10 @@ export default function ConsultationPage() {
             <>
               <div className="c2-d-cards desktop-only">
                 {[1, 2, 3].map((k) => {
-                  const titleKey = `c2_card${k}_title` as const;
-                  const bodyKey = `c2_card${k}_body` as const;
-                  const priceKey = `c2_card${k}_price` as const;
-                  const descKey = `c2_card${k}_desc` as const;
+                  const titleKey = `c2_card${k}_title` as TranslationKey;
+                  const bodyKey = `c2_card${k}_body` as TranslationKey;
+                  const priceKey = `c2_card${k}_price` as TranslationKey;
+                  const descKey = `c2_card${k}_desc` as TranslationKey;
                   // Платёжные ссылки WayForPay по каждой карточке.
                   // Card 1 — временная (тестовая), поменяем позже.
                   const payHrefs: Record<number, string> = {
