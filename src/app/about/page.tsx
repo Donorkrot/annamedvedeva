@@ -521,7 +521,7 @@ export default function AboutPage() {
           {i === 5 && (
             <div className="about-btn-book-group">
               <a href="https://drive.google.com/drive/folders/1V5KF6JG-TGjbRFOk_Y0n7wxdmd0SG49V" target="_blank" rel="noopener noreferrer" className="about-btn-book"><span>Читать книгу</span></a>
-              <a href="#" className="about-btn-book"><span>Слушать книгу</span></a>
+              <a href="https://t.me/+VvkBk9x7J6cxNWQ6" target="_blank" rel="noopener noreferrer" className="about-btn-book"><span>Слушать книгу</span></a>
             </div>
           )}
 

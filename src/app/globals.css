@@ -3380,47 +3380,76 @@ img.desktop-only { display: block !important; }
 }
 #s12.s12-figma .s12-logo__year { display: inline; }
 
-/* Tablet (700–1100px) — Figma 131:476 keeps the 1440×495 horizontal layout
-   but the fixed-px fonts (28/20/16/12) and 44px social gap cause the right
-   column ("Состояние — Новая валюта" + body) and the bottom row (logo +
-   legal links) to overflow off the right edge as the section shrinks.
-   Scale typography and the social gap proportionally to viewport width
-   while leaving the % positions intact, so the design intent (two columns,
-   row of icons, centered logo) is preserved at tablet sizes.
-   Range extends down to 700px to cover iPad mini portrait (768) and
-   smaller tablets, where we force the desktop-style footer above. */
-@media (min-width: 700px) and (max-width: 1100px) {
+/* Tablet (980–1100px) — узкий desktop / широкий tablet landscape.
+   Используем vw-fonts чтобы компенсировать сжатие layout'а. */
+@media (min-width: 980px) and (max-width: 1100px) {
   #s12.s12-figma .s12-headline,
   #s12.s12-figma .s12-currency-title {
-    font-size: 2.8vw;        /* ≈22.96px @820, 28px @1000 */
+    font-size: 2.4vw;        /* ≈23.5px @980, 26.4px @1100 */
   }
   #s12.s12-figma .s12-tagline,
   #s12.s12-figma .s12-currency-body,
   #s12.s12-figma .s12-book__sub,
   #s12.s12-figma .s12-logo {
-    font-size: 1.6vw;        /* ≈13.12px @820, 16px @1000 */
+    font-size: 1.4vw;        /* ≈13.7px @980, 15.4px @1100 */
   }
   #s12.s12-figma .s12-book__title {
-    font-size: 2vw;          /* ≈16.4px @820, 20px @1000 */
+    font-size: 1.7vw;        /* ≈16.7px @980, 18.7px @1100 */
   }
   #s12.s12-figma .s12-book {
-    padding: 1vw 1.4vw;
+    padding: 0.9vw 1.2vw;
     gap: 0.4vw;
     border-radius: 1vw;
   }
   #s12.s12-figma .s12-legal__link,
   #s12.s12-figma .s12-legal__sep {
-    font-size: 1.2vw;        /* ≈9.84px @820, 12px @1000 */
+    font-size: 1.1vw;
   }
-  #s12.s12-figma .s12-legal { gap: 1.3vw; }
-  #s12.s12-figma .s12-social { gap: 4.4vw; }    /* 44px @1000 */
+  #s12.s12-figma .s12-legal { gap: 1.2vw; }
+  #s12.s12-figma .s12-social { gap: 4vw; }
   #s12.s12-figma .s12-social__link,
   #s12.s12-figma .s12-social__link img {
-    width: 4vw;              /* ≈32.8px @820, 40px @1000 */
-    height: 4vw;
+    width: 3.5vw;
+    height: 3.5vw;
   }
   #s12.s12-figma .s12-headline-block,
-  #s12.s12-figma .s12-currency-block { gap: 2vw; }
+  #s12.s12-figma .s12-currency-block { gap: 1.6vw; }
+}
+
+/* Tablet portrait (700–979px) — узкий iPad portrait, текст ещё меньше
+   чтобы не выглядел крупным относительно компактного футера. */
+@media (min-width: 700px) and (max-width: 979px) {
+  #s12.s12-figma .s12-headline,
+  #s12.s12-figma .s12-currency-title {
+    font-size: 18px;         /* ≈ компактный compact */
+  }
+  #s12.s12-figma .s12-tagline,
+  #s12.s12-figma .s12-currency-body,
+  #s12.s12-figma .s12-book__sub,
+  #s12.s12-figma .s12-logo {
+    font-size: 11px;
+  }
+  #s12.s12-figma .s12-book__title {
+    font-size: 14px;
+  }
+  #s12.s12-figma .s12-book {
+    padding: 8px 10px;
+    gap: 3px;
+    border-radius: 8px;
+  }
+  #s12.s12-figma .s12-legal__link,
+  #s12.s12-figma .s12-legal__sep {
+    font-size: 10px;
+  }
+  #s12.s12-figma .s12-legal { gap: 10px; }
+  #s12.s12-figma .s12-social { gap: 28px; }
+  #s12.s12-figma .s12-social__link,
+  #s12.s12-figma .s12-social__link img {
+    width: 26px;
+    height: 26px;
+  }
+  #s12.s12-figma .s12-headline-block,
+  #s12.s12-figma .s12-currency-block { gap: 12px; }
 }
 
 /* ===== S12 - Footer (legacy) ===== */
@@ -4802,6 +4831,108 @@ img.desktop-only { display: block !important; }
   font-feature-settings: 'lnum' 1, 'pnum' 1;
 }
 
+/* ===== Consultation c1 MOBILE — Figma node 1:1192 (375×827) =====
+   Copper-фон (375×480) сверху + фото (375×449) снизу + HTML-текст в
+   верхней части. Все координаты — Figma 375-frame. */
+@media (max-width: 768px) {
+  /* Фикс aspect-ratio для c1 mobile. Двойной класс нужен для специфичности
+     выше generic .consult-section{aspect-ratio:auto!important} (есть позже
+     в каскаде). */
+  .consult-section.consult-section--c1 {
+    aspect-ratio: 375 / 827 !important;
+    min-height: 0 !important;
+  }
+  /* BG copper: top 0, height 480/827 ≈ 58.04% */
+  .consult-section .c1-m-bg.mobile-only {
+    position: absolute !important;
+    inset: auto auto auto 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 58.04% !important;
+    z-index: 0 !important;
+    pointer-events: none;
+  }
+  /* Затемняющий 30% overlay над copper-фоном — как linear-gradient
+     rgba(0,0,0,0.3) в Figma node 1:1192. Делает текст читабельнее. */
+  .consult-section .c1-m-bg.mobile-only::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    pointer-events: none;
+  }
+  /* Фото: top 378/827 = 45.71%, height 449/827 = 54.29% */
+  .consult-section .c1-m-photo.mobile-only {
+    position: absolute !important;
+    inset: auto auto auto 0 !important;
+    top: 45.71% !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 54.29% !important;
+    z-index: 1 !important;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  /* Перебиваем generic `.consult-section .mobile-only img { height:auto }`
+     для c1-m-bg/photo — Image fill должен растягивать <img> на 100%
+     контейнера, иначе cover-fit не работает и видны полосы фона. */
+  .consult-section .c1-m-bg.mobile-only img,
+  .consult-section .c1-m-photo.mobile-only img {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  /* Текст-блок: left 40px (10.67vw), centered vertically at 50%-225.5px
+     (от высоты секции). У нас section.height = 100vw * 827/375.
+     В % от секции: y_center = (50% * 827 - 225.5) / 827 = 22.74% (где
+     находится середина блока). Реализуем через top: 22.74% и
+     translateY(-50%) — блок естественно центрируется по центру y=22.74. */
+  /* !important нужен чтобы переопределить generic
+     .consult-section .mobile-only { width: 100% } (есть позже в каскаде). */
+  .consult-section .c1-m-text.mobile-only {
+    position: absolute !important;
+    z-index: 2;
+    left: 10.67vw !important; /* 40/375 */
+    top: 22.74% !important;   /* центр блока в Figma */
+    transform: translateY(-50%);
+    width: 84vw !important;   /* 315/375 */
+    display: flex;
+    flex-direction: column;
+    gap: 5.33vw;              /* 20/375 */
+    color: #fff5ef;
+    -webkit-user-select: text;
+    user-select: text;
+    pointer-events: auto;
+  }
+  /* Title — Cormorant Garamond Medium 28px (~7.47vw на 375 frame) */
+  .c1-m-title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 7.47vw;        /* 28/375 */
+    line-height: 1.05;
+    color: #fff5ef;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
+    font-feature-settings: 'lnum' 1, 'pnum' 1;
+  }
+  /* Body — Raleway Regular 16px (~4.27vw на 375).
+     Цвет осветлён до cream + text-shadow для контраста на ярких пятнах
+     copper-фона (десктоп c1-bg.png имеет блики, плохо читалось). */
+  .c1-m-body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 4.27vw;        /* 16/375 */
+    line-height: 1.4;
+    color: #fff5ef;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7), 0 0 16px rgba(0, 0, 0, 0.4);
+    font-feature-settings: 'lnum' 1, 'pnum' 1;
+  }
+}
+
 /* ===== Consultation c2 — Figma node 1:1323 (1440×963) =====
    Чистый фон + 3 HTML карточки (селектируемый текст). Координаты и
    размеры пиксель-в-пиксель из Figma. */
@@ -4890,10 +5021,13 @@ img.desktop-only { display: block !important; }
   opacity: 0.9;
   color: #fff5ef;
 }
-/* Золотистый horizontal divider (#de8b23) — как в Figma imgLine5. */
+/* Золотистый horizontal divider (#de8b23) — как в Figma imgLine5.
+   Не выходит за визуальный край body-текста: ширина 85% центрирована,
+   фейд-края + 8% inset с каждой стороны = видимая линия 85% inner-card. */
 .c2-line {
   height: 1px;
-  width: 100%;
+  width: 85%;
+  align-self: center;
   background: linear-gradient(90deg,
     rgba(222, 139, 35, 0) 0%,
     rgba(222, 139, 35, 0.85) 50%,
@@ -5462,69 +5596,68 @@ img.desktop-only { display: block !important; }
   background: rgba(251, 234, 224, 0.7);
 }
 
-/* ── Card 1: "9 лет" + "практики" в одну строку, baseline-aligned ── */
-.a2-dc1-tg {
+/* Все 3 карточки используют абсолютное позиционирование по Figma 1:2022
+   (frame 326×98). Координаты пиксельные, обёрнутые в min(Xvw, Ypx) для
+   масштабирования при viewport > 1440 (где body capped). */
+
+/* ── Card 1: "9 лет" (20, 32) + "практики" (102, 45) ── */
+.a2-dc1-tg { position: static; }
+.a2-dc1-num {
   position: absolute;
   left: min(1.389vw, 20px);
   top: min(2.222vw, 32px);
-  display: flex;
-  align-items: baseline;
-  gap: min(0.764vw, 11px);
-  white-space: nowrap;
-}
-.a2-dc1-num {
-  position: static;
   font-family: var(--font-heading);
   font-size: min(2.5vw, 36px);
   font-weight: 600;
-  line-height: 0.933;     /* 33.6/36 */
+  line-height: 1;
   color: #46211a;
+  white-space: nowrap;
 }
 .a2-dc1-sub {
-  position: static;
+  position: absolute;
+  left: min(7.083vw, 102px);
+  top: min(3.125vw, 45px);
   font-family: var(--font-body);
   font-size: min(1.111vw, 16px);
   font-weight: 400;
   line-height: 1;
   color: #332000;
-}
-
-/* ── Card 2: "7 лет" + "личной терапии" в одну строку (baseline) + note ниже ── */
-.a2-dc2-tg {
-  position: absolute;
-  left: min(1.389vw, 20px);
-  top: min(1.736vw, 25px);
-  width: min(21.25vw, 306px);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: min(0.486vw, 7px);
-}
-.a2-dc2-row {
-  position: static;
-  display: flex;
-  align-items: baseline;
-  gap: min(0.764vw, 11px);
   white-space: nowrap;
 }
+
+/* ── Card 2: "7 лет" (20, 25) + "личной терапии" (99, 38) + note (20, 59) ── */
+.a2-dc2-tg,
+.a2-dc2-row { position: static; }
+/* Card 2: блок num+sub+note центрирован.
+   num.top=20, sub baseline-align к num (33), note сдвинута ниже (66) на
+   чистый gap от line-box "7 лет" (бот=56). */
 .a2-dc2-num {
-  position: static;
+  position: absolute;
+  left: min(1.389vw, 20px);
+  top: min(1.389vw, 20px);
   font-family: var(--font-heading);
   font-size: min(2.5vw, 36px);
   font-weight: 600;
-  line-height: 0.933;
+  line-height: 1;
   color: #46211a;
+  white-space: nowrap;
 }
 .a2-dc2-sub {
-  position: static;
+  position: absolute;
+  left: min(6.875vw, 99px);
+  top: min(2.292vw, 33px);
   font-family: var(--font-body);
   font-size: min(1.111vw, 16px);
   font-weight: 400;
   line-height: 1;
   color: #332000;
+  white-space: nowrap;
 }
 .a2-dc2-note {
-  width: 100%;
+  position: absolute;
+  left: min(1.389vw, 20px);
+  top: min(4.583vw, 66px);     /* >= num bottom (56) + buffer */
+  width: min(21.25vw, 306px);
   font-family: var(--font-body);
   font-size: min(0.833vw, 12px);
   font-weight: 400;
@@ -5532,45 +5665,42 @@ img.desktop-only { display: block !important; }
   color: #000;
 }
 
-/* ── Card 3: «более» абсолютом сверху, «$100 тыс» + «вложено в обучение» в одну строку ── */
-.a2-dc3-tg {
+/* ── Card 3: "более" / "$100 тыс" / "вложено..." — блок (pre+num)
+   вертикально центрирован в карточке 98px высотой. sub baseline-aligned
+   к num справа. Сверху и снизу одинаковое расстояние ~18-19px. ── */
+.a2-dc3-tg { position: static; }
+.a2-dc3-pre {
   position: absolute;
   left: min(1.389vw, 20px);
-  top: min(0.972vw, 14px);
-  /* Резерв сверху под "более" — равен его собственной высоте строки (font-size).
-     Раньше было 33.6px, что опускало num+sub вниз. */
-  padding-top: min(1.389vw, 20px);
-  display: flex;
-  align-items: baseline;
-  gap: min(0.486vw, 7px);
-  white-space: nowrap;
-}
-.a2-dc3-pre {
-  /* "более" — абсолютом над flex-строкой, line-height сжата до font-size */
-  position: absolute;
-  top: 0;
-  left: 0;
+  top: min(1.250vw, 18px);     /* центрирование: top space 18 */
   font-family: var(--font-heading);
   font-size: min(1.389vw, 20px);
   font-weight: 300;
   line-height: 1;
   color: #332000;
+  white-space: nowrap;
 }
 .a2-dc3-num {
-  position: static;
+  position: absolute;
+  left: min(1.389vw, 20px);
+  top: min(3.056vw, 44px);     /* pre.top + 20 (pre высота) + ~6 gap */
   font-family: var(--font-heading);
   font-size: min(2.5vw, 36px);
   font-weight: 600;
-  line-height: min(2.333vw, 33.6px);
+  line-height: 1;
   color: #46211a;
+  white-space: nowrap;
 }
 .a2-dc3-sub {
-  position: static;
+  position: absolute;
+  left: min(10.903vw, 157px);
+  top: min(4.097vw, 59px);     /* baseline-align к num: num.top 44 + ~15 */
   font-family: var(--font-body);
   font-size: min(1.111vw, 16px);
   font-weight: 400;
   line-height: 1;
   color: #332000;
+  white-space: nowrap;
 }
 
 /* Right text block: Figma x=960, top=calc(50%-133.5px), w=325 */
@@ -5655,21 +5785,31 @@ img.desktop-only { display: block !important; }
   }
 
   .a2-m-card {
-    position: relative;    /* anchor для абсолютных детей */
-    height: 26.133vw;      /* 98/375 */
+    position: relative;
+    min-height: 26.133vw;  /* 98/375 — поднимаем до min чтобы card 2 с note мог расти */
     border-radius: 5.333vw;/* 20/375 */
     background: rgba(251, 234, 224, 0.7);
     -webkit-user-select: text;
     user-select: text;
+    /* Flex column с центровкой — текст внутри карточки центрируется
+       по центру блока (по горизонтали и вертикали). */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2vw;
+    padding: 4vw 4vw;
+    text-align: center;
   }
-  /* Все тексты карточек позиционируются абсолютом по Figma px → vw (frame 375) */
   .a2-m-card__num,
   .a2-m-card__sub,
   .a2-m-card__note,
   .a2-m-card__pre {
-    position: absolute;
+    position: static;      /* убираем абсолютное позиционирование */
     white-space: nowrap;
   }
+  /* Все карточки — column-flex с центровкой: каждый элемент на
+     своей строке, центрирован по горизонтали (как в Figma). */
   .a2-m-card__num {
     font-family: var(--font-heading);
     font-size: 9.6vw;      /* 36/375 */
@@ -5699,44 +5839,10 @@ img.desktop-only { display: block !important; }
     color: #332000;
   }
 
-  /* Card 1 (1:1818): "9 лет" центр top=25, "практики" left=122 top=59 */
-  .a2-m-card--1 .a2-m-card__num {
-    left: 50%; transform: translateX(-50%);
-    top: 6.667vw;          /* 25/375 */
-  }
-  .a2-m-card--1 .a2-m-card__sub {
-    left: 32.533vw;        /* 122/375 */
-    top: 15.733vw;         /* 59/375 */
-  }
-
-  /* Card 2 (1:1822): "7 лет" центр top=18.5, "личной терапии" left=99 top=52.5,
-     "Я начинала..." центр top=71.5 */
-  .a2-m-card--2 .a2-m-card__num {
-    left: 50%; transform: translateX(-50%);
-    top: 4.933vw;          /* 18.5/375 */
-  }
-  .a2-m-card--2 .a2-m-card__sub {
-    left: 26.4vw;          /* 99/375 */
-    top: 14vw;             /* 52.5/375 */
-  }
-  .a2-m-card--2 .a2-m-card__note {
-    left: 50%; transform: translateX(-50%);
-    top: 19.067vw;         /* 71.5/375 */
-  }
-
-  /* Card 3 (1:1827): "более" центр top=12, "$100 тыс" центр top=29,
-     "вложено в обучение" left=78 top=63 */
-  .a2-m-card--3 .a2-m-card__pre {
-    left: 50%; transform: translateX(-50%);
-    top: 3.2vw;            /* 12/375 */
-  }
-  .a2-m-card--3 .a2-m-card__num {
-    left: 50%; transform: translateX(-50%);
-    top: 7.733vw;          /* 29/375 */
-  }
-  .a2-m-card--3 .a2-m-card__sub {
-    left: 20.8vw;          /* 78/375 */
-    top: 16.8vw;           /* 63/375 */
+  /* Card 3: "более" / "$100 тыс" / "вложено в обучение" — три элемента
+     в столбик, каждый по центру. Flex column родителя уже центрирует. */
+  .a2-m-card--3 {
+    gap: 0.5vw;            /* плотнее чем cards 1/2 */
   }
 
   /* Photo: Figma top=542, w=375, h=496 — full-width 100% */

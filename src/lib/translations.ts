@@ -138,8 +138,9 @@ const t = {
     // Consultation page buttons
     consult_pay: 'Оплатить',
     consult_support: 'Техподдержка',
-    // Consultation page — c1 (hero)
-    c1_title: 'КОНСУЛЬТАЦИИ С АННОЙ',
+    // Consultation page — c1 (hero) — храним в обычном регистре,
+    // desktop переводит в caps через text-transform: uppercase.
+    c1_title: 'Консультации с Анной',
     c1_body: 'Формат глубокой работы с вашим запросом в режиме реального времени. Это работа с состоянием, из которого строится ваша реальность.',
     // Consultation page — c2 (pricing cards)
     c2_cost_label: 'Стоимость:',
@@ -376,7 +377,7 @@ const t = {
     consult_pay: 'Оплатити',
     consult_support: 'Техпідтримка',
     // Consultation page — c1
-    c1_title: 'КОНСУЛЬТАЦІЇ З АННОЮ',
+    c1_title: 'Консультації з Анною',
     c1_body: 'Формат глибокої роботи з вашим запитом у режимі реального часу. Це робота зі станом, з якого будується ваша реальність.',
     // Consultation page — c2
     c2_cost_label: 'Вартість:',
@@ -613,7 +614,7 @@ const t = {
     consult_pay: 'Pay',
     consult_support: 'Technical support',
     // Consultation page — c1
-    c1_title: 'CONSULTATIONS WITH ANNA',
+    c1_title: 'Consultations with Anna',
     c1_body: 'A format of deep work with your request in real time. This is work with the state from which your reality is built.',
     // Consultation page — c2
     c2_cost_label: 'Cost:',

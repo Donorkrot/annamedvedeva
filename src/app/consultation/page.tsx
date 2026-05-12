@@ -4,7 +4,7 @@ import { useTranslation } from '@/components/LanguageProvider';
 import type { TranslationKey } from '@/lib/translations';
 import Footer from '@/components/Footer';
 
-const ASSET_VERSION = '20260420-c2-ref';
+const ASSET_VERSION = 'r-' + 'a8f3d2e9b';
 const v = (p: string) => `${p}?v=${ASSET_VERSION}`;
 
 function consultPath(type: 'desk' | 'mob', section: number, lang: string): string {
@@ -41,7 +41,7 @@ export default function ConsultationPage() {
             <>
               <div className="c1-d-bg desktop-only">
                 <Image
-                  src="/images/backgrounds/consultation/c1-bg.png"
+                  src={v("/images/backgrounds/consultation/c1-bg.png")}
                   alt=""
                   fill
                   sizes="100vw"
@@ -52,7 +52,7 @@ export default function ConsultationPage() {
               </div>
               <div className="c1-d-photo desktop-only">
                 <Image
-                  src="/images/backgrounds/consultation/c1-photo.png"
+                  src={v("/images/backgrounds/consultation/c1-photo.png")}
                   alt=""
                   fill
                   sizes="(max-width: 768px) 100vw, 37vw"
@@ -108,23 +108,61 @@ export default function ConsultationPage() {
               />
             </div>
           )}
-          <div className="s10-bg mobile-only">
-            <Image
-              src={consultPath('mob', n, lang)}
-              alt=""
-              fill
-              sizes="100vw"
-              style={{ objectFit: 'cover', objectPosition: 'center top' }}
-              quality={90}
-              {...(i === 0 ? { priority: true } : {})}
-            />
-          </div>
+          {/* Mobile bg:
+              c1 — чистые ассеты (copper top + фото снизу), HTML текст
+              c2/c3 — старый baked image (пока) */}
+          {n === 1 ? (
+            <>
+              <div className="c1-m-bg mobile-only">
+                <Image
+                  src={v("/images/backgrounds/consultation/c1-bg.png")}
+                  alt=""
+                  fill
+                  sizes="(max-width: 768px) 100vw, 100vw"
+                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
+                  quality={95}
+                  priority
+                />
+              </div>
+              <div className="c1-m-photo mobile-only">
+                <Image
+                  src={v("/images/backgrounds/consultation/c1-photo.png")}
+                  alt=""
+                  fill
+                  sizes="(max-width: 768px) 100vw, 100vw"
+                  style={{ objectFit: 'cover', objectPosition: 'center bottom' }}
+                  quality={95}
+                  priority
+                />
+              </div>
+            </>
+          ) : (
+            <div className="s10-bg mobile-only">
+              <Image
+                src={consultPath('mob', n, lang)}
+                alt=""
+                fill
+                sizes="100vw"
+                style={{ objectFit: 'cover', objectPosition: 'center top' }}
+                quality={90}
+                {...(i === 0 ? { priority: true } : {})}
+              />
+            </div>
+          )}
 
-          {/* c1 — HTML текст селектируемый, координаты из Figma node 1:1319. */}
+          {/* c1 desktop — HTML текст селектируемый, координаты Figma 1:1319. */}
           {n === 1 && (
             <div className="c1-text desktop-only">
               <h1 className="c1-title">{tr('c1_title')}</h1>
               <p className="c1-body">{tr('c1_body')}</p>
+            </div>
+          )}
+
+          {/* c1 mobile — HTML текст по Figma 1:1192 (375×827). */}
+          {n === 1 && (
+            <div className="c1-m-text mobile-only">
+              <h1 className="c1-m-title">{tr('c1_title')}</h1>
+              <p className="c1-m-body">{tr('c1_body')}</p>
             </div>
           )}
 
