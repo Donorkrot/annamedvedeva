@@ -4814,14 +4814,14 @@ img.desktop-only { display: block !important; }
 }
 .c2-d-bg img { object-fit: cover; }
 
-/* c2 секция растёт по контенту — снимаем фиксированный aspect-ratio,
-   используем paddings + relative-поток для cards. Так карточки никогда
-   не обрезаются на узких viewport (1280 / tablet / etc). */
+/* c2 секция растёт по контенту, карточки вертикально по центру —
+   одинаковый padding сверху и снизу даёт равное расстояние от
+   границ секции до карточек. */
 .consult-section--c2 {
   aspect-ratio: auto !important;
   min-height: 0 !important;
-  padding-top: 8.47%;     /* 122/1440 — соблюдаем top:122 Figma */
-  padding-bottom: 4.5%;
+  padding-top: 6.5%;
+  padding-bottom: 6.5%;
 }
 .c2-d-cards {
   position: relative;
@@ -4864,10 +4864,9 @@ img.desktop-only { display: block !important; }
   place-items: center;
   white-space: pre-line;
 }
-/* height: 140px чтобы вместить самый длинный body (card 3 — 7 строк
-   при 16px / line-height 1.2 = 134px). Все 3 body равны, "Стоимость"
-   во всех карточках выравнивается на одной горизонтали. Короткие
-   тексты вертикально центрируются внутри body (justify-center в Figma). */
+/* Body фиксированной высоты → "Оплатить" во всех 3 карточках на
+   одной горизонтали. align-items: center — текст всегда балансируется
+   по середине body-блока во всех 3 карточках. */
 .c2-card-body {
   margin: 0;
   font-family: var(--font-body);
@@ -4877,7 +4876,8 @@ img.desktop-only { display: block !important; }
   opacity: 0.9;
   color: #fff5ef;
   text-align: left;
-  height: 140px;
+  /* high = высота самого длинного body (card 3, 7 строк @ 16/1.2 = 134) */
+  height: 138px;
   display: flex;
   align-items: center;
 }
@@ -4976,32 +4976,41 @@ img.desktop-only { display: block !important; }
 }
 .c2-feelings-f { margin-top: 0.5em; }
 
-/* На узком desktop / tablet текст в карточках переносится больше.
-   ФИКСИРУЕМ height для title и body (не min-height), чтобы блок
-   "Стоимость → кнопки → Длительность" во всех 3 карточках был на
-   одной горизонтали независимо от длины текста. */
+/* На узком desktop / tablet делаем карточки шире (контейнер 92% вместо
+   78.4%, gap меньше), фиксируем title/body height для выравнивания. */
 @media (min-width: 769px) and (max-width: 1280px) {
+  .c2-d-cards {
+    width: 92%;
+    max-width: none;
+    column-gap: clamp(16px, 3.5vw, 40px);
+  }
+  .c2-card {
+    padding: 18px;
+    gap: 13px;
+  }
   .c2-card-title {
-    /* 28px font wraps to 2 lines, fixed height фиксированный */
     height: 62px;
     font-size: 22px;
   }
   .c2-card-body {
-    /* Самая длинная карточка (3) в 14px на узкой ширине занимает
-       ~9-10 строк по 17px = ~170. Берём 180 чтобы все вмещались
-       и кнопки шли в одну линию. */
-    height: 180px;
+    /* минимум по card 3 (longest) @ tablet 1024 ≈ 101 — берём 110 буфер */
+    height: 110px;
     font-size: 14px;
   }
-  .c2-card-desc { font-size: 11px; }
-  .c2-feelings  { font-size: 11px; }
+  .c2-card-desc { font-size: 11.5px; }
+  .c2-feelings  { font-size: 11.5px; }
 }
 
-/* Узкий tablet portrait — карточки еще уже, текст еще больше переносится.
-   Поднимаем body чтобы вместить самый длинный, и уменьшаем шрифт еще. */
+/* Узкий tablet portrait — карточки ещё уже, уменьшаем шрифт сильнее. */
 @media (min-width: 769px) and (max-width: 980px) {
+  .c2-d-cards {
+    width: 94%;
+    column-gap: clamp(14px, 2.5vw, 28px);
+  }
+  .c2-card { padding: 16px; gap: 12px; }
   .c2-card-title { height: 60px; font-size: 20px; }
-  .c2-card-body  { height: 230px; font-size: 13px; }
+  /* минимум по card 3 @ 820 ≈ 109, на 769 будет ~140 (8.5 строк × 16) */
+  .c2-card-body  { height: 140px; font-size: 13px; }
   .c2-card-desc  { font-size: 11px; }
   .c2-feelings   { font-size: 11px; }
 }
