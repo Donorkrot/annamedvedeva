@@ -171,7 +171,7 @@ export default function ConsultationPage() {
               запечённое изображение + cons-hit overlay. */}
           {n === 2 && (
             <>
-              <div className="c2-d-cards desktop-only">
+              <div className="c2-d-cards">
                 {[1, 2, 3].map((k) => {
                   const titleKey = `c2_card${k}_title` as TranslationKey;
                   const bodyKey = `c2_card${k}_body` as TranslationKey;

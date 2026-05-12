@@ -2141,7 +2141,9 @@ img.desktop-only { display: block !important; }
   #s4 .s4-title  { font-size: 2.6vw; }      /* ≈21.3px @820, 26px @1000 */
   #s4 .s4-letter { font-size: 2.2vw; }
   #s4 .s4-letter--ri { font-size: 4vw; }
-  #s4 .s4-name   { font-size: 1.5vw; }
+  /* UA «Епоха індустріалізації» на 1024 не помещалась в колонку (overflow 10px).
+     Разрешаем перенос, line-height сжата чтобы 2 строки не ломали раскладку. */
+  #s4 .s4-name   { font-size: 1.5vw; white-space: normal; line-height: 1.15; }
   #s4 .s4-desc   { font-size: 1.1vw; line-height: 1.25; }
   #s4 .s4-accent { font-size: 1.5vw; }
 
@@ -3405,7 +3407,9 @@ img.desktop-only { display: block !important; }
   #s12.s12-figma .s12-legal__sep {
     font-size: 1.1vw;
   }
-  #s12.s12-figma .s12-legal { gap: 1.2vw; }
+  /* UA «Політика конфіденційності» длиннее RU — расширяем легал-блок и
+     даём wrap чтобы текст не уезжал за правый край. */
+  #s12.s12-figma .s12-legal { gap: 1.2vw; width: 36%; flex-wrap: wrap; }
   #s12.s12-figma .s12-social { gap: 4vw; }
   #s12.s12-figma .s12-social__link,
   #s12.s12-figma .s12-social__link img {
@@ -3441,7 +3445,8 @@ img.desktop-only { display: block !important; }
   #s12.s12-figma .s12-legal__sep {
     font-size: 10px;
   }
-  #s12.s12-figma .s12-legal { gap: 10px; }
+  /* На узком tablet portrait тоже расширяем легал-блок + wrap. */
+  #s12.s12-figma .s12-legal { gap: 8px 10px; width: 38%; flex-wrap: wrap; }
   #s12.s12-figma .s12-social { gap: 28px; }
   #s12.s12-figma .s12-social__link,
   #s12.s12-figma .s12-social__link img {
@@ -4738,11 +4743,14 @@ img.desktop-only { display: block !important; }
      18.9333vw in EN where "Public Offer" is short). flex+gap couldn't express
      this so the first link sits at left:0 and the second at left:43.17%
      (136/315) absolutely. */
-  .s12-m-legal { position: absolute; left: 8%; top: 86.08%; width: 84%; height: 3.7333vw; z-index: 2; }
-  .s12-m-legal-link { position: absolute; top: 0; }
-  .s12-m-legal-link:nth-of-type(1) { left: 0; }
-  .s12-m-legal-link:nth-of-type(2) { left: 43.17%; }
-  .s12-m-legal-link { font-family: var(--font-body); font-size: 3.2vw; font-weight: 400; color: #fff5ef; opacity: 0.5; text-decoration: none; white-space: nowrap; }
+  /* Flex layout вместо абсолютных позиций — auto-fit для разных языков
+     (UA "Політика конфіденційності" длиннее RU и не помещалась). */
+  .s12-m-legal {
+    position: absolute; left: 8%; top: 86.08%; width: 84%; z-index: 2;
+    display: flex; flex-wrap: wrap; gap: 4vw 6vw; align-items: baseline;
+  }
+  .s12-m-legal-link { position: static; }
+  .s12-m-legal-link { font-family: var(--font-body); font-size: 3.2vw; font-weight: 400; color: #fff5ef; opacity: 0.5; text-decoration: none; }
 
   /* Copyright — bottom:9.12% centred */
   .s12-m-copy { position: absolute; bottom: 3.33%; left: 50%; transform: translateX(-50%); z-index: 2; margin: 0; font-family: var(--font-body); font-size: 3.2vw; font-weight: 400; color: #fff5ef; white-space: nowrap; line-height: normal; }
@@ -5147,6 +5155,55 @@ img.desktop-only { display: block !important; }
   .c2-card-body  { height: 140px; font-size: 13px; }
   .c2-card-desc  { font-size: 11px; }
   .c2-feelings   { font-size: 11px; }
+}
+
+/* ===== c2 mobile (≤768px) =====
+   Раньше тут показывалась baked JPG c2.jpg + transparent click-zones.
+   Проблема: в UA/EN версиях baked-картинки кнопки "Оплатить"/"Техподдержка"
+   НЕ нарисованы, click-zones невидимые. Переключаем mobile на HTML
+   карточки (как desktop) — кнопки рендерятся реально, текст переводится. */
+@media (max-width: 768px) {
+  /* Прячем baked c2.jpg на mobile (HTML-карточки сверху) */
+  .consult-section--c2 .s10-bg.mobile-only { display: none !important; }
+  /* Прячем невидимые click-zones — теперь у нас настоящие <a> кнопки */
+  .consult-section--c2 .cons-hit.mobile-only { display: none !important; }
+  /* c2 секция растёт по контенту, паддинги для воздуха */
+  .consult-section.consult-section--c2 {
+    aspect-ratio: auto !important;
+    min-height: 0 !important;
+    padding-top: 8vw;
+    padding-bottom: 8vw;
+  }
+  /* Карточки в один столбик */
+  .c2-d-cards {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 90%;
+    max-width: 420px;
+    margin: 0 auto;
+    grid-template-columns: 1fr;
+    row-gap: 5vw;
+    column-gap: 0;
+  }
+  .c2-card { padding: 5vw; gap: 4vw; border-radius: 2.5vw; }
+  .c2-card-title { height: auto; min-height: 0; font-size: 6vw; line-height: 1.15; padding: 1vw 0; }
+  .c2-card-body {
+    height: auto;
+    min-height: 0;
+    font-size: 4vw;
+    line-height: 1.4;
+    align-items: flex-start;
+  }
+  .c2-row-label { font-size: 4.4vw; }
+  .c2-row-val { font-size: 4vw; }
+  .c2-price { font-size: 8vw; line-height: 1; }
+  .c2-btn { padding: 3.5vw 4vw; font-size: 4vw; border-radius: 2.5vw; }
+  .c2-buttons { gap: 3vw; }
+  .c2-card-desc { font-size: 3.2vw; line-height: 1.4; }
+  .c2-feelings { font-size: 3.2vw; line-height: 1.45; }
+  .c2-line { width: 75%; }
 }
 
 /* ===== Thank-you (/thank-you) — после успешной оплаты WayForPay ===== */
@@ -6830,8 +6887,12 @@ img.desktop-only { display: block !important; }
   display: flex;
   align-items: baseline;
   gap: clamp(4px, 0.486vw, 7px);
-  white-space: nowrap;
+  /* nowrap не годится для длинных EN-подписей («hours of training and
+     practice») — разрешаем wrap, num держим nowrap чтобы цифра не ломалась. */
+  flex-wrap: wrap;
 }
+.a9-d-stat__num { white-space: nowrap; }
+.a9-d-stat__sub { min-width: 0; }
 .a9-d-stat__num {
   font-family: var(--font-heading);
   font-size: clamp(20px, 2.5vw, 36px);     /* 36px Cormorant SemiBold */
