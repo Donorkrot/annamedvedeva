@@ -41,7 +41,7 @@ export default function ConsultationPage() {
             <>
               <div className="c1-d-bg desktop-only">
                 <Image
-                  src={v("/images/backgrounds/consultation/c1-bg.png")}
+                  src={v("/images/backgrounds/consultation/c1-bg.jpg")}
                   alt=""
                   fill
                   sizes="100vw"
@@ -52,7 +52,7 @@ export default function ConsultationPage() {
               </div>
               <div className="c1-d-photo desktop-only">
                 <Image
-                  src={v("/images/backgrounds/consultation/c1-photo.png")}
+                  src={v("/images/backgrounds/consultation/c1-photo.jpg")}
                   alt=""
                   fill
                   sizes="(max-width: 768px) 100vw, 37vw"
@@ -64,7 +64,7 @@ export default function ConsultationPage() {
           ) : n === 2 ? (
             <div className="c2-d-bg desktop-only">
               <Image
-                src="/images/backgrounds/consultation/c2-bg.png"
+                src="/images/backgrounds/consultation/c2-bg.jpg"
                 alt=""
                 fill
                 sizes="100vw"
@@ -76,7 +76,7 @@ export default function ConsultationPage() {
             <>
               <div className="c3-d-bg desktop-only">
                 <Image
-                  src="/images/backgrounds/consultation/c3-bg.png"
+                  src="/images/backgrounds/consultation/c3-bg.jpg"
                   alt=""
                   fill
                   sizes="100vw"
@@ -86,7 +86,7 @@ export default function ConsultationPage() {
               </div>
               <div className="c3-d-photo desktop-only">
                 <Image
-                  src="/images/backgrounds/consultation/c3-photo.png"
+                  src="/images/backgrounds/consultation/c3-photo.jpg"
                   alt=""
                   fill
                   sizes="(max-width: 768px) 100vw, 42vw"
@@ -115,7 +115,7 @@ export default function ConsultationPage() {
             <>
               <div className="c1-m-bg mobile-only">
                 <Image
-                  src={v("/images/backgrounds/consultation/c1-bg.png")}
+                  src={v("/images/backgrounds/consultation/c1-bg.jpg")}
                   alt=""
                   fill
                   sizes="(max-width: 768px) 100vw, 100vw"
@@ -126,7 +126,7 @@ export default function ConsultationPage() {
               </div>
               <div className="c1-m-photo mobile-only">
                 <Image
-                  src={v("/images/backgrounds/consultation/c1-photo.png")}
+                  src={v("/images/backgrounds/consultation/c1-photo.jpg")}
                   alt=""
                   fill
                   sizes="(max-width: 768px) 100vw, 100vw"

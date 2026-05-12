@@ -71,7 +71,7 @@ export default function AboutPage() {
               {/* Mobile a1 — Figma node 1-1804 (375×854): bg(top) + photo(bottom) + HTML text */}
               <div className="a1-m mobile-only">
                 <div className="a1-m-bg" aria-hidden="true">
-                  <Image src="/images/about/a1-m-bg.png" alt="" fill sizes="100vw" priority />
+                  <Image src="/images/about/a1-m-bg.jpg" alt="" fill sizes="100vw" priority />
                 </div>
                 <div className="a1-m-photo" aria-hidden="true">
                   <Image src="/images/about/a1-m-photo.png" alt="" fill sizes="100vw" priority />
@@ -98,7 +98,7 @@ export default function AboutPage() {
                 </div>
                 <div className="a2-d-photo" aria-hidden="true">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/about/a2-d-photo.png" alt="" className="a2-d-photo__img" />
+                  <img src="/images/about/a2-d-photo.jpg" alt="" className="a2-d-photo__img" />
                 </div>
                 <h2 className="a2-d-title">{tr('about_a2_title')}</h2>
                 <div className="a2-d-cards">
@@ -174,7 +174,7 @@ export default function AboutPage() {
                   </div>
                 </div>
                 <div className="a2-m-photo" aria-hidden="true">
-                  <Image src="/images/about/a2-m-photo.png" alt="Анна Медведева" fill sizes="100vw" quality={90}
+                  <Image src="/images/about/a2-m-photo.jpg" alt="Анна Медведева" fill sizes="100vw" quality={90}
                     style={{ objectFit: 'cover', objectPosition: 'center bottom' }} />
                 </div>
                 <div className="a2-m-text">
