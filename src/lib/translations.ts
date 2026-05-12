@@ -171,6 +171,13 @@ const t = {
     c3_note_1_l2: 'легкость или необходимость интеграции.',
     c3_note_2_l1: 'Рекомендовано 15–30 минут тишины после.',
     c3_note_2_l2: 'Анна на связи 24 часа после сессии.',
+    // Thank-you page (после успешной оплаты WayForPay)
+    thanks_title: 'Спасибо за покупку',
+    thanks_subtitle: 'Ваша оплата получена',
+    thanks_body: 'Анна свяжется с вами, чтобы согласовать удобное время сессии',
+    thanks_note: 'Если письмо не пришло — проверьте папку «Спам» или напишите нам в Telegram.',
+    thanks_cta_home: 'На главную',
+    thanks_cta_tg: 'Написать в Telegram',
     // About page overlays a2–a10
     about_a2_title: 'Путь: от красиво-удобной → к красиво-честной',
     about_a2_s1_num: '9 лет', about_a2_s1_sub: 'практики',
@@ -401,6 +408,13 @@ const t = {
     c3_note_1_l2: 'легкість або потребу в інтеграції.',
     c3_note_2_l1: 'Рекомендовано 15–30 хвилин тиші після.',
     c3_note_2_l2: 'Анна на зв’язку 24 години після сесії.',
+    // Thank-you page
+    thanks_title: 'Дякуємо за покупку',
+    thanks_subtitle: 'Вашу оплату отримано',
+    thanks_body: 'Анна зв’яжеться з вами, щоб узгодити зручний час сесії',
+    thanks_note: 'Якщо лист не надійшов — перевірте папку «Спам» або напишіть нам у Telegram.',
+    thanks_cta_home: 'На головну',
+    thanks_cta_tg: 'Написати у Telegram',
     // About page overlays a2–a10
     about_a2_title: 'Шлях: від красиво-зручного → до красиво-чесного',
     about_a2_s1_num: '9 років', about_a2_s1_sub: 'практики',
@@ -631,6 +645,13 @@ const t = {
     c3_note_1_l2: 'lightness, or a need for integration.',
     c3_note_2_l1: '15–30 minutes of silence afterwards is recommended.',
     c3_note_2_l2: 'Anna is available for 24 hours after the session.',
+    // Thank-you page
+    thanks_title: 'Thank you for your purchase',
+    thanks_subtitle: 'Your payment has been received',
+    thanks_body: 'Anna will contact you to schedule a convenient time for your session',
+    thanks_note: 'If the email hasn’t arrived — check your Spam folder or message us on Telegram.',
+    thanks_cta_home: 'Back to home',
+    thanks_cta_tg: 'Message on Telegram',
     // About page overlays a2–a10
     about_a2_title: 'The path: from beautifully convenient → to beautifully honest',
     about_a2_s1_num: '9 years', about_a2_s1_sub: 'of practice',

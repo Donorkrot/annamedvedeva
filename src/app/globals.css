@@ -5006,6 +5006,138 @@ img.desktop-only { display: block !important; }
   .c2-feelings   { font-size: 11px; }
 }
 
+/* ===== Thank-you (/thank-you) — после успешной оплаты WayForPay ===== */
+.thanks-section {
+  position: relative;
+  min-height: 100svh;
+  background: radial-gradient(
+    ellipse at center top,
+    #2a1308 0%,
+    #1a0d05 55%,
+    #0c0703 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 96px 24px 120px;
+  overflow: hidden;
+  color: var(--cream);
+}
+
+/* Декоративные «искры» — мягкое gold-свечение по диагонали */
+.thanks-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(222, 139, 35, 0.10) 0%, transparent 35%),
+    radial-gradient(circle at 80% 75%, rgba(222, 139, 35, 0.08) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.thanks-content {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.thanks-check {
+  width: clamp(72px, 8vw, 100px);
+  height: clamp(72px, 8vw, 100px);
+  margin-bottom: 8px;
+}
+
+.thanks-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: clamp(36px, 5.4vw, 64px);
+  line-height: 1;
+  color: var(--cream);
+  font-feature-settings: 'lnum' 1, 'pnum' 1;
+}
+
+.thanks-subtitle {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: clamp(20px, 2.2vw, 28px);
+  line-height: 1.2;
+  color: #de8b23;
+}
+
+.thanks-body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.5;
+  color: var(--cream);
+  max-width: 540px;
+}
+
+.thanks-note {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(13px, 1vw, 14px);
+  line-height: 1.5;
+  color: var(--cream);
+  opacity: 0.65;
+  max-width: 480px;
+}
+
+.thanks-cta {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+.thanks-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  border: 1px solid var(--cream);
+  color: var(--cream);
+  background-color: transparent;
+  min-width: 200px;
+}
+.thanks-btn-primary {
+  background-color: #de8b23;
+  border-color: #de8b23;
+  color: #1a0d05;
+}
+.thanks-btn-primary:hover {
+  background-color: #c97a1c;
+  border-color: #c97a1c;
+}
+.thanks-btn-secondary:hover {
+  background-color: var(--cream);
+  color: #1a0d05;
+}
+
+@media (max-width: 480px) {
+  .thanks-cta { flex-direction: column; width: 100%; }
+  .thanks-btn { width: 100%; }
+}
+
 /* ===== Consultation c3 — Figma node 1:1380 (1440×732) =====
    Чистый stone-фон (c3-bg.png) + фото слева (c3-photo.png) + HTML текст
    справа. Координаты и размеры — из Figma node 1:1384. */
