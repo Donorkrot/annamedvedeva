@@ -5813,6 +5813,9 @@ img.desktop-only { display: block !important; }
 
   /* Title — Figma left=calc(50%-157.5px)=30, top=80, w=315, 28px Cormorant Medium,
      2 строки (без стрелки) */
+  /* Единый размер шрифта 24px (6.4vw) для всех языков — UA/EN длиннее
+     RU и при 28px переносились на 3 строки и перекрывали карточки.
+     text-align: left — по левому краю. */
   .a2-m-title {
     position: absolute;
     left: 8vw;             /* 30/375 */
@@ -5820,37 +5823,27 @@ img.desktop-only { display: block !important; }
     width: 84vw;           /* 315/375 */
     margin: 0;
     font-family: var(--font-heading);
-    font-size: 7.467vw;    /* 28/375 */
+    font-size: 6.4vw;      /* 24/375 — одинаково RU/UA/EN */
     font-weight: 500;
-    line-height: 1.15;
+    line-height: 1.2;
     color: #332000;
+    text-align: left;
     z-index: 2;
     -webkit-user-select: text;
     user-select: text;
   }
-  /* UA/EN title длиннее RU и переносится на 3 строки. Уменьшаем шрифт
-     до 6.4vw чтобы "Шлях: від красиво-зручного" поместился в 2 строки
-     и не наезжал на карточки ниже. data-lang ставится на <html>. */
-  html[data-lang="ua"] .a2-m-title,
-  html[data-lang="en"] .a2-m-title {
-    font-size: 6.4vw;      /* 24/375 */
-  }
 
-  /* Cards: Figma left=30, top=168, w=315, gap=20.
-     Для UA/EN опускаем top чтобы дать место под более длинный заголовок. */
+  /* Cards: top сдвинут до 14% во всех языках, чтобы оставалось место
+     под title в 2 строки (одинаково для RU/UA/EN). */
   .a2-m-cards {
     position: absolute;
     left: 8vw;             /* 30/375 */
-    top: 11.507%;          /* 168/1460 */
+    top: 14%;              /* ~205/1460 */
     width: 84vw;           /* 315/375 */
     display: flex;
     flex-direction: column;
     gap: 5.333vw;          /* 20/375 */
     z-index: 2;
-  }
-  html[data-lang="ua"] .a2-m-cards,
-  html[data-lang="en"] .a2-m-cards {
-    top: 14%;              /* ~205/1460 — отступ под более длинный title */
   }
 
   .a2-m-card {
