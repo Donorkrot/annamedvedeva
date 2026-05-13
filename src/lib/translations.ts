@@ -250,6 +250,10 @@ const t = {
     about_a10_p2: 'Все участники дали согласие на запись и распространение этих материалов.',
     about_a10_how_title: 'Как смотреть',
     about_a10_how_body: 'Рекомендую смотреть эти работы не как обучающий материал, а как процесс, в который можно включиться.',
+    about_btn_method: 'Подробнее о методе',
+    about_btn_book_read: 'Читать книгу',
+    about_btn_book_listen: 'Слушать книгу',
+    about_btn_consult: 'Запись на консультацию',
   },
 
   ua: {
@@ -487,6 +491,10 @@ const t = {
     about_a10_p2: 'Усі учасники надали згоду на запис і поширення цих матеріалів.',
     about_a10_how_title: 'Як дивитися',
     about_a10_how_body: 'Рекомендую дивитися ці роботи не як навчальний матеріал, а як процес, у який можна включитися.',
+    about_btn_method: 'Детальніше про метод',
+    about_btn_book_read: 'Читати книгу',
+    about_btn_book_listen: 'Слухати книгу',
+    about_btn_consult: 'Запис на консультацію',
   },
 
   en: {
@@ -724,6 +732,10 @@ const t = {
     about_a10_p2: 'All participants have given their consent for these sessions to be recorded and shared.',
     about_a10_how_title: 'How to watch',
     about_a10_how_body: 'I recommend watching these not as educational material, but as a process you can enter and experience.',
+    about_btn_method: 'More about the method',
+    about_btn_book_read: 'Read the book',
+    about_btn_book_listen: 'Listen to the book',
+    about_btn_consult: 'Book a session',
   },
 } as const;
 

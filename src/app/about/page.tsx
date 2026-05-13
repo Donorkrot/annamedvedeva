@@ -513,22 +513,22 @@ export default function AboutPage() {
           {/* a5 — "Подробнее о методе" button */}
           {i === 4 && (
             <a href="/method" className="about-btn-method">
-              <span>Подробнее о методе</span>
+              <span>{tr('about_btn_method')}</span>
             </a>
           )}
 
           {/* a6 — book buttons */}
           {i === 5 && (
             <div className="about-btn-book-group">
-              <a href="https://drive.google.com/drive/folders/1V5KF6JG-TGjbRFOk_Y0n7wxdmd0SG49V" target="_blank" rel="noopener noreferrer" className="about-btn-book"><span>Читать книгу</span></a>
-              <a href="https://t.me/+VvkBk9x7J6cxNWQ6" target="_blank" rel="noopener noreferrer" className="about-btn-book"><span>Слушать книгу</span></a>
+              <a href="https://drive.google.com/drive/folders/1V5KF6JG-TGjbRFOk_Y0n7wxdmd0SG49V" target="_blank" rel="noopener noreferrer" className="about-btn-book"><span>{tr('about_btn_book_read')}</span></a>
+              <a href="https://t.me/+VvkBk9x7J6cxNWQ6" target="_blank" rel="noopener noreferrer" className="about-btn-book"><span>{tr('about_btn_book_listen')}</span></a>
             </div>
           )}
 
           {/* a9 — consultation button */}
           {i === 8 && (
             <a href="/consultation" className="about-btn-consult">
-              <span>Запись на консультацию</span>
+              <span>{tr('about_btn_consult')}</span>
             </a>
           )}
 
