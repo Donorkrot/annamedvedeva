@@ -5811,11 +5811,12 @@ img.desktop-only { display: block !important; }
   }
   .a2-m-bg img { object-fit: cover; object-position: center; }
 
-  /* Title — Figma left=calc(50%-157.5px)=30, top=80, w=315, 28px Cormorant Medium,
-     2 строки (без стрелки) */
-  /* Единый размер шрифта 24px (6.4vw) для всех языков — UA/EN длиннее
-     RU и при 28px переносились на 3 строки и перекрывали карточки.
-     text-align: left — по левому краю. */
+  /* Title — Figma 28px Cormorant Medium для RU и EN.
+     RU: 2 строки (1:1815 h=68), EN: 3 строки natural-wrap (1:2381 h=102).
+     UA: "Шлях: від красиво-зручного" = 319px при 28px, container = 315px →
+     ломается по дефису на 3 строки. 24px (6.4vw) даёт 273px → 2 строки,
+     как в макете RU. Поэтому UA уменьшено до 24px и использует RU-позиции
+     карточек/фото/текста ниже. */
   .a2-m-title {
     position: absolute;
     left: 8vw;             /* 30/375 */
@@ -5823,7 +5824,7 @@ img.desktop-only { display: block !important; }
     width: 84vw;           /* 315/375 */
     margin: 0;
     font-family: var(--font-heading);
-    font-size: 6.4vw;      /* 24/375 — одинаково RU/UA/EN */
+    font-size: 7.467vw;    /* 28/375 — Figma 1:1815 / 1:2381 */
     font-weight: 500;
     line-height: 1.2;
     color: #332000;
@@ -5832,35 +5833,40 @@ img.desktop-only { display: block !important; }
     -webkit-user-select: text;
     user-select: text;
   }
+  html[data-lang="ua"] .a2-m-title { font-size: 6.4vw; } /* 24/375 — fit 2 lines */
 
-  /* Cards: top сдвинут до 14% во всех языках, чтобы оставалось место
-     под title в 2 строки (одинаково для RU/UA/EN). */
+  /* Cards: top 168/1460 = 11.507% — точно по Figma 1:1813 (RU/UA).
+     EN-версия (Figma 1:2379) title 3 строки (h:102), карточки на y:202
+     → 13.84%, photo сдвинуто на y:556 → 38.08%. */
   .a2-m-cards {
     position: absolute;
     left: 8vw;             /* 30/375 */
-    top: 14%;              /* ~205/1460 */
+    top: 11.507%;          /* 168/1460 — RU/UA */
     width: 84vw;           /* 315/375 */
     display: flex;
     flex-direction: column;
     gap: 5.333vw;          /* 20/375 */
     z-index: 2;
   }
+  /* EN: title 3 строки при 28px (Figma 1:2381 h=102) → двигаем cards/photo/
+     text вниз по Figma 1:2379. RU/UA остаются по Figma 1:1813 (2 строки). */
+  html[data-lang="en"] .a2-m-cards { top: 13.836%; } /* 202/1460 — Figma EN */
+  html[data-lang="en"] .a2-m-photo { top: 38.082%; } /* 556/1460 — Figma EN */
+  html[data-lang="en"] .a2-m-text  { top: 74.795%; } /* 1092/1460 — Figma EN */
 
   .a2-m-card {
     position: relative;
-    min-height: 26.133vw;  /* 98/375 — поднимаем до min чтобы card 2 с note мог расти */
+    height: 26.133vw;      /* 98/375 — фикс. высота как в Figma 1:2384/2388/2393 */
     border-radius: 5.333vw;/* 20/375 */
     background: rgba(251, 234, 224, 0.7);
     -webkit-user-select: text;
     user-select: text;
-    /* Flex column с центровкой — текст внутри карточки центрируется
-       по центру блока (по горизонтали и вертикали). */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2vw;
-    padding: 4vw 4vw;
+    gap: 1.067vw;          /* 4/375 — компактнее, чтобы 3 строки card 2/3 влезали */
+    padding: 0;            /* нет padding — flex центрирует контент в 98px */
     text-align: center;
   }
   .a2-m-card__num,
@@ -5918,7 +5924,10 @@ img.desktop-only { display: block !important; }
     pointer-events: none;
     z-index: 1;
   }
-  .a2-m-photo img { object-fit: cover; object-position: center top; }
+  /* Figma: img scaled 113.76% h, top -13.81% — visible bottom 88% of source.
+     `object-position: center bottom` приближает Figma-кроп (показывает
+     модель + камень внизу, без верхнего пустого пространства). */
+  .a2-m-photo img { object-fit: cover; object-position: center bottom; }
 
   /* Text: Figma left=30, top=calc(50%+348)=1078, w=315, 16px Raleway leading-[normal] */
   .a2-m-text {
