@@ -5657,12 +5657,22 @@ img.desktop-only { display: block !important; }
    (frame 326×98). Координаты пиксельные, обёрнутые в min(Xvw, Ypx) для
    масштабирования при viewport > 1440 (где body capped). */
 
-/* ── Card 1: "9 лет" (20, 32) + "практики" (102, 45) ── */
-.a2-dc1-tg { position: static; }
-.a2-dc1-num {
+/* ── Card 1: "9 лет / 9 років / 9 years" + sub.
+   tg-обёртка позиционирована абсолютно в стартовой точке Figma (20, 32);
+   num+sub — inline-flex с базовым выравниванием. Так sub корректно отстаёт
+   от num любой длины (UA "9 років", EN "9 years" шире чем RU "9 лет"). ── */
+.a2-dc1-tg {
   position: absolute;
   left: min(1.389vw, 20px);
   top: min(2.222vw, 32px);
+  display: flex;
+  align-items: baseline;
+  gap: min(0.625vw, 9px);
+  max-width: calc(100% - min(2.778vw, 40px));
+}
+.a2-dc1-num,
+.a2-dc1-sub { position: static; }
+.a2-dc1-num {
   font-family: var(--font-heading);
   font-size: min(2.5vw, 36px);
   font-weight: 600;
@@ -5671,9 +5681,6 @@ img.desktop-only { display: block !important; }
   white-space: nowrap;
 }
 .a2-dc1-sub {
-  position: absolute;
-  left: min(7.083vw, 102px);
-  top: min(3.125vw, 45px);
   font-family: var(--font-body);
   font-size: min(1.111vw, 16px);
   font-weight: 400;
@@ -5682,16 +5689,26 @@ img.desktop-only { display: block !important; }
   white-space: nowrap;
 }
 
-/* ── Card 2: "7 лет" (20, 25) + "личной терапии" (99, 38) + note (20, 59) ── */
-.a2-dc2-tg,
-.a2-dc2-row { position: static; }
-/* Card 2: блок num+sub+note центрирован.
-   num.top=20, sub baseline-align к num (33), note сдвинута ниже (66) на
-   чистый gap от line-box "7 лет" (бот=56). */
-.a2-dc2-num {
+/* ── Card 2: num+sub в строку, под ними — note. Те же принципы что и card 1. ── */
+.a2-dc2-tg {
   position: absolute;
   left: min(1.389vw, 20px);
   top: min(1.389vw, 20px);
+  width: calc(100% - min(2.778vw, 40px));
+  display: flex;
+  flex-direction: column;
+  gap: min(0.972vw, 14px);
+}
+.a2-dc2-row {
+  position: static;
+  display: flex;
+  align-items: baseline;
+  gap: min(0.625vw, 9px);
+}
+.a2-dc2-num,
+.a2-dc2-sub,
+.a2-dc2-note { position: static; }
+.a2-dc2-num {
   font-family: var(--font-heading);
   font-size: min(2.5vw, 36px);
   font-weight: 600;
@@ -5700,9 +5717,6 @@ img.desktop-only { display: block !important; }
   white-space: nowrap;
 }
 .a2-dc2-sub {
-  position: absolute;
-  left: min(6.875vw, 99px);
-  top: min(2.292vw, 33px);
   font-family: var(--font-body);
   font-size: min(1.111vw, 16px);
   font-weight: 400;
@@ -5711,10 +5725,6 @@ img.desktop-only { display: block !important; }
   white-space: nowrap;
 }
 .a2-dc2-note {
-  position: absolute;
-  left: min(1.389vw, 20px);
-  top: min(4.583vw, 66px);     /* >= num bottom (56) + buffer */
-  width: min(21.25vw, 306px);
   font-family: var(--font-body);
   font-size: min(0.833vw, 12px);
   font-weight: 400;
@@ -5722,14 +5732,22 @@ img.desktop-only { display: block !important; }
   color: #000;
 }
 
-/* ── Card 3: "более" / "$100 тыс" / "вложено..." — блок (pre+num)
-   вертикально центрирован в карточке 98px высотой. sub baseline-aligned
-   к num справа. Сверху и снизу одинаковое расстояние ~18-19px. ── */
-.a2-dc3-tg { position: static; }
-.a2-dc3-pre {
+/* ── Card 3: pre (отдельная строка) + num + sub (в одной строке справа от num).
+   tg-обёртка абс. позиц., внутри pre — block, num+sub — inline-flex baseline.
+   Без max-width: длинные UA/EN sub ("інвестовано в навчання", "invested in
+   training") могут немного выходить за карточку — обрезаются overflow:hidden. */
+.a2-dc3-tg {
   position: absolute;
   left: min(1.389vw, 20px);
-  top: min(1.250vw, 18px);     /* центрирование: top space 18 */
+  top: min(1.250vw, 18px);
+  white-space: nowrap;
+}
+.a2-dc3-pre,
+.a2-dc3-num,
+.a2-dc3-sub { position: static; }
+.a2-dc3-pre {
+  display: block;
+  margin-bottom: min(0.417vw, 6px);
   font-family: var(--font-heading);
   font-size: min(1.389vw, 20px);
   font-weight: 300;
@@ -5738,9 +5756,8 @@ img.desktop-only { display: block !important; }
   white-space: nowrap;
 }
 .a2-dc3-num {
-  position: absolute;
-  left: min(1.389vw, 20px);
-  top: min(3.056vw, 44px);     /* pre.top + 20 (pre высота) + ~6 gap */
+  display: inline-block;
+  vertical-align: baseline;
   font-family: var(--font-heading);
   font-size: min(2.5vw, 36px);
   font-weight: 600;
@@ -5749,9 +5766,9 @@ img.desktop-only { display: block !important; }
   white-space: nowrap;
 }
 .a2-dc3-sub {
-  position: absolute;
-  left: min(10.903vw, 157px);
-  top: min(4.097vw, 59px);     /* baseline-align к num: num.top 44 + ~15 */
+  display: inline-block;
+  vertical-align: baseline;
+  margin-left: min(0.625vw, 9px);
   font-family: var(--font-body);
   font-size: min(1.111vw, 16px);
   font-weight: 400;
