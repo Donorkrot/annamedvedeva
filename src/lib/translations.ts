@@ -254,6 +254,10 @@ const t = {
     about_btn_book_read: 'Читать книгу',
     about_btn_book_listen: 'Слушать книгу',
     about_btn_consult: 'Запись на консультацию',
+    a11y_menu: 'Меню',
+    a11y_play: 'Воспроизвести',
+    a11y_anna_alt: 'Анна Медведева',
+    video_title_method: 'Метод Reality DNA — Анна Медведева',
   },
 
   ua: {
@@ -495,6 +499,10 @@ const t = {
     about_btn_book_read: 'Читати книгу',
     about_btn_book_listen: 'Слухати книгу',
     about_btn_consult: 'Запис на консультацію',
+    a11y_menu: 'Меню',
+    a11y_play: 'Відтворити',
+    a11y_anna_alt: 'Анна Медведєва',
+    video_title_method: 'Метод Reality DNA — Анна Медведєва',
   },
 
   en: {
@@ -736,6 +744,10 @@ const t = {
     about_btn_book_read: 'Read the book',
     about_btn_book_listen: 'Listen to the book',
     about_btn_consult: 'Book a session',
+    a11y_menu: 'Menu',
+    a11y_play: 'Play',
+    a11y_anna_alt: 'Anna Medvedeva',
+    video_title_method: 'Reality DNA method — Anna Medvedeva',
   },
 } as const;
 

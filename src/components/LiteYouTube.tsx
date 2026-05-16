@@ -1,5 +1,6 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
+import { useTranslation } from '@/components/LanguageProvider';
 
 /* Click-to-play YouTube facade.
    Shows the video poster (i.ytimg.com thumbnail) with a play button until
@@ -31,6 +32,7 @@ type Props = {
 export default function LiteYouTube({ id, title, className = '' }: Props) {
   const [active, setActive] = useState(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const { tr } = useTranslation();
 
   // Once the iframe is mounted, focus it so keyboard users can interact.
   // Using a ref rather than autoFocus to avoid layout-shift focus jumps.
@@ -74,7 +76,7 @@ export default function LiteYouTube({ id, title, className = '' }: Props) {
         <button
           ref={buttonRef}
           type="button"
-          aria-label={`Воспроизвести: ${title}`}
+          aria-label={`${tr('a11y_play')}: ${title}`}
           className="lyt__btn"
           onClick={() => setActive(true)}
           style={{

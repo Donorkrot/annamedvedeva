@@ -174,7 +174,7 @@ export default function AboutPage() {
                   </div>
                 </div>
                 <div className="a2-m-photo" aria-hidden="true">
-                  <Image src="/images/about/a2-m-photo.jpg" alt="Анна Медведева" fill sizes="100vw" quality={90}
+                  <Image src="/images/about/a2-m-photo.jpg" alt={tr('a11y_anna_alt')} fill sizes="100vw" quality={90}
                     style={{ objectFit: 'cover', objectPosition: 'center bottom' }} />
                 </div>
                 <div className="a2-m-text">

@@ -26,7 +26,7 @@ export default function VideoSection() {
       </a>
 
       <div className="s6-video-frame desktop-only">
-        <LiteYouTube id="i6vCzyWnE-o" title="Метод Reality DNA — Анна Медведева" />
+        <LiteYouTube id="i6vCzyWnE-o" title={tr('video_title_method')} />
       </div>
 
       {/* ── Mobile: HTML from Figma node 1:213 (375×306) ── */}
@@ -48,7 +48,7 @@ export default function VideoSection() {
 
         {/* Video frame — x:30 y:0 w:315 h:199 (Figma node 1:216 placeholder) */}
         <div className="s6-m-video-wrap">
-          <LiteYouTube id="i6vCzyWnE-o" title="Метод Reality DNA — Анна Медведева" />
+          <LiteYouTube id="i6vCzyWnE-o" title={tr('video_title_method')} />
         </div>
 
         {/* Button "Метод" — x:30 y:223 w:315 h:47 r:10 (Figma node 1:217) */}

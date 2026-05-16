@@ -88,7 +88,7 @@ export default function Header() {
           <button
             className="header-burger"
             onClick={() => setMenuOpen(true)}
-            aria-label="Меню"
+            aria-label={tr('a11y_menu')}
           >
             <span /><span /><span />
           </button>

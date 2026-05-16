@@ -14,7 +14,7 @@ export default function AnnaSection() {
       </div>
 
       <div className="s7-photo desktop-only">
-        <Image src="/images/content/s7-photo-desktop.jpg" alt="Анна Медведева" fill sizes="(max-width:768px) 100vw, 33vw" style={{ objectFit: 'cover' }} />
+        <Image src="/images/content/s7-photo-desktop.jpg" alt={tr('a11y_anna_alt')} fill sizes="(max-width:768px) 100vw, 33vw" style={{ objectFit: 'cover' }} />
       </div>
 
       <div className="s7-block s7-block-1 desktop-only">
@@ -75,7 +75,7 @@ export default function AnnaSection() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img loading="lazy" decoding="async"
             src="/images/content/s7-photo-mobile.jpg"
-            alt="Анна Медведева"
+            alt={tr('a11y_anna_alt')}
             className="s7-m-photo-img"
             draggable={false}
           />
