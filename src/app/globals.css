@@ -6129,6 +6129,14 @@ img.desktop-only { display: block !important; }
 .about-btn-consult:hover { background: rgba(255, 245, 239, 0.1); transform: translateY(-1px); }
 .about-btn-consult:active { transform: translateY(0); }
 
+/* Tablet (portrait + landscape) и mobile landscape: ширина кнопки 22.57%
+   от viewport — на 769-1280 не хватает места под 16px ("Запись на
+   консультацию" / "Запис на консультацію"). Уменьшаем только шрифт,
+   геометрию не трогаем. Desktop ≥1281 и mobile ≤768 — без изменений. */
+@media (min-width: 769px) and (max-width: 1280px) {
+  .about-btn-consult { font-size: 11px; }
+}
+
 @media (max-width: 768px) {
   /* a6 mobile per Figma 1:1854 — book section background image (1125×4680
      for 376×1562 frame) has the title and body baked in, with an empty cream
