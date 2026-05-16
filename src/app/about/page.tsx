@@ -209,16 +209,24 @@ export default function AboutPage() {
                   <p>{tr('about_a3_p3')}</p>
                 </div>
               </div>
-              {/* Mobile a3 — пока на запечённом фоне (HTML-вариант для мобильного будет отдельной задачей) */}
-              <div className="s10-bg mobile-only">
-                <Image
-                  src={aboutPath('mob', n, lang)}
-                  alt=""
-                  fill
-                  sizes="100vw"
-                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
-                  quality={90}
-                />
+              {/* Mobile a3 — Figma 1:2289 (RU/UA) / 1:2399 (EN), 375×732 */}
+              <div className="a3-m mobile-only">
+                <div className="a3-m-bg" aria-hidden="true">
+                  <Image src="/images/about/a3-m-bg.jpg" alt="" fill sizes="100vw" quality={90} />
+                </div>
+                <h2 className="a3-m-title">
+                  <span>{tr('about_a3_title').split(/:\s+/)[0]}:</span>
+                  <br aria-hidden="true" />
+                  <span>{tr('about_a3_title').split(/:\s+/)[1]}</span>
+                </h2>
+                <div className="a3-m-text">
+                  <p>{tr('about_a3_p1')}</p>
+                  <p>{tr('about_a3_p1b')}</p>
+                  <p className="a3-m-text__sep" aria-hidden="true" />
+                  <p>{tr('about_a3_p2')}</p>
+                  <p className="a3-m-text__sep" aria-hidden="true" />
+                  <p>{tr('about_a3_p3')}</p>
+                </div>
               </div>
             </>
           ) : i === 3 ? (
@@ -233,16 +241,15 @@ export default function AboutPage() {
                 <p className="a4-d-p a4-d-p--1">{tr('about_a4_p1')}</p>
                 <p className="a4-d-p a4-d-p--2">{tr('about_a4_p2')}</p>
               </div>
-              {/* Mobile a4 — пока на запечённом фоне (отдельная задача) */}
-              <div className="s10-bg mobile-only">
-                <Image
-                  src={aboutPath('mob', n, lang)}
-                  alt=""
-                  fill
-                  sizes="100vw"
-                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
-                  quality={90}
-                />
+              {/* Mobile a4 «RI» — Figma 1:2403, 375×818 (bg 732 at top + video 234) */}
+              <div className="a4-m mobile-only">
+                <div className="a4-m-bg" aria-hidden="true">
+                  <Image src="/images/about/a4-m-bg.jpg" alt="" fill sizes="100vw" quality={90} />
+                </div>
+                <h2 className="a4-m-h1">{tr('about_a4_h1')}</h2>
+                <p className="a4-m-subtitle">{tr('about_a4_subtitle')}</p>
+                <p className="a4-m-p a4-m-p--1">{tr('about_a4_p1')}</p>
+                <p className="a4-m-p a4-m-p--2">{tr('about_a4_p2')}</p>
               </div>
             </>
           ) : i === 4 ? (
@@ -310,16 +317,21 @@ export default function AboutPage() {
                   <p className="a10-d-how__body">{tr('about_a10_how_body')}</p>
                 </div>
               </div>
-              {/* Mobile a10 — пока на запечённом фоне (отдельная задача) */}
-              <div className="s10-bg mobile-only">
-                <Image
-                  src={aboutPath('mob', n, lang)}
-                  alt=""
-                  fill
-                  sizes="100vw"
-                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
-                  quality={90}
-                />
+              {/* Mobile a10 «Примеры работы» — Figma 1:2473, 375×696 */}
+              <div className="a10-m mobile-only">
+                <div className="a10-m-bg" aria-hidden="true">
+                  <Image src="/images/about/a10-m-bg.jpg" alt="" fill sizes="100vw" quality={90} />
+                </div>
+                <h2 className="a10-m-title">{tr('about_a10_title')}</h2>
+                <div className="a10-m-text">
+                  <p>{tr('about_a10_p1')}</p>
+                  <p className="a10-m-text__sep" aria-hidden="true" />
+                  <p>{tr('about_a10_p2')}</p>
+                </div>
+                <div className="a10-m-how">
+                  <p className="a10-m-how__title">{tr('about_a10_how_title')}</p>
+                  <p className="a10-m-how__body">{tr('about_a10_how_body')}</p>
+                </div>
               </div>
             </>
           ) : i === 8 ? (
@@ -365,16 +377,44 @@ export default function AboutPage() {
                   <span className="a9-d-cta-sub__em">{tr('about_a9_cta_sub_em')}</span>
                 </p>
               </div>
-              {/* Mobile a9 — пока на запечённом фоне (отдельная задача) */}
-              <div className="s10-bg mobile-only">
-                <Image
-                  src={aboutPath('mob', n, lang)}
-                  alt=""
-                  fill
-                  sizes="100vw"
-                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
-                  quality={90}
-                />
+              {/* Mobile a9 «Почему я» — Figma 1:2447, 375×1430 */}
+              <div className="a9-m mobile-only">
+                <div className="a9-m-bg" aria-hidden="true">
+                  <Image src="/images/about/a9-m-bg.jpg" alt="" fill sizes="100vw" quality={90} />
+                </div>
+                <h2 className="a9-m-title">{tr('about_a9_title')}</h2>
+                <div className="a9-m-statements">
+                  <p>{tr('about_a9_r1')}</p>
+                  <p>{tr('about_a9_r2')}</p>
+                  <p>{tr('about_a9_r3')}</p>
+                  <div className="a9-m-statement-block">
+                    <p className="a9-m-r4">{tr('about_a9_r4')}</p>
+                    <p>{tr('about_a9_r5')}</p>
+                  </div>
+                </div>
+                <div className="a9-m-stats">
+                  <h3 className="a9-m-stats__heading">{tr('about_a9_exp')}</h3>
+                  <div className="a9-m-stat">
+                    <span className="a9-m-stat__num">{tr('about_a9_s1_num')}</span>
+                    <span className="a9-m-stat__sub">{tr('about_a9_s1_sub')}</span>
+                  </div>
+                  <div className="a9-m-stat">
+                    <span className="a9-m-stat__num">{tr('about_a9_s2_num')}</span>
+                    <span className="a9-m-stat__sub">{tr('about_a9_s2_sub')}</span>
+                  </div>
+                  <div className="a9-m-stat">
+                    <span className="a9-m-stat__num">{tr('about_a9_s3_num')}</span>
+                    <span className="a9-m-stat__sub">{tr('about_a9_s3_sub')}</span>
+                  </div>
+                </div>
+                <div className="a9-m-photo" aria-hidden="true">
+                  <Image src="/images/about/a9-m-photo.jpg" alt="" fill sizes="100vw" quality={90} />
+                </div>
+                <h2 className="a9-m-cta-title">{tr('about_a9_cta_title')}</h2>
+                <p className="a9-m-cta-sub">
+                  <span>{tr('about_a9_cta_sub_pre')}</span>
+                  <span className="a9-m-cta-sub__em">{tr('about_a9_cta_sub_em')}</span>
+                </p>
               </div>
             </>
           ) : i === 7 ? (
@@ -405,16 +445,31 @@ export default function AboutPage() {
                   <span>{tr('about_a8_d3').split(' ').slice(1).join(' ')}</span>
                 </span>
               </div>
-              {/* Mobile a8 — пока на запечённом фоне (отдельная задача) */}
-              <div className="s10-bg mobile-only">
-                <Image
-                  src={aboutPath('mob', n, lang)}
-                  alt=""
-                  fill
-                  sizes="100vw"
-                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
-                  quality={90}
-                />
+              {/* Mobile a8 «Как проходит работа» — Figma 1:2437, 375×903 */}
+              <div className="a8-m mobile-only">
+                <div className="a8-m-bg" aria-hidden="true">
+                  <Image src="/images/about/a8-m-bg.jpg" alt="" fill sizes="100vw" quality={90} />
+                </div>
+                <h2 className="a8-m-title">{tr('about_a8_title')}</h2>
+                <div className="a8-m-text a8-m-text--1">
+                  <p>{tr('about_a8_p1')}</p>
+                  <p>{tr('about_a8_p1b')}</p>
+                  <p className="a8-m-text__sep" aria-hidden="true" />
+                  <p>{tr('about_a8_p2')}</p>
+                </div>
+                <div className="a8-m-text a8-m-text--2">
+                  <p>{tr('about_a8_p3')}</p>
+                  <p className="a8-m-text__sep" aria-hidden="true" />
+                  <p>{tr('about_a8_p3b')}</p>
+                </div>
+                <span className="a8-m-d a8-m-d--ekol">{tr('about_a8_d1')}</span>
+                <span className="a8-m-d a8-m-d--bere">{tr('about_a8_d4')}</span>
+                <span className="a8-m-d a8-m-d--bezd">{tr('about_a8_d5')}</span>
+                <span className="a8-m-d a8-m-d--glub">{tr('about_a8_d2')}</span>
+                <span className="a8-m-result">
+                  <span>{tr('about_a8_d3').split(' ')[0]}</span>
+                  <span>{tr('about_a8_d3').split(' ').slice(1).join(' ')}</span>
+                </span>
               </div>
             </>
           ) : i === 6 ? (
@@ -434,16 +489,20 @@ export default function AboutPage() {
                 </ul>
                 <p className="a7-d-quote">{tr('about_a7_li6')}</p>
               </div>
-              {/* Mobile a7 — пока на запечённом фоне (отдельная задача) */}
-              <div className="s10-bg mobile-only">
-                <Image
-                  src={aboutPath('mob', n, lang)}
-                  alt=""
-                  fill
-                  sizes="100vw"
-                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
-                  quality={90}
-                />
+              {/* Mobile a7 «С какими запросами» — Figma 1:2427, 375×903 */}
+              <div className="a7-m mobile-only">
+                <div className="a7-m-bg" aria-hidden="true">
+                  <Image src="/images/about/a7-m-bg.jpg" alt="" fill sizes="100vw" quality={90} />
+                </div>
+                <h2 className="a7-m-title">{tr('about_a7_title')}</h2>
+                <ul className="a7-m-list">
+                  <li>{tr('about_a7_li1')}</li>
+                  <li>{tr('about_a7_li2')}</li>
+                  <li>{tr('about_a7_li3')}</li>
+                  <li>{tr('about_a7_li4')}</li>
+                  <li>{tr('about_a7_li5')}</li>
+                </ul>
+                <p className="a7-m-quote">{tr('about_a7_li6')}</p>
               </div>
             </>
           ) : i === 5 ? (
@@ -461,16 +520,18 @@ export default function AboutPage() {
                   <p>{tr('about_a6_p2b')}</p>
                 </div>
               </div>
-              {/* Mobile a6 — пока на запечённом фоне (отдельная задача) */}
-              <div className="s10-bg mobile-only">
-                <Image
-                  src={aboutPath('mob', n, lang)}
-                  alt=""
-                  fill
-                  sizes="100vw"
-                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
-                  quality={90}
-                />
+              {/* Mobile a6 «Книга» — Figma 1:2420, 375×1560 */}
+              <div className="a6-m mobile-only">
+                <div className="a6-m-bg" aria-hidden="true">
+                  <Image src="/images/about/a6-m-bg.jpg" alt="" fill sizes="100vw" quality={90} />
+                </div>
+                <h2 className="a6-m-title">{tr('about_a6_title')}</h2>
+                <div className="a6-m-text">
+                  <p>{tr('about_a6_p1')}</p>
+                  <p className="a6-m-text__sep" aria-hidden="true" />
+                  <p>{tr('about_a6_p2')}</p>
+                  <p>{tr('about_a6_p2b')}</p>
+                </div>
               </div>
             </>
           ) : (

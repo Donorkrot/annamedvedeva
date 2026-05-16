@@ -7323,3 +7323,391 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   /* Bg image desktop-only div */
   .s12-footer .s12-bg.desktop-only { display: block !important; }
 }
+
+/* ====================================================================
+   About page — mobile HTML версии для a3, a4, a6, a7, a8, a9, a10
+   ====================================================================
+   Текст рендерится как HTML (через tr()) — чёткий на retina, переводится
+   на UA/EN/RU. Чистые bg-картинки скачаны из Figma frames 1:2399, 1:2403,
+   1:2420, 1:2427, 1:2437, 1:2447, 1:2473.
+   Координаты position/width — в % от секции (parent .aN-m = inset:0 от
+   секции). Font-size в min(vw, design_px) чтобы на широких viewport текст
+   не раздувался выше Figma 375 design. */
+@media (max-width: 768px) {
+  /* ── a3 «Роль: Мастер состояния» — Figma 1:2289/2399, 375×732 ── */
+  .consult-section.a3-figma { aspect-ratio: 375 / 732 !important; }
+  .consult-section.a3-figma .a3-m.mobile-only {
+    position: absolute !important;
+    inset: 0;
+    width: auto !important;
+    height: auto !important;
+    z-index: 0;
+  }
+  .consult-section.a3-figma .a3-m img {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .a3-m { position: absolute; inset: 0; z-index: 0; }
+  .a3-m-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .a3-m-bg img { object-fit: cover; object-position: center; }
+  .a3-m-title {
+    position: absolute;
+    left: 8%; top: 10.929%;  /* 30/375, 80/732 */
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 7.467vw; font-weight: 500; line-height: 1.2;
+    color: #332000; z-index: 2;
+  }
+  .a3-m-text {
+    position: absolute;
+    left: 8%; top: 25.683%; width: 84%;  /* 30, 188, 315 */
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 4.267vw; font-weight: 400; line-height: normal;
+    color: #000; z-index: 2;
+  }
+  .a3-m-text p { margin: 0; line-height: normal; }
+  .a3-m-text__sep { display: block; height: 1em; line-height: normal; }
+  .a3-m-text__sep::before { content: '\200B'; }
+
+  /* ── a4 «RI» — Figma 1:2403, 375×818 (bg 732 + video 234 = 966 актуально:
+       Figma frame 818, video at 584..818, bg визуально на 732). */
+  .consult-section.a4-figma { aspect-ratio: 375 / 818 !important; }
+  .consult-section.a4-figma .a4-m.mobile-only {
+    position: absolute !important;
+    inset: 0;
+    width: auto !important;
+    height: auto !important;
+    z-index: 0;
+  }
+  .consult-section.a4-figma .a4-m img {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .a4-m { position: absolute; inset: 0; z-index: 0; }
+  .a4-m-bg {
+    position: absolute; left: 0; top: 0; width: 100%; height: 89.487%;  /* 732/818 */
+    z-index: 0; pointer-events: none;
+  }
+  .a4-m-bg img { object-fit: cover; object-position: bottom center; }
+  .a4-m-h1 {
+    position: absolute;
+    left: 50%; top: 9.78%;  /* 80/818 */
+    transform: translateX(-50%);
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 13.867vw;  /* 52/375 */
+    font-weight: 600; line-height: 1;
+    text-transform: uppercase;
+    color: #332000; z-index: 2; white-space: nowrap;
+  }
+  .a4-m-subtitle {
+    position: absolute;
+    left: 8%; top: 19.927%; width: 84%;  /* 30, 163, 315 */
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 6.4vw;  /* 24/375 */
+    font-weight: 300; line-height: 6.16vw;  /* 23.1/375 */
+    color: #000; z-index: 2;
+  }
+  .a4-m-p {
+    position: absolute;
+    left: 8%; width: 84%;  /* 30, 315 */
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 4.267vw; font-weight: 400; line-height: normal;
+    color: #000; z-index: 2;
+  }
+  .a4-m-p--1 { top: 47.799%; }  /* 391/818 */
+  .a4-m-p--2 { top: 57.213%; }  /* 468/818 */
+
+  /* ── a6 «Книга: ДНК Реальности» — Figma 1:2420, 375×1560 ── */
+  .consult-section.a6-figma { aspect-ratio: 375 / 1560 !important; }
+  .consult-section.a6-figma .a6-m.mobile-only {
+    position: absolute !important;
+    inset: 0;
+    width: auto !important;
+    height: auto !important;
+    z-index: 0;
+  }
+  .consult-section.a6-figma .a6-m img {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .a6-m { position: absolute; inset: 0; z-index: 0; }
+  .a6-m-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .a6-m-bg img { object-fit: cover; object-position: center; }
+  .a6-m-title {
+    position: absolute;
+    left: 8%; top: 37.179%; width: 84%;  /* 30, 580, 315 */
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 7.467vw;  /* 28/375 */
+    font-weight: 500; line-height: normal;
+    color: #332000; z-index: 2;
+  }
+  .a6-m-text {
+    position: absolute;
+    left: 8%; top: 40.641%; width: 84%;  /* 30, 634, 315 */
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 4.267vw; font-weight: 400; line-height: normal;
+    color: #000; z-index: 2;
+  }
+  .a6-m-text p { margin: 0; line-height: normal; }
+  .a6-m-text__sep { display: block; height: 1em; line-height: normal; }
+  .a6-m-text__sep::before { content: '\200B'; }
+  /* Кнопки a6 уже стилизованы .about-btn-book / .about-btn-book-group */
+
+  /* ── a7 «С какими запросами приходят» — Figma 1:2427, 375×903 ── */
+  .consult-section.a7-figma { aspect-ratio: 375 / 903 !important; }
+  .consult-section.a7-figma .a7-m.mobile-only {
+    position: absolute !important;
+    inset: 0;
+    width: auto !important;
+    height: auto !important;
+    z-index: 0;
+  }
+  .consult-section.a7-figma .a7-m img {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .a7-m { position: absolute; inset: 0; z-index: 0; }
+  .a7-m-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .a7-m-bg img { object-fit: cover; object-position: center; }
+  .a7-m-title {
+    position: absolute;
+    left: 7.733%; top: 8.527%; width: 84.267%;  /* 29, 77, 316 */
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 7.467vw;  /* 28/375 */
+    font-weight: 500; line-height: normal;
+    color: #fff5ef; z-index: 2;
+  }
+  .a7-m-list {
+    position: absolute;
+    left: 13.067%; top: 20.487%; width: 78.933%;  /* 49, 185, 296 */
+    margin: 0; padding: 0; list-style: none;
+    display: flex; flex-direction: column; gap: 5.333vw;  /* 20/375 */
+    font-family: var(--font-body);
+    font-size: 4.267vw; font-weight: 400; line-height: normal;
+    color: #fff5ef; z-index: 2;
+  }
+  .a7-m-list li { margin: 0; }
+  .a7-m-quote {
+    position: absolute;
+    left: 13.067%; top: 50.499%; width: 69.867%;  /* 49, 456, 262 */
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 4.8vw;  /* 18/375 */
+    font-weight: 500; line-height: normal;
+    color: #de8b23; z-index: 2;
+  }
+
+  /* ── a8 «Как проходит работа» — Figma 1:2437, 375×903 ── */
+  .consult-section.a8-figma { aspect-ratio: 375 / 903 !important; }
+  .consult-section.a8-figma .a8-m.mobile-only {
+    position: absolute !important;
+    inset: 0;
+    width: auto !important;
+    height: auto !important;
+    z-index: 0;
+  }
+  .consult-section.a8-figma .a8-m img {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .a8-m { position: absolute; inset: 0; z-index: 0; }
+  .a8-m-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .a8-m-bg img { object-fit: cover; object-position: center; }
+  .a8-m-title {
+    position: absolute;
+    left: 8%; top: 8.859%; width: 84%;  /* 30, 80, 315 */
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 9.6vw;  /* 36/375 */
+    font-weight: 600; line-height: 8.96vw;  /* 33.6/375 */
+    color: #332000; z-index: 2;
+  }
+  .a8-m-text {
+    position: absolute;
+    left: 8%; width: 84%;  /* 30, 315 */
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 4.267vw; font-weight: 400; line-height: normal;
+    color: #332000; z-index: 2;
+  }
+  .a8-m-text p { margin: 0; line-height: normal; }
+  .a8-m-text__sep { display: block; height: 1em; line-height: normal; }
+  .a8-m-text__sep::before { content: '\200B'; }
+  .a8-m-text--1 { top: 18.605%; }  /* 168/903 */
+  .a8-m-text--2 { top: 33.444%; }  /* 302/903 */
+  .a8-m-d {
+    position: absolute;
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 5.333vw;  /* 20/375 */
+    font-weight: 300; line-height: normal;
+    color: #332000; white-space: nowrap; z-index: 2;
+  }
+  /* Венн-диаграмма: Figma labels — Deep(30,610), Precise(center,452),
+     Without pressure(120,781), Attuned(right ~291, 610) */
+  .a8-m-d--ekol { left: 50%; top: 50.06%; transform: translateX(-50%); color: #fff5ef; }  /* Precise center, top=452 */
+  .a8-m-d--glub { left: 8%; top: 67.553%; }  /* Deep 30, 610 */
+  .a8-m-d--bere { right: 4.8%; top: 67.553%; }  /* Attuned ~291, 610 */
+  .a8-m-d--bezd { left: 32%; top: 86.49%; }  /* Without pressure 120, 781 */
+  .a8-m-result {
+    position: absolute;
+    left: 50%; top: 66.224%;  /* 598/903 */
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center;
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 5.333vw; font-weight: 300; line-height: normal;
+    color: #fff5ef; text-align: center; white-space: nowrap; z-index: 2;
+  }
+  .a8-m-result span { display: block; }
+
+  /* ── a9 «Почему я» — Figma 1:2447, 375×1430 ── */
+  .consult-section.a9-figma { aspect-ratio: 375 / 1430 !important; }
+  .consult-section.a9-figma .a9-m.mobile-only {
+    position: absolute !important;
+    inset: 0;
+    width: auto !important;
+    height: auto !important;
+    z-index: 0;
+  }
+  .consult-section.a9-figma .a9-m img {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .a9-m { position: absolute; inset: 0; z-index: 0; }
+  .a9-m-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .a9-m-bg img { object-fit: cover; object-position: center; }
+  .a9-m-title {
+    position: absolute;
+    left: 8%; top: 5.105%;  /* 30, 73/1430 */
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 9.6vw;  /* 36/375 */
+    font-weight: 600; line-height: 8.96vw;
+    color: #fff5ef; z-index: 2;
+  }
+  .a9-m-statements {
+    position: absolute;
+    left: 8%; top: 9.58%; width: 86.667%;  /* 30, 137, 325 */
+    display: flex; flex-direction: column; gap: 5.333vw;  /* 20/375 */
+    font-family: var(--font-body);
+    font-size: 4.267vw; line-height: normal;
+    color: #fff5ef; z-index: 2;
+  }
+  .a9-m-statements p { margin: 0; }
+  .a9-m-statement-block { display: flex; flex-direction: column; gap: 2.667vw; }
+  .a9-m-r4 { font-weight: 500 !important; font-size: 4.8vw !important; }
+  .a9-m-stats {
+    position: absolute;
+    left: 8%; top: 32.308%; width: 80.533%;  /* 30, 462, 302 */
+    display: flex; flex-direction: column; gap: 5.333vw;
+    z-index: 2;
+  }
+  .a9-m-stats__heading {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 7.467vw;  /* 28/375 */
+    font-weight: 500; line-height: normal;
+    color: #fff5ef;
+  }
+  .a9-m-stat {
+    display: flex; align-items: baseline; gap: 2.667vw;
+  }
+  .a9-m-stat__num {
+    font-family: var(--font-heading);
+    font-size: 9.6vw;  /* 36/375 */
+    font-weight: 600; line-height: 8.96vw;
+    color: #de8b23;
+  }
+  .a9-m-stat__sub {
+    font-family: var(--font-body);
+    font-size: 4.267vw; font-weight: 400; line-height: normal;
+    color: #fff5ef;
+  }
+  .a9-m-photo {
+    position: absolute;
+    left: 0; bottom: 22.238%; width: 100%; height: 29.72%;  /* bottom=318/1430, h=425 */
+    z-index: 1; overflow: hidden; pointer-events: none;
+  }
+  .a9-m-photo img { object-fit: cover; object-position: bottom; }
+  .a9-m-cta-title {
+    position: absolute;
+    left: 8%; top: 80.629%; width: 84%;  /* 30, 1153, 315 */
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 9.6vw; font-weight: 600; line-height: 8.96vw;
+    color: #fff5ef; z-index: 2;
+  }
+  .a9-m-cta-sub {
+    position: absolute;
+    left: 8%; top: 86.783%; width: 84%;  /* 30, 1241, 315 */
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 4.267vw; line-height: normal;
+    color: #fff5ef; z-index: 2;
+  }
+  .a9-m-cta-sub__em {
+    font-style: normal; font-weight: 500;
+  }
+
+  /* ── a10 «Примеры работы» — Figma 1:2473, 375×696 ── */
+  .consult-section.a10-figma { aspect-ratio: 375 / 696 !important; }
+  .consult-section.a10-figma .a10-m.mobile-only {
+    position: absolute !important;
+    inset: 0;
+    width: auto !important;
+    height: auto !important;
+    z-index: 0;
+  }
+  .consult-section.a10-figma .a10-m img {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .a10-m { position: absolute; inset: 0; z-index: 0; }
+  .a10-m-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .a10-m-bg img { object-fit: cover; object-position: center; }
+  .a10-m-title {
+    position: absolute;
+    left: 8%; top: 9.052%;  /* 30, 63/696 */
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 7.467vw;  /* 28/375 */
+    font-weight: 500; line-height: normal;
+    color: #fff5ef; z-index: 2;
+  }
+  .a10-m-text {
+    position: absolute;
+    left: 8%; top: 16.81%; width: 84%;  /* 30, 117, 315 */
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 4.267vw; font-weight: 400; line-height: normal;
+    color: #fff; z-index: 2;
+  }
+  .a10-m-text p { margin: 0; line-height: normal; }
+  .a10-m-text__sep { display: block; height: 1em; line-height: normal; }
+  .a10-m-text__sep::before { content: '\200B'; }
+  .a10-m-how {
+    position: absolute;
+    left: 8%; top: 77.874%; width: 84%;  /* 30, 542, 315 */
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 4.267vw; font-weight: 400; line-height: normal;
+    color: #fff; opacity: 0.5; z-index: 2;
+  }
+  .a10-m-how p { margin: 0; line-height: normal; }
+  .a10-m-how__title { margin-bottom: 1em !important; }
+}
