@@ -1,225 +1,128 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createHmac } from 'node:crypto';
+import { isValidPayloadShape, parseWebhookBody } from '@/lib/wayforpay/parser';
+import {
+  computeIncomingSignature,
+  computeResponseSignature,
+  signaturesMatch,
+} from '@/lib/wayforpay/signature';
+import { tryMarkProcessed } from '@/lib/wayforpay/dedupe';
+import { notify } from '@/lib/wayforpay/notify';
+import type { WebhookPayload, WebhookResponse } from '@/lib/wayforpay/types';
 
 /**
- * WayForPay Service URL webhook.
+ * WayForPay Service URL webhook endpoint.
  *
- * WayForPay шлёт POST после оплаты. Мы проверяем входящую подпись
- * (HMAC-MD5 по merchantSecretKey), логируем платёж и возвращаем
- * подписанный JSON-ответ — иначе WayForPay будет ретраить.
+ * URL для прописки в личном кабинете WayForPay:
+ *   https://www.anna-medvedeva.space/api/wayforpay
  *
- * Документация:
+ * Поток:
+ *   1. Парсим тело (JSON / form-urlencoded / plain).
+ *   2. Минимальная валидация структуры.
+ *   3. Проверяем merchantAccount совпадает с нашим (защита от подделки).
+ *   4. Считаем HMAC-MD5 от полей и сверяем с merchantSignature (timing-safe).
+ *   5. Идемпотентность: пропускаем дубликаты (orderReference + status).
+ *   6. Передаём в notify() — логирование + email админу (если настроено).
+ *   7. Возвращаем подписанный JSON-ответ — иначе WayForPay будет ретраить.
+ *
+ * Доки:
  *   https://wiki.wayforpay.com/uk/view/852091  (Service URL)
  *   https://wiki.wayforpay.com/en/view/608067  (HMAC_MD5 signature)
  */
 
-// Запуск только в node-runtime (нужен `crypto` и формирование сырого тела)
-export const runtime = 'nodejs';
-// На Vercel этот роут НЕ кэшируется
-export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';        // нужен node:crypto
+export const dynamic = 'force-dynamic'; // не кэшируем
 
-// ────────────────────────────────────────────────────────────────────────
-// Типы
+export async function POST(req: NextRequest): Promise<NextResponse> {
+  const secret = process.env.WAYFORPAY_MERCHANT_SECRET_KEY;
+  const expectedAccount = process.env.WAYFORPAY_MERCHANT_ACCOUNT;
 
-type WayForPayWebhookBody = {
-  merchantAccount: string;
-  orderReference: string;
-  merchantSignature: string;
-  amount: number | string;
-  currency: string;
-  authCode?: string;
-  email?: string;
-  phone?: string;
-  createdDate?: number;
-  processingDate?: number;
-  cardPan?: string;
-  cardType?: string;
-  issuerBankCountry?: string;
-  issuerBankName?: string;
-  recToken?: string;
-  transactionStatus: 'Approved' | 'Declined' | 'Refunded' | 'Voided' | 'Expired' | 'Pending' | 'InProcessing' | 'WaitingAuthComplete' | 'RefundInProcessing';
-  reason?: string;
-  reasonCode?: number | string;
-  fee?: number | string;
-  paymentSystem?: string;
-};
-
-type WayForPayResponseStatus = 'accept' | 'decline';
-
-// ────────────────────────────────────────────────────────────────────────
-// Подпись
-
-/**
- * Считает HMAC-MD5 по массиву полей, соединённых ";", с ключом
- * merchantSecretKey. Возвращает hex-строку (как ожидает WayForPay).
- */
-function hmacMd5(secret: string, fields: Array<string | number | undefined | null>): string {
-  const payload = fields.map((v) => (v === undefined || v === null ? '' : String(v))).join(';');
-  return createHmac('md5', secret).update(payload, 'utf8').digest('hex');
-}
-
-/**
- * Поля для проверки подписи входящего webhook (порядок строго по спецификации).
- *   merchantAccount;orderReference;amount;currency;authCode;cardPan;
- *   transactionStatus;reasonCode
- */
-function buildIncomingSignature(secret: string, b: WayForPayWebhookBody): string {
-  return hmacMd5(secret, [
-    b.merchantAccount,
-    b.orderReference,
-    b.amount,
-    b.currency,
-    b.authCode,
-    b.cardPan,
-    b.transactionStatus,
-    b.reasonCode,
-  ]);
-}
-
-/**
- * Поля для ответной подписи (мы → WayForPay):
- *   orderReference;status;time
- */
-function buildResponseSignature(secret: string, orderReference: string, status: WayForPayResponseStatus, time: number): string {
-  return hmacMd5(secret, [orderReference, status, time]);
-}
-
-// ────────────────────────────────────────────────────────────────────────
-// Парсинг тела
-
-/**
- * WayForPay может прислать тело несколькими форматами:
- *   1. application/json — обычный JSON
- *   2. application/x-www-form-urlencoded — единственное поле, где key или value
- *      содержат JSON-строку (исторический legacy-формат, иногда встречается)
- *   3. text/plain — голый JSON в теле
- *
- * Возвращаем распарсенный объект либо null если разобрать не удалось.
- */
-async function parseBody(req: NextRequest): Promise<unknown> {
-  const contentType = req.headers.get('content-type') ?? '';
-  const raw = await req.text();
-
-  // 1. JSON
-  if (contentType.includes('application/json')) {
-    try {
-      return JSON.parse(raw);
-    } catch {
-      return null;
-    }
+  if (!secret) {
+    console.error('[wayforpay] WAYFORPAY_MERCHANT_SECRET_KEY not configured');
+    return jsonError('server_not_configured', 500);
   }
 
-  // 2. form-urlencoded — WayForPay иногда шлёт JSON в виде единственного
-  //    поля, где ключ ИЛИ значение — JSON-строка.
-  if (contentType.includes('application/x-www-form-urlencoded')) {
-    const params = new URLSearchParams(raw);
-    for (const [k, v] of params.entries()) {
-      const candidate = v && v !== 'undefined' ? v : k;
-      try {
-        return JSON.parse(candidate);
-      } catch {
-        // continue
-      }
-    }
-    return null;
+  // 1. Парсим
+  const parsed = await parseWebhookBody(req);
+  if (!isValidPayloadShape(parsed)) {
+    console.error('[wayforpay] invalid payload shape');
+    return jsonError('invalid_body', 400);
+  }
+  const body = parsed as WebhookPayload;
+
+  // 2. Проверяем merchantAccount (если задан в env — должен совпадать)
+  if (expectedAccount && body.merchantAccount !== expectedAccount) {
+    console.error('[wayforpay] merchantAccount mismatch', {
+      received: body.merchantAccount,
+      expected: expectedAccount,
+    });
+    return signedDecline(secret, body.orderReference);
   }
 
-  // 3. Plain или неизвестный content-type — пробуем как JSON
-  try {
-    return JSON.parse(raw);
-  } catch {
-    return null;
-  }
-}
-
-// ────────────────────────────────────────────────────────────────────────
-// Handler
-
-export async function POST(req: NextRequest) {
-  const merchantSecretKey = process.env.WAYFORPAY_MERCHANT_SECRET_KEY;
-  if (!merchantSecretKey) {
-    console.error('[wayforpay] WAYFORPAY_MERCHANT_SECRET_KEY is not set');
-    // 500: WayForPay будет ретраить — починим конфиг и платёж дойдёт повторно
-    return NextResponse.json({ error: 'server_not_configured' }, { status: 500 });
-  }
-
-  // 1. Парсим тело
-  const parsed = await parseBody(req);
-  if (!parsed || typeof parsed !== 'object') {
-    console.error('[wayforpay] failed to parse body');
-    return NextResponse.json({ error: 'invalid_body' }, { status: 400 });
-  }
-  const body = parsed as WayForPayWebhookBody;
-
-  // 2. Проверяем подпись от WayForPay
-  const expectedSignature = buildIncomingSignature(merchantSecretKey, body);
-  const signatureValid = body.merchantSignature === expectedSignature;
-
-  if (!signatureValid) {
+  // 3. Проверяем подпись
+  const expectedSig = computeIncomingSignature(secret, body);
+  if (!signaturesMatch(body.merchantSignature, expectedSig)) {
     console.error('[wayforpay] signature mismatch', {
       orderReference: body.orderReference,
       received: body.merchantSignature,
-      expected: expectedSignature,
+      expected: expectedSig,
     });
-    // 200 + status=decline — WayForPay перестанет ретраить, но мы не приняли
-    const time = Math.floor(Date.now() / 1000);
-    const responseSignature = buildResponseSignature(
-      merchantSecretKey,
-      body.orderReference ?? '',
-      'decline',
-      time,
-    );
-    return NextResponse.json({
-      orderReference: body.orderReference ?? '',
-      status: 'decline',
-      time,
-      signature: responseSignature,
-    });
+    return signedDecline(secret, body.orderReference);
   }
 
-  // 3. Логируем (тут может быть запись в БД, отправка email и т.д.)
-  console.log('[wayforpay] webhook received', {
-    orderReference: body.orderReference,
-    transactionStatus: body.transactionStatus,
-    amount: body.amount,
-    currency: body.currency,
-    email: body.email,
-    phone: body.phone,
-    cardPan: body.cardPan,
-    paymentSystem: body.paymentSystem,
-    reasonCode: body.reasonCode,
-  });
+  // 4. Идемпотентность: дубликаты webhook (retry от WayForPay) обрабатываем,
+  //    но без побочных эффектов (email не шлём повторно). Ответ всё равно
+  //    шлём с status=accept чтобы WayForPay прекратил ретрай.
+  const firstTime = tryMarkProcessed(body.orderReference, body.transactionStatus);
 
-  if (body.transactionStatus === 'Approved') {
-    console.log('[wayforpay] ✅ APPROVED:', body.orderReference, body.amount, body.currency);
-    // TODO: пометить заказ как оплаченный (БД), отправить email пользователю и т.п.
-  } else {
-    console.log('[wayforpay] ℹ status:', body.transactionStatus, body.orderReference);
+  // 5. Бизнес-логика (логирование + email)
+  try {
+    await notify(body, { isDuplicate: !firstTime });
+  } catch (err) {
+    // Падение notify не должно ломать ответ — иначе WayForPay будет ретраить
+    // и спам с email-ами усилится. Просто логируем.
+    console.error('[wayforpay] notify error', err);
   }
 
-  // 4. Подписываем ответ
-  const time = Math.floor(Date.now() / 1000);
-  const responseSignature = buildResponseSignature(
-    merchantSecretKey,
-    body.orderReference,
-    'accept',
-    time,
-  );
-
-  return NextResponse.json({
-    orderReference: body.orderReference,
-    status: 'accept',
-    time,
-    signature: responseSignature,
-  });
+  // 6. Подписанный ответ
+  return signedAccept(secret, body.orderReference);
 }
 
-// Опциональный GET для health-check / проверки в браузере: убедиться что
-// роут жив и доступен по правильному URL. WayForPay сам шлёт только POST.
-export async function GET() {
+/**
+ * Health-check эндпоинт. WayForPay шлёт только POST — GET для удобной
+ * проверки руками что URL прописан правильно.
+ */
+export async function GET(): Promise<NextResponse> {
   return NextResponse.json({
     ok: true,
     service: 'wayforpay-webhook',
     methods: ['POST'],
+    configured: Boolean(process.env.WAYFORPAY_MERCHANT_SECRET_KEY),
   });
+}
+
+// ────────────────────────────────────────────────────────────────────────
+// Helpers
+
+function jsonError(code: string, status: number): NextResponse {
+  return NextResponse.json({ error: code }, { status });
+}
+
+function signedAccept(secret: string, orderReference: string): NextResponse {
+  const time = nowSec();
+  const signature = computeResponseSignature(secret, orderReference, 'accept', time);
+  const body: WebhookResponse = { orderReference, status: 'accept', time, signature };
+  return NextResponse.json(body);
+}
+
+function signedDecline(secret: string, orderReference: string): NextResponse {
+  const time = nowSec();
+  const safeRef = orderReference ?? '';
+  const signature = computeResponseSignature(secret, safeRef, 'decline', time);
+  const body: WebhookResponse = { orderReference: safeRef, status: 'decline', time, signature };
+  // 200 + decline — WayForPay прекратит ретрай, но мы не приняли платёж
+  return NextResponse.json(body);
+}
+
+function nowSec(): number {
+  return Math.floor(Date.now() / 1000);
 }
