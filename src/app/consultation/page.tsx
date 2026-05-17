@@ -178,9 +178,8 @@ export default function ConsultationPage() {
                   const priceKey = `c2_card${k}_price` as TranslationKey;
                   const descKey = `c2_card${k}_desc` as TranslationKey;
                   // Платёжные ссылки WayForPay по каждой карточке.
-                  // Card 1 — временная (тестовая), поменяем позже.
                   const payHrefs: Record<number, string> = {
-                    1: 'https://secure.wayforpay.com/button/b2d184be4c5c8',
+                    1: 'https://secure.wayforpay.com/button/b37e9508b6987',
                     2: 'https://secure.wayforpay.com/button/bfb1bc2d0ff4a',
                     3: 'https://secure.wayforpay.com/button/be98247d8ff2f',
                   };
