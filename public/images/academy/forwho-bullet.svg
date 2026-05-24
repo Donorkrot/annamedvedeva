@@ -1,0 +1,29 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="halo-fw" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE070" stop-opacity="0.45"/>
+      <stop offset="60%" stop-color="#FFC800" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#FFC800" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- soft golden halo -->
+  <circle cx="12" cy="12" r="11.5" fill="url(#halo-fw)"/>
+  <g stroke="#FFC800" stroke-width="1" stroke-linecap="round" fill="none">
+    <!-- outer ring -->
+    <circle cx="12" cy="12" r="7"/>
+    <!-- inner ring -->
+    <circle cx="12" cy="12" r="3.2"/>
+    <!-- 4 main rays (N/E/S/W) — longer, going through outer ring -->
+    <line x1="12" y1="2"  x2="12" y2="9"/>
+    <line x1="12" y1="15" x2="12" y2="22"/>
+    <line x1="2"  y1="12" x2="9"  y2="12"/>
+    <line x1="15" y1="12" x2="22" y2="12"/>
+    <!-- 4 diagonal rays (NE/SE/SW/NW) — shorter, inside outer ring -->
+    <line x1="6.5"  y1="6.5"  x2="9.7"  y2="9.7"/>
+    <line x1="14.3" y1="9.7"  x2="17.5" y2="6.5"/>
+    <line x1="14.3" y1="14.3" x2="17.5" y2="17.5"/>
+    <line x1="6.5"  y1="17.5" x2="9.7"  y2="14.3"/>
+  </g>
+  <!-- center dot -->
+  <circle cx="12" cy="12" r="1.2" fill="#FFE070"/>
+</svg>
