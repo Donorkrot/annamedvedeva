@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useTranslation } from '@/components/LanguageProvider';
+import type { TranslationKey } from '@/lib/translations';
 
 /**
  * /academy — Академия мастеров.
@@ -255,10 +256,10 @@ export default function AcademyPage() {
                 />
               </span>
               <div className="acad-study-card-text">
-                <p className="acad-study-card-title">{tr(`academy_study_card_${n}_title`)}</p>
-                <p className="acad-study-card-sub">{tr(`academy_study_card_${n}_sub`)}</p>
-                {tr(`academy_study_card_${n}_extra`) && (
-                  <p className="acad-study-card-extra">{tr(`academy_study_card_${n}_extra`)}</p>
+                <p className="acad-study-card-title">{tr(`academy_study_card_${n}_title` as TranslationKey)}</p>
+                <p className="acad-study-card-sub">{tr(`academy_study_card_${n}_sub` as TranslationKey)}</p>
+                {tr(`academy_study_card_${n}_extra` as TranslationKey) && (
+                  <p className="acad-study-card-extra">{tr(`academy_study_card_${n}_extra` as TranslationKey)}</p>
                 )}
               </div>
             </li>
@@ -326,8 +327,8 @@ export default function AcademyPage() {
                 <img src={`/images/academy/whatif-icon-${n}.svg`} alt="" className="acad-whatif-card-icon__fg" />
               </span>
               <div className="acad-whatif-card-text">
-                <p className="acad-whatif-card-title">{tr(`academy_whatif_card_${n}_title`)}</p>
-                <p className="acad-whatif-card-desc">{tr(`academy_whatif_card_${n}_desc`)}</p>
+                <p className="acad-whatif-card-title">{tr(`academy_whatif_card_${n}_title` as TranslationKey)}</p>
+                <p className="acad-whatif-card-desc">{tr(`academy_whatif_card_${n}_desc` as TranslationKey)}</p>
               </div>
             </li>
           ))}
@@ -376,7 +377,7 @@ export default function AcademyPage() {
                 <li className="acad-result-list-item" key={n}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src="/images/academy/result-bullet.svg" alt="" className="acad-result-bullet" />
-                  <span>{tr(`academy_result_list_1_item_${n}`)}</span>
+                  <span>{tr(`academy_result_list_1_item_${n}` as TranslationKey)}</span>
                 </li>
               ))}
             </ul>
@@ -389,7 +390,7 @@ export default function AcademyPage() {
                 <li className="acad-result-list-item" key={n}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src="/images/academy/result-bullet.svg" alt="" className="acad-result-bullet" />
-                  <span>{tr(`academy_result_list_2_item_${n}`)}</span>
+                  <span>{tr(`academy_result_list_2_item_${n}` as TranslationKey)}</span>
                 </li>
               ))}
             </ul>
@@ -455,7 +456,7 @@ export default function AcademyPage() {
               <li className="acad-forwho-item" key={n}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/images/academy/forwho-bullet.svg" alt="" className="acad-forwho-bullet" />
-                <span>{tr(`academy_forwho_yes_item_${n}`)}</span>
+                <span>{tr(`academy_forwho_yes_item_${n}` as TranslationKey)}</span>
               </li>
             ))}
           </ul>
@@ -469,7 +470,7 @@ export default function AcademyPage() {
               <li className="acad-forwho-item" key={n}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/images/academy/forwho-bullet.svg" alt="" className="acad-forwho-bullet" />
-                <span>{tr(`academy_forwho_no_item_${n}`)}</span>
+                <span>{tr(`academy_forwho_no_item_${n}` as TranslationKey)}</span>
               </li>
             ))}
           </ul>
