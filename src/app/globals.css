@@ -7739,7 +7739,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   left: 50%;
   top: calc(50% - 0.972vw);     /* 14/1440 — Figma offset */
   transform: translate(-50%, -50%);
-  width: 40.139%;               /* 578/1440 */
+  width: 50%;                   /* шире чем Figma 40% — чтобы заголовок-nowrap влезал */
   max-width: 720px;
   display: flex;
   flex-direction: column;
@@ -7760,6 +7760,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   text-transform: uppercase;
   color: #fff5ef;
   width: 100%;
+  white-space: nowrap;            /* "АКАДЕМИЯ МАСТЕРОВ" одной строкой на desktop */
 }
 .acad-hero-title__line { display: inline; }
 .acad-hero-title__line + .acad-hero-title__line::before {
@@ -7828,6 +7829,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     font-size: 9.6vw;           /* 36/375 */
     line-height: 8.96vw;        /* 33.6/375 — Figma leading */
     width: 100%;
+    white-space: normal;        /* mobile — снимаем nowrap, spans на отдельных строках */
   }
   .acad-hero-title__line {
     display: block;
@@ -9074,4 +9076,323 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     height: 5.333vw;
     margin-top: 0.15em;
   }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   /academy — section 8 "Важное условие" — Figma 740:549 (1440×700)
+   Текст по центру (вертикально и горизонтально) поверх bg-картинки.
+   ════════════════════════════════════════════════════════════════════════ */
+.acad-condition {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1440 / 700;
+  overflow: hidden;
+  background: #010101;
+}
+.acad-condition-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.acad-condition-bg img { object-fit: cover; }
+
+.acad-condition-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(33.333vw, 480px);    /* 480/1440 */
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: min(2.778vw, 40px);        /* 40/1440 */
+  color: #fff5ef;
+  text-align: center;
+}
+
+.acad-condition-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: min(3.611vw, 52px);  /* 52/1440 */
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.acad-condition-desc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: min(1.389vw, 20px);        /* 20/1440 */
+  width: min(30.556vw, 440px);    /* 440/1440 */
+}
+.acad-condition-desc-1 {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: min(1.25vw, 18px);   /* 18/1440 */
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: pre-line;           /* respect \n after "предполагает" */
+  width: 100%;
+}
+.acad-condition-desc-2 {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: min(1.111vw, 16px);   /* 16/1440 */
+  font-weight: 400;
+  line-height: 1.3;
+  white-space: pre-line;
+  width: min(22.569vw, 325px);     /* 325/1440 */
+}
+
+.acad-condition-tagline {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: min(2.5vw, 36px);     /* 36/1440 */
+  font-weight: 600;
+  line-height: min(2.333vw, 33.6px);
+  width: 100%;
+}
+
+/* ── Tablet (769-1024px) — same proportions, content slightly wider */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .acad-condition-content { width: min(55vw, 480px); }
+  .acad-condition-title { font-size: min(5vw, 44px); }
+  .acad-condition-desc { width: min(50vw, 440px); gap: 2.5vw; }
+  .acad-condition-desc-1 { font-size: min(2.2vw, 18px); }
+  .acad-condition-desc-2 { font-size: min(1.95vw, 16px); width: 100%; }
+  .acad-condition-tagline { font-size: min(3.5vw, 30px); line-height: 1.05; }
+}
+
+/* ── Mobile portrait (≤768px) ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .acad-condition {
+    aspect-ratio: 375 / 600;       /* секция выше в портрете для уместить контент */
+  }
+  .acad-condition-content {
+    width: 84vw;                   /* 315/375 */
+    gap: 6.4vw;                    /* 24/375 */
+  }
+  .acad-condition-title {
+    font-size: 9.6vw;              /* 36/375 */
+    line-height: 1;
+  }
+  .acad-condition-desc {
+    width: 84vw;
+    gap: 4vw;                      /* 15/375 */
+  }
+  .acad-condition-desc-1 {
+    font-size: 4.267vw;            /* 16/375 */
+    line-height: 1.35;
+  }
+  .acad-condition-desc-2 {
+    font-size: 3.733vw;            /* 14/375 */
+    line-height: 1.35;
+    width: 84vw;
+  }
+  .acad-condition-tagline {
+    font-size: 6.4vw;              /* 24/375 */
+    line-height: 1.05;
+  }
+}
+
+/* ── Mobile landscape (≤768 height, wide) — компактнее, чтобы влезло
+       в маленькой landscape-высоте */
+@media (max-width: 900px) and (orientation: landscape) {
+  .acad-condition {
+    aspect-ratio: 900 / 500;
+  }
+  .acad-condition-content {
+    width: min(70vw, 480px);
+    gap: 2.5vh;
+  }
+  .acad-condition-title { font-size: min(5vh, 40px); }
+  .acad-condition-desc { gap: 1.5vh; }
+  .acad-condition-desc-1 { font-size: min(2.2vh, 16px); }
+  .acad-condition-desc-2 { font-size: min(2vh, 14px); }
+  .acad-condition-tagline { font-size: min(3.5vh, 28px); line-height: 1.05; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   /academy — section 9 "Первая ступень" — Figma 740:557 (1440×700)
+   ════════════════════════════════════════════════════════════════════════ */
+.acad-step1 {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1440 / 700;
+  overflow: hidden;
+  background: #010101;
+}
+.acad-step1-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.acad-step1-bg img { object-fit: cover; }
+
+.acad-step1-title {
+  position: absolute;
+  left: 50%;
+  top: 12%;
+  transform: translateX(-50%);
+  margin: 0;
+  z-index: 2;
+  font-family: var(--font-heading);
+  font-size: min(3.611vw, 52px);
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #fff5ef;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.acad-step1-cols {
+  position: absolute;
+  left: 18.472%;
+  right: 18.472%;
+  top: 30.571%;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: min(11.528vw, 166px);
+}
+.acad-step1-col {
+  display: flex;
+  flex-direction: column;
+  gap: min(2.778vw, 40px);
+  color: #fff5ef;
+}
+.acad-step1-col--left { width: min(26.181vw, 377px); }
+.acad-step1-col--right { width: min(25.278vw, 364px); }
+
+.acad-step1-subtitle {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: min(2.5vw, 36px);
+  font-weight: 600;
+  line-height: min(2.333vw, 33.6px);
+}
+.acad-step1-text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: min(1.25vw, 18px);
+  font-weight: 500;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.acad-step1-text p { margin: 0; }
+
+.acad-step1-date {
+  font-family: var(--font-heading);
+  font-size: min(1.667vw, 24px);
+  font-weight: 300;
+  line-height: 23.1px;
+}
+
+.acad-step1-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid #fff5ef;
+  border-radius: 10px;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: min(1.111vw, 16px);
+  font-weight: 400;
+  color: #fff5ef;
+  white-space: nowrap;
+  transition: background 0.25s ease, transform 0.25s ease;
+  cursor: pointer;
+}
+.acad-step1-btn:hover {
+  background: rgba(255, 245, 239, 0.12);
+  transform: translateY(-1px);
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .acad-step1-title { font-size: min(5vw, 44px); }
+  .acad-step1-cols {
+    left: 8%;
+    right: 8%;
+    gap: 5vw;
+    top: 30%;
+  }
+  .acad-step1-col--left,
+  .acad-step1-col--right { width: 45%; }
+  .acad-step1-subtitle { font-size: min(3.5vw, 30px); line-height: 1.05; }
+  .acad-step1-text { font-size: min(2.2vw, 17px); }
+  .acad-step1-date { font-size: min(2.6vw, 22px); }
+  .acad-step1-btn { font-size: min(2vw, 15px); padding: 12px 18px; }
+}
+
+@media (max-width: 768px) {
+  .acad-step1 {
+    aspect-ratio: 375 / 760;
+  }
+  .acad-step1-title {
+    top: 10.526%;
+    font-size: 9.6vw;
+    line-height: 1;
+  }
+  .acad-step1-cols {
+    left: 8vw;
+    right: 8vw;
+    top: 22%;
+    flex-direction: column;
+    gap: 10.667vw;
+  }
+  .acad-step1-col--left,
+  .acad-step1-col--right {
+    width: 100%;
+    gap: 5.333vw;
+  }
+  .acad-step1-subtitle {
+    font-size: 7.467vw;
+    line-height: 1;
+  }
+  .acad-step1-text {
+    font-size: 4.267vw;
+    line-height: 1.4;
+  }
+  .acad-step1-date {
+    font-size: 5.333vw;
+  }
+  .acad-step1-btn {
+    padding: 3.733vw 5.333vw;
+    font-size: 4.267vw;
+    border-radius: 2.667vw;
+  }
+}
+
+@media (max-width: 900px) and (orientation: landscape) {
+  .acad-step1 {
+    aspect-ratio: 900 / 500;
+  }
+  .acad-step1-title {
+    top: 8%;
+    font-size: min(5vh, 36px);
+  }
+  .acad-step1-cols {
+    flex-direction: row;
+    top: 32%;
+    left: 8%;
+    right: 8%;
+    gap: 4vw;
+  }
+  .acad-step1-col--left,
+  .acad-step1-col--right { width: 48%; gap: 1.5vh; }
+  .acad-step1-subtitle { font-size: min(3.2vh, 24px); line-height: 1.05; }
+  .acad-step1-text { font-size: min(2.2vh, 14px); }
+  .acad-step1-date { font-size: min(2.6vh, 18px); }
+  .acad-step1-btn { font-size: min(2vh, 13px); padding: 8px 14px; }
 }

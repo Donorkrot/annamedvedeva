@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import { useTranslation } from '@/components/LanguageProvider';
 import type { TranslationKey } from '@/lib/translations';
+import Footer from '@/components/Footer';
 
 /**
  * /academy — Академия мастеров.
@@ -476,6 +477,71 @@ export default function AcademyPage() {
           </ul>
         </div>
       </section>
+
+      {/* ── Section 8 — "Важное условие" — Figma 740:549 (1440×700) ── */}
+      <section className="acad-condition">
+        <div className="acad-condition-bg" aria-hidden="true">
+          <Image
+            src="/images/academy/condition-bg.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            quality={90}
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+        </div>
+        <div className="acad-condition-content">
+          <h2 className="acad-condition-title">{tr('academy_condition_title')}</h2>
+          <div className="acad-condition-desc">
+            <p className="acad-condition-desc-1">{tr('academy_condition_desc_1')}</p>
+            <p className="acad-condition-desc-2">{tr('academy_condition_desc_2')}</p>
+          </div>
+          <p className="acad-condition-tagline">{tr('academy_condition_tagline')}</p>
+        </div>
+      </section>
+
+      {/* ── Section 9 — "Первая ступень" — Figma 740:557 (1440×700) ── */}
+      <section className="acad-step1">
+        <div className="acad-step1-bg" aria-hidden="true">
+          <Image
+            src="/images/academy/step1-bg.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            quality={90}
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+        </div>
+
+        {/* Main title centered at top */}
+        <h2 className="acad-step1-title">{tr('academy_step1_title')}</h2>
+
+        <div className="acad-step1-cols">
+          {/* Left column — Вход в метод */}
+          <div className="acad-step1-col acad-step1-col--left">
+            <h3 className="acad-step1-subtitle">{tr('academy_step1_left_title')}</h3>
+            <p className="acad-step1-text">{tr('academy_step1_left_text')}</p>
+            <a href="#step1-details" className="acad-step1-btn">
+              <span>{tr('academy_step1_left_btn')}</span>
+            </a>
+          </div>
+
+          {/* Right column — Записаться в Академию */}
+          <div className="acad-step1-col acad-step1-col--right">
+            <h3 className="acad-step1-subtitle">{tr('academy_step1_right_title')}</h3>
+            <div className="acad-step1-text">
+              <p>{tr('academy_step1_right_line_1')}</p>
+              <p>{tr('academy_step1_right_line_2')}</p>
+              <p className="acad-step1-date">{tr('academy_step1_right_date')}</p>
+            </div>
+            <a href="#apply" className="acad-step1-btn">
+              <span>{tr('academy_step1_right_btn')}</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </main>
   );
 }
