@@ -478,11 +478,23 @@ export default function AcademyPage() {
         </div>
       </section>
 
-      {/* ── Section 8 — "Важное условие" — Figma 740:549 (1440×700) ── */}
+      {/* ── Section 8 — "Важное условие" — Figma desk 759:412 (1440×700) / mob 740:529 (375×755) ── */}
       <section className="acad-condition">
-        <div className="acad-condition-bg" aria-hidden="true">
+        {/* Desktop bg */}
+        <div className="acad-condition-bg desktop-only" aria-hidden="true">
           <Image
             src="/images/academy/condition-bg.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            quality={90}
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+        </div>
+        {/* Mobile bg — portrait, две руки сверху/снизу */}
+        <div className="acad-condition-bg mobile-only" aria-hidden="true">
+          <Image
+            src="/images/academy/condition-m-bg.jpg"
             alt=""
             fill
             sizes="100vw"
@@ -500,9 +512,10 @@ export default function AcademyPage() {
         </div>
       </section>
 
-      {/* ── Section 9 — "Первая ступень" — Figma 740:557 (1440×700) ── */}
+      {/* ── Section 9 — "Первая ступень" — Figma desk 740:557 (1440×700) / mob 740:537 (375×755) ── */}
       <section className="acad-step1">
-        <div className="acad-step1-bg" aria-hidden="true">
+        {/* Desktop bg */}
+        <div className="acad-step1-bg desktop-only" aria-hidden="true">
           <Image
             src="/images/academy/step1-bg.jpg"
             alt=""
@@ -510,6 +523,17 @@ export default function AcademyPage() {
             sizes="100vw"
             quality={90}
             style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+        </div>
+        {/* Mobile bg — арка с рунами внизу */}
+        <div className="acad-step1-bg mobile-only" aria-hidden="true">
+          <Image
+            src="/images/academy/step1-m-bg.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            quality={90}
+            style={{ objectFit: 'cover', objectPosition: 'bottom' }}
           />
         </div>
 
@@ -531,8 +555,10 @@ export default function AcademyPage() {
             <h3 className="acad-step1-subtitle">{tr('academy_step1_right_title')}</h3>
             <div className="acad-step1-text">
               <p>{tr('academy_step1_right_line_1')}</p>
-              <p>{tr('academy_step1_right_line_2')}</p>
-              <p className="acad-step1-date">{tr('academy_step1_right_date')}</p>
+              <p>
+                <span className="acad-step1-line-prefix">{tr('academy_step1_right_line_2')}</span>{' '}
+                <span className="acad-step1-date">{tr('academy_step1_right_date')}</span>
+              </p>
             </div>
             <a href="#apply" className="acad-step1-btn">
               <span>{tr('academy_step1_right_btn')}</span>

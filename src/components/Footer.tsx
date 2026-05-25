@@ -88,7 +88,7 @@ export default function Footer() {
         {/* Right text block — element centre at (calc(50%+66.7px), calc(50%−9px)) */}
         {/* x:163 y:~241, Cormorant Medium 28px + Raleway 12px */}
         <div className="s12-m-right">
-          <p className="s12-m-right-heading">{tr('s12_currency_title')}</p>
+          <p className="s12-m-right-heading">{tr('s12_currency_title_m')}</p>
           <p className="s12-m-right-body">{tr('s12_currency_body')}</p>
         </div>
 

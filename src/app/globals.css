@@ -4694,67 +4694,71 @@ img.desktop-only { display: block !important; }
   .s11-m-btn { display: flex; align-items: center; justify-content: center; width: 78.6667vw; height: 12.5333vw; padding: 0 5.3333vw; border: 1px solid #fff5ef; border-radius: 2.6667vw; background: transparent; text-decoration: none; transition: background 0.3s; box-sizing: border-box; }
   .s11-m-btn span { font-family: var(--font-body); font-size: 4.2667vw; font-weight: 400; line-height: 1; color: #fff5ef; white-space: nowrap; }
 
-  /* === S12 FOOTER — Figma 375×600 (node 1:469, mobile) === */
-  .s12-footer.s12-figma { aspect-ratio: 375 / 600 !important; background: #000 !important; }
+  /* === S12 FOOTER — Figma 375×687 (node 740:569, mobile) === */
+  .s12-footer.s12-figma { aspect-ratio: 375 / 687 !important; background: #000 !important; }
 
   .s12-mobile-html { position: absolute; inset: 0; z-index: 0; }
 
-  /* Background */
+  /* Background — новый ассет совпадает по аспекту, без обрезки */
   .s12-m-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
-  .s12-m-bg-img { width: 100% !important; max-width: none !important; height: 100%; object-fit: cover; object-position: center top; display: block; }
+  .s12-m-bg-img { width: 100% !important; max-width: none !important; height: 100%; object-fit: cover; object-position: center; display: block; }
 
-  /* Gradient top — Figma 131:732: container h:298/600≈49.67%, with a near-
-     solid dark cap at the top fading to transparent over the lower ~60% of
-     the container (so heading text reads against a clean dark backdrop). */
-  .s12-m-grad-top { position: absolute; left: 0; top: 0; width: 100%; height: 49.67%; background: linear-gradient(to bottom, #111 0%, #111 4%, rgba(17,17,17,0) 62%); z-index: 1; pointer-events: none; }
+  /* Gradients — новый bg уже достаточно тёмный, оставляем минимальные оверлеи */
+  .s12-m-grad-top { display: none; }
+  .s12-m-grad-bot { display: none; }
 
-  /* Gradient bottom — starts at y:229/600=38.24%, covers to bottom */
-  .s12-m-grad-bot { position: absolute; left: 0; top: 70%; width: 100%; height: 30%; background: linear-gradient(to bottom, transparent 0%, #000 100%); z-index: 1; pointer-events: none; }
-
-  /* Left text block — Figma: top:4.2667vw (no centre transform — heading wraps and goes above section on small viewports) */
-  .s12-m-left { position: absolute; left: 8%; top: 4.2667vw; width: 84%; z-index: 2; display: flex; flex-direction: column; gap: 4.2667vw; }
-  .s12-m-left-heading { margin: 0; font-family: var(--font-heading); font-size: 7.4667vw; font-weight: 500; line-height: 1.1; color: #fff5ef; text-transform: uppercase; }
+  /* Left text block — Figma 740:571: center at (≈50%, top:50%-200.5/687)
+     translate(-50%,-50%). Содержит heading (28px) + tagline (16px), gap:20 */
+  .s12-m-left {
+    position: absolute;
+    left: 50%; top: 20.82%;            /* (343.5 - 200.5) / 687 = 143/687 */
+    width: 84%;                         /* 315/375 */
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    display: flex; flex-direction: column; gap: 5.333vw;  /* 20/375 */
+  }
+  .s12-m-left-heading { margin: 0; font-family: var(--font-heading); font-size: 7.467vw; font-weight: 500; line-height: 1.1; color: #fff5ef; text-transform: uppercase; }
   .s12-m-left-hl { color: #de8b23; }
   .s12-m-left-rest { color: #fff5ef; }
-  .s12-m-left-tagline { margin: 0; font-family: var(--font-body); font-size: 4.2667vw; font-weight: 400; color: #fff5ef; line-height: normal; }
+  .s12-m-left-tagline { margin: 0; font-family: var(--font-body); font-size: 4.267vw; font-weight: 400; color: #fff5ef; line-height: normal; white-space: pre-line; }
 
-  /* Right text block — Figma: centre at (calc(50%+17.7867vw), calc(50%−2.4vw)) */
-  .s12-m-right { position: absolute; left: calc(50% + 17.7867vw); top: calc(50% - 2.4vw); width: 48.5333vw; z-index: 2; transform: translate(-50%, -50%); display: flex; flex-direction: column; gap: 2.6667vw; }
-  .s12-m-right-heading { margin: 0; padding-bottom: 2.6667vw; font-family: var(--font-heading); font-size: 7.4667vw; font-weight: 500; color: #fff5ef; line-height: 1; white-space: pre-wrap; }
+  /* Right text block — Figma 740:574: center at (≈67.78%, 50%+34.5/687)
+     translate(-50%,-50%). width 182/375 ≈ 48.53%. Содержит heading + body, gap:10 */
+  .s12-m-right {
+    position: absolute;
+    left: 67.78%;                       /* (83.33% × 375 - 58.3) / 375 = 254.2/375 */
+    top: 55.02%;                        /* (343.5 + 34.5) / 687 = 378/687 */
+    width: 48.533vw;                    /* 182/375 */
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    display: flex; flex-direction: column; gap: 2.667vw;  /* 10/375 */
+  }
+  .s12-m-right-heading { margin: 0; font-family: var(--font-heading); font-size: 7.467vw; font-weight: 500; color: #fff5ef; line-height: 1; white-space: pre-wrap; }
   .s12-m-right-body { margin: 0; font-family: var(--font-body); font-size: 3.2vw; font-weight: 400; color: #fff5ef; opacity: 0.7; line-height: normal; }
 
-  /* Book — x:162.2/375=43.25%, y:377.5/600=62.92% */
-  .s12-m-book { position: absolute; left: 43.25%; top: 62.92%; z-index: 2; display: flex; flex-direction: column; text-decoration: none; }
+  /* Book Info — Figma 740:583: left=33.33%+38.2px=163.2/375≈43.52%, top=465.5/687≈67.76% */
+  .s12-m-book { position: absolute; left: 43.52%; top: 67.76%; z-index: 2; display: flex; flex-direction: column; text-decoration: none; }
   .s12-m-book-label { font-family: var(--font-body); font-size: 3.2vw; font-weight: 400; color: #fff5ef; opacity: 0.5; line-height: normal; }
-  .s12-m-book-title { font-family: var(--font-heading); font-size: 5.3333vw; font-weight: 300; color: #fff5ef; text-transform: uppercase; line-height: 1; }
+  .s12-m-book-title { font-family: var(--font-heading); font-size: 5.333vw; font-weight: 300; color: #fff5ef; text-transform: uppercase; line-height: 1; }
 
-  /* Logo "REALITY DNA" — x:33/375=8.8%, y:465/600=77.5% */
-  .s12-m-logo { position: absolute; left: 8.8%; top: 77.5%; z-index: 2; margin: 0; width: 24.5333vw; font-family: var(--font-body); font-size: 4.2667vw; font-weight: 400; color: #fff5ef; text-align: center; white-space: nowrap; line-height: normal; }
+  /* Logo "REALITY DNA" — Figma 740:582: left=34/375=9.07%, top=553/687=80.49%, w=92/375=24.53% */
+  .s12-m-logo { position: absolute; left: 9.07%; top: 80.49%; z-index: 2; margin: 0; width: 24.533vw; font-family: var(--font-body); font-size: 4.267vw; font-weight: 400; color: #fff5ef; text-align: center; white-space: nowrap; line-height: normal; }
 
-  /* Social icons — x:158.2/375=42.19%, y:455.5/600=75.92%, w:50.6667vw */
-  .s12-m-social { position: absolute; left: 42.19%; top: 75.92%; width: 50.6667vw; z-index: 2; display: flex; align-items: center; justify-content: space-between; }
+  /* Social icons — Figma 740:586: left=33.33%+34.2px=159.2/375≈42.45%, top=543.5/687≈79.11%, w=190/375≈50.67% */
+  .s12-m-social { position: absolute; left: 42.45%; top: 79.11%; width: 50.667vw; z-index: 2; display: flex; align-items: center; justify-content: space-between; }
   .s12-m-social a { display: flex; align-items: center; justify-content: center; }
-  .s12-m-social img { width: 10.6667vw !important; height: 10.6667vw !important; display: block; }
+  .s12-m-social img { width: 10.667vw !important; height: 10.667vw !important; display: block; }
 
-  /* Legal links — x:30/375=8%, y:515.5/600=85.92%, gap:6.6667vw */
-  /* Footer Links — Figma 1:830 (UA) / 1:1157 (EN). Container 315×14 at
-     (30.2, 516.5). The second link ("Privacy Policy" / "Політика конф...")
-     is anchored to x=136 in BOTH locales — only its visual gap to the
-     first link changes (4.2667vw in UA where "Публічна пропозиція" is wider,
-     18.9333vw in EN where "Public Offer" is short). flex+gap couldn't express
-     this so the first link sits at left:0 and the second at left:43.17%
-     (136/315) absolutely. */
-  /* Flex layout вместо абсолютных позиций — auto-fit для разных языков
-     (UA "Політика конфіденційності" длиннее RU и не помещалась). */
+  /* Legal links — Figma 740:579: center at (50%, top:603.5/687) translateX(-50%), w=315/375=84%, gap=25/375=6.667vw */
   .s12-m-legal {
-    position: absolute; left: 8%; top: 86.08%; width: 84%; z-index: 2;
-    display: flex; flex-wrap: wrap; gap: 4vw 6vw; align-items: baseline;
+    position: absolute; left: 50%; top: 87.85%; width: 84%; z-index: 2;
+    transform: translateX(-50%);
+    display: flex; flex-wrap: nowrap; gap: 6.667vw; align-items: center;
   }
-  .s12-m-legal-link { position: static; }
-  .s12-m-legal-link { font-family: var(--font-body); font-size: 3.2vw; font-weight: 400; color: #fff5ef; opacity: 0.5; text-decoration: none; }
+  .s12-m-legal-link { position: static; white-space: nowrap; font-family: var(--font-body); font-size: 3.2vw; font-weight: 400; color: #fff5ef; opacity: 0.5; text-decoration: none; }
 
-  /* Copyright — bottom:9.12% centred */
-  .s12-m-copy { position: absolute; bottom: 3.33%; left: 50%; transform: translateX(-50%); z-index: 2; margin: 0; font-family: var(--font-body); font-size: 3.2vw; font-weight: 400; color: #fff5ef; white-space: nowrap; line-height: normal; }
+  /* Copyright "© 2026" — Figma 740:590: centred ≈ bottom-3% */
+  .s12-m-copy { position: absolute; bottom: 3%; left: 50%; transform: translateX(-50%); z-index: 2; margin: 0; font-family: var(--font-body); font-size: 3.2vw; font-weight: 400; color: #fff5ef; white-space: nowrap; line-height: normal; }
 
   /* === AUTH MODAL === */
   .auth-modal {
@@ -8430,69 +8434,57 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
 .acad-ri-desc-1 p,
 .acad-ri-desc-2 p { margin: 0; }
 
-/* ── Mobile RI — Figma 686:1277 (375×479) ──────────────────────────────
-   Затемнённый фон с книгами/колпаком, текст поверх — full-width,
-   left-aligned. Heading "REALITY / INTELLIGENCE" в 2 строки. */
+/* ── Mobile RI — Figma 764:424 (375×660) ──────────────────────────────
+   Тёмная библиотека + стеклянный колпак с кристаллом справа.
+   Текст слева: label, heading в 2 строки, описание, и отдельный нижний блок. */
 @media (max-width: 768px) {
   .acad-ri {
-    aspect-ratio: 375 / 479;
+    aspect-ratio: 375 / 660;
   }
-  /* Mobile bg: object-position: left center показывает левую часть source
-     (где колпак с кристаллом), затем transform: scaleX(-1) зеркалит img —
-     колпак перемещается на правую часть секции, как в Figma 686:1278. */
+  /* Mobile bg — новый ассет (Figma 764:414), правильно ориентирован, без зеркалирования */
   .acad-ri-bg img {
     object-fit: cover !important;
-    object-position: left center !important;
+    object-position: center !important;
     width: 100% !important;
     height: 100% !important;
-    left: 0 !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    transform: scaleX(-1);
+    transform: none;
   }
+  /* Overlay не нужен — новый ассет достаточно тёмный */
+  .acad-ri-overlay { display: none; }
 
-  /* Затемнение поверх bg — rgba(17,5,0,0.7) per Figma */
-  .acad-ri-overlay {
-    display: block;
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: rgba(17, 5, 0, 0.7);
-    pointer-events: none;
-  }
-
-  /* Текстовый блок — Figma 686:1279: left=30, top=60, w=315 */
+  /* Top text block — Figma 764:415: left=30 (центр по горизонтали), top=88, w=315 */
   .acad-ri-content {
     left: 8vw;                     /* 30/375 */
-    top: 12.526%;                  /* 60/479 */
+    top: 13.333%;                  /* 88/660 */
     width: 84vw;                   /* 315/375 */
-    gap: 5.333vw;                  /* 20/375 — gap между title-block и desc */
+    gap: 5.333vw;                  /* 20/375 — gap между title-block и desc-1 */
   }
   .acad-ri-label {
     font-size: 4.267vw;            /* 16/375 */
-    margin-bottom: 0;
+    margin-bottom: 5.333vw;        /* ~20px — отступ перед заголовком (2 br в Figma) */
   }
-  /* Heading на mobile — 36/Cormorant, line-height 33.6, в 2 строки.
-     Снимаем nowrap (с desktop) — на mobile перенос обязателен. */
+  /* Heading: REALITY / INTELLIGENCE 36px Cormorant, line-height 33.6, 2 строки */
   .acad-ri-title {
     font-size: 9.6vw;              /* 36/375 */
     line-height: 0.933;            /* 33.6/36 */
     margin-top: 0;
     white-space: normal;
   }
-  /* desc-1 и desc-2 в Figma — два разнесённых блока (top=60 и top=302).
-     Воспроизводим увеличенным gap'ом внутри .acad-ri-desc. */
+  /* desc-1 и desc-2 — два разнесённых блока в flex-колонке.
+     В макете desc-1 заканчивается ~310px, desc-2 начинается на 407px → gap ~95px */
   .acad-ri-desc {
-    gap: 13.333vw;                 /* ~50/375 — расстояние между параграфами */
+    gap: 25.333vw;                 /* ~95/375 — расстояние между блоками */
   }
   .acad-ri-desc-1 {
     font-size: 4.267vw;            /* 16/375 */
-    opacity: 0.8;                  /* Figma: opacity 80% на первом параграфе */
+    opacity: 0.8;                  /* Figma: opacity 80% */
+    white-space: pre-line;         /* respect \n чтобы текст не наезжал на колпак */
   }
+  .acad-ri-desc-1 p { white-space: pre-line; }
   .acad-ri-desc-2 {
-    font-size: 4.267vw;            /* 16/375 — на mobile тот же размер */
-    font-weight: 400;              /* Figma mobile: Regular, не Medium */
+    width: 52vw;                   /* 195/375 — desc-2 уже, чем desc-1 */
+    font-size: 4.267vw;            /* 16/375 */
+    font-weight: 400;              /* Raleway Regular */
   }
 }
 
@@ -9168,34 +9160,39 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   .acad-condition-tagline { font-size: min(3.5vw, 30px); line-height: 1.05; }
 }
 
-/* ── Mobile portrait (≤768px) ─────────────────────────────────────────── */
+/* ── Mobile portrait (≤768px) — Figma 740:529 (375×755) ─────────────── */
 @media (max-width: 768px) {
   .acad-condition {
-    aspect-ratio: 375 / 600;       /* секция выше в портрете для уместить контент */
+    aspect-ratio: 375 / 755;       /* per Figma mobile macet */
   }
   .acad-condition-content {
     width: 84vw;                   /* 315/375 */
-    gap: 6.4vw;                    /* 24/375 */
+    gap: 5.333vw;                  /* 20/375 */
   }
   .acad-condition-title {
-    font-size: 9.6vw;              /* 36/375 */
+    font-size: 7.467vw;            /* 28/375 — Cormorant Medium */
+    font-weight: 500;
     line-height: 1;
   }
   .acad-condition-desc {
     width: 84vw;
-    gap: 4vw;                      /* 15/375 */
+    gap: 2.667vw;                  /* 10/375 */
   }
   .acad-condition-desc-1 {
-    font-size: 4.267vw;            /* 16/375 */
+    font-size: 4.267vw;            /* 16/375 — Raleway Regular */
+    font-weight: 400;
     line-height: 1.35;
+    white-space: normal;           /* mobile: естественный wrap, без \n из перевода */
   }
   .acad-condition-desc-2 {
-    font-size: 3.733vw;            /* 14/375 */
+    font-size: 3.2vw;              /* 12/375 — Raleway Regular */
+    font-weight: 400;
     line-height: 1.35;
     width: 84vw;
   }
   .acad-condition-tagline {
-    font-size: 6.4vw;              /* 24/375 */
+    font-size: 5.333vw;            /* 20/375 — Cormorant Light */
+    font-weight: 300;
     line-height: 1.05;
   }
 }
@@ -9288,10 +9285,15 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   display: flex;
   flex-direction: column;
   gap: 0;
+  white-space: pre-line;          /* respect \n in left-col single <p> */
 }
 .acad-step1-text p { margin: 0; }
 
+.acad-step1-line-prefix {
+  display: block; /* desktop: «Ближайший старт:» на отдельной строке */
+}
 .acad-step1-date {
+  display: block; /* desktop: «Сентябрь 2026» на отдельной 3-й строке */
   font-family: var(--font-heading);
   font-size: min(1.667vw, 24px);
   font-weight: 300;
@@ -9338,40 +9340,53 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
 
 @media (max-width: 768px) {
   .acad-step1 {
-    aspect-ratio: 375 / 760;
+    aspect-ratio: 375 / 755;             /* Figma 740:537 mobile */
+  }
+  /* Mobile bg занимает только нижние ~65% секции (как в макете), верх — чёрный */
+  .acad-step1-bg.mobile-only {
+    inset: auto 0 0 0;
+    height: 64.9%;                       /* 490/755 */
   }
   .acad-step1-title {
-    top: 10.526%;
-    font-size: 9.6vw;
+    top: 9.4%;                           /* 71/755 */
+    font-size: 9.6vw;                    /* 36/375 */
     line-height: 1;
+    text-transform: none;                /* per Figma mobile macet — без uppercase */
   }
   .acad-step1-cols {
-    left: 8vw;
+    left: 8vw;                           /* 30/375 */
     right: 8vw;
-    top: 22%;
+    top: 19.2%;                          /* 145/755 — subtitle "Вход в метод" */
     flex-direction: column;
-    gap: 10.667vw;
+    gap: 13.333vw;                       /* ~50px между блоками */
   }
   .acad-step1-col--left,
   .acad-step1-col--right {
     width: 100%;
-    gap: 5.333vw;
+    gap: 5.333vw;                        /* 20/375 */
   }
   .acad-step1-subtitle {
-    font-size: 7.467vw;
+    font-size: 7.467vw;                  /* 28/375 — Cormorant Medium */
+    font-weight: 500;
     line-height: 1;
   }
   .acad-step1-text {
-    font-size: 4.267vw;
+    font-size: 4.267vw;                  /* 16/375 — Raleway */
     line-height: 1.4;
   }
+  /* На мобиле «Ближайший старт: Сентябрь 2026» — одной строкой (per Figma) */
+  .acad-step1-line-prefix,
   .acad-step1-date {
-    font-size: 5.333vw;
+    display: inline;
+  }
+  .acad-step1-date {
+    font-size: 6.4vw;                    /* 24/375 — Cormorant Light */
+    line-height: 1.4;
   }
   .acad-step1-btn {
-    padding: 3.733vw 5.333vw;
+    padding: 3.733vw 5.333vw;            /* 14/20 → vw */
     font-size: 4.267vw;
-    border-radius: 2.667vw;
+    border-radius: 2.667vw;              /* 10/375 */
   }
 }
 
