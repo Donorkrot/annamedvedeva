@@ -3256,12 +3256,12 @@ img.desktop-only { display: block !important; }
 #s12.s12-figma .s12-currency-block {
   position: absolute;
   z-index: 2;
-  top: 47.47%;             /* center y = 235/495 */
+  top: 50.10%;             /* center y = 247.5/495 — Figma 740:511 */
   /* Left-anchored at the same x as the legal block below so the right
      column (currency title, body, оферта/privacy) shares a single left
      edge across RU/UA/EN — centering by translateX shifted the block
      with text width and visibly misaligned UA/EN. */
-  left: 62.15%;            /* 895/1440 — matches .s12-legal */
+  left: 62.78%;            /* 904/1440 — matches .s12-legal */
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
@@ -3290,8 +3290,8 @@ img.desktop-only { display: block !important; }
 #s12.s12-figma .s12-book {
   position: absolute;
   z-index: 2;
-  left: 10.69%;            /* 154/1440 */
-  top: 46.26%;             /* 229/495 */
+  left: 10.76%;            /* 155/1440 — Figma 740:521 */
+  top: 53.74%;             /* 266/495 */
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -3324,8 +3324,8 @@ img.desktop-only { display: block !important; }
 #s12.s12-figma .s12-social {
   position: absolute;
   z-index: 2;
-  left: 61.74%;            /* 889/1440 */
-  top: 63.64%;             /* 315/495 */
+  left: 10.76%;            /* 155/1440 — Figma 740:517 */
+  top: 80.81%;             /* 400/495 */
   display: flex;
   gap: 44px;
   align-items: center;
@@ -3342,7 +3342,7 @@ img.desktop-only { display: block !important; }
 #s12.s12-figma .s12-legal {
   position: absolute;
   z-index: 2;
-  left: 62.15%;            /* 895/1440 */
+  left: 62.78%;            /* 904/1440 — Figma 740:524 */
   top: 85.66%;             /* 424/495 */
   width: 21.94%;           /* 316/1440 */
   display: flex;
@@ -3369,8 +3369,9 @@ img.desktop-only { display: block !important; }
 #s12.s12-figma .s12-logo {
   position: absolute;
   z-index: 2;
-  left: 44.10%;            /* 635/1440 */
-  top: 85.66%;             /* 424/495 */
+  left: 49.97%;            /* 719.5/1440 — centered, Figma 740:528 */
+  top: 85.86%;             /* 425/495 */
+  transform: translateX(-50%);
   margin: 0;
   font-family: var(--font-body);
   font-weight: 400;
