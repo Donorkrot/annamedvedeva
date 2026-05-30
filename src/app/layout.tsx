@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Raleway } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import Header from "@/components/Header";
+import { SITE, absUrl } from "@/lib/seo";
 
 // Weight lists were grepped against globals.css — drop unused weights so the
 // browser doesn't pull woff2 files it never renders. Audit:
@@ -23,13 +24,87 @@ const raleway = Raleway({
   display: "swap",
 });
 
+// metadataBase нужен Next.js для резолва относительных URL в OG/canonical.
+// Без него Next выводит warning при сборке. Используем production-домен.
 export const metadata: Metadata = {
-  title: "Reality DNA | Анна Медведева — Новый Интеллект Реальности",
-  description:
-    "Академия Управления Состоянием. Стабильность и управление реальностью в эпоху AI.",
-  icons: {
-    icon: "/images/icons/logo-1.png",
+  metadataBase: new URL(SITE.url),
+  // Title-шаблон: на main используется default; per-page title подставляется
+  // через `title.template` (см. per-route layout.tsx).
+  title: {
+    default: SITE.baseTitle,
+    template: `%s | ${SITE.brand}`,
   },
+  description: SITE.description,
+  keywords: [...SITE.keywords],
+  authors: [{ name: SITE.authorName, url: SITE.url }],
+  creator: SITE.authorName,
+  publisher: SITE.brand,
+  category: 'health',
+
+  // Canonical для главной (per-route layouts перебивают)
+  alternates: {
+    canonical: SITE.url,
+  },
+
+  // Open Graph — для Facebook, LinkedIn, Telegram превью
+  openGraph: {
+    type: 'website',
+    locale: SITE.locale,
+    alternateLocale: [...SITE.alternateLocales],
+    url: SITE.url,
+    siteName: SITE.brand,
+    title: SITE.baseTitle,
+    description: SITE.description,
+    images: [
+      {
+        url: absUrl(SITE.ogImage),
+        width: 1200,
+        height: 630,
+        alt: `${SITE.brand} — ${SITE.authorName}`,
+      },
+    ],
+  },
+
+  // Twitter Cards — для X / Telegram preview
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE.baseTitle,
+    description: SITE.description,
+    images: [absUrl(SITE.ogImage)],
+    creator: '@medvedieva_anna',
+  },
+
+  // robots — разрешаем индексацию всего сайта
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+
+  // Иконки и favicon
+  icons: {
+    icon: [
+      { url: '/images/icons/logo-1.png', type: 'image/png' },
+    ],
+    apple: '/images/icons/logo-1.png',
+  },
+
+  // formatDetection — отключаем авто-парсинг телефонов в iOS Safari
+  // (мы сами форматируем номера и оборачиваем в tel: ссылки где нужно)
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
+
+  // verification — добавлять когда подтвердим сайт в Google/Yandex Search Console
+  // verification: { google: '...', yandex: '...' },
 };
 
 export const viewport: Viewport = {
@@ -41,6 +116,11 @@ export const viewport: Viewport = {
   // focus is prevented by setting all input font-size to 16px, not by
   // capping max scale.
   viewportFit: "cover",
+  // Цвет адресной строки на мобильных браузерах (соответствует hero bg)
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#332000" },
+    { media: "(prefers-color-scheme: dark)", color: "#1a0d05" },
+  ],
 };
 
 export default function RootLayout({

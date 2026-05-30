@@ -545,7 +545,7 @@ export default function AcademyPage() {
           <div className="acad-step1-col acad-step1-col--left">
             <h3 className="acad-step1-subtitle">{tr('academy_step1_left_title')}</h3>
             <p className="acad-step1-text">{tr('academy_step1_left_text')}</p>
-            <a href="#step1-details" className="acad-step1-btn">
+            <a href="/first-stage" className="acad-step1-btn">
               <span>{tr('academy_step1_left_btn')}</span>
             </a>
           </div>

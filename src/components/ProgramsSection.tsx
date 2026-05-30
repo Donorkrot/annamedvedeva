@@ -1,8 +1,10 @@
 'use client';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useTranslation } from '@/components/LanguageProvider';
 
 const CTA_HREF = 'https://t.me/medvedieva_anna';
+const ACADEMY_HREF = '/academy';
 
 export default function ProgramsSection() {
   const { tr } = useTranslation();
@@ -29,7 +31,7 @@ export default function ProgramsSection() {
           <h3 className="s11-card__title">{tr('s11_c2_title')}</h3>
           <p className="s11-card__body">{tr('s11_c2_body')}</p>
           <p className="s11-card__sub">{tr('s11_c2_sub')}</p>
-          <a href={CTA_HREF} target="_blank" rel="noopener noreferrer" className="s11-btn"><span>{tr('s11_btn')}</span></a>
+          <Link href={ACADEMY_HREF} className="s11-btn"><span>{tr('s11_btn')}</span></Link>
         </article>
 
         <article className="s11-card s11-card--gold">
@@ -73,14 +75,14 @@ export default function ProgramsSection() {
             </a>
           </div>
 
-          {/* Card 2 — yellow gradient (node 1:454) */}
+          {/* Card 2 — yellow gradient (node 1:454) — internal link to /academy */}
           <div className="s11-m-card s11-m-card--2">
             <p className="s11-m-card-title">{tr('s11_c2_title')}</p>
             <p className="s11-m-card-body">{tr('s11_c2_body')}</p>
             <p className="s11-m-card-sub">{tr('s11_c2_sub')}</p>
-            <a href={CTA_HREF} target="_blank" rel="noopener noreferrer" className="s11-m-btn">
+            <Link href={ACADEMY_HREF} className="s11-m-btn">
               <span>{tr('s11_btn')}</span>
-            </a>
+            </Link>
           </div>
 
           {/* Card 3 — gold gradient (node 1:461) */}

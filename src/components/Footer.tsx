@@ -1,19 +1,32 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/components/LanguageProvider';
 
 const BOOK_HREF = 'https://drive.google.com/drive/folders/1V5KF6JG-TGjbRFOk_Y0n7wxdmd0SG49V';
 
+/**
+ * Подвал. На страницах академии (/academy, /first-stage) используется
+ * академический фон (золотой ключ + молнии), на остальных — оригинал (трещина).
+ */
 export default function Footer() {
   const { tr } = useTranslation();
+  const pathname = usePathname() || '';
+  const isAcademy = pathname.startsWith('/academy') || pathname.startsWith('/first-stage');
+  const bgDesktop = isAcademy
+    ? '/images/backgrounds/bg-s12-academy-desktop.jpg'
+    : '/images/backgrounds/bg-s12-desktop.jpg';
+  const bgMobile = isAcademy
+    ? '/images/backgrounds/bg-s12-academy-mobile.jpg'
+    : '/images/backgrounds/bg-s12-mobile.jpg';
 
   return (
     <footer id="s12" className="s12-footer s12-figma">
 
       {/* ── Desktop ── */}
       <div className="s12-bg desktop-only">
-        <Image src="/images/backgrounds/bg-s12-desktop.jpg" alt="" fill sizes="100vw" />
+        <Image src={bgDesktop} alt="" fill sizes="100vw" />
       </div>
 
       <div className="s12-headline-block desktop-only">
@@ -61,7 +74,7 @@ export default function Footer() {
         <div className="s12-m-bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img loading="lazy" decoding="async"
-            src="/images/backgrounds/bg-s12-mobile.jpg"
+            src={bgMobile}
             alt=""
             className="s12-m-bg-img"
             draggable={false}

@@ -8400,8 +8400,9 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   font-weight: 400;
   line-height: normal;
   color: #fff5ef;
-  /* Figma имеет mb=-4px чтобы прижать к heading; даём небольшой отрицательный gap */
-  margin-bottom: -0.278vw;
+  /* Visible gap to REALITY INTELLIGENCE — в Figma mb:-4 при h:51px глифы перекрывают
+     контейнер; в CSS с line-height:1 этого нет, поэтому даём явный положительный отступ */
+  margin-bottom: 0.833vw;        /* ~12px gap */
 }
 .acad-ri-title {
   margin: 0;
@@ -8441,13 +8442,16 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   .acad-ri {
     aspect-ratio: 375 / 660;
   }
-  /* Mobile bg — новый ассет (Figma 764:414), правильно ориентирован, без зеркалирования */
+  /* Mobile bg — новый ассет (Figma 764:414). В Figma картинка отрисована при
+     107.46% ширины с привязкой к top:0 (node 764:414 img-rect). Это сдвигает
+     стеклянный колпак ниже, чтобы он не накрывал последнюю строку desc-1. */
   .acad-ri-bg img {
     object-fit: cover !important;
-    object-position: center !important;
+    object-position: center top !important;
     width: 100% !important;
     height: 100% !important;
-    transform: none;
+    transform: scale(1.075);
+    transform-origin: center top;
   }
   /* Overlay не нужен — новый ассет достаточно тёмный */
   .acad-ri-overlay { display: none; }
@@ -9150,14 +9154,78 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   width: 100%;
 }
 
-/* ── Tablet (769-1024px) — same proportions, content slightly wider */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .acad-condition-content { width: min(55vw, 480px); }
-  .acad-condition-title { font-size: min(5vw, 44px); }
-  .acad-condition-desc { width: min(50vw, 440px); gap: 2.5vw; }
-  .acad-condition-desc-1 { font-size: min(2.2vw, 18px); }
-  .acad-condition-desc-2 { font-size: min(1.95vw, 16px); width: 100%; }
-  .acad-condition-tagline { font-size: min(3.5vw, 30px); line-height: 1.05; }
+/* ── Tablet portrait (769-1024px, portrait) — повторяет desktop 759:412:
+       узкая центральная колонка, типографика близка к 52/18/16/36 ─────── */
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
+  .acad-condition {
+    aspect-ratio: 1024 / 700;
+  }
+  .acad-condition-content {
+    width: min(60vw, 480px);
+    gap: min(4vw, 40px);              /* desktop 40px */
+  }
+  .acad-condition-title {
+    font-size: min(6vw, 52px);        /* desktop 52px */
+    line-height: 1;
+  }
+  .acad-condition-desc {
+    width: min(55vw, 440px);
+    gap: min(2vw, 20px);              /* desktop 20px */
+  }
+  .acad-condition-desc-1 {
+    font-size: min(2.2vw, 18px);
+    font-weight: 500;
+    line-height: 1.3;
+    white-space: pre-line;
+  }
+  .acad-condition-desc-2 {
+    font-size: min(2vw, 16px);
+    font-weight: 400;
+    line-height: 1.3;
+    width: min(40vw, 325px);
+  }
+  .acad-condition-tagline {
+    font-size: min(4vw, 36px);        /* desktop 36px */
+    font-weight: 600;
+    line-height: 1;
+  }
+}
+
+/* ── Tablet landscape (901-1366px, landscape) — фактически как desktop,
+       чуть меньшая колонка по ширине, типографика 1:1 с десктопным макетом */
+@media (min-width: 901px) and (max-width: 1366px) and (orientation: landscape) {
+  .acad-condition {
+    aspect-ratio: 1366 / 700;
+  }
+  .acad-condition-content {
+    width: min(40vw, 480px);
+    gap: min(3vw, 40px);
+  }
+  .acad-condition-title {
+    font-size: min(4.5vw, 52px);
+    line-height: 1;
+  }
+  .acad-condition-desc {
+    width: min(36vw, 440px);
+    gap: min(1.5vw, 20px);
+  }
+  .acad-condition-desc-1 {
+    font-size: min(1.7vw, 18px);
+    font-weight: 500;
+    line-height: 1.3;
+    white-space: pre-line;
+  }
+  .acad-condition-desc-2 {
+    font-size: min(1.5vw, 16px);
+    font-weight: 400;
+    line-height: 1.3;
+    width: min(26vw, 325px);
+  }
+  .acad-condition-tagline {
+    font-size: min(3vw, 36px);
+    font-weight: 600;
+    line-height: 1;
+  }
 }
 
 /* ── Mobile portrait (≤768px) — Figma 740:529 (375×755) ─────────────── */
@@ -9197,21 +9265,42 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   }
 }
 
-/* ── Mobile landscape (≤768 height, wide) — компактнее, чтобы влезло
-       в маленькой landscape-высоте */
+/* ── Mobile landscape (≤900px, wide) — повторяем десктопный layout
+       (Figma 759:412): текст-блок узкой колонкой по центру, типографика
+       в тех же пропорциях, что и на 1440×700, но в vh-единицах */
 @media (max-width: 900px) and (orientation: landscape) {
   .acad-condition {
     aspect-ratio: 900 / 500;
   }
   .acad-condition-content {
-    width: min(70vw, 480px);
-    gap: 2.5vh;
+    width: min(60vw, 480px);          /* ~33% как на десктопе, но не уже 60vw */
+    gap: min(5.5vh, 40px);            /* desktop gap=40px */
   }
-  .acad-condition-title { font-size: min(5vh, 40px); }
-  .acad-condition-desc { gap: 1.5vh; }
-  .acad-condition-desc-1 { font-size: min(2.2vh, 16px); }
-  .acad-condition-desc-2 { font-size: min(2vh, 14px); }
-  .acad-condition-tagline { font-size: min(3.5vh, 28px); line-height: 1.05; }
+  .acad-condition-title {
+    font-size: min(7vh, 52px);        /* desktop 52px */
+    line-height: 1;
+  }
+  .acad-condition-desc {
+    width: min(55vw, 440px);          /* desktop 440px */
+    gap: min(2.8vh, 20px);            /* desktop 20px */
+  }
+  .acad-condition-desc-1 {
+    font-size: min(2.6vh, 18px);      /* desktop 18px Raleway Medium */
+    font-weight: 500;
+    line-height: 1.3;
+    white-space: pre-line;
+  }
+  .acad-condition-desc-2 {
+    font-size: min(2.2vh, 16px);      /* desktop 16px Raleway Regular */
+    font-weight: 400;
+    line-height: 1.3;
+    width: min(40vw, 325px);          /* desktop 325px — уже, чем desc-1 */
+  }
+  .acad-condition-tagline {
+    font-size: min(5vh, 36px);        /* desktop 36px Cormorant SemiBold */
+    font-weight: 600;
+    line-height: 1;
+  }
 }
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -9306,7 +9395,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   justify-content: center;
   padding: 14px 20px;
   background: rgba(0, 0, 0, 0.2);
-  border: 1px solid #fff5ef;
+  border: 1px solid #ffc800;
   border-radius: 10px;
   text-decoration: none;
   font-family: var(--font-body);
@@ -9318,24 +9407,72 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   cursor: pointer;
 }
 .acad-step1-btn:hover {
-  background: rgba(255, 245, 239, 0.12);
+  background: rgba(255, 200, 0, 0.12);
   transform: translateY(-1px);
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
-  .acad-step1-title { font-size: min(5vw, 44px); }
+/* ── Tablet portrait (769-1024px) — повторяет desktop 740:557, но
+       типографика и зазоры уменьшены, чтобы content-блок не «уезжал»
+       на резной свод bg-картинки в нижней половине секции ─────────── */
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
+  .acad-step1-title {
+    top: 11%;
+    font-size: min(4.5vw, 40px);
+  }
   .acad-step1-cols {
     left: 8%;
     right: 8%;
-    gap: 5vw;
-    top: 30%;
+    top: 26%;
+    gap: 4vw;
+    align-items: flex-start;
   }
   .acad-step1-col--left,
-  .acad-step1-col--right { width: 45%; }
-  .acad-step1-subtitle { font-size: min(3.5vw, 30px); line-height: 1.05; }
-  .acad-step1-text { font-size: min(2.2vw, 17px); }
-  .acad-step1-date { font-size: min(2.6vw, 22px); }
-  .acad-step1-btn { font-size: min(2vw, 15px); padding: 12px 18px; }
+  .acad-step1-col--right {
+    width: 46%;
+    gap: min(1.8vw, 18px);            /* было 40 → 18, всё стянуто плотнее */
+    align-items: stretch;
+    text-align: center;
+  }
+  .acad-step1-subtitle { font-size: min(3vw, 26px); line-height: 1; }
+  .acad-step1-text { font-size: min(1.7vw, 14px); line-height: 1.35; }
+  .acad-step1-date { font-size: min(2.2vw, 18px); line-height: 1.2; }
+  .acad-step1-btn {
+    width: 100%;
+    font-size: min(1.6vw, 14px);
+    padding: 10px 16px;
+  }
+}
+
+/* ── Tablet landscape (901-1366px) — десктопный layout, но размеры
+       уменьшены и зазоры сжаты, чтобы кнопки оставались над резной
+       аркой bg-картинки (per Figma 740:557 визуально) ─────────────── */
+@media (min-width: 901px) and (max-width: 1366px) and (orientation: landscape) {
+  .acad-step1-title {
+    top: 12%;
+    font-size: min(3.8vw, 44px);
+  }
+  .acad-step1-cols {
+    left: 14%;
+    right: 14%;
+    top: 28%;
+    gap: min(8vw, 110px);
+    align-items: flex-start;
+  }
+  .acad-step1-col--left,
+  .acad-step1-col--right {
+    width: 50%;
+    gap: min(1.5vw, 18px);            /* плотный вертикальный gap */
+    align-items: stretch;
+    text-align: center;
+  }
+  .acad-step1-subtitle { font-size: min(2.4vw, 28px); line-height: 1; }
+  .acad-step1-text { font-size: min(1.3vw, 14px); line-height: 1.35; }
+  .acad-step1-date { font-size: min(1.7vw, 20px); line-height: 1.2; }
+  .acad-step1-btn {
+    width: 100%;
+    font-size: min(1.2vw, 14px);
+    padding: 10px 16px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -9364,6 +9501,8 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   .acad-step1-col--right {
     width: 100%;
     gap: 5.333vw;                        /* 20/375 */
+    align-items: center;
+    text-align: center;
   }
   .acad-step1-subtitle {
     font-size: 7.467vw;                  /* 28/375 — Cormorant Medium */
@@ -9398,17 +9537,1002 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     top: 8%;
     font-size: min(5vh, 36px);
   }
+  /* Повторяем десктопный layout (Figma 740:557): subtitle → text → button,
+     button — на всю ширину колонки. align-items: stretch выравнивает колонки
+     по высоте, а margin-top: auto на кнопке прижимает её к низу — обе кнопки
+     оказываются на одной горизонтальной линии. */
   .acad-step1-cols {
     flex-direction: row;
+    align-items: stretch;
     top: 32%;
     left: 8%;
     right: 8%;
     gap: 4vw;
   }
   .acad-step1-col--left,
-  .acad-step1-col--right { width: 48%; gap: 1.5vh; }
+  .acad-step1-col--right {
+    width: 48%;
+    gap: 2.2vh;
+    align-items: stretch;
+    text-align: center;
+  }
   .acad-step1-subtitle { font-size: min(3.2vh, 24px); line-height: 1.05; }
   .acad-step1-text { font-size: min(2.2vh, 14px); }
   .acad-step1-date { font-size: min(2.6vh, 18px); }
-  .acad-step1-btn { font-size: min(2vh, 13px); padding: 8px 14px; }
+  .acad-step1-btn {
+    width: 100%;
+    margin-top: auto;
+    font-size: min(2vh, 13px);
+    padding: 8px 14px;
+    white-space: nowrap;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   /first-stage — Hero — Figma 772:448 (1672×941)
+   HTML текст поверх запечённого в bg-изображении — для копируемости.
+   ════════════════════════════════════════════════════════════════════════ */
+.first-stage { background: #000; }
+
+.first-hero {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1672 / 850;
+  overflow: hidden;
+  background: #050505;
+}
+.first-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.first-hero-bg img { object-fit: cover; }
+
+/* Точечное затемнение под текстом — мягкое радиальное «пятно» для читаемости */
+.first-hero::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 8%;
+  transform: translateX(-50%);
+  width: min(60vw, 1000px);
+  height: 38%;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.45) 45%,
+    rgba(0, 0, 0, 0) 80%
+  );
+}
+
+/* Top brand badge — "─ REALITY DNA ─" centred */
+.first-hero-brand {
+  position: absolute;
+  left: 50%;
+  top: 4.5%;                          /* ~42/941 */
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: min(0.6vw, 10px);
+  color: #fff5ef;
+  font-family: var(--font-body);
+  font-size: min(0.84vw, 14px);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  white-space: nowrap;
+}
+.first-hero-brand-line {
+  width: min(2vw, 34px);
+  height: 1px;
+  background: rgba(255, 245, 239, 0.5);
+}
+.first-hero-brand-text {
+  font-family: var(--font-body);
+}
+
+/* Bottom content block — title + subtitle row + description */
+.first-hero-content {
+  position: absolute;
+  left: 50%;
+  bottom: 13%;                        /* ~123/941 от низа */
+  transform: translateX(-50%);
+  z-index: 2;
+  width: min(74vw, 1240px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: min(1.4vw, 24px);
+  color: #fff5ef;
+  text-align: center;
+}
+.first-hero-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: min(4.7vw, 78px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff5ef;
+  white-space: nowrap;
+}
+
+/* Subtitle row — линия + ◆ + ВХОД В МЕТОД + ◆ + линия */
+.first-hero-subtitle-row {
+  display: flex;
+  align-items: center;
+  gap: min(0.9vw, 15px);
+  color: #d6a44b;                     /* золотистый */
+  font-family: var(--font-heading);
+  font-size: min(1.4vw, 24px);
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+/* "ВХОД В МЕТОД" — кликабельная кнопка с hover + пульсирующая подсветка */
+.first-hero-subtitle-btn {
+  text-decoration: none;
+  cursor: pointer;
+  padding: min(0.7vw, 12px) min(1.4vw, 24px);
+  border-radius: 999px;
+  /* reset button defaults */
+  background: transparent;
+  border: none;
+  font: inherit;
+  transition: color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+  /* Пульсация каждые 3 сек — притягивает внимание */
+  animation: firstHeroSubtitlePulse 3s ease-in-out infinite;
+}
+@keyframes firstHeroSubtitlePulse {
+  0%, 100% {
+    background: transparent;
+    box-shadow: 0 0 0 0 rgba(214, 164, 75, 0);
+    transform: scale(1);
+  }
+  20% {
+    background: rgba(214, 164, 75, 0.05);
+    box-shadow: 0 0 10px 2px rgba(214, 164, 75, 0.1);
+    transform: scale(1.005);
+  }
+  50% {
+    background: rgba(214, 164, 75, 0.16);
+    box-shadow: 0 0 32px 10px rgba(214, 164, 75, 0.3);
+    transform: scale(1.02);
+  }
+  80% {
+    background: rgba(214, 164, 75, 0.05);
+    box-shadow: 0 0 10px 2px rgba(214, 164, 75, 0.1);
+    transform: scale(1.005);
+  }
+}
+.first-hero-subtitle-btn:hover {
+  color: #f5c977;
+  background: rgba(214, 164, 75, 0.08);
+  transform: translateY(-1px);
+  /* На hover приостанавливаем пульсацию */
+  animation-play-state: paused;
+}
+.first-hero-subtitle-btn:hover .first-hero-divider-line,
+.first-hero-subtitle-btn:hover .first-hero-divider-diamond {
+  background: #f5c977;
+}
+.first-hero-divider-line {
+  width: min(8vw, 134px);
+  height: 1px;
+  background: #d6a44b;
+}
+.first-hero-divider-diamond {
+  width: min(0.65vw, 11px);
+  height: min(0.65vw, 11px);
+  background: #d6a44b;
+  transform: rotate(45deg);
+}
+.first-hero-subtitle {
+  white-space: nowrap;
+}
+
+.first-hero-desc {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: min(0.35vw, 6px);
+  font-family: var(--font-body);
+  font-size: min(1.13vw, 19px);
+  font-weight: 400;
+  line-height: 1.35;
+  color: #fff5ef;
+}
+.first-hero-desc span { display: block; }
+
+/* ── Tablet ────────────────────────────────────────────────────── */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .first-hero-title { font-size: min(5.5vw, 56px); }
+  .first-hero-subtitle-row { font-size: min(1.8vw, 18px); gap: min(1.2vw, 12px); }
+  .first-hero-divider-line { width: min(7vw, 88px); }
+  .first-hero-desc { font-size: min(1.5vw, 16px); }
+}
+
+/* ── Mobile — Figma 774:616 (941×1672, portrait) ────────────────── */
+@media (max-width: 768px) {
+  .first-hero {
+    aspect-ratio: 941 / 1672;          /* ~375 × 666, портрет */
+  }
+  /* Точечное затемнение под текстом — адаптируем под портретный фрейм */
+  .first-hero::after {
+    width: 92vw;
+    height: 32%;
+    bottom: 6%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0.75) 0%,
+      rgba(0, 0, 0, 0.5) 45%,
+      rgba(0, 0, 0, 0) 80%
+    );
+  }
+  .first-hero-content {
+    bottom: 10%;
+    width: 92vw;
+    gap: 4vw;
+  }
+  .first-hero-title {
+    font-size: 8.53vw;                 /* 32/375 */
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+  .first-hero-subtitle-row {
+    font-size: 3.2vw;                  /* 12/375 */
+    gap: 2.4vw;
+    letter-spacing: 0.25em;
+  }
+  .first-hero-divider-line { width: 13.33vw; }
+  .first-hero-divider-diamond { width: 1.87vw; height: 1.87vw; }
+  .first-hero-desc {
+    font-size: 3.47vw;                 /* 13/375 */
+    gap: 1.07vw;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   Lead Form Modal — модалка обратной связи (имя + телефон)
+   ════════════════════════════════════════════════════════════════════════ */
+.lead-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: leadFadeIn 0.2s ease;
+}
+@keyframes leadFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lead-modal {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: #111;
+  border: 1px solid rgba(255, 245, 239, 0.15);
+  border-radius: 16px;
+  padding: 36px 28px 28px;
+  color: #fff5ef;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: leadSlideUp 0.25s ease;
+}
+@keyframes leadSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.lead-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  color: #fff5ef;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+.lead-close:hover { opacity: 1; }
+
+.lead-form, .lead-success { display: flex; flex-direction: column; gap: 16px; }
+
+.lead-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: #fff5ef;
+}
+.lead-sub {
+  margin: 0 0 4px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: rgba(255, 245, 239, 0.65);
+  line-height: 1.4;
+}
+
+.lead-field { display: flex; flex-direction: column; gap: 6px; }
+.lead-label {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 245, 239, 0.75);
+}
+.lead-input {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: #fff5ef;
+  background: rgba(255, 245, 239, 0.05);
+  border: 1px solid rgba(255, 245, 239, 0.2);
+  border-radius: 10px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.lead-input:focus {
+  border-color: #d6a44b;
+  background: rgba(255, 245, 239, 0.08);
+}
+.lead-input::placeholder { color: rgba(255, 245, 239, 0.3); }
+
+.lead-submit {
+  margin-top: 8px;
+  background: #d6a44b;
+  color: #111;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 24px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.lead-submit:hover:not(:disabled) {
+  background: #e3b658;
+  transform: translateY(-1px);
+}
+.lead-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.lead-error {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #ff7a6c;
+}
+
+.lead-success-text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: rgba(255, 245, 239, 0.8);
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .lead-modal { padding: 32px 20px 22px; border-radius: 12px; }
+  .lead-title { font-size: 20px; }
+}
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   /first-stage — Section 2 "О чём эта ступень" — Figma 781:628 (1672×850)
+   ════════════════════════════════════════════════════════════════════════ */
+.first-about {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1672 / 850;
+  overflow: hidden;
+  background: #02040a;
+}
+.first-about-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.first-about-bg img { object-fit: cover; }
+
+/* Градиент сверху — чёрный → прозрачный, ~26% высоты секции
+   (Figma 782:634: h:220.736 / 850 ≈ 25.97%) */
+.first-about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 26%;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.first-about-content {
+  position: absolute;
+  left: 12.92%;                    /* 216/1672 */
+  /* Центрируем контент по вертикали — равные отступы сверху и снизу */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 55.02%;                   /* 920/1672 */
+  z-index: 2;
+  color: #fff5ef;
+}
+
+.first-about-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: min(2.153vw, 36px);    /* 36/1672 */
+  font-weight: 600;
+  line-height: 0.933;               /* 33.6/36 */
+  color: #ffc800;
+  white-space: nowrap;
+}
+
+.first-about-desc {
+  margin: min(0.837vw, 14px) 0 0;   /* 264-214-36 = 14px gap (Figma точно) */
+  width: min(26.316vw, 440px);      /* 440/1672 */
+  font-family: var(--font-body);
+  font-size: min(0.957vw, 16px);    /* 16/1672 */
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.first-about-list-title {
+  margin: min(5.144vw, 86px) 0 0;   /* 393-264-43(desc h)=86px gap до "Вы учитесь" */
+  font-family: var(--font-heading);
+  font-size: min(1.675vw, 28px);    /* 28/1672 */
+  font-weight: 500;
+  line-height: 1;
+  color: #fff5ef;
+}
+
+.first-about-cards {
+  margin: min(1.555vw, 26px) 0 0;   /* 54-28 = 26px gap до карточек */
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: min(1.196vw, 20px);          /* 20/1672 */
+  width: 100%;
+}
+.first-about-card {
+  flex: 1 1 calc(50% - min(0.598vw, 10px));
+  min-width: calc(50% - min(0.598vw, 10px));
+  min-height: min(4.665vw, 78px);    /* 78/1672 */
+  padding: min(1.196vw, 20px);
+  background: rgba(255, 200, 0, 0.1);
+  border-radius: min(1.196vw, 20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: min(0.957vw, 16px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: #fff5ef;
+  text-align: left;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+.first-about-card:hover {
+  background: rgba(255, 200, 0, 0.16);
+  transform: translateY(-2px);
+}
+
+/* ── Tablet (769-1100px) ─────────────────────────────────────── */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .first-about-title { font-size: min(3vw, 30px); }
+  .first-about-desc { font-size: min(1.6vw, 15px); width: min(40vw, 400px); }
+  .first-about-list-title { font-size: min(2.5vw, 24px); }
+  .first-about-card { font-size: min(1.5vw, 14px); padding: min(1.6vw, 16px); }
+}
+
+/* ── Mobile ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .first-about {
+    aspect-ratio: 375 / 720;        /* портретная пропорция */
+  }
+  .first-about-content {
+    left: 8vw;                       /* 30/375 */
+    top: 8%;
+    width: 84vw;                     /* 315/375 */
+  }
+  .first-about-title {
+    font-size: 7.467vw;              /* 28/375 */
+    line-height: 1.05;
+    white-space: normal;
+  }
+  .first-about-desc {
+    margin-top: 4.267vw;             /* 16/375 */
+    width: 84vw;
+    font-size: 4vw;                  /* 15/375 */
+  }
+  .first-about-list-title {
+    margin-top: 9.6vw;               /* 36/375 */
+    font-size: 6.4vw;                /* 24/375 */
+  }
+  .first-about-cards {
+    margin-top: 5.333vw;             /* 20/375 */
+    gap: 3.2vw;                      /* 12/375 */
+  }
+  .first-about-card {
+    flex: 1 1 100%;
+    min-width: 100%;
+    min-height: 18.667vw;            /* 70/375 */
+    padding: 4.267vw 4.8vw;          /* 16/18 */
+    border-radius: 4.267vw;          /* 16/375 */
+    font-size: 4vw;
+    text-align: center;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   /first-stage — Section 3 "Как проходит обучение" — Figma 772:504 (1672×850)
+   ════════════════════════════════════════════════════════════════════════ */
+.first-how {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1672 / 850;
+  overflow: hidden;
+  background: #0a0703;
+}
+.first-how-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.first-how-bg img { object-fit: cover; }
+
+/* Затемнение в центре (где текст) — края светлые, середина тёмная.
+   Один градиент с прозрачностью на краях и пиком в середине секции. */
+.first-how::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.55) 35%,
+    rgba(0, 0, 0, 0.75) 50%,
+    rgba(0, 0, 0, 0.55) 65%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.first-how-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: min(70vw, 1170px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: min(1.674vw, 28px);
+  color: #fff5ef;
+  text-align: center;
+}
+
+.first-how-title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: min(0.359vw, 6px);
+  font-family: var(--font-heading);
+  font-size: min(3.11vw, 52px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff5ef;
+  white-space: nowrap;
+}
+.first-how-title span { display: block; }
+
+.first-how-desc {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: min(1.077vw, 18px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: #fff5ef;
+  max-width: min(50vw, 836px);
+}
+
+.first-how-chips {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: min(1.196vw, 20px);
+}
+.first-how-chip {
+  padding: min(0.957vw, 16px) min(2.273vw, 38px);
+  border: 1px solid #ffc800;
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: min(0.957vw, 16px);
+  font-weight: 400;
+  line-height: 1;
+  color: #fff5ef;
+  white-space: nowrap;
+  cursor: default;
+  transition: background 0.25s ease, transform 0.25s ease, color 0.25s ease;
+}
+.first-how-chip:hover {
+  background: rgba(255, 200, 0, 0.1);
+  color: #ffc800;
+  transform: translateY(-1px);
+}
+
+.first-how-footer {
+  margin: min(1.196vw, 20px) 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: min(0.299vw, 5px);
+  font-family: var(--font-body);
+  font-size: min(1.077vw, 18px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: #fff5ef;
+}
+.first-how-footer span { display: block; }
+
+/* ── Tablet (769-1100px) ────────────────────────────────────── */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .first-how-content { width: 88vw; gap: 2.5vw; }
+  .first-how-title { font-size: min(4.5vw, 44px); }
+  .first-how-desc { font-size: min(1.6vw, 15px); }
+  .first-how-chip { font-size: min(1.5vw, 14px); padding: min(1.4vw, 13px) min(2.8vw, 28px); }
+  .first-how-footer { font-size: min(1.6vw, 15px); }
+}
+
+/* ── Mobile ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .first-how {
+    aspect-ratio: 375 / 720;          /* портрет */
+  }
+  .first-how-content {
+    width: 88vw;
+    gap: 5.333vw;
+  }
+  .first-how-title {
+    font-size: 8.533vw;               /* 32/375 */
+    gap: 1.067vw;
+  }
+  .first-how-desc {
+    font-size: 4vw;                   /* 15/375 */
+    max-width: 88vw;
+  }
+  .first-how-chips {
+    gap: 3.2vw;                       /* 12/375 */
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .first-how-chip {
+    width: 100%;
+    text-align: center;
+    padding: 3.733vw 5.333vw;         /* 14×20 */
+    font-size: 4vw;                   /* 15/375 */
+    border-radius: 13.333vw;
+  }
+  .first-how-footer {
+    margin-top: 4vw;
+    font-size: 3.733vw;               /* 14/375 */
+    gap: 1.067vw;
+  }
+}
+
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   /first-stage — Section 4 "Что важно" — Figma 804:678 (1672×850)
+   ════════════════════════════════════════════════════════════════════════ */
+.first-matters {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1672 / 850;
+  overflow: hidden;
+  background: #050307;
+}
+.first-matters-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.first-matters-bg img { object-fit: cover; object-position: center bottom; }
+
+/* "ЧТО ВАЖНО" — top:114, центр по x, 36px Cormorant SemiBold gold */
+.first-matters-title {
+  position: absolute;
+  left: 50%;
+  top: 13.41%;                       /* 114/850 */
+  transform: translateX(-50%);
+  margin: 0;
+  z-index: 2;
+  font-family: var(--font-heading);
+  font-size: min(2.153vw, 36px);
+  font-weight: 600;
+  line-height: 33.6px;
+  text-transform: uppercase;
+  color: #ffc800;                    /* было #fff5ef — теперь золотой per Figma */
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* "Практика начинается уже с первых недель" — top:155, w:331, Raleway 16px */
+.first-matters-desc {
+  position: absolute;
+  left: 50%;
+  top: 18.24%;                       /* 155/850 */
+  transform: translateX(-50%);
+  margin: 0;
+  z-index: 2;
+  width: min(19.8vw, 331px);         /* 331/1672 */
+  font-family: var(--font-body);
+  font-size: min(0.957vw, 16px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: #fff5ef;
+  text-align: center;
+}
+
+/* "И в какой-то момент вы понимаете:" — top:183, left:693, w:286, Raleway 16px */
+.first-matters-before {
+  position: absolute;
+  left: 50%;
+  top: 21.53%;                       /* 183/850 */
+  transform: translateX(-50%);
+  margin: 0;
+  z-index: 2;
+  width: min(17.1vw, 286px);         /* 286/1672 */
+  font-family: var(--font-body);
+  font-size: min(0.957vw, 16px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: #fff5ef;
+  text-align: center;
+}
+
+/* Цитата — top:calc(50%+221) с translate(-50%,-50%), 36px Cormorant SemiBold white */
+.first-matters-quote {
+  position: absolute;
+  left: 50%;
+  top: 75.99%;                       /* (425+221)/850 = 646/850 — было 77.06% */
+  transform: translate(-50%, -50%);
+  margin: 0;
+  z-index: 2;
+  width: min(39.59vw, 662px);        /* 662/1672 — было 743 */
+  font-family: var(--font-heading);
+  font-size: min(2.153vw, 36px);     /* 36/1672 — было 40px */
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #fff5ef;                    /* было #ffc800 — теперь белый per Figma */
+  text-align: center;
+}
+
+/* ── Tablet (769-1100px) ────────────────────────────────────── */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .first-matters-title { font-size: min(3.5vw, 32px); }
+  .first-matters-desc, .first-matters-before { font-size: min(1.6vw, 15px); }
+  .first-matters-quote { font-size: min(3.6vw, 32px); }
+}
+
+/* ── Mobile ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .first-matters {
+    aspect-ratio: 375 / 720;
+  }
+  .first-matters-title {
+    top: 10%;
+    font-size: 8.533vw;               /* 32/375 */
+    line-height: 1;
+  }
+  .first-matters-desc {
+    top: 17%;
+    width: 80vw;
+    font-size: 3.733vw;
+    line-height: 1.4;
+  }
+  .first-matters-before {
+    top: 24%;
+    width: 80vw;
+    font-size: 3.733vw;
+    line-height: 1.4;
+  }
+  .first-matters-quote {
+    top: 75%;
+    width: 92vw;
+    font-size: 6.4vw;                 /* 24/375 */
+    line-height: 1.15;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   /first-stage — Section 5 "Глубина" — Figma 812:695 (1672×850)
+   ════════════════════════════════════════════════════════════════════════ */
+.first-depth {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1672 / 850;
+  overflow: hidden;
+  background: #050307;
+}
+.first-depth-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.first-depth-bg img { object-fit: cover; }
+
+/* "ГЛУБИНА" — top:63, центр, 36px Cormorant SemiBold gold */
+.first-depth-title {
+  position: absolute;
+  left: 50%;
+  top: 7.41%;                        /* 63/850 — поднято с 12.71% */
+  transform: translateX(-50%);
+  margin: 0;
+  z-index: 2;
+  width: min(14.65vw, 245px);        /* 245/1672 — было 367 */
+  font-family: var(--font-heading);
+  font-size: min(2.153vw, 36px);     /* 36/1672 — было 48px */
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #ffc800;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+/* "Мы постепенно заходим в разные уровни" — top:108, w:489, 16px Raleway Medium */
+.first-depth-desc {
+  position: absolute;
+  left: 50%;
+  top: 12.71%;                       /* 108/850 */
+  transform: translateX(-50%);
+  margin: 0;
+  z-index: 2;
+  width: min(29.25vw, 489px);        /* 489/1672 */
+  font-family: var(--font-body);
+  font-size: min(0.957vw, 16px);     /* 16/1672 — было 24px */
+  font-weight: 500;
+  line-height: 1.15;
+  color: #fff5ef;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 4 уровня вдоль горизонтальной линии — Cormorant Light 24px white */
+.first-depth-label {
+  position: absolute;
+  z-index: 2;
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: min(1.435vw, 24px);     /* 24/1672 */
+  font-weight: 300;
+  line-height: 23.1px;
+  color: #fff5ef;
+  white-space: nowrap;
+}
+.first-depth-label--1 { left: 9.75%;  top: 59.18%; }  /* 163, 503 */
+.first-depth-label--2 { left: 30.44%; top: 59.18%; }  /* 509, 503 */
+.first-depth-label--3 { left: 58.37%; top: 58.59%; }  /* 976, 498 */
+.first-depth-label--4 { left: 71.11%; top: 58.59%; }  /* 1189, 498 */
+
+/* Caption внизу слева — "Вы учитесь ориентироваться там..." */
+.first-depth-caption {
+  position: absolute;
+  z-index: 2;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: min(0.957vw, 16px);     /* 16/1672 */
+  font-weight: 400;
+  line-height: 1.4;
+  color: #fff5ef;
+}
+.first-depth-caption--left {
+  left: 13.04%;                      /* 218/1672 */
+  top: 84.12%;                       /* 715/850 */
+  width: min(19.44vw, 325px);        /* 325/1672 */
+}
+.first-depth-caption--right {
+  left: 75.54%;                      /* 1263/1672 */
+  top: 83.65%;                       /* 711/850 */
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+}
+.first-depth-caption--right span { display: block; }
+
+/* ── Tablet (769-1100px) ────────────────────────────────────── */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .first-depth-title { font-size: min(3.4vw, 30px); }
+  .first-depth-desc { font-size: min(1.6vw, 15px); width: min(50vw, 460px); }
+  .first-depth-label { font-size: min(2vw, 18px); }
+  .first-depth-caption { font-size: min(1.5vw, 14px); }
+}
+
+/* ── Mobile — стек вертикально, 4 уровня в столбик ─────────── */
+@media (max-width: 768px) {
+  .first-depth {
+    aspect-ratio: 375 / 820;
+  }
+  .first-depth-title {
+    top: 7%;
+    width: 80vw;
+    font-size: 10.667vw;              /* 40/375 */
+  }
+  .first-depth-desc {
+    top: 16%;
+    width: 80vw;
+    font-size: 4.8vw;                 /* 18/375 */
+    line-height: 1.25;
+  }
+  /* Все 4 уровня в столбик по центру */
+  .first-depth-label {
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 5.333vw;               /* 20/375 */
+    line-height: 1.3;
+    white-space: normal;
+    text-align: center;
+    width: 84vw;
+  }
+  .first-depth-label--1 { top: 32%; }
+  .first-depth-label--2 { top: 41%; }
+  .first-depth-label--3 { top: 50%; }
+  .first-depth-label--4 { top: 59%; }
+
+  .first-depth-caption {
+    font-size: 3.733vw;                /* 14/375 */
+  }
+  .first-depth-caption--left {
+    left: 8vw;
+    top: 78%;
+    width: 84vw;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .first-depth-caption--right {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 90%;
+    text-align: center;
+    white-space: normal;
+    width: 84vw;
+  }
 }

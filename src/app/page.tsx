@@ -10,10 +10,13 @@ import ArchetypesSection from "@/components/ArchetypesSection";
 import UnitySection from "@/components/UnitySection";
 import ProgramsSection from "@/components/ProgramsSection";
 import Footer from "@/components/Footer";
+import { HomeJsonLd } from "@/components/JsonLd";
 
 export default function Home() {
   return (
     <main>
+      {/* JSON-LD: Organization + Person + WebSite для Google knowledge panel */}
+      <HomeJsonLd />
       <HeroSection />
       <ProblemSection />
       <OldCodeSection />
