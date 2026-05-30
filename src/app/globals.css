@@ -424,6 +424,17 @@ img.desktop-only { display: block !important; }
   img.desktop-only { display: none !important; }
   img.mobile-only { display: block !important; }
 }
+/* /academy специфично: на узком landscape (≤768px landscape — например 667×375)
+   используем desktop-layout вместо mobile, иначе блоки растягиваются на 5
+   экранов как в портретной верстке. Здесь же возвращаем desktop bg-картинки.
+   Footer тоже использует desktop-раскладку (1440/495), отмасштабированную под
+   667 — см. блок «S12 academy landscape» ниже. */
+@media (max-width: 768px) and (orientation: landscape) {
+  .academy .desktop-only { display: block !important; }
+  .academy .mobile-only { display: none !important; }
+  .academy img.desktop-only { display: block !important; }
+  .academy img.mobile-only { display: none !important; }
+}
 
 /* All sections — aspect-ratios from final block exports */
 #s1, #s2, #s5, #s7, #s8, #s9, #s10 {
@@ -1482,6 +1493,41 @@ img.desktop-only { display: block !important; }
     gap: 2.6667vw;
   }
 }
+
+/* ── Mobile landscape (≤900px landscape) — компактный header, чтобы он
+   не занимал треть viewport на 667×375. Cap по px, чтобы vw не раздувал. */
+@media (max-width: 900px) and (orientation: landscape) {
+  .site-header,
+  .site-header.scrolled {
+    height: calc(48px + env(safe-area-inset-top));
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+    background: rgba(49, 15, 0, 0.35) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .site-header.scrolled {
+    background: rgba(49, 15, 0, 0.55) !important;
+  }
+  .site-header .header-btn { display: none; }
+  .site-header .header-logo-text {
+    font-size: 13px;
+    letter-spacing: 2px;
+  }
+  .site-header .header-right { gap: 16px; }
+  .lang-switcher { font-size: 12px; gap: 10px; }
+  .header-burger { width: 28px; height: 28px; padding: 5px 3px; gap: 4px; }
+  .header-burger span { width: 20px; }
+}
+
+/* ── Home page header — прозрачный (без bg/blur) до скролла. CTA скрыта
+   на всех ширинах, чтобы остались только логотип + языки + кнопка меню. */
+.site-header--home:not(.scrolled) {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.site-header--home .header-btn { display: none !important; }
 
 .header-login {
   font-family: var(--font-body);
@@ -3458,6 +3504,51 @@ img.desktop-only { display: block !important; }
   #s12.s12-figma .s12-currency-block { gap: 12px; }
 }
 
+/* ===== S12 academy landscape (≤768 landscape, напр. 667×375) =====
+   Используем desktop-раскладку футера (1440/495), но отмасштабированную:
+   секция ~229px высотой при 667w, поэтому шрифты/иконки/отступы уменьшены.
+   .academy-префикс повышает специфичность, чтобы перебить mobile-правила
+   (.s12-footer.s12-figma { aspect-ratio: 375/687 !important }) ниже по файлу. */
+@media (max-width: 768px) and (orientation: landscape) {
+  .academy .s12-footer.s12-figma { aspect-ratio: 1440 / 495 !important; }
+
+  /* .academy .desktop-only{display:block!important} (выше) клобберит flex —
+     возвращаем правильный display флекс-контейнерам футера. */
+  .academy #s12.s12-figma .s12-headline-block,
+  .academy #s12.s12-figma .s12-currency-block,
+  .academy #s12.s12-figma .s12-book { display: flex !important; flex-direction: column; }
+  .academy #s12.s12-figma .s12-social,
+  .academy #s12.s12-figma .s12-legal { display: flex !important; }
+
+  /* верхний градиент (живёт в min-width:769) — добавляем вручную */
+  .academy #s12.s12-figma::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 40.61%;
+    background: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .academy #s12.s12-figma .s12-headline,
+  .academy #s12.s12-figma .s12-currency-title { font-size: 15px; }
+  .academy #s12.s12-figma .s12-tagline,
+  .academy #s12.s12-figma .s12-currency-body,
+  .academy #s12.s12-figma .s12-book__sub,
+  .academy #s12.s12-figma .s12-logo { font-size: 9.5px; }
+  .academy #s12.s12-figma .s12-book__title { font-size: 13px; }
+  .academy #s12.s12-figma .s12-book { padding: 7px 10px; gap: 2px; border-radius: 7px; }
+  .academy #s12.s12-figma .s12-legal__link,
+  .academy #s12.s12-figma .s12-legal__sep { font-size: 9px; }
+  .academy #s12.s12-figma .s12-legal { gap: 8px; width: auto; }
+  .academy #s12.s12-figma .s12-social { gap: 18px; }
+  .academy #s12.s12-figma .s12-social__link,
+  .academy #s12.s12-figma .s12-social__link img { width: 22px; height: 22px; }
+  .academy #s12.s12-figma .s12-headline-block,
+  .academy #s12.s12-figma .s12-currency-block { gap: 10px; }
+}
+
 /* ===== S12 - Footer (legacy) ===== */
 .s12-footer {
   position: relative;
@@ -3876,28 +3967,32 @@ img.desktop-only { display: block !important; }
   .s12-footer { aspect-ratio: 1125 / 1800 !important; }
 
   /* === HEADER === */
-  .site-header {
-    padding: 0 4.2667vw;
-    height: 14.9333vw;
+  /* На landscape ≤900 высоту хедера задаёт правило в начале файла —
+     не переопределяем здесь, иначе 14.9333vw=99px съест треть viewport. */
+  @media (orientation: portrait) {
+    .site-header {
+      padding: 0 4.2667vw;
+      height: 14.9333vw;
+    }
+    .header-logo img {
+      width: 9.6vw !important;
+      height: 6.4vw !important;
+    }
+    .header-logo-text {
+      font-size: 1.8667vw;
+      letter-spacing: 0.5333vw;
+    }
+    .lang-switcher {
+      gap: 3.2vw;
+      font-size: 3.7333vw;
+    }
+    .header-right {
+      gap: 3.2vw;
+    }
   }
   .header-login,
   .header-btn {
     display: none !important;
-  }
-  .lang-switcher {
-    gap: 3.2vw;
-    font-size: 3.7333vw;
-  }
-  .header-right {
-    gap: 3.2vw;
-  }
-  .header-logo img {
-    width: 9.6vw !important;
-    height: 6.4vw !important;
-  }
-  .header-logo-text {
-    font-size: 1.8667vw;
-    letter-spacing: 0.5333vw;
   }
 
   /* === SIDE MENU === */
@@ -4759,6 +4854,99 @@ img.desktop-only { display: block !important; }
 
   /* Copyright "© 2026" — Figma 740:590: centred ≈ bottom-3% */
   .s12-m-copy { position: absolute; bottom: 3%; left: 50%; transform: translateX(-50%); z-index: 2; margin: 0; font-family: var(--font-body); font-size: 3.2vw; font-weight: 400; color: #fff5ef; white-space: nowrap; line-height: normal; }
+
+  /* ── Mobile landscape (≤900 landscape) — переразложенный layout:
+       верх — 2 колонки (left: heading+tagline+book, right: heading+body);
+       низ — единая горизонтальная строка (logo · social · legal · ©). */
+  @media (orientation: landscape) {
+    .s12-footer.s12-figma {
+      aspect-ratio: auto !important;
+      height: 280px !important;
+    }
+    /* Тёмная подложка поверх bg, чтобы ключ-декорация не накрывала текст */
+    .s12-mobile-html::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.78);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Верх-левая колонка: heading + tagline */
+    .s12-m-left {
+      top: 24px;
+      left: 4%;
+      width: 44%;
+      transform: none;
+      gap: 8px;
+    }
+    .s12-m-left-heading { font-size: max(min(3.6vw, 28px), 18px); }          /* 667→24 */
+    .s12-m-left-tagline { font-size: max(min(2.5vw, 18px), 13px); }          /* 667→16.7 */
+
+    /* Верх-правая колонка: heading + body */
+    .s12-m-right {
+      top: 24px;
+      left: 54%;
+      width: 42%;
+      transform: none;
+      gap: 6px;
+    }
+    .s12-m-right-heading { font-size: max(min(3.6vw, 28px), 18px); white-space: normal; }
+    .s12-m-right-body { font-size: max(min(1.7vw, 13px), 10px); }            /* 667→11.3 */
+
+    /* Книга — под левым блоком */
+    .s12-m-book {
+      top: auto;
+      bottom: 70px;
+      left: 4%;
+      gap: 2px;
+    }
+    .s12-m-book-label { font-size: max(min(1.7vw, 13px), 10px); }
+    .s12-m-book-title { font-size: max(min(2vw, 16px), 12px); }
+
+    /* Нижняя строка — 3 зоны: слева logo+© (стопкой), по центру social,
+       справа legal. © вынесен из центра под логотип, чтобы не налезал
+       на соцыконки и легал-ссылки. */
+    .s12-m-logo {
+      top: auto;
+      bottom: 28px;
+      left: 4%;
+      width: auto;
+      font-size: max(min(1.7vw, 13px), 10px);
+      text-align: left;
+    }
+    .s12-m-copy {
+      top: auto;
+      bottom: 12px;
+      left: 4%;
+      transform: none;
+      font-size: max(min(1.5vw, 12px), 9px);
+      opacity: 0.5;
+      text-align: left;
+    }
+    /* social сдвинут левее центра: легал-блок справа широкий (RU/UA),
+       поэтому soc живёт в свободной зоне между логотипом и легалом. */
+    .s12-m-social {
+      top: auto;
+      bottom: 18px;
+      left: 34%;
+      transform: translateX(-50%);
+      width: 84px;
+      justify-content: space-between;
+    }
+    .s12-m-social img { width: 18px !important; height: 18px !important; }
+    .s12-m-legal {
+      top: auto;
+      bottom: 20px;
+      left: auto;
+      right: 4%;
+      width: auto;
+      transform: none;
+      gap: 14px;
+    }
+    .s12-m-legal-link { font-size: max(min(1.7vw, 13px), 10px); }
+  }
 
   /* === AUTH MODAL === */
   .auth-modal {
@@ -7817,7 +8005,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
 /* ── Hero — Mobile portrait, Figma 2138:744 (375×716) ───────────────────
    Title в 2 строки, divider между title и subtitle, smaller subtitle (12px),
    позиции точно по Figma (% от секции). */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (orientation: portrait) {
   .acad-hero { aspect-ratio: 375 / 716 !important; }
 
   /* Content centered — title at top=227, subtitle ниже через flex */
@@ -7831,7 +8019,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
 
   /* Title spans — каждая на отдельной строке */
   .acad-hero-title {
-    font-size: 9.6vw;           /* 36/375 */
+    font-size: min(9.6vw, 36px);;           /* 36/375 */
     line-height: 8.96vw;        /* 33.6/375 — Figma leading */
     width: 100%;
     white-space: normal;        /* mobile — снимаем nowrap, spans на отдельных строках */
@@ -7856,7 +8044,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   /* Subtitle — 12px Raleway, w=247, top=359 */
   .acad-hero-subtitle {
     margin-top: 5.067vw;        /* 19/375 — divider→subtitle gap */
-    font-size: 3.2vw;           /* 12/375 */
+    font-size: min(3.2vw, 12px);;           /* 12/375 */
     line-height: 1.45;
     width: 65.867vw;            /* 247/375 */
     font-weight: 400;
@@ -7868,7 +8056,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     width: 84vw;                /* 315/375 */
     max-width: none;
     height: 12.533vw;           /* 47/375 */
-    font-size: 4.267vw;         /* 16/375 */
+    font-size: min(4.267vw, 16px);;         /* 16/375 */
   }
 }
 
@@ -8039,12 +8227,12 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   white-space: nowrap;             /* Figma 728:* — все теги в одну строку */
 }
 /* Mobile может оборачивать */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (orientation: portrait) {
   .acad-about-tag-text { white-space: normal; }
 }
 
 /* ── About block — Mobile Figma 2143:559 (375×766) ───────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (orientation: portrait) {
   .acad-about { aspect-ratio: 375 / 766 !important; }
 
   /* Mobile bg image — 432×766 portrait scene, centered */
@@ -8064,12 +8252,12 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     align-items: center;
   }
   .acad-about-title {
-    font-size: 13.867vw;          /* 52/375 — оставлено как в Figma */
+    font-size: min(13.867vw, 52px);;          /* 52/375 — оставлено как в Figma */
     text-align: center;
     width: 100%;
   }
   .acad-about-subtitle {
-    font-size: 3.2vw;             /* 12/375 — мобильный размер */
+    font-size: min(3.2vw, 12px);;             /* 12/375 — мобильный размер */
     font-weight: 400;
     line-height: 1.4;
     text-align: center;
@@ -8086,7 +8274,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     border-radius: 5.333vw;       /* 20/375 */
   }
   .acad-about-info-title {
-    font-size: 7.467vw;           /* 28/375 — H3 Medium */
+    font-size: min(7.467vw, 28px);;           /* 28/375 — H3 Medium */
     line-height: 1.1;
     font-weight: 500;
   }
@@ -8104,7 +8292,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     height: 10.667vw;
   }
   .acad-about-tag-text {
-    font-size: 3.2vw;             /* 12/375 */
+    font-size: min(3.2vw, 12px);;             /* 12/375 */
     line-height: 1.3;
     flex: 1;
   }
@@ -8244,7 +8432,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
    AI-фигура между title и карточками, карточки 2×3 + 1 wide снизу.
    Каждая мелкая карточка — вертикальная (icon top-center, text below).
    Wide card 7 — горизонтальная (icon left, text right). */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (orientation: portrait) {
   .acad-study {
     aspect-ratio: 375 / 1111;
     overflow: hidden;
@@ -8275,7 +8463,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     left: 12.533%;                 /* 47/375 ≈ Figma (375/2 - 140.5)/375 */
     top: 5.310%;                   /* 59/1111 */
     width: 77.067%;                /* 289/375 */
-    font-size: 8.533vw;            /* 36/375 → но скейлим под 32 для нашего шрифта */
+    font-size: min(8.533vw, 36px);;            /* 36/375 → но скейлим под 32 для нашего шрифта */
     line-height: 1.06;             /* ≈ 33.6/36 */
     margin: 0;
     margin-bottom: 0;
@@ -8320,13 +8508,13 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     gap: 2.133vw;                  /* 8/375 — Figma text-block gap */
   }
   .acad-study-card-title {
-    font-size: 4.267vw;            /* 16/375 */
+    font-size: min(4.267vw, 16px);;            /* 16/375 */
     line-height: 1.2;
     text-align: center;
   }
   .acad-study-card-sub,
   .acad-study-card-extra {
-    font-size: 3.2vw;              /* 12/375 */
+    font-size: min(3.2vw, 12px);;              /* 12/375 */
     text-align: center;
   }
 
@@ -8438,7 +8626,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
 /* ── Mobile RI — Figma 764:424 (375×660) ──────────────────────────────
    Тёмная библиотека + стеклянный колпак с кристаллом справа.
    Текст слева: label, heading в 2 строки, описание, и отдельный нижний блок. */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (orientation: portrait) {
   .acad-ri {
     aspect-ratio: 375 / 660;
   }
@@ -8464,12 +8652,12 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     gap: 5.333vw;                  /* 20/375 — gap между title-block и desc-1 */
   }
   .acad-ri-label {
-    font-size: 4.267vw;            /* 16/375 */
+    font-size: min(4.267vw, 16px);;            /* 16/375 */
     margin-bottom: 5.333vw;        /* ~20px — отступ перед заголовком (2 br в Figma) */
   }
   /* Heading: REALITY / INTELLIGENCE 36px Cormorant, line-height 33.6, 2 строки */
   .acad-ri-title {
-    font-size: 9.6vw;              /* 36/375 */
+    font-size: min(9.6vw, 36px);;              /* 36/375 */
     line-height: 0.933;            /* 33.6/36 */
     margin-top: 0;
     white-space: normal;
@@ -8480,14 +8668,14 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     gap: 25.333vw;                 /* ~95/375 — расстояние между блоками */
   }
   .acad-ri-desc-1 {
-    font-size: 4.267vw;            /* 16/375 */
+    font-size: min(4.267vw, 16px);;            /* 16/375 */
     opacity: 0.8;                  /* Figma: opacity 80% */
     white-space: pre-line;         /* respect \n чтобы текст не наезжал на колпак */
   }
   .acad-ri-desc-1 p { white-space: pre-line; }
   .acad-ri-desc-2 {
     width: 52vw;                   /* 195/375 — desc-2 уже, чем desc-1 */
-    font-size: 4.267vw;            /* 16/375 */
+    font-size: min(4.267vw, 16px);;            /* 16/375 */
     font-weight: 400;              /* Raleway Regular */
   }
 }
@@ -8633,7 +8821,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
 }
 
 /* ── Mobile — Figma 686:1049 (375×1075) ────────────────────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (orientation: portrait) {
   .acad-whatif {
     aspect-ratio: 375 / 1075;
   }
@@ -8642,7 +8830,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     left: 50%;
     top: 9.302%;                  /* 100/1075 */
     transform: translateX(-50%);
-    font-size: 9.6vw;             /* 36/375 */
+    font-size: min(9.6vw, 36px);;             /* 36/375 */
     line-height: 0.933;           /* 33.6/36 */
     text-align: center;
     white-space: nowrap;
@@ -8653,7 +8841,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     top: 18.512%;                 /* 199/1075 */
     transform: translateX(-50%);
     width: 65.333vw;              /* 245/375 */
-    font-size: 4.267vw;           /* 16/375 */
+    font-size: min(4.267vw, 16px);;           /* 16/375 */
     font-weight: 400;
     line-height: 1.25;
     text-align: center;
@@ -8686,12 +8874,12 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     align-items: stretch;
   }
   .acad-whatif-card-title {
-    font-size: 4.267vw;           /* 16/375 */
+    font-size: min(4.267vw, 16px);;           /* 16/375 */
     font-weight: 400;             /* mobile Regular */
     text-align: left;
   }
   .acad-whatif-card-desc {
-    font-size: 3.2vw;             /* 12/375 */
+    font-size: min(3.2vw, 12px);;             /* 12/375 */
     text-align: left;
   }
   /* Footer — позиционируем через top чтобы гарантированно не пересекалось
@@ -8702,7 +8890,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     bottom: auto;
     transform: translateX(-50%);
     width: 84vw;                  /* 315/375 */
-    font-size: 6.4vw;             /* 24/375 */
+    font-size: min(6.4vw, 24px);;             /* 24/375 */
     line-height: 1.05;            /* небольшой воздух между строками */
     white-space: normal;
   }
@@ -8889,7 +9077,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
 .acad-result-card-quote p { margin: 0; }
 
 /* ── Mobile — Figma 686:1096 (375×1162) ────────────────────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (orientation: portrait) {
   .acad-result {
     aspect-ratio: 375 / 1162;     /* Figma 686:1096 — точная высота */
   }
@@ -8901,7 +9089,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     top: 5.938%;                  /* 69/1162 */
     transform: none;
     width: auto;
-    font-size: 9.6vw;             /* 36/375 */
+    font-size: min(9.6vw, 36px);;             /* 36/375 */
     line-height: 0.933;
     text-align: left;
   }
@@ -8914,7 +9102,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   }
   .acad-result-list { gap: 5.333vw; }
   .acad-result-list-title {
-    font-size: 7.467vw;           /* 28/375 — Cormorant Medium */
+    font-size: min(7.467vw, 28px);;           /* 28/375 — Cormorant Medium */
     font-weight: 500;
     line-height: 1;
   }
@@ -8923,7 +9111,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     row-gap: 4vw;                 /* 15/375 — Figma gap */
   }
   .acad-result-list-item {
-    font-size: 4.267vw;           /* 16/375 — Raleway Light per Figma визуально */
+    font-size: min(4.267vw, 16px);;           /* 16/375 — Raleway Light per Figma визуально */
     font-weight: 300;             /* Light — менее жирно, чем 400 */
     line-height: 1.4;
     gap: 2.667vw;                 /* 10/375 — gap bullet→text per Figma */
@@ -8954,12 +9142,12 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     background: rgba(255, 245, 239, 0.5);
   }
   .acad-result-card-title {
-    font-size: 7.467vw;           /* 28/375 */
+    font-size: min(7.467vw, 28px);;           /* 28/375 */
     color: #fff5ef;
     text-transform: uppercase;    /* mobile updated: "И ЭТО КЛЮЧЕВОЕ" */
   }
   .acad-result-card-quote {
-    font-size: 6.4vw;             /* 24/375 */
+    font-size: min(6.4vw, 24px);;             /* 24/375 */
     line-height: 1.05;
     color: #fff5ef;
     gap: 8vw;                     /* ~30/375 — Figma имеет двойной <br/> между блоками */
@@ -9040,7 +9228,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
 /* ── Mobile — Figma 686:1154 (375×853) ──────────────────────────────────
    Колонки складываются вертикально. Title 1 top=60, list top=134,
    Title 2 top=504, list2 top=577. List width 224, font 12. */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (orientation: portrait) {
   .acad-forwho {
     aspect-ratio: 375 / 853;
   }
@@ -9055,7 +9243,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     width: 59.733vw;
   }
   .acad-forwho-title {
-    font-size: 9.6vw;             /* 36/375 */
+    font-size: min(9.6vw, 36px);;             /* 36/375 */
     line-height: 0.933;           /* 33.6/36 */
     margin-bottom: 8.667vw;       /* gap ~ 134-60-33.6 ≈ 40 */
     white-space: nowrap;          /* Figma — заголовки в одну строку */
@@ -9064,7 +9252,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     gap: 4.8vw;                   /* 18-20/375 */
   }
   .acad-forwho-item {
-    font-size: 3.2vw;             /* 12/375 */
+    font-size: min(3.2vw, 12px);;             /* 12/375 */
     gap: 2.667vw;                 /* 10/375 — mobile gap bullet→text */
     line-height: 1.35;
   }
@@ -9229,7 +9417,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
 }
 
 /* ── Mobile portrait (≤768px) — Figma 740:529 (375×755) ─────────────── */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (orientation: portrait) {
   .acad-condition {
     aspect-ratio: 375 / 755;       /* per Figma mobile macet */
   }
@@ -9265,39 +9453,38 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   }
 }
 
-/* ── Mobile landscape (≤900px, wide) — повторяем десктопный layout
-       (Figma 759:412): текст-блок узкой колонкой по центру, типографика
-       в тех же пропорциях, что и на 1440×700, но в vh-единицах */
+/* ── Mobile landscape (≤900px) — типографика подогнана под размеры блока
+       "Результат" на 667×375: title 24, desc-1 16, desc-2 ~11, tagline ~13. */
 @media (max-width: 900px) and (orientation: landscape) {
   .acad-condition {
     aspect-ratio: 900 / 500;
   }
   .acad-condition-content {
-    width: min(60vw, 480px);          /* ~33% как на десктопе, но не уже 60vw */
-    gap: min(5.5vh, 40px);            /* desktop gap=40px */
+    width: min(75vw, 480px);
+    gap: max(min(3vw, 24px), 14px);
   }
   .acad-condition-title {
-    font-size: min(7vh, 52px);        /* desktop 52px */
+    font-size: max(min(3.6vw, 28px), 18px);            /* 667→24 (= acad-result-title) */
     line-height: 1;
   }
   .acad-condition-desc {
-    width: min(55vw, 440px);          /* desktop 440px */
-    gap: min(2.8vh, 20px);            /* desktop 20px */
+    width: min(70vw, 440px);
+    gap: max(min(1.8vw, 14px), 10px);
   }
   .acad-condition-desc-1 {
-    font-size: min(2.6vh, 18px);      /* desktop 18px Raleway Medium */
+    font-size: max(min(2.5vw, 18px), 13px);            /* 667→16.7 (≈ acad-result-list-title) */
     font-weight: 500;
-    line-height: 1.3;
+    line-height: 1.35;
     white-space: pre-line;
   }
   .acad-condition-desc-2 {
-    font-size: min(2.2vh, 16px);      /* desktop 16px Raleway Regular */
+    font-size: max(min(1.7vw, 13px), 10px);            /* 667→11.3 (≈ acad-result-card-quote) */
     font-weight: 400;
-    line-height: 1.3;
-    width: min(40vw, 325px);          /* desktop 325px — уже, чем desc-1 */
+    line-height: 1.35;
+    width: min(55vw, 360px);
   }
   .acad-condition-tagline {
-    font-size: min(5vh, 36px);        /* desktop 36px Cormorant SemiBold */
+    font-size: max(min(2vw, 16px), 12px);              /* 667→13.3 (≈ acad-result-card-title) */
     font-weight: 600;
     line-height: 1;
   }
@@ -9529,22 +9716,20 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   }
 }
 
+/* Mobile landscape (≤900px) — типографика по размеру блока "Результат"
+   на 667×375: title 24, subtitle 16.7, text 11.3, date 13.3, btn 11.3. */
 @media (max-width: 900px) and (orientation: landscape) {
   .acad-step1 {
     aspect-ratio: 900 / 500;
   }
   .acad-step1-title {
-    top: 8%;
-    font-size: min(5vh, 36px);
+    top: 6%;
+    font-size: max(min(3.6vw, 28px), 18px);            /* 667→24 (= acad-result-title) */
   }
-  /* Повторяем десктопный layout (Figma 740:557): subtitle → text → button,
-     button — на всю ширину колонки. align-items: stretch выравнивает колонки
-     по высоте, а margin-top: auto на кнопке прижимает её к низу — обе кнопки
-     оказываются на одной горизонтальной линии. */
   .acad-step1-cols {
     flex-direction: row;
     align-items: stretch;
-    top: 32%;
+    top: 28%;
     left: 8%;
     right: 8%;
     gap: 4vw;
@@ -9552,18 +9737,27 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   .acad-step1-col--left,
   .acad-step1-col--right {
     width: 48%;
-    gap: 2.2vh;
+    gap: max(min(1.5vw, 12px), 8px);
     align-items: stretch;
     text-align: center;
   }
-  .acad-step1-subtitle { font-size: min(3.2vh, 24px); line-height: 1.05; }
-  .acad-step1-text { font-size: min(2.2vh, 14px); }
-  .acad-step1-date { font-size: min(2.6vh, 18px); }
+  .acad-step1-subtitle {
+    font-size: max(min(2.5vw, 18px), 14px);            /* 667→16.7 (≈ acad-result-list-title) */
+    line-height: 1.05;
+  }
+  .acad-step1-text {
+    font-size: max(min(1.7vw, 13px), 10px);            /* 667→11.3 (≈ acad-result-card-quote) */
+    line-height: 1.35;
+  }
+  .acad-step1-date {
+    font-size: max(min(2vw, 16px), 12px);              /* 667→13.3 (≈ acad-result-card-title) */
+    line-height: 1.2;
+  }
   .acad-step1-btn {
     width: 100%;
     margin-top: auto;
-    font-size: min(2vh, 13px);
-    padding: 8px 14px;
+    font-size: max(min(1.7vw, 13px), 10px);            /* 667→11.3 */
+    padding: 7px 12px;
     white-space: nowrap;
   }
 }

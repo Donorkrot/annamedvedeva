@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/components/LanguageProvider';
 import AuthModal from '@/components/AuthModal';
 import SideMenu from '@/components/SideMenu';
@@ -7,6 +8,8 @@ import type { Lang } from '@/lib/translations';
 
 export default function Header() {
   const { lang, setLang, tr } = useTranslation();
+  const pathname = usePathname();
+  const isHome = pathname === '/';
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
@@ -65,7 +68,7 @@ export default function Header() {
 
   return (
     <>
-      <header className={`site-header${scrolled ? ' scrolled' : ''}${hidden ? ' hidden' : ''}`}>
+      <header className={`site-header${scrolled ? ' scrolled' : ''}${hidden ? ' hidden' : ''}${isHome ? ' site-header--home' : ''}`}>
         <a href="/" className="header-logo">
           <span className="header-logo-text">REALITY DNA</span>
         </a>
