@@ -19,8 +19,6 @@ export default function AcademyPage() {
   const [leadOpen, setLeadOpen] = useState(false);
   const [leadSource, setLeadSource] = useState('academy-step1');
   const openLead = (src: string) => { setLeadSource(src); setLeadOpen(true); };
-  // На проде страница /first-stage ещё не готова — скрываем кнопку «Вход в метод».
-  const hideFirstStage = process.env.NEXT_PUBLIC_HIDE_FIRST_STAGE === '1';
   // Title рендерится в 2 строки на mobile (по Figma "АКАДЕМИЯ" / "МАСТЕРОВ").
   // На desktop spans схлопываются в одну inline-строку через CSS.
   const titleWords = tr('academy_hero_title').split(' ');
@@ -552,11 +550,9 @@ export default function AcademyPage() {
           <div className="acad-step1-col acad-step1-col--left">
             <h3 className="acad-step1-subtitle">{tr('academy_step1_left_title')}</h3>
             <p className="acad-step1-text">{tr('academy_step1_left_text')}</p>
-            {!hideFirstStage && (
-              <a href="/first-stage" className="acad-step1-btn">
-                <span>{tr('academy_step1_left_btn')}</span>
-              </a>
-            )}
+            <a href="/first-stage" className="acad-step1-btn">
+              <span>{tr('academy_step1_left_btn')}</span>
+            </a>
           </div>
 
           {/* Right column — Записаться в Академию */}
