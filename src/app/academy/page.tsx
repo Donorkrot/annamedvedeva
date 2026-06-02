@@ -1,8 +1,10 @@
 'use client';
+import { useState } from 'react';
 import Image from 'next/image';
 import { useTranslation } from '@/components/LanguageProvider';
 import type { TranslationKey } from '@/lib/translations';
 import Footer from '@/components/Footer';
+import LeadFormModal from '@/components/LeadFormModal';
 
 /**
  * /academy — Академия мастеров.
@@ -14,6 +16,11 @@ import Footer from '@/components/Footer';
  */
 export default function AcademyPage() {
   const { tr } = useTranslation();
+  const [leadOpen, setLeadOpen] = useState(false);
+  const [leadSource, setLeadSource] = useState('academy-step1');
+  const openLead = (src: string) => { setLeadSource(src); setLeadOpen(true); };
+  // На проде страница /first-stage ещё не готова — скрываем кнопку «Вход в метод».
+  const hideFirstStage = process.env.NEXT_PUBLIC_HIDE_FIRST_STAGE === '1';
   // Title рендерится в 2 строки на mobile (по Figma "АКАДЕМИЯ" / "МАСТЕРОВ").
   // На desktop spans схлопываются в одну inline-строку через CSS.
   const titleWords = tr('academy_hero_title').split(' ');
@@ -59,9 +66,9 @@ export default function AcademyPage() {
           <p className="acad-hero-subtitle">{tr('academy_hero_subtitle')}</p>
         </div>
 
-        <a href="#apply" className="acad-hero-cta">
+        <button type="button" className="acad-hero-cta" onClick={() => openLead('academy-hero')}>
           <span>{tr('academy_hero_cta')}</span>
-        </a>
+        </button>
       </section>
 
       {/* ── About block — Figma desktop 2140:499 (1440×700) / mobile 2143:559 (375×766) ──
@@ -545,9 +552,11 @@ export default function AcademyPage() {
           <div className="acad-step1-col acad-step1-col--left">
             <h3 className="acad-step1-subtitle">{tr('academy_step1_left_title')}</h3>
             <p className="acad-step1-text">{tr('academy_step1_left_text')}</p>
-            <a href="/first-stage" className="acad-step1-btn">
-              <span>{tr('academy_step1_left_btn')}</span>
-            </a>
+            {!hideFirstStage && (
+              <a href="/first-stage" className="acad-step1-btn">
+                <span>{tr('academy_step1_left_btn')}</span>
+              </a>
+            )}
           </div>
 
           {/* Right column — Записаться в Академию */}
@@ -560,14 +569,16 @@ export default function AcademyPage() {
                 <span className="acad-step1-date">{tr('academy_step1_right_date')}</span>
               </p>
             </div>
-            <a href="#apply" className="acad-step1-btn">
+            <button type="button" className="acad-step1-btn" onClick={() => openLead('academy-step1')}>
               <span>{tr('academy_step1_right_btn')}</span>
-            </a>
+            </button>
           </div>
         </div>
       </section>
 
       <Footer />
+
+      <LeadFormModal open={leadOpen} onClose={() => setLeadOpen(false)} source={leadSource} />
     </main>
   );
 }

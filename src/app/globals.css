@@ -4754,8 +4754,9 @@ img.desktop-only { display: block !important; }
   /* Gradient top — h:300/1239=24.21% */
   .s11-m-grad-top { position: absolute; left: 0; top: 0; width: 100%; height: 24.21%; background: linear-gradient(to bottom, #000 0%, transparent 100%); z-index: 1; pointer-events: none; }
 
-  /* Gradient bottom — h:71/1239=5.73% */
-  .s11-m-grad-bot { position: absolute; left: 0; bottom: 0; width: 100%; height: 5.73%; background: linear-gradient(to top, #111 0%, transparent 100%); z-index: 1; pointer-events: none; }
+  /* Gradient bottom — фейд в чёрный, чтобы стык с подвалом (#s12) был незаметен.
+     Нижний край секции уходит в #000, совпадая с верхом футера. */
+  .s11-m-grad-bot { position: absolute; left: 0; bottom: 0; width: 100%; height: 12%; background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.85) 35%, transparent 100%); z-index: 1; pointer-events: none; }
 
   /* Title — top:82/1239=6.62%, Cormorant SemiBold 9.6vw center.
      Soft dark text-shadow keeps the title readable even where the bg
@@ -4798,9 +4799,24 @@ img.desktop-only { display: block !important; }
   .s12-m-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
   .s12-m-bg-img { width: 100% !important; max-width: none !important; height: 100%; object-fit: cover; object-position: center; display: block; }
 
-  /* Gradients — новый bg уже достаточно тёмный, оставляем минимальные оверлеи */
-  .s12-m-grad-top { display: none; }
-  .s12-m-grad-bot { display: none; }
+  /* Gradients — затемнения сверху и снизу для читаемости текста (как в макете).
+     Лежат поверх bg (z:1), но под текстом (z:2). */
+  .s12-m-grad-top {
+    display: block;
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 30%;            /* ≈180/687 + запас */
+    z-index: 1; pointer-events: none;
+    /* Верхний край — чистый чёрный, совпадает с низом секции выше (#s11),
+       поэтому стык блоков незаметен; ниже плавно раскрывается фон. */
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.7) 30%, rgba(0, 0, 0, 0) 100%);
+  }
+  .s12-m-grad-bot {
+    display: block;
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 50%;            /* нижняя часть с лого/соцсетями/легалом */
+    z-index: 1; pointer-events: none;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 100%);
+  }
 
   /* Left text block — Figma 740:571: center at (≈50%, top:50%-200.5/687)
      translate(-50%,-50%). Содержит heading (28px) + tagline (16px), gap:20 */
@@ -9845,7 +9861,14 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   text-align: center;
 }
 .first-hero-title {
+  position: absolute;
+  left: 50%;
+  bottom: 31.3%;                      /* ~повторяет прежнюю позицию (внутри content-блока) */
+  transform: translateX(-50%);
+  z-index: 2;
   margin: 0;
+  width: min(74vw, 1240px);
+  text-align: center;
   font-family: var(--font-heading);
   font-size: min(4.7vw, 78px);
   font-weight: 600;
@@ -9868,47 +9891,51 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   letter-spacing: 0.32em;
   text-transform: uppercase;
 }
-/* "ВХОД В МЕТОД" — кликабельная кнопка с hover + пульсирующая подсветка */
+/* "ВХОД В МЕТОД" — кликабельная кнопка с hover + переливающийся текст */
 .first-hero-subtitle-btn {
   text-decoration: none;
   cursor: pointer;
-  padding: min(0.7vw, 12px) min(1.4vw, 24px);
+  padding: min(1.3vw, 20px) min(1.6vw, 28px);
   border-radius: 999px;
-  /* reset button defaults */
-  background: transparent;
-  border: none;
   font: inherit;
-  transition: color 0.25s ease, transform 0.25s ease, background 0.25s ease;
-  /* Пульсация каждые 3 сек — притягивает внимание */
-  animation: firstHeroSubtitlePulse 3s ease-in-out infinite;
+  /* рамка + затемнение */
+  background: rgba(0, 0, 0, 0.42);
+  border: 1px solid rgba(214, 164, 75, 0.55);
+  box-shadow: 0 min(0.5vw, 8px) min(2vw, 32px) rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  transform: scale(1.02);             /* на 2% больше */
+  transition: color 0.25s ease, transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
 }
-@keyframes firstHeroSubtitlePulse {
-  0%, 100% {
-    background: transparent;
-    box-shadow: 0 0 0 0 rgba(214, 164, 75, 0);
-    transform: scale(1);
-  }
-  20% {
-    background: rgba(214, 164, 75, 0.05);
-    box-shadow: 0 0 10px 2px rgba(214, 164, 75, 0.1);
-    transform: scale(1.005);
-  }
-  50% {
-    background: rgba(214, 164, 75, 0.16);
-    box-shadow: 0 0 32px 10px rgba(214, 164, 75, 0.3);
-    transform: scale(1.02);
-  }
-  80% {
-    background: rgba(214, 164, 75, 0.05);
-    box-shadow: 0 0 10px 2px rgba(214, 164, 75, 0.1);
-    transform: scale(1.005);
-  }
+/* Переливающийся золотой блик, бегущий по тексту */
+.first-hero-subtitle {
+  white-space: nowrap;
+  background: linear-gradient(
+    100deg,
+    #b8893a 0%,
+    #d6a44b 30%,
+    #fff0c4 50%,
+    #d6a44b 70%,
+    #b8893a 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: firstHeroSubtitleShimmer 4s linear infinite;
+}
+@keyframes firstHeroSubtitleShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 .first-hero-subtitle-btn:hover {
   color: #f5c977;
-  background: rgba(214, 164, 75, 0.08);
-  transform: translateY(-1px);
-  /* На hover приостанавливаем пульсацию */
+  background: rgba(0, 0, 0, 0.55);
+  border-color: rgba(245, 201, 119, 0.85);
+  transform: scale(1.02) translateY(-1px);
+}
+.first-hero-subtitle-btn:hover .first-hero-subtitle {
   animation-play-state: paused;
 }
 .first-hero-subtitle-btn:hover .first-hero-divider-line,
@@ -9926,10 +9953,6 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   background: #d6a44b;
   transform: rotate(45deg);
 }
-.first-hero-subtitle {
-  white-space: nowrap;
-}
-
 .first-hero-desc {
   margin: 0;
   display: flex;
@@ -9941,7 +9964,8 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   line-height: 1.35;
   color: #fff5ef;
 }
-.first-hero-desc span { display: block; }
+.first-hero-desc span { display: block; text-align: center; }
+.first-hero-desc .first-hero-desc-break { margin-top: 0.7em; }
 
 /* ── Tablet ────────────────────────────────────────────────────── */
 @media (min-width: 769px) and (max-width: 1100px) {
@@ -9974,14 +9998,27 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     gap: 4vw;
   }
   .first-hero-title {
+    position: absolute;                /* поднимаем заголовок над воротами */
+    top: 25%;
+    bottom: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92vw;
+    text-align: center;
+    z-index: 2;
     font-size: 8.53vw;                 /* 32/375 */
     letter-spacing: 0.03em;
     white-space: nowrap;
+    text-shadow: 0 0.533vw 4.267vw rgba(0, 0, 0, 0.65);
   }
   .first-hero-subtitle-row {
     font-size: 3.2vw;                  /* 12/375 */
     gap: 2.4vw;
     letter-spacing: 0.25em;
+    margin-bottom: 3.8vw;              /* кнопка опущена ниже (~на 3%) */
+  }
+  .first-hero-subtitle-btn {
+    padding: 3.2vw 6.9vw;             /* выше + немного шире */
   }
   .first-hero-divider-line { width: 13.33vw; }
   .first-hero-divider-diamond { width: 1.87vw; height: 1.87vw; }
@@ -10063,6 +10100,16 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   line-height: 1.4;
 }
 
+.lead-topic {
+  margin: 0 0 4px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: #d6a44b;
+  line-height: 1.4;
+}
+.lead-textarea { resize: vertical; min-height: 76px; }
+
 .lead-field { display: flex; flex-direction: column; gap: 6px; }
 .lead-label {
   font-family: var(--font-body);
@@ -10086,6 +10133,46 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   background: rgba(255, 245, 239, 0.08);
 }
 .lead-input::placeholder { color: rgba(255, 245, 239, 0.3); }
+
+.lead-messenger { display: flex; gap: 10px; }
+.lead-messenger-btn {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: rgba(255, 245, 239, 0.75);
+  background: rgba(255, 245, 239, 0.05);
+  border: 1px solid rgba(255, 245, 239, 0.2);
+  border-radius: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.lead-messenger-btn:hover { border-color: rgba(214, 164, 75, 0.6); }
+.lead-messenger-btn.active {
+  color: #fff5ef;
+  border-color: #d6a44b;
+  background: rgba(214, 164, 75, 0.18);
+}
+
+.lead-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.4;
+  color: rgba(255, 245, 239, 0.75);
+  cursor: pointer;
+}
+.lead-consent input {
+  margin: 2px 0 0;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  accent-color: #d6a44b;
+  cursor: pointer;
+}
+.lead-consent a { color: #d6a44b; text-decoration: underline; }
 
 .lead-submit {
   margin-top: 8px;
@@ -10229,6 +10316,8 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   background: rgba(255, 200, 0, 0.16);
   transform: translateY(-2px);
 }
+/* Иконки карточек — только в мобильной версии (десктоп без иконок) */
+.first-about-card-icon { display: none; }
 
 /* ── Tablet (769-1100px) ─────────────────────────────────────── */
 @media (min-width: 769px) and (max-width: 1100px) {
@@ -10243,9 +10332,19 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   .first-about {
     aspect-ratio: 375 / 720;        /* портретная пропорция */
   }
+  /* Лёгкий оверлей только сверху — мобильный фон уже тёмный (Figma-ассет) */
+  .first-about::before {
+    height: 40%;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.45) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
   .first-about-content {
     left: 8vw;                       /* 30/375 */
-    top: 8%;
+    top: 27%;                        /* ниже вспышки, в тёмной зоне — как в макете */
+    transform: none;
     width: 84vw;                     /* 315/375 */
   }
   .first-about-title {
@@ -10263,18 +10362,42 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     font-size: 6.4vw;                /* 24/375 */
   }
   .first-about-cards {
-    margin-top: 5.333vw;             /* 20/375 */
-    gap: 3.2vw;                      /* 12/375 */
+    margin-top: 4.267vw;             /* 16/375 */
+    gap: 2.667vw;                    /* 10/375 */
   }
   .first-about-card {
     flex: 1 1 100%;
     min-width: 100%;
-    min-height: 18.667vw;            /* 70/375 */
-    padding: 4.267vw 4.8vw;          /* 16/18 */
-    border-radius: 4.267vw;          /* 16/375 */
-    font-size: 4vw;
-    text-align: center;
+    min-height: 14.4vw;              /* 54/375 */
+    padding: 2.667vw 4vw;            /* 10/15 */
+    border-radius: 3.733vw;          /* 14/375 */
+    font-size: 3.467vw;              /* 13/375 */
+    line-height: 1.3;
+    text-align: left;
+    justify-content: flex-start;     /* иконка слева + текст */
+    gap: 3.2vw;                      /* 12/375 — отступ иконка↔текст */
+    background: rgba(8, 7, 4, 0.5);  /* тёмная заливка — контраст над ярким лучом */
+    border: 1px solid rgba(255, 200, 0, 0.3);
+    backdrop-filter: blur(2px);
   }
+  .first-about-card:hover { background: rgba(8, 7, 4, 0.6); }
+  /* Иконка в тонком золотом круге слева */
+  .first-about-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 9.6vw;                    /* 36/375 */
+    height: 9.6vw;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 200, 0, 0.55);
+    color: #ffc800;
+  }
+  .first-about-card-icon svg {
+    width: 4.8vw;                    /* 18/375 */
+    height: 4.8vw;
+  }
+  .first-about-card-text { flex: 1 1 auto; }
 }
 
 
@@ -10411,35 +10534,77 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
 /* ── Mobile ─────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .first-how {
-    aspect-ratio: 375 / 720;          /* портрет */
+    aspect-ratio: 375 / 700;          /* портрет — Figma 859:481 (375×700) */
   }
+  /* Затемнение ТОЛЬКО под текстом/карточками (как в макете 859:481):
+     тёмное «пятно» по центру, к краям прозрачное — верх (полки) и низ (кресло)
+     остаются яркими/видимыми. */
+  /* Одно общее мягкое пятно затемнения под всем текстом — выделяет текст,
+     к краям растворяется (верх, низ и бока изображения остаются яркими). */
+  .first-how::before {
+    background:
+      /* доп. затемнение под заголовком «КАК ПРОХОДИТ ОБУЧЕНИЕ» (верхняя часть) */
+      radial-gradient(
+        ellipse 52% 18% at 50% 30%,
+        rgba(0, 0, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0.34) 55%,
+        rgba(0, 0, 0, 0) 100%
+      ),
+      /* общее пятно под всем текстом */
+      radial-gradient(
+        ellipse 64% 47% at 50% 51%,
+        rgba(0, 0, 0, 0.72) 0%,
+        rgba(0, 0, 0, 0.66) 52%,
+        rgba(0, 0, 0, 0.4) 76%,
+        rgba(0, 0, 0, 0.14) 90%,
+        rgba(0, 0, 0, 0) 100%
+      );
+  }
+  /* Контент привязан к верху с точными отступами под макет 859:481:
+     заголовок ~25%, описание ~36%, карточки 41-69%, подпись ~74%. */
   .first-how-content {
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
     width: 88vw;
-    gap: 5.333vw;
+    gap: 0;
+    align-items: center;
   }
   .first-how-title {
-    font-size: 8.533vw;               /* 32/375 */
+    font-size: 7.2vw;                 /* 27/375 — высота блока ~7.5% как в макете */
     gap: 1.067vw;
   }
   .first-how-desc {
+    margin-top: 1.6vw;                /* плотно под заголовком */
     font-size: 4vw;                   /* 15/375 */
-    max-width: 88vw;
+    line-height: 1.3;
+    max-width: 84vw;
   }
   .first-how-chips {
-    gap: 3.2vw;                       /* 12/375 */
+    margin-top: 4vw;                  /* отступ описание → карточки */
+    gap: 2.667vw;                     /* 10/375 — плотнее между карточками */
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;              /* карточки по центру, шириной по тексту */
     width: 100%;
   }
   .first-how-chip {
-    width: 100%;
+    width: auto;                      /* рамка облегает текст — без пустых мест */
+    max-width: 92vw;
     text-align: center;
-    padding: 3.733vw 5.333vw;         /* 14×20 */
+    padding: 2.667vw 5.333vw;         /* 10×20 — компактнее (высота карточки ~4.9%) */
     font-size: 4vw;                   /* 15/375 */
-    border-radius: 13.333vw;
+    border-radius: 4.267vw;           /* 16px — скруглённый прямоугольник, как карточки сайта */
+    background: rgba(6, 5, 3, 0.55);  /* тёмная заливка для читабельности */
+    border: 1px solid rgba(255, 200, 0, 0.55);
+    backdrop-filter: blur(2px);
+  }
+  .first-how-chip:hover {
+    background: rgba(6, 5, 3, 0.7);
+    transform: none;
+    color: #ffc800;
   }
   .first-how-footer {
-    margin-top: 4vw;
+    margin-top: 5.333vw;              /* отступ карточки → подпись */
     font-size: 3.733vw;               /* 14/375 */
     gap: 1.067vw;
   }
@@ -10546,30 +10711,49 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
 /* ── Mobile ─────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .first-matters {
-    aspect-ratio: 375 / 720;
+    aspect-ratio: 375 / 766;          /* портрет — Figma 859:504/505 */
   }
   .first-matters-title {
-    top: 10%;
-    font-size: 8.533vw;               /* 32/375 */
+    top: 10%;                         /* поднято на 5% */
+    font-size: 6.4vw;                 /* 24/375 */
     line-height: 1;
   }
   .first-matters-desc {
-    top: 17%;
-    width: 80vw;
-    font-size: 3.733vw;
+    top: 14.5%;                       /* поднято на 5% */
+    width: 84vw;
+    font-size: 3.733vw;               /* 14/375 */
     line-height: 1.4;
   }
   .first-matters-before {
-    top: 24%;
-    width: 80vw;
+    top: 17.6%;                       /* поднято на 5% */
+    width: 84vw;
     font-size: 3.733vw;
     line-height: 1.4;
   }
   .first-matters-quote {
-    top: 75%;
-    width: 92vw;
+    top: 82%;                         /* цитата в нижней части ~82% */
+    width: 84vw;
     font-size: 6.4vw;                 /* 24/375 */
-    line-height: 1.15;
+    line-height: 1.2;
+  }
+  /* Мобильная цитата в три строки (Figma 859:505): крупная «Я», ниже мельче */
+  .first-matters-quote--m {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    text-transform: none;             /* строчные, как в макете */
+    color: #fff5ef;
+  }
+  .first-matters-quote--m span {
+    font-size: 4.8vw;                 /* 18/375 — «действительно», «это чувствую» */
+    line-height: 1.35;
+    font-weight: 500;
+  }
+  .first-matters-quote-lead {
+    font-size: 4.8vw !important;      /* 18/375 — «Я» того же размера, что и остальные строки */
+    line-height: 1.35;
+    font-weight: 500;
   }
 }
 
@@ -10679,54 +10863,108 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   .first-depth-caption { font-size: min(1.5vw, 14px); }
 }
 
-/* ── Mobile — стек вертикально, 4 уровня в столбик ─────────── */
+/* ── Mobile — по макету Figma 859:507 ───────────────────────── */
 @media (max-width: 768px) {
   .first-depth {
-    aspect-ratio: 375 / 820;
+    aspect-ratio: 375 / 766;          /* портрет — Figma 859:506/507 */
   }
   .first-depth-title {
-    top: 7%;
-    width: 80vw;
-    font-size: 10.667vw;              /* 40/375 */
+    top: 8%;
+    width: 84vw;
+    font-size: 9.6vw;                 /* 36/375 */
   }
   .first-depth-desc {
-    top: 16%;
-    width: 80vw;
-    font-size: 4.8vw;                 /* 18/375 */
-    line-height: 1.25;
+    top: 15.2%;
+    width: 84vw;
+    font-size: 4.267vw;               /* 16/375 */
+    line-height: 1.3;
+    white-space: normal;
   }
-  /* Все 4 уровня в столбик по центру */
-  .first-depth-label {
+
+  /* Верхняя карточка («Вы учитесь ориентироваться…») — ~24-34% */
+  .first-depth-caption--left {
     left: 50%;
+    top: 24%;
     transform: translateX(-50%);
-    font-size: 5.333vw;               /* 20/375 */
+    width: 64vw;
+    padding: 3.467vw 4.8vw;
+    text-align: center;
+    font-size: 3.467vw;               /* 13/375 */
+    line-height: 1.4;
+    background: rgba(8, 6, 4, 0.62);
+    border: 1px solid rgba(255, 200, 0, 0.4);
+    border-radius: 4.267vw;           /* 16px */
+    backdrop-filter: blur(2px);
+  }
+
+  /* Горизонтальная ось с 4 светящимися узлами — ~57.5% */
+  .first-depth-axis {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 57.5%;
+    height: 0;
+    z-index: 2;
+  }
+  .first-depth-axis-line {
+    position: absolute;
+    left: 6%;
+    right: 6%;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 180, 60, 0) 0%,
+      rgba(255, 180, 60, 0.7) 12%,
+      rgba(255, 200, 90, 0.85) 50%,
+      rgba(255, 180, 60, 0.7) 88%,
+      rgba(255, 180, 60, 0) 100%
+    );
+  }
+  .first-depth-node {
+    position: absolute;
+    top: 0;
+    width: 3.2vw;
+    height: 3.2vw;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff2d0 0%, #ffb43c 45%, rgba(255, 140, 30, 0) 75%);
+    box-shadow: 0 0 2.667vw rgba(255, 170, 50, 0.8);
+  }
+
+  /* 4 подписи под узлами в строку — симметрично, равные отступы по краям */
+  .first-depth-label {
+    top: 61%;
+    transform: translateX(-50%);
+    font-size: 2.8vw;                 /* 10.5/375 */
     line-height: 1.3;
     white-space: normal;
     text-align: center;
-    width: 84vw;
+    width: 21vw;
   }
-  .first-depth-label--1 { top: 32%; }
-  .first-depth-label--2 { top: 41%; }
-  .first-depth-label--3 { top: 50%; }
-  .first-depth-label--4 { top: 59%; }
+  .first-depth-label--1 { left: 12.5%; }
+  .first-depth-label--2 { left: 37.5%; width: 13vw; }   /* «Родовые / сценарии» в 2 строки */
+  .first-depth-label--3 { left: 62.5%; }
+  .first-depth-label--4 { left: 87.5%; width: 23vw; }
 
+  /* Нижняя карточка («Без мистификации / Но и без упрощения») — ~74-83% */
   .first-depth-caption {
-    font-size: 3.733vw;                /* 14/375 */
-  }
-  .first-depth-caption--left {
-    left: 8vw;
-    top: 78%;
-    width: 84vw;
-    text-align: center;
-    left: 50%;
-    transform: translateX(-50%);
+    font-size: 3.467vw;
   }
   .first-depth-caption--right {
     left: 50%;
+    top: 79%;
     transform: translateX(-50%);
-    top: 90%;
+    width: 54vw;
+    padding: 3.467vw 4.8vw;
     text-align: center;
+    align-items: center;
     white-space: normal;
-    width: 84vw;
+    font-size: 3.467vw;               /* 13/375 */
+    line-height: 1.45;
+    background: rgba(8, 6, 4, 0.62);
+    border: 1px solid rgba(255, 200, 0, 0.4);
+    border-radius: 4.267vw;
+    backdrop-filter: blur(2px);
   }
 }

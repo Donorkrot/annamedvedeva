@@ -1,8 +1,10 @@
 'use client';
+import { useState } from 'react';
 import Image from "next/image";
 import { useTranslation } from '@/components/LanguageProvider';
 import type { TranslationKey } from '@/lib/translations';
 import Footer from '@/components/Footer';
+import LeadFormModal from '@/components/LeadFormModal';
 
 const ASSET_VERSION = 'r-' + 'a8f3d2e9b';
 const v = (p: string) => `${p}?v=${ASSET_VERSION}`;
@@ -22,6 +24,12 @@ const DESKTOP_BGS    = ['#1a0d05', '#1a0d05', '#1a0d05'];
 
 export default function ConsultationPage() {
   const { lang, tr } = useTranslation();
+  const [leadOpen, setLeadOpen] = useState(false);
+  const [leadSource, setLeadSource] = useState('');
+  const [leadTopic, setLeadTopic] = useState('');
+  const openLead = (src: string, topic: string) => { setLeadSource(src); setLeadTopic(topic); setLeadOpen(true); };
+  // Название + цена консультации по номеру карточки (для подстановки в форму).
+  const cardTopic = (k: number) => `${tr(`c2_card${k}_title` as TranslationKey)} — ${tr(`c2_card${k}_price` as TranslationKey)}`;
 
   return (
     // `data-lang` lets CSS target language-specific button positions for c2
@@ -198,7 +206,7 @@ export default function ConsultationPage() {
                       </div>
                       <div className="c2-buttons">
                         <a href={payHref} target="_blank" rel="noopener noreferrer" className="c2-btn c2-btn-primary">{tr('consult_pay')}</a>
-                        <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" className="c2-btn c2-btn-secondary">{tr('consult_support')}</a>
+                        <button type="button" className="c2-btn c2-btn-secondary" onClick={() => openLead(`consultation-card-${k}`, cardTopic(k))}>{tr('consult_support')}</button>
                       </div>
                       <div className="c2-row">
                         <span className="c2-row-label">{tr('c2_duration_label')}</span>
@@ -219,11 +227,11 @@ export default function ConsultationPage() {
               </div>
               {/* Mobile only — старая раскладка с baked image + hit overlays */}
               <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" aria-label={tr('consult_pay')}     className="cons-hit cons-pay cons-col-1 mobile-only" />
-              <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" aria-label={tr('consult_support')} className="cons-hit cons-support cons-col-1 mobile-only" />
+              <button type="button" aria-label={tr('consult_support')} className="cons-hit cons-support cons-col-1 mobile-only" onClick={() => openLead('consultation-card-1', cardTopic(1))} />
               <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" aria-label={tr('consult_pay')}     className="cons-hit cons-pay cons-col-2 mobile-only" />
-              <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" aria-label={tr('consult_support')} className="cons-hit cons-support cons-col-2 mobile-only" />
+              <button type="button" aria-label={tr('consult_support')} className="cons-hit cons-support cons-col-2 mobile-only" onClick={() => openLead('consultation-card-2', cardTopic(2))} />
               <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" aria-label={tr('consult_pay')}     className="cons-hit cons-pay cons-col-3 mobile-only" />
-              <a href="https://t.me/medvedieva_anna" target="_blank" rel="noopener noreferrer" aria-label={tr('consult_support')} className="cons-hit cons-support cons-col-3 mobile-only" />
+              <button type="button" aria-label={tr('consult_support')} className="cons-hit cons-support cons-col-3 mobile-only" onClick={() => openLead('consultation-card-3', cardTopic(3))} />
             </>
           )}
 
@@ -250,6 +258,7 @@ export default function ConsultationPage() {
           )}
         </section>
       ))}
+      <LeadFormModal open={leadOpen} onClose={() => setLeadOpen(false)} source={leadSource} topic={leadTopic} />
       <Footer />
     </main>
   );
