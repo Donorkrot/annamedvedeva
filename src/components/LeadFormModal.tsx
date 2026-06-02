@@ -72,11 +72,6 @@ export default function LeadFormModal({ open, onClose, source = 'first-stage', t
       setStatus('error');
       return;
     }
-    if (messenger === 'telegram' && !tgNick.trim()) {
-      setErrorMsg(tr('lead_form_error_tg_nick'));
-      setStatus('error');
-      return;
-    }
     if (!agreed) {
       setErrorMsg(tr('lead_form_error_consent'));
       setStatus('error');
