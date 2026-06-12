@@ -8,6 +8,7 @@ import { absUrl, SITE } from '@/lib/seo';
 const TITLE = 'Анна Медведева — автор метода «ДНК Реальности»';
 const DESCRIPTION =
   'Биография Анны Медведевой, профессиональный опыт, образование, подход к работе и история создания метода Reality DNA.';
+const OG_IMAGE = '/og/og-about.jpg';
 
 export const metadata: Metadata = {
   // absolute — без бренд-суффикса из root-шаблона (точный title по ТЗ).
@@ -21,13 +22,13 @@ export const metadata: Metadata = {
     url: absUrl('/about'),
     title: TITLE,
     description: DESCRIPTION,
-    images: [{ url: absUrl(SITE.ogImage), width: 1200, height: 630 }],
+    images: [{ url: absUrl(OG_IMAGE), width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: TITLE,
     description: DESCRIPTION,
-    images: [absUrl(SITE.ogImage)],
+    images: [absUrl(OG_IMAGE)],
   },
 };
 
