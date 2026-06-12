@@ -1,26 +1,31 @@
 import type { Metadata } from 'next';
-import { absUrl, SITE } from '@/lib/seo';
+import { absUrl } from '@/lib/seo';
+
+// OG-превью — герой-экран страницы консультаций (1200×630).
+const OG_IMAGE = '/og/og-consultation.jpg';
+
+const TITLE = 'Консультация Анны Медведевой по управлению состоянием';
+const DESCRIPTION =
+  'Индивидуальная консультация Анны Медведевой: формат работы, продолжительность, стоимость, подготовка и запись на сессию.';
 
 export const metadata: Metadata = {
-  title: 'Консультации с Анной Медведевой',
-  description:
-    'Индивидуальная, срочная и дистанционная консультация квантового психолога Анны Медведевой. Работа с состоянием на уровне ядра.',
+  title: { absolute: TITLE },
+  description: DESCRIPTION,
   alternates: {
     canonical: absUrl('/consultation'),
   },
   openGraph: {
     type: 'website',
     url: absUrl('/consultation'),
-    title: 'Консультации — Reality DNA',
-    description:
-      'Запись на консультацию: индивидуальная / срочная / дистанционная. Глубинная работа с состоянием.',
-    images: [{ url: absUrl(SITE.ogImage), width: 1200, height: 630 }],
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: absUrl(OG_IMAGE), width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Консультации — Reality DNA',
-    description: 'Запись на консультацию у Анны Медведевой.',
-    images: [absUrl(SITE.ogImage)],
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [absUrl(OG_IMAGE)],
   },
 };
 

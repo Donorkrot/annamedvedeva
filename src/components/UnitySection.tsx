@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { useTranslation } from '@/components/LanguageProvider';
 
 export default function UnitySection() {
@@ -10,8 +11,10 @@ export default function UnitySection() {
       {/* ── Desktop (Figma 1440×700, node 1:156) ── */}
       <div className="s10-d desktop-only">
         <div className="s10-d-bg" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img loading="lazy" decoding="async" src="/images/backgrounds/bg-s10-desktop.jpg" alt="" />
+          {/* next/image → автоматический avif/webp + подбор ширины под deviceSizes.
+              Раньше это был сырой <img> с полным JPG (~171 КБ) в обход оптимизатора —
+              теперь ~50 КБ. object-fit:cover задаётся в .s10-d-bg img. */}
+          <Image src="/images/backgrounds/bg-s10-desktop.jpg" alt="" fill sizes="100vw" quality={65} />
         </div>
         <div className="s10-d-title">
           <h2 className="s10-d-h2">{tr('s10_title_1')} {tr('s10_title_2')}</h2>

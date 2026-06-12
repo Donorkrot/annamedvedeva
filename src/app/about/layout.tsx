@@ -5,26 +5,28 @@ import { absUrl, SITE } from '@/lib/seo';
  * Server-обёртка для /about (страница сама — client component).
  * Перебивает default-title + canonical из root layout.
  */
+const TITLE = 'Анна Медведева — автор метода «ДНК Реальности»';
+const DESCRIPTION =
+  'Биография Анны Медведевой, профессиональный опыт, образование, подход к работе и история создания метода Reality DNA.';
+
 export const metadata: Metadata = {
-  title: 'О мастере — Анна Медведева',
-  description:
-    'Анна Медведева — квантовый психолог, мастер состояния, автор метода ДНК Реальности. 9 лет практики, 3000+ сессий, $100,000 вложено в обучение.',
+  // absolute — без бренд-суффикса из root-шаблона (точный title по ТЗ).
+  title: { absolute: TITLE },
+  description: DESCRIPTION,
   alternates: {
     canonical: absUrl('/about'),
   },
   openGraph: {
     type: 'profile',
     url: absUrl('/about'),
-    title: `О мастере — ${SITE.authorName}`,
-    description:
-      'Квантовый психолог, автор метода ДНК Реальности. Путь от красиво-удобной к красиво-честной.',
+    title: TITLE,
+    description: DESCRIPTION,
     images: [{ url: absUrl(SITE.ogImage), width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `О мастере — ${SITE.authorName}`,
-    description:
-      'Квантовый психолог, автор метода ДНК Реальности.',
+    title: TITLE,
+    description: DESCRIPTION,
     images: [absUrl(SITE.ogImage)],
   },
 };

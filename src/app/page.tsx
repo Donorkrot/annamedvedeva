@@ -14,7 +14,7 @@ import { HomeJsonLd } from "@/components/JsonLd";
 
 export default function Home() {
   return (
-    <main>
+    <main className="home">
       {/* JSON-LD: Organization + Person + WebSite для Google knowledge panel */}
       <HomeJsonLd />
       <HeroSection />

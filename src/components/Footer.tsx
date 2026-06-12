@@ -9,11 +9,17 @@ const BOOK_HREF = 'https://drive.google.com/drive/folders/1V5KF6JG-TGjbRFOk_Y0n7
 /**
  * Подвал. На страницах академии (/academy, /first-stage) используется
  * академический фон (золотой ключ + молнии), на остальных — оригинал (трещина).
+ *
+ * Страница /first-stage использует ОТДЕЛЬНЫЙ desktop-макет подвала (Figma 878:6079):
+ * центральный ключ на чёрном фоне, два текстовых блока слева, справа — «Запись
+ * в Академию» с кнопкой «Оставить заявку» (открывает форму через onApply).
+ * Мобильный подвал у всех страниц общий.
  */
-export default function Footer() {
+export default function Footer({ onApply }: { onApply?: () => void } = {}) {
   const { tr } = useTranslation();
   const pathname = usePathname() || '';
-  const isAcademy = pathname.startsWith('/academy') || pathname.startsWith('/first-stage');
+  const isFirstStage = pathname.startsWith('/first-stage');
+  const isAcademy = pathname.startsWith('/academy') || isFirstStage;
   const bgDesktop = isAcademy
     ? '/images/backgrounds/bg-s12-academy-desktop.jpg'
     : '/images/backgrounds/bg-s12-desktop.jpg';
@@ -21,12 +27,28 @@ export default function Footer() {
     ? '/images/backgrounds/bg-s12-academy-mobile.jpg'
     : '/images/backgrounds/bg-s12-mobile.jpg';
 
+  const social = (
+    <>
+      <a href="https://instagram.com/medvedieva.anna" target="_blank" rel="noopener noreferrer" className="s12-social__link" aria-label="Instagram">
+        <img loading="lazy" decoding="async" src="/images/icons/instagram.svg" alt="" width={40} height={40} draggable={false} />
+      </a>
+      <a href="https://www.youtube.com/@medvedievaanna" target="_blank" rel="noopener noreferrer" className="s12-social__link" aria-label="YouTube">
+        <img loading="lazy" decoding="async" src="/images/icons/youtube.svg" alt="" width={40} height={40} draggable={false} />
+      </a>
+      <a href="https://t.me/wayofsoulanna" target="_blank" rel="noopener noreferrer" className="s12-social__link" aria-label="Telegram">
+        <img loading="lazy" decoding="async" src="/images/icons/telegram.svg" alt="" width={40} height={40} draggable={false} />
+      </a>
+    </>
+  );
+
   return (
     <footer id="s12" className="s12-footer s12-figma">
 
       {/* ── Desktop ── */}
+      {/* Единый подвал для всех страниц. На /academy и /first-stage используется
+          академический фон (bgDesktop через isAcademy) — подвалы идентичны. */}
       <div className="s12-bg desktop-only">
-        <Image src={bgDesktop} alt="" fill sizes="100vw" />
+        <Image src={bgDesktop} alt="" fill sizes="100vw" quality={65} />
       </div>
 
       <div className="s12-headline-block desktop-only">
@@ -47,17 +69,7 @@ export default function Footer() {
         <span className="s12-book__sub">{tr('s12_book')}</span>
       </a>
 
-      <div className="s12-social desktop-only">
-        <a href="https://instagram.com/medvedieva.anna" target="_blank" rel="noopener noreferrer" className="s12-social__link" aria-label="Instagram">
-          <img loading="lazy" decoding="async" src="/images/icons/instagram.svg" alt="" width={40} height={40} draggable={false} />
-        </a>
-        <a href="https://www.youtube.com/@medvedievaanna" target="_blank" rel="noopener noreferrer" className="s12-social__link" aria-label="YouTube">
-          <img loading="lazy" decoding="async" src="/images/icons/youtube.svg" alt="" width={40} height={40} draggable={false} />
-        </a>
-        <a href="https://t.me/wayofsoulanna" target="_blank" rel="noopener noreferrer" className="s12-social__link" aria-label="Telegram">
-          <img loading="lazy" decoding="async" src="/images/icons/telegram.svg" alt="" width={40} height={40} draggable={false} />
-        </a>
-      </div>
+      <div className="s12-social desktop-only">{social}</div>
 
       <div className="s12-legal desktop-only">
         <Link href="/offer" className="s12-legal__link">{tr('s12_offer')}</Link>

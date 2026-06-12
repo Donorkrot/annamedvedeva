@@ -10,7 +10,7 @@ export default function ArchetypesSection() {
 
       {/* ── Desktop ── */}
       <div className="s9-bg desktop-only">
-        <Image src="/images/backgrounds/bg-s9-desktop.jpg" alt="" fill sizes="100vw" />
+        <Image src="/images/backgrounds/bg-s9-desktop.jpg" alt="" fill sizes="100vw" quality={65} />
       </div>
 
       <h2 className="s9-title desktop-only">{tr('s9_title_1')} {tr('s9_title_2')}</h2>

@@ -10,7 +10,7 @@ export default function OldCodeSection() {
 
       {/* ── Desktop ── */}
       <div className="s3-bg desktop-only">
-        <Image src="/images/backgrounds/bg-s3-desktop.jpg" alt="" fill sizes="100vw" />
+        <Image src="/images/backgrounds/bg-s3-desktop.jpg" alt="" fill sizes="100vw" quality={65} />
       </div>
 
       <p className="s3-kicker desktop-only">{tr('s3_kicker')}</p>

@@ -1,9 +1,13 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useTranslation } from '@/components/LanguageProvider';
 import Footer from '@/components/Footer';
 import LeadFormModal from '@/components/LeadFormModal';
+import MattersEnergy from '@/components/MattersEnergy';
+import ReviewsMarquee from '@/components/ReviewsMarquee';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import { CourseJsonLd } from '@/components/JsonLd';
 
 /**
  * /first-stage — Первая ступень.
@@ -11,11 +15,51 @@ import LeadFormModal from '@/components/LeadFormModal';
  * чтобы оставался копируемым (визуально совпадает с запечённым в макете).
  */
 export default function FirstStagePage() {
-  const { tr } = useTranslation();
+  const { tr, lang } = useTranslation();
   const [leadOpen, setLeadOpen] = useState(false);
+
+  // Блок 6 (мобайл): все карточки одной ширины — по самой длинной строке среди всех.
+  // Текст остаётся в 2 строки, справа нет пустого места, карточки выровнены.
+  useEffect(() => {
+    const fit = () => {
+      const texts = Array.from(document.querySelectorAll<HTMLElement>('.first-result-m-text'));
+      if (!texts.length) return;
+      // 1) сбросить инлайн-ширину → перенос по CSS-ширине (2 строки)
+      texts.forEach((t) => { t.style.width = ''; });
+      // 2) найти максимальную длину строки среди всех карточек
+      let globalMax = 0;
+      texts.forEach((t) => {
+        const range = document.createRange();
+        range.selectNodeContents(t);
+        Array.from(range.getClientRects()).forEach((r) => {
+          if (r.width > globalMax) globalMax = r.width;
+        });
+      });
+      // 3) задать всем одинаковую ширину
+      if (globalMax > 0) {
+        const w = `${Math.ceil(globalMax)}px`;
+        texts.forEach((t) => { t.style.width = w; });
+      }
+    };
+    fit();
+    window.addEventListener('resize', fit);
+    return () => window.removeEventListener('resize', fit);
+  }, [lang]);
 
   return (
     <main className="first-stage">
+      <CourseJsonLd
+        name="Первая ступень Академии Reality DNA"
+        description="Программа первой ступени Reality DNA: содержание обучения, формат занятий, практика и вход в метод управления состоянием."
+        path="/first-stage"
+      />
+      <Breadcrumbs
+        items={[
+          { name: 'Главная', path: '/' },
+          { name: 'Академия', path: '/academy' },
+          { name: 'Первая ступень', path: '/first-stage' },
+        ]}
+      />
       {/* ── Hero — Figma 772:448 ── */}
       <section className="first-hero">
         {/* Desktop bg — Figma 772:456 (1672×941, landscape) */}
@@ -26,7 +70,7 @@ export default function FirstStagePage() {
             fill
             sizes="100vw"
             priority
-            quality={90}
+            quality={70}
             style={{ objectFit: 'cover', objectPosition: 'center' }}
           />
         </div>
@@ -38,7 +82,7 @@ export default function FirstStagePage() {
             fill
             sizes="100vw"
             priority
-            quality={90}
+            quality={70}
             style={{ objectFit: 'cover', objectPosition: 'center' }}
           />
         </div>
@@ -82,7 +126,7 @@ export default function FirstStagePage() {
             alt=""
             fill
             sizes="100vw"
-            quality={90}
+            quality={70}
             style={{ objectFit: 'cover', objectPosition: 'center' }}
           />
         </div>
@@ -93,7 +137,7 @@ export default function FirstStagePage() {
             alt=""
             fill
             sizes="100vw"
-            quality={90}
+            quality={70}
             style={{ objectFit: 'cover', objectPosition: 'center' }}
           />
         </div>
@@ -149,22 +193,22 @@ export default function FirstStagePage() {
         {/* Desktop bg — landscape */}
         <div className="first-how-bg desktop-only" aria-hidden="true">
           <Image
-            src="/images/first-stage/how-bg.jpg"
+            src="/images/first-stage/how-bg-3.jpg"
             alt=""
             fill
             sizes="100vw"
-            quality={90}
+            quality={70}
             style={{ objectFit: 'cover', objectPosition: 'center' }}
           />
         </div>
-        {/* Mobile bg — portrait (Figma 855:473) */}
+        {/* Mobile bg — portrait (Figma 861:511) */}
         <div className="first-how-bg mobile-only" aria-hidden="true">
           <Image
-            src="/images/first-stage/how-m-bg.jpg"
+            src="/images/first-stage/how-m-bg-2.jpg"
             alt=""
             fill
             sizes="100vw"
-            quality={90}
+            quality={70}
             style={{ objectFit: 'cover', objectPosition: 'center' }}
           />
         </div>
@@ -174,10 +218,24 @@ export default function FirstStagePage() {
             <span>{tr('first_stage_how_title_1')}</span>
             <span>{tr('first_stage_how_title_2')}</span>
           </h2>
-          <p className="first-how-desc">{tr('first_stage_how_desc')}</p>
+          <p className="first-how-desc">
+            {(() => {
+              const d = tr('first_stage_how_desc');
+              const i = d.indexOf(', ');
+              if (i < 0) return d;
+              return (
+                <>
+                  <span>{d.slice(0, i + 2)}</span>
+                  <span>{d.slice(i + 2)}</span>
+                </>
+              );
+            })()}
+          </p>
           <ul className="first-how-chips">
-            <li className="first-how-chip">{tr('first_stage_how_chip_1')}</li>
+            {/* Порядок: «Демонстрации и разборы» → «Живая работа в группе» →
+                «Практика в парах» → «Супервизия» (chip_2 раньше chip_1). */}
             <li className="first-how-chip">{tr('first_stage_how_chip_2')}</li>
+            <li className="first-how-chip">{tr('first_stage_how_chip_1')}</li>
             <li className="first-how-chip">{tr('first_stage_how_chip_3')}</li>
             <li className="first-how-chip">{tr('first_stage_how_chip_4')}</li>
           </ul>
@@ -197,7 +255,7 @@ export default function FirstStagePage() {
             alt=""
             fill
             sizes="100vw"
-            quality={90}
+            quality={70}
             style={{ objectFit: 'cover', objectPosition: 'center bottom' }}
           />
         </div>
@@ -208,10 +266,13 @@ export default function FirstStagePage() {
             alt=""
             fill
             sizes="100vw"
-            quality={90}
+            quality={70}
             style={{ objectFit: 'cover', objectPosition: 'center' }}
           />
         </div>
+
+        {/* Анимированный слой энергии (руки ⇄ круг) */}
+        <MattersEnergy />
 
         <h2 className="first-matters-title">{tr('first_stage_matters_title')}</h2>
         <p className="first-matters-desc">{tr('first_stage_matters_desc')}</p>
@@ -228,14 +289,15 @@ export default function FirstStagePage() {
 
       {/* ── Section 5 — "Глубина" — Figma 812:695 (1672×850) ── */}
       <section className="first-depth">
-        {/* Desktop bg — landscape */}
+        {/* Desktop bg — звёзды + светящаяся ось (макет 927:443, без артефакта/текста).
+            ?v=2 — сброс кэша браузера после замены содержимого файла. */}
         <div className="first-depth-bg desktop-only" aria-hidden="true">
           <Image
-            src="/images/first-stage/depth-bg.jpg"
+            src="/images/first-stage/depth-bg.jpg?v=2"
             alt=""
             fill
             sizes="100vw"
-            quality={90}
+            quality={70}
             style={{ objectFit: 'cover', objectPosition: 'center' }}
           />
         </div>
@@ -246,13 +308,28 @@ export default function FirstStagePage() {
             alt=""
             fill
             sizes="100vw"
-            quality={95}
+            quality={75}
             style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+        </div>
+
+        {/* Артефакт-спираль — отдельный прозрачный слой по центру (desktop).
+            Фон depth-bg теперь чистый (звёзды+ось), артефакт сверху. */}
+        <div className="first-depth-artifact desktop-only" aria-hidden="true">
+          <Image
+            src="/images/first-stage/depth-artifact.png"
+            alt=""
+            fill
+            sizes="20vw"
+            quality={75}
           />
         </div>
 
         <h2 className="first-depth-title">{tr('first_stage_depth_title')}</h2>
         <p className="first-depth-desc">{tr('first_stage_depth_desc')}</p>
+
+        {/* Mobile — светящийся шар по центру (Figma 928:450) */}
+        <div className="first-depth-orb mobile-only" aria-hidden="true" />
 
         {/* Mobile — горизонтальная ось с 4 узлами (Figma 859:507) */}
         <div className="first-depth-axis mobile-only" aria-hidden="true">
@@ -263,23 +340,189 @@ export default function FirstStagePage() {
           <span className="first-depth-node" style={{ left: '87.5%' }} />
         </div>
 
-        {/* 4 уровня вдоль горизонтальной линии */}
+        {/* 4 уровня. Desktop — вдоль горизонтальной оси; mobile — вертикальный
+            funnel под шаром (Figma 928:450). */}
         <p className="first-depth-label first-depth-label--1">{tr('first_stage_depth_label_1')}</p>
         <p className="first-depth-label first-depth-label--2">{tr('first_stage_depth_label_2')}</p>
         <p className="first-depth-label first-depth-label--3">{tr('first_stage_depth_label_3')}</p>
         <p className="first-depth-label first-depth-label--4">{tr('first_stage_depth_label_4')}</p>
 
-        {/* Подписи внизу */}
+        {/* Подписи-карточки. Desktop — внизу слева/справа; mobile — две рядом
+            вверху с иконками (Figma 928:450). */}
         <p className="first-depth-caption first-depth-caption--left">
+          <span className="first-depth-card-ic mobile-only" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 12a2 2 0 1 1 2.4 1.96A4 4 0 1 1 8 11.5a6 6 0 1 1 9.6 3.3" />
+            </svg>
+          </span>
           {tr('first_stage_depth_caption_left')}
         </p>
         <p className="first-depth-caption first-depth-caption--right">
+          <span className="first-depth-card-ic mobile-only" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 7.5v10" />
+              <path d="M12 8.5C12 5 9.2 3 6.7 3 4.6 3 3.2 4.7 3.2 6.9c0 3 2.9 5.1 6 5.1 1.4 0 2.8-1.1 2.8-3.5z" />
+              <path d="M12 8.5C12 5 14.8 3 17.3 3 19.4 3 20.8 4.7 20.8 6.9c0 3-2.9 5.1-6 5.1-1.4 0-2.8-1.1-2.8-3.5z" />
+              <path d="M12 12.5c-.8 2-2 3.3-3.6 4.2 1.4.9 2.8.4 3.6-1z" />
+              <path d="M12 12.5c.8 2 2 3.3 3.6 4.2-1.4.9-2.8.4-3.6-1z" />
+            </svg>
+          </span>
           <span>{tr('first_stage_depth_caption_right_1')}</span>
           <span>{tr('first_stage_depth_caption_right_2')}</span>
         </p>
       </section>
 
-      <Footer />
+      {/* ── Section 6 — "Результат" — Figma 855:449 (1672×941) ── */}
+      <section className="first-result">
+        {/* Desktop bg — арка/руины (макет 942:519). ?v=2 — сброс кэша браузера. */}
+        <div className="first-result-bg desktop-only" aria-hidden="true">
+          <Image
+            src="/images/first-stage/result-bg.jpg?v=2"
+            alt=""
+            fill
+            sizes="100vw"
+            quality={70}
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+        </div>
+        {/* Mobile bg — чистый фон Figma 873:6001 (текст/карточки — живой HTML поверх) */}
+        <div className="first-result-bg mobile-only" aria-hidden="true">
+          <Image
+            src="/images/first-stage/result-m-clean.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            quality={70}
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+        </div>
+
+        {/* Desktop content (горизонтальные пилюли) */}
+        <div className="first-result-content">
+          <h2 className="first-result-title">{tr('first_stage_result_title')}</h2>
+          <p className="first-result-subtitle">{tr('first_stage_result_subtitle')}</p>
+          <ul className="first-result-cards">
+            <li className="first-result-card">{tr('first_stage_result_card_1')}</li>
+            <li className="first-result-card">{tr('first_stage_result_card_2')}</li>
+            <li className="first-result-card">{tr('first_stage_result_card_3')}</li>
+          </ul>
+          <p className="first-result-before">{tr('first_stage_result_before')}</p>
+          <p className="first-result-quote">{tr('first_stage_result_quote')}</p>
+        </div>
+
+        {/* Mobile content — Figma 873:6000 (карточки с иконками, живой текст) */}
+        <div className="first-result-m mobile-only">
+          <h2 className="first-result-m-title">{tr('first_stage_result_title')}</h2>
+          <p className="first-result-m-subtitle">{tr('first_stage_result_subtitle')}</p>
+          <ul className="first-result-m-cards">
+            <li className="first-result-m-card">
+              <span className="first-result-m-ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="8" r="4" />
+                  <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" />
+                </svg>
+              </span>
+              <span className="first-result-m-text">{tr('first_stage_result_card_1')}</span>
+            </li>
+            <li className="first-result-m-card">
+              <span className="first-result-m-ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="M21 21l-4.3-4.3" />
+                </svg>
+              </span>
+              <span className="first-result-m-text">{tr('first_stage_result_card_2')}</span>
+            </li>
+            <li className="first-result-m-card">
+              <span className="first-result-m-ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="3" />
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                </svg>
+              </span>
+              <span className="first-result-m-text">{tr('first_stage_result_card_3')}</span>
+            </li>
+          </ul>
+          <p className="first-result-m-before">{tr('first_stage_result_before')}</p>
+          <p className="first-result-m-quote">{tr('first_stage_result_quote')}</p>
+        </div>
+      </section>
+
+      {/* ── Section 7 — Отзывы (слайдер-лента, авто-прокрутка) ── */}
+      <section className="first-reviews" id="reviews">
+        <h2 className="first-reviews-title">{tr('first_stage_reviews_title')}</h2>
+        <p className="first-reviews-subtitle">{tr('first_stage_reviews_subtitle')}</p>
+        <ReviewsMarquee />
+      </section>
+
+      {/* ── Section 8 — "Формат" — Figma 873:5995 (1672×1048) ── */}
+      <section className="first-format">
+        {/* Правая светящаяся сфера */}
+        <div className="first-format-img" aria-hidden="true">
+          <Image
+            src="/images/first-stage/format-sphere.jpg"
+            alt=""
+            fill
+            sizes="(max-width: 768px) 100vw, 51vw"
+            quality={70}
+            style={{ objectFit: 'contain', objectPosition: 'center' }}
+          />
+        </div>
+
+        {/* Левая колонка */}
+        <div className="first-format-content">
+          <h2 className="first-format-title">{tr('first_stage_format_title')}</h2>
+          <p className="first-format-desc">{tr('first_stage_format_desc')}</p>
+          <ul className="first-format-pills">
+            <li className="first-format-pill">{tr('first_stage_format_pill_1')}</li>
+            <li className="first-format-pill">{tr('first_stage_format_pill_2')}</li>
+            <li className="first-format-pill">{tr('first_stage_format_pill_3')}</li>
+            <li className="first-format-pill">{tr('first_stage_format_pill_4')}</li>
+          </ul>
+          <p className="first-format-note">{tr('first_stage_format_note')}</p>
+          {/* Кнопка-книга «ДНК РЕАЛЬНОСТИ / Читать книгу» убрана — в макете
+              873:5995 её нет. Вернуть: раскомментировать. */}
+          {/* <button type="button" className="first-format-book" onClick={() => setLeadOpen(true)}>
+            <span className="first-format-book-title">{tr('first_stage_format_book_title')}</span>
+            <span className="first-format-book-sub">{tr('first_stage_format_book_sub')}</span>
+          </button> */}
+        </div>
+
+        {/* Нижняя кнопка */}
+        <button type="button" className="first-format-cta" onClick={() => setLeadOpen(true)}>
+          {tr('first_stage_format_button')}
+        </button>
+      </section>
+
+      {/* ── CTA-баннер «Запись в Академию» — Figma 949:520 (1672×392) ── */}
+      <section className="first-enroll">
+        <div className="first-enroll-bg" aria-hidden="true">
+          <Image
+            src="/images/first-stage/enroll-bg.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            quality={70}
+            style={{ objectFit: 'cover', objectPosition: 'center 70%' }}
+          />
+        </div>
+        <div className="first-enroll-content">
+          <div className="first-enroll-text">
+            <h2 className="first-enroll-title">{tr('s12_fs_academy')}</h2>
+            <p className="first-enroll-sub">
+              {tr('s12_fs_cohorts')}
+              <br />
+              {tr('s12_fs_start')}
+              <span className="first-enroll-date">{tr('s12_fs_date')}</span>
+            </p>
+          </div>
+          <button type="button" className="first-enroll-btn" onClick={() => setLeadOpen(true)}>
+            {tr('academy_hero_cta')}
+          </button>
+        </div>
+      </section>
+
+      <Footer onApply={() => setLeadOpen(true)} />
 
       <LeadFormModal open={leadOpen} onClose={() => setLeadOpen(false)} source="first-stage" />
     </main>

@@ -3,25 +3,21 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from '@/components/LanguageProvider';
-import type { Lang } from '@/lib/translations';
+import { useAuth } from '@/lib/auth';
 
 interface SideMenuProps {
   open: boolean;
   onClose: () => void;
+  /** Открыть модалку входа/регистрации (передаётся из Header). */
+  onLogin: () => void;
 }
 
-const NAV_ITEMS = [
-  { key: 'menu_ri',       href: '#s4'  },
-  { key: 'menu_key_ri',   href: '#s7'  },
-  { key: 'menu_dna',      href: '#s8'  },
-  { key: 'menu_archetypes', href: '#s9' },
-  { key: 'menu_unity',    href: '#s10' },
-  { key: 'menu_contact',  href: '#s12' },
-] as const;
-
 const PAGE_ITEMS = [
-  { key: 'nav_consult', href: '/consultation' },
-  { key: 's7_btn2',     href: '/about' },
+  { key: 'menu_home',          href: '/' },
+  { key: 'menu_academy',       href: '/academy' },
+  { key: 's7_btn2',            href: '/about' },
+  { key: 'menu_consultations', href: '/consultation' },
+  { key: 'menu_first_stage',   href: '/first-stage' },
 ] as const;
 
 const SOCIAL_LINKS = {
@@ -30,8 +26,9 @@ const SOCIAL_LINKS = {
   telegram:  'https://t.me/wayofsoulanna',
 } as const;
 
-export default function SideMenu({ open, onClose }: SideMenuProps) {
-  const { lang, setLang, tr } = useTranslation();
+export default function SideMenu({ open, onClose, onLogin }: SideMenuProps) {
+  const { tr } = useTranslation();
+  const { user } = useAuth();
 
   // Close on Escape
   useEffect(() => {
@@ -46,16 +43,6 @@ export default function SideMenu({ open, onClose }: SideMenuProps) {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [open]);
-
-  const scrollTo = (href: string) => {
-    onClose();
-    setTimeout(() => {
-      const el = document.querySelector(href) as HTMLElement | null;
-      if (!el) return;
-      const top = el.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }, 320);
-  };
 
   return (
     <>
@@ -84,15 +71,6 @@ export default function SideMenu({ open, onClose }: SideMenuProps) {
 
         {/* Nav links */}
         <nav className="sidemenu-nav">
-          {NAV_ITEMS.map(item => (
-            <a
-              key={item.key}
-              className="sidemenu-link"
-              onClick={() => scrollTo(item.href)}
-            >
-              {tr(item.key as Parameters<typeof tr>[0])}
-            </a>
-          ))}
           {PAGE_ITEMS.map(item => (
             <Link
               key={item.key}
@@ -127,35 +105,26 @@ export default function SideMenu({ open, onClose }: SideMenuProps) {
           </a>
         </div>
 
-        {/* Login / Register — placeholder for future auth modal */}
-        <button
-          className="sidemenu-cta"
-          style={{ marginTop: 0, opacity: 0.85 }}
-          onClick={onClose}
-        >
-          {tr('nav_login')}
-        </button>
-
-        {/* CTA button */}
-        <button
-          className="sidemenu-cta"
-          onClick={() => scrollTo('#s12')}
-        >
-          {tr('nav_btn')}
-        </button>
-
-        {/* Language switcher */}
-        <div className="sidemenu-lang">
-          {(['ru', 'ua', 'en'] as Lang[]).map((l) => (
-            <a
-              key={l}
-              className={`sidemenu-lang-item${lang === l ? ' active' : ''}`}
-              onClick={() => setLang(l)}
-            >
-              {l.toUpperCase()}
-            </a>
-          ))}
-        </div>
+        {/* Вход/Регистрация — если пользователь уже вошёл, ведём в личный
+            кабинет; иначе открываем модалку авторизации. */}
+        {user ? (
+          <Link
+            href="/account"
+            className="sidemenu-cta"
+            style={{ marginTop: 0 }}
+            onClick={onClose}
+          >
+            {tr('nav_account')}
+          </Link>
+        ) : (
+          <button
+            className="sidemenu-cta"
+            style={{ marginTop: 0 }}
+            onClick={() => { onClose(); onLogin(); }}
+          >
+            {tr('nav_login')}
+          </button>
+        )}
 
       </aside>
     </>

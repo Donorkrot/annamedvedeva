@@ -5,6 +5,8 @@ import { useTranslation } from '@/components/LanguageProvider';
 import type { TranslationKey } from '@/lib/translations';
 import Footer from '@/components/Footer';
 import LeadFormModal from '@/components/LeadFormModal';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import { CourseJsonLd } from '@/components/JsonLd';
 
 /**
  * /academy — Академия мастеров.
@@ -15,7 +17,7 @@ import LeadFormModal from '@/components/LeadFormModal';
  *  - Mobile:  2138:744 (375×716) — другой bg-кадрировка + title в 2 строки + divider
  */
 export default function AcademyPage() {
-  const { tr } = useTranslation();
+  const { tr, lang } = useTranslation();
   const [leadOpen, setLeadOpen] = useState(false);
   const [leadSource, setLeadSource] = useState('academy-step1');
   const openLead = (src: string) => { setLeadSource(src); setLeadOpen(true); };
@@ -24,7 +26,18 @@ export default function AcademyPage() {
   const titleWords = tr('academy_hero_title').split(' ');
 
   return (
-    <main className="academy">
+    <main className="academy" data-lang={lang}>
+      <CourseJsonLd
+        name="Академия Reality DNA"
+        description="Программа Академии Reality DNA: ступени обучения, практика, работа с состоянием и подготовка специалистов методу управления состоянием."
+        path="/academy"
+      />
+      <Breadcrumbs
+        items={[
+          { name: 'Главная', path: '/' },
+          { name: 'Академия', path: '/academy' },
+        ]}
+      />
       {/* ── Hero — Figma 668:466 (desktop) + 2138:744 (mobile) ── */}
       <section className="acad-hero">
         {/* Desktop bg — full-width 1440×700 cathedral */}

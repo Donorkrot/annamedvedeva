@@ -25,9 +25,8 @@ export async function POST(request: Request) {
     if (!messengerNorm) {
       return NextResponse.json({ ok: false, error: 'Missing messenger' }, { status: 400 });
     }
-    if (messengerNorm === 'telegram' && !telegram) {
-      return NextResponse.json({ ok: false, error: 'Missing telegram nick' }, { status: 400 });
-    }
+    // Telegram-ник НЕ обязателен: если пользователь выбрал Telegram, но не указал
+    // никнейм — заявку всё равно принимаем (telegram уйдёт пустым).
 
     // Серверная проверка телефона (UA-форматы с кодом/без + международный E.164),
     // чтобы не приходили неполные номера.
@@ -74,7 +73,7 @@ export async function POST(request: Request) {
         `👤 Имя: ${lead.name}\n` +
         `📞 Телефон: ${lead.phone}\n` +
         (lead.messenger === 'telegram'
-          ? `💬 Telegram: ${lead.telegram}\n`
+          ? `💬 Telegram: ${lead.telegram || 'ник не указан (свяжитесь по телефону)'}\n`
           : `💬 Мессенджер: WhatsApp (по номеру телефона)\n`) +
         `📄 Форма: ${sourceLabel}\n` +
         (lead.topic ? `💼 Услуга: ${lead.topic}\n` : '') +

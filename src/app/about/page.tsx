@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useTranslation } from '@/components/LanguageProvider';
 import Footer from '@/components/Footer';
 import LiteYouTube from '@/components/LiteYouTube';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 const ASSET_VERSION = '20260418-hq3x';
 const v = (p: string) => `${p}?v=${ASSET_VERSION}`;
@@ -39,7 +40,13 @@ export default function AboutPage() {
   const { lang, tr } = useTranslation();
 
   return (
-    <main>
+    <main className="about-pg">
+      <Breadcrumbs
+        items={[
+          { name: 'Главная', path: '/' },
+          { name: 'О мастере', path: '/about' },
+        ]}
+      />
       {Array.from({ length: 10 }, (_, i) => i + 1).map((n, i) => (
         <section
           key={`a${n}`}
@@ -57,11 +64,13 @@ export default function AboutPage() {
                   <Image src="/images/about/a1-d-photo.png" alt="" fill sizes="42vw" priority />
                 </div>
                 <div className="a1-d-text">
-                  <h2 className="a1-title">
+                  {/* Единственный h1 страницы /about — главный видимый заголовок.
+                      Мобильный дубль ниже остаётся h2, чтобы не плодить h1. */}
+                  <h1 className="a1-title">
                     <span className="a1-title__name">{tr('about_a1_title_name')}</span>
                     <span className="a1-title__sep">{' — '}</span>
                     <span className="a1-title__rest">{tr('about_a1_title_rest')}</span>
-                  </h2>
+                  </h1>
                   <div className="a1-body">
                     <p>{tr('about_a1_body_1')}</p>
                     <p>{tr('about_a1_body_2')}</p>

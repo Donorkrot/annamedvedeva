@@ -10,7 +10,7 @@ export default function ProblemSection() {
 
       {/* ── Desktop ── */}
       <div className="s2-bg desktop-only">
-        <Image src="/images/backgrounds/bg-s2-desktop.jpg" alt="" fill sizes="100vw" priority={false} />
+        <Image src="/images/backgrounds/bg-s2-desktop.jpg" alt="" fill sizes="100vw" priority={false} quality={65} />
       </div>
 
       <h4 className="s2-title desktop-only">{tr('s2_tagline')}</h4>

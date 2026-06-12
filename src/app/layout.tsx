@@ -1,9 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Raleway } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import Header from "@/components/Header";
 import { SITE, absUrl } from "@/lib/seo";
+
+// Google Analytics 4 — Measurement ID (поток данных)
+const GA_MEASUREMENT_ID = "G-KGZ17SHLEL";
 
 // Weight lists were grepped against globals.css — drop unused weights so the
 // browser doesn't pull woff2 files it never renders. Audit:
@@ -138,7 +142,23 @@ export default function RootLayout({
             iPhone 16 / Pro Max / small Android all see identical proportions
             without depending on viewport-meta tricks. */}
       </head>
-      <body><LanguageProvider><Header />{children}</LanguageProvider></body>
+      <body>
+        <LanguageProvider><Header />{children}</LanguageProvider>
+
+        {/* Google Analytics 4 (gtag.js) */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
+      </body>
     </html>
   );
 }

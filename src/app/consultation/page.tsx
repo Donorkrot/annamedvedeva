@@ -5,6 +5,8 @@ import { useTranslation } from '@/components/LanguageProvider';
 import type { TranslationKey } from '@/lib/translations';
 import Footer from '@/components/Footer';
 import LeadFormModal from '@/components/LeadFormModal';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import { ConsultationServiceJsonLd } from '@/components/JsonLd';
 
 const ASSET_VERSION = 'r-' + 'a8f3d2e9b';
 const v = (p: string) => `${p}?v=${ASSET_VERSION}`;
@@ -34,7 +36,14 @@ export default function ConsultationPage() {
   return (
     // `data-lang` lets CSS target language-specific button positions for c2
     // (exports have slightly different vertical alignment per language).
-    <main data-lang={lang}>
+    <main data-lang={lang} className="consult-pg">
+      <ConsultationServiceJsonLd />
+      <Breadcrumbs
+        items={[
+          { name: 'Главная', path: '/' },
+          { name: 'Консультация', path: '/consultation' },
+        ]}
+      />
       {[1, 2, 3].map((n, i) => (
         <section
           key={`c${n}`}
@@ -169,7 +178,10 @@ export default function ConsultationPage() {
           {/* c1 mobile — HTML текст по Figma 1:1192 (375×827). */}
           {n === 1 && (
             <div className="c1-m-text mobile-only">
-              <h1 className="c1-m-title">{tr('c1_title')}</h1>
+              {/* Один h1 на страницу: семантический h1 — в desktop-блоке
+                  (c1-title). Мобильный визуальный заголовок — <p> с тем же
+                  классом, чтобы не плодить второй h1 в DOM. */}
+              <p className="c1-m-title">{tr('c1_title')}</p>
               <p className="c1-m-body">{tr('c1_body')}</p>
             </div>
           )}
