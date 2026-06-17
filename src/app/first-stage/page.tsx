@@ -455,50 +455,6 @@ export default function FirstStagePage() {
         <ReviewsMarquee />
       </section>
 
-      {/* ── Section 7.5 — Цена — Figma 980:446 (1672×850) ── */}
-      <section className="first-price">
-        {/* Desktop bg — landscape (Figma 981:448) */}
-        <div className="first-price-bg desktop-only" aria-hidden="true">
-          <Image
-            src="/images/first-stage/price-bg.jpg?v=2"
-            alt=""
-            fill
-            sizes="100vw"
-            quality={75}
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
-          />
-        </div>
-        {/* Mobile bg — portrait (Figma 983:450) */}
-        <div className="first-price-bg mobile-only" aria-hidden="true">
-          <Image
-            src="/images/first-stage/price-bg-m.jpg"
-            alt=""
-            fill
-            sizes="100vw"
-            quality={75}
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
-          />
-        </div>
-        <div className="first-price-content">
-          <p className="first-price-label">{tr('first_stage_price_label')}</p>
-          <p className="first-price-amount">{tr('first_stage_price_amount')}</p>
-          <p className="first-price-installment">{tr('first_stage_price_installment')}</p>
-          <div className="first-price-payments">
-            <div className="first-price-payment">
-              <span className="first-price-num">1</span>
-              <span className="first-price-pay-title">{tr('first_stage_price_pay1_title')}</span>
-              <span className="first-price-pay-sub">{tr('first_stage_price_pay1_sub')}</span>
-            </div>
-            <span className="first-price-divider" aria-hidden="true" />
-            <div className="first-price-payment">
-              <span className="first-price-num">2</span>
-              <span className="first-price-pay-title">{tr('first_stage_price_pay2_title')}</span>
-              <span className="first-price-pay-sub">{tr('first_stage_price_pay2_sub')}</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ── Section 8 — "Формат" — Figma 873:5995 (1672×1048) ── */}
       <section className="first-format">
         {/* Правая светящаяся сфера */}
@@ -523,19 +479,16 @@ export default function FirstStagePage() {
             <li className="first-format-pill">{tr('first_stage_format_pill_3')}</li>
             <li className="first-format-pill">{tr('first_stage_format_pill_4')}</li>
           </ul>
-          <p className="first-format-note">{tr('first_stage_format_note')}</p>
-          {/* Кнопка-книга «ДНК РЕАЛЬНОСТИ / Читать книгу» убрана — в макете
-              873:5995 её нет. Вернуть: раскомментировать. */}
-          {/* <button type="button" className="first-format-book" onClick={() => setLeadOpen(true)}>
-            <span className="first-format-book-title">{tr('first_stage_format_book_title')}</span>
-            <span className="first-format-book-sub">{tr('first_stage_format_book_sub')}</span>
-          </button> */}
+          {/* Стоимость + рассрочка */}
+          <div className="first-format-price">
+            <p className="first-format-price-title">{tr('first_stage_format_price_title')}</p>
+            <p className="first-format-price-sub">{tr('first_stage_format_price_sub')}</p>
+            <ul className="first-format-price-list">
+              <li>{tr('first_stage_format_price_1')}</li>
+              <li>{tr('first_stage_format_price_2')}</li>
+            </ul>
+          </div>
         </div>
-
-        {/* Нижняя кнопка */}
-        <button type="button" className="first-format-cta" onClick={() => setLeadOpen(true)}>
-          {tr('first_stage_format_button')}
-        </button>
       </section>
 
       {/* ── Section 8.5 — Эссе для поступления — Figma 986:452 (1672×850) ── */}

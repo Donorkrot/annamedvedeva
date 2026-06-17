@@ -382,7 +382,7 @@ const t = {
     first_stage_title: 'Первая ступень',
     first_stage_subtitle: 'Вход в метод',
     first_stage_hero_desc_1: 'Это точка где вы впервые\nначинаете реально работать с полем',
-    first_stage_hero_desc_2: 'Не теоретически. Не "представлять"\nА чувствовать, считывать\nи менять',
+    first_stage_hero_desc_2: 'Не теоретически. Не "представлять"\nА чувствовать, считывать и менять',
     // First-stage section 2 — "О чём эта ступень"
     first_stage_about_title: 'О чём эта ступень',
     first_stage_about_desc: 'Это не про «знания». Это про навык, который начинает собираться в процессе практики.',
@@ -448,6 +448,10 @@ const t = {
     first_stage_format_book_title: 'ДНК реальности',
     first_stage_format_book_sub: 'Читать книгу',
     first_stage_format_button: 'Подробнее о программе',
+    first_stage_format_price_title: 'Стоимость первой ступени — 700$',
+    first_stage_format_price_sub: 'Доступна внутренняя рассрочка на 2 платежа:',
+    first_stage_format_price_1: 'первый платёж — до начала обучения',
+    first_stage_format_price_2: 'второй платёж — в середине обучения',
     // Section 8.5 — Эссе для поступления
     first_stage_essay_title: 'Для поступления',
     first_stage_essay_subtitle: 'Важно рассказать:',
@@ -854,7 +858,7 @@ const t = {
     first_stage_title: 'Перший ступінь',
     first_stage_subtitle: 'Вхід у метод',
     first_stage_hero_desc_1: 'Це точка де ви вперше\nпочинаєте реально працювати з полем',
-    first_stage_hero_desc_2: 'Не теоретично. Не "уявляти"\nА відчувати, зчитувати\nта змінювати',
+    first_stage_hero_desc_2: 'Не теоретично. Не "уявляти"\nА відчувати, зчитувати та змінювати',
     // First-stage section 2 — "О чём эта ступень"
     first_stage_about_title: 'Про що цей ступінь',
     first_stage_about_desc: 'Це не про «знання». Це про навичку, яка починає збиратися у процесі практики.',
@@ -920,6 +924,10 @@ const t = {
     first_stage_format_book_title: 'ДНК реальності',
     first_stage_format_book_sub: 'Читати книгу',
     first_stage_format_button: 'Детальніше про програму',
+    first_stage_format_price_title: 'Вартість першого ступеня — 700$',
+    first_stage_format_price_sub: 'Доступна внутрішня розстрочка на 2 платежі:',
+    first_stage_format_price_1: 'перший платіж — до початку навчання',
+    first_stage_format_price_2: 'другий платіж — в середині навчання',
     // Section 8.5 — Есе для вступу
     first_stage_essay_title: 'Для вступу',
     first_stage_essay_subtitle: 'Важливо розповісти:',
@@ -1326,7 +1334,7 @@ const t = {
     first_stage_title: 'First stage',
     first_stage_subtitle: 'Entry into the method',
     first_stage_hero_desc_1: 'This is the point where for the first time\nyou begin to truly work with the field',
-    first_stage_hero_desc_2: 'Not theoretically. Not "imagining"\nBut sensing, reading\nand changing it',
+    first_stage_hero_desc_2: 'Not theoretically. Not "imagining"\nBut sensing, reading and changing it',
     // First-stage section 2 — "О чём эта ступень"
     first_stage_about_title: 'What this stage is about',
     first_stage_about_desc: 'It’s not about «knowledge». It’s about a skill that starts forming through practice.',
@@ -1392,6 +1400,10 @@ const t = {
     first_stage_format_book_title: 'DNA of reality',
     first_stage_format_book_sub: 'Read the book',
     first_stage_format_button: 'More about the program',
+    first_stage_format_price_title: 'First stage cost — 700$',
+    first_stage_format_price_sub: 'Internal instalment plan available — 2 payments:',
+    first_stage_format_price_1: 'first payment — before training begins',
+    first_stage_format_price_2: 'second payment — halfway through training',
     // Section 8.5 — Application essay
     first_stage_essay_title: 'To apply',
     first_stage_essay_subtitle: "What's important to share:",

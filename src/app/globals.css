@@ -10910,7 +10910,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   flex-direction: column;
   gap: min(0.35vw, 6px);
   font-family: var(--font-body);
-  font-size: min(1.13vw, 19px);
+  font-size: min(1.13vw, 16px);
   font-weight: 400;
   line-height: 1.35;
   color: #fff5ef;
@@ -10956,6 +10956,11 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   .first-hero-desc span:not(:last-child)::after { content: '\00A0'; }
   .first-hero-desc .first-hero-desc-break { margin-top: 0; }
   .first-hero-desc .first-hero-desc-break::before {
+    content: '\A';
+    white-space: pre;
+  }
+  /* перенос третьей строки: «А чувствовать, считывать и менять» — на свою строку */
+  .first-hero-desc .first-hero-desc-break ~ span::before {
     content: '\A';
     white-space: pre;
   }
@@ -13463,11 +13468,11 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   justify-content: center;
   text-align: center;
   padding: min(1.196vw, 20px);   /* 20/1672 */
-  border: 1px solid #ffc800;
+  border: 1px solid #ffc800;     /* в цвет заголовка «ФОРМАТ» */
   border-radius: min(0.718vw, 12px); /* 12/1672 */
   background: rgba(0, 0, 0, 0.5);
   font-family: var(--font-body);
-  font-size: min(1.077vw, 18px); /* 18/1672 — макет 873:5968 */
+  font-size: min(1.15vw, 16px);
   font-weight: 500;
   line-height: 1.15;
   color: #fff5ef;
@@ -13483,6 +13488,53 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   font-weight: 400;
   color: #fff5ef;
   opacity: 0.7;
+}
+/* Стоимость + рассрочка (вместо кнопки) */
+.first-format-price {
+  position: absolute;
+  left: 13.94%;
+  top: 66%;
+  width: 38%;
+  z-index: 2;
+  color: #fff5ef;
+}
+.first-format-price-title {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: min(0.95vw, 13px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: #fff5ef;
+}
+.first-format-price-sub {
+  margin: min(0.7vw, 12px) 0 0;
+  font-family: var(--font-body);
+  font-size: min(0.95vw, 13px);
+  font-weight: 400;
+  line-height: 1.4;
+}
+.first-format-price-list {
+  margin: min(0.4vw, 6px) 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: min(0.3vw, 5px);
+}
+.first-format-price-list li {
+  position: relative;
+  padding-left: min(1.1vw, 18px);
+  font-family: var(--font-body);
+  font-size: min(0.95vw, 13px);
+  font-weight: 400;
+  line-height: 1.45;
+  color: rgba(255, 245, 239, 0.85);
+}
+.first-format-price-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #ffc800;
 }
 .first-format-book {
   position: absolute;
@@ -13767,11 +13819,17 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   .first-format-desc,
   .first-format-pills,
   .first-format-note,
+  .first-format-price,
   .first-format-book {
     position: static;
     left: auto;
     top: auto;
   }
+  .first-format-price { width: 100%; max-width: 86vw; margin-top: 11vw; text-align: center; }
+  .first-format-price-title { font-size: 3.3vw; }
+  .first-format-price-sub { font-size: 3.3vw; margin-top: 2.5vw; }
+  .first-format-price-list { margin-top: 1.6vw; gap: 1.2vw; align-items: center; }
+  .first-format-price-list li { padding-left: 4vw; font-size: 3.3vw; }
   .first-format-title { font-size: 8vw; }
   .first-format-desc {
     width: 100%;
@@ -14107,6 +14165,11 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
     border-radius: 1.5vh;
   }
   .first-format-note { margin-top: 1.6vh; font-size: min(2.3vh, 12px); text-align: left; }
+  .first-format-price { width: 100%; max-width: 100%; margin-top: 3vh; text-align: left; }
+  .first-format-price-title { font-size: min(2.3vh, 11px); }
+  .first-format-price-sub { font-size: min(2.3vh, 11px); margin-top: 1vh; }
+  .first-format-price-list { margin-top: 0.6vh; gap: 0.3vh; align-items: flex-start; }
+  .first-format-price-list li { padding-left: 2.2vh; font-size: min(2.3vh, 11px); }
   .first-format-img {
     grid-column: 2;
     grid-row: 1 / 3;
