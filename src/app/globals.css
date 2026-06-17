@@ -13088,6 +13088,311 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
 }
 
 /* ════════════════════════════════════════════════════════════════
+   Section 7.5 — «Цена» (Figma 980:446, 1672×850)
+   ════════════════════════════════════════════════════════════════ */
+.first-price {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1672 / 941;
+  background: #0a0a0a;
+  overflow: hidden;
+  color: #fff5ef;
+}
+.first-price-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.first-price-bg img { object-fit: cover; }
+/* лёгкий оверлей для читаемости + плавные затемнения сверху/снизу,
+   чтобы блок бесшовно стыковался с соседними секциями (обе #000). */
+.first-price::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to bottom,
+      #000 0%,
+      rgba(0, 0, 0, 0) 16%,
+      rgba(0, 0, 0, 0) 84%,
+      #000 100%),
+    rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+.first-price-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 min(4vw, 60px);
+}
+.first-price-label {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: min(1.44vw, 24px);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: rgba(255, 245, 239, 0.85);
+  text-transform: uppercase;
+}
+.first-price-amount {
+  margin: min(0.6vw, 10px) 0 0;
+  font-family: var(--font-display);
+  font-size: min(9.2vw, 154px);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  color: var(--gold);
+  text-shadow: 0 0 60px rgba(201, 169, 110, 0.45);
+}
+.first-price-installment {
+  margin: min(1.5vw, 24px) 0 0;
+  font-family: var(--font-body);
+  font-size: min(1.2vw, 20px);
+  font-weight: 400;
+  color: rgba(255, 245, 239, 0.8);
+}
+.first-price-payments {
+  display: flex;
+  align-items: center;
+  gap: min(3vw, 52px);
+  margin-top: min(2.4vw, 40px);
+}
+.first-price-payment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: min(0.54vw, 9px);
+}
+.first-price-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(2.4vw, 40px);
+  height: min(2.4vw, 40px);
+  border: 1px solid rgba(255, 245, 239, 0.5);
+  border-radius: 50%;
+  font-family: var(--font-body);
+  font-size: min(1.08vw, 18px);
+  font-weight: 400;
+  color: #fff5ef;
+}
+.first-price-pay-title {
+  font-family: var(--font-body);
+  font-size: min(1.08vw, 18px);
+  font-weight: 400;
+  color: #fff5ef;
+}
+.first-price-pay-sub {
+  font-family: var(--font-body);
+  font-size: min(0.96vw, 16px);
+  font-weight: 400;
+  color: rgba(255, 245, 239, 0.6);
+}
+.first-price-divider {
+  width: 1px;
+  height: min(4.8vw, 80px);
+  background: rgba(255, 245, 239, 0.25);
+  flex-shrink: 0;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .first-price {
+    aspect-ratio: 375 / 560;
+  }
+  .first-price-label { font-size: 3.7vw; }
+  .first-price-amount { font-size: 19.2vw; margin-top: 1vw; }
+  .first-price-installment { font-size: 3.2vw; margin-top: 4vw; }
+  .first-price-payments { gap: 6vw; margin-top: 5vw; }
+  .first-price-num { width: 7.5vw; height: 7.5vw; font-size: 3.5vw; }
+  .first-price-pay-title { font-size: 3.5vw; }
+  .first-price-pay-sub { font-size: 3vw; }
+  .first-price-divider { height: 14vw; }
+}
+
+/* ── Mobile landscape (≤768 landscape, напр. 667×375) ──
+   В узком landscape портретный фон растягивал блок на ~2.6 экрана.
+   Возвращаем desktop-раскладку: landscape-фон + desktop vw-размеры,
+   которые при ширине 667 масштабируются пропорционально (как /academy). */
+@media (max-width: 768px) and (orientation: landscape) {
+  .first-price { aspect-ratio: 1672 / 941; }
+  .first-price .desktop-only { display: block !important; }
+  .first-price .mobile-only { display: none !important; }
+  .first-price img.desktop-only { display: block !important; }
+  .first-price img.mobile-only { display: none !important; }
+  .first-price-label { font-size: min(1.44vw, 24px); }
+  .first-price-amount { font-size: min(9.2vw, 154px); margin-top: min(0.6vw, 10px); }
+  .first-price-installment { font-size: min(1.2vw, 20px); margin-top: min(1.5vw, 24px); }
+  .first-price-payments { gap: min(3vw, 52px); margin-top: min(2.4vw, 40px); }
+  .first-price-num { width: min(2.4vw, 40px); height: min(2.4vw, 40px); font-size: min(1.08vw, 18px); }
+  .first-price-pay-title { font-size: min(1.08vw, 18px); }
+  .first-price-pay-sub { font-size: min(0.96vw, 16px); }
+  .first-price-divider { height: min(4.8vw, 80px); }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Section 8.5 — «Эссе для поступления» (Figma 986:452, 1672×850)
+   Фон-библиотека со светящейся книгой справа, текст — слева.
+   ════════════════════════════════════════════════════════════════ */
+.first-essay {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1672 / 750;
+  background: #000;
+  overflow: hidden;
+  color: #fff5ef;
+}
+.first-essay-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.first-essay-bg img { object-fit: cover; }
+/* плавные затемнения верх/низ для бесшовной стыковки соседних секций
+   (читаемость текста обеспечивает чёрная подложка под текстом) */
+.first-essay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to bottom,
+    #000 0%, rgba(0, 0, 0, 0) 16%, rgba(0, 0, 0, 0) 84%, #000 100%);
+  pointer-events: none;
+}
+.first-essay-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: min(1.8vw, 30px);
+  padding-left: 13.94%;
+  padding-right: min(4vw, 64px);
+}
+/* Заголовок — вынесен над подложкой, размер/шрифт как в блоке «Формат» */
+.first-essay-title {
+  margin: 0;
+  max-width: min(640px, 100%);
+  font-family: var(--font-heading);
+  font-size: min(2.15vw, 36px);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: 0.02em;
+  color: #ffc800;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
+}
+/* Чёрная подложка с округлёнными краями (как пилюли в блоке «Формат») */
+.first-essay-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: min(480px, 100%);
+  padding: min(2.4vw, 40px) min(2.6vw, 44px);
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: min(1.1vw, 18px);
+}
+.first-essay-note {
+  margin: min(1.7vw, 26px) 0 0;
+  font-family: var(--font-body);
+  font-size: min(0.9vw, 13px);
+  font-weight: 400;
+  line-height: 1.45;
+  color: rgba(255, 245, 239, 0.55);
+}
+.first-essay-note--top { margin-top: 0; }
+.first-essay-subtitle {
+  margin: min(1.6vw, 24px) 0 0;
+  font-family: var(--font-body);
+  font-size: min(1.7vw, 16px);
+  font-weight: 500;
+  color: #fff5ef;
+}
+.first-essay-points {
+  margin: min(0.8vw, 14px) 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: min(0.7vw, 12px);
+}
+.first-essay-points li {
+  position: relative;
+  padding-left: min(1.7vw, 26px);
+  font-family: var(--font-body);
+  font-size: min(1.7vw, 16px);
+  line-height: 1.35;
+  color: rgba(255, 245, 239, 0.88);
+}
+.first-essay-points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: min(0.72vw, 12px);
+  height: 1px;
+  background: #ffc800;
+}
+
+/* Mobile — текст по центру по вертикали, во всю ширину, усиленный оверлей */
+@media (max-width: 767px) {
+  .first-essay { aspect-ratio: 375 / 600; }
+  .first-essay::before {
+    background: linear-gradient(to bottom,
+      #000 0%, rgba(0, 0, 0, 0) 14%, rgba(0, 0, 0, 0) 86%, #000 100%);
+  }
+  .first-essay-content {
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .first-essay-panel {
+    width: 86vw;
+    padding: 6vw 6vw;
+    border-radius: 3.5vw;
+  }
+  .first-essay-title { width: 86vw; max-width: 86vw; font-size: 8vw; line-height: 1.12; text-align: center; }
+  .first-essay-note { font-size: 3vw; margin-top: 4.5vw; }
+  .first-essay-subtitle { font-size: 3.9vw; margin-top: 5.5vw; }
+  .first-essay-points { gap: 2.6vw; margin-top: 3.2vw; }
+  .first-essay-points li { font-size: 3.7vw; padding-left: 5.5vw; }
+  .first-essay-points li::before { width: 3.2vw; top: 0.62em; }
+}
+
+/* Mobile landscape (≤768 landscape, напр. 667×375) — desktop-раскладка */
+@media (max-width: 768px) and (orientation: landscape) {
+  .first-essay { aspect-ratio: 1672 / 750; }
+  .first-essay::before {
+    background: linear-gradient(to bottom,
+      #000 0%, rgba(0, 0, 0, 0) 16%, rgba(0, 0, 0, 0) 84%, #000 100%);
+  }
+  .first-essay-content {
+    align-items: flex-start;
+    padding-left: 13.94%;
+    padding-right: min(4vw, 64px);
+  }
+  .first-essay-panel {
+    width: min(480px, 100%);
+    padding: min(2.4vw, 40px) min(2.6vw, 44px);
+    border-radius: min(1.1vw, 18px);
+  }
+  .first-essay-title { font-size: min(6vh, 30px); line-height: 1.12; }
+  .first-essay-note { font-size: min(0.9vw, 13px); margin-top: min(1.7vw, 26px); }
+  .first-essay-subtitle { font-size: min(1.7vw, 16px); margin-top: min(1.6vw, 24px); }
+  .first-essay-points { gap: min(0.7vw, 12px); margin-top: min(0.8vw, 14px); }
+  .first-essay-points li { font-size: min(1.7vw, 16px); padding-left: min(1.7vw, 26px); }
+  .first-essay-points li::before { width: min(0.72vw, 12px); top: 0.62em; }
+}
+
+/* ════════════════════════════════════════════════════════════════
    Section 8 — «Формат» (Figma 873:5995, 1672×1048)
    ════════════════════════════════════════════════════════════════ */
 .first-format {
@@ -13246,7 +13551,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
 .first-enroll {
   position: relative;
   width: 100%;
-  aspect-ratio: 1672 / 392;
+  aspect-ratio: 1672 / 560;
   overflow: hidden;
   background: #000;
 }
@@ -13339,17 +13644,66 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   font-size: min(0.957vw, 16px);     /* 16/1672 */
   color: #fff5ef;
   cursor: pointer;
-  transition: background 0.25s, border-color 0.25s;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+  animation: enrollBtnGlow 3.4s ease-in-out infinite;
 }
-.first-enroll-btn:hover { background: #3f2800; border-color: #f0a542; }
+/* Бегущий блик по кнопке */
+.first-enroll-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -65%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent 0%, rgba(255, 214, 140, 0.5) 50%, transparent 100%);
+  transform: skewX(-20deg);
+  animation: enrollBtnShimmer 4.6s ease-in-out infinite;
+  pointer-events: none;
+}
+.first-enroll-btn:hover {
+  background: #3f2800;
+  border-color: #f0a542;
+  box-shadow: 0 0 26px rgba(240, 165, 66, 0.6);
+  transform: translateY(-1px);
+}
+@keyframes enrollBtnGlow {
+  0%, 100% { box-shadow: 0 0 6px rgba(222, 139, 35, 0.15); }
+  50% { box-shadow: 0 0 22px rgba(222, 139, 35, 0.5); }
+}
+@keyframes enrollBtnShimmer {
+  0% { left: -65%; }
+  60%, 100% { left: 135%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .first-enroll-btn { animation: none; }
+  .first-enroll-btn::after { animation: none; opacity: 0; }
+}
+/* Мелкая info-сноска под кнопкой */
+/* Чёрная подложка ТОЛЬКО под info-сноской — читаемость поверх собора */
+.first-enroll-note {
+  margin: min(1.7vw, 28px) auto 0;
+  max-width: min(64vw, 920px);
+  padding: min(1.4vw, 22px) min(2.4vw, 40px);
+  background: rgba(0, 0, 0, 0.62);
+  border-radius: min(1vw, 16px);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: min(0.66vw, 11px);
+  line-height: 1.5;
+  color: rgba(255, 245, 239, 0.7);
+  text-align: center;
+}
 
 @media (max-width: 768px) {
-  .first-enroll { aspect-ratio: 375 / 320; }
-  .first-enroll-content { gap: 3.2vw; padding: 0 6vw; }
+  .first-enroll { aspect-ratio: 375 / 500; }
+  .first-enroll-content { gap: 3.2vw; padding: 0 5vw; }
   .first-enroll-title { font-size: 7.2vw; }
   .first-enroll-sub { font-size: 3.8vw; }
   .first-enroll-date { font-size: 5vw; }
   .first-enroll-btn { width: 86vw; padding: 3.6vw 5vw; font-size: 4vw; margin-top: 4vw; border-radius: 2.6vw; }
+  .first-enroll-note { max-width: 88vw; font-size: 2.6vw; margin-top: 5vw; padding: 4vw 5vw; border-radius: 3vw; }
 }
 
 /* ── Tablet ─────────────────────────────────────────────────── */
@@ -13780,16 +14134,17 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
      весь экран. Делаем компактный баннер ~56vh, контент центрирован. */
   .first-enroll {
     aspect-ratio: auto;
-    height: 56vh;
-    min-height: 190px;
-    max-height: 260px;
+    height: 72vh;
+    min-height: 240px;
+    max-height: 340px;
   }
-  .first-enroll-content { gap: 2.4vh; padding: 0 8vw; }
+  .first-enroll-content { gap: 2.4vh; padding: 0 6vw; }
   /* Воздушный отступ заголовок → подзаголовок, как в десктопе */
   .first-enroll-text { gap: min(4.5vh, 22px); }
   .first-enroll-title { font-size: min(6.6vh, 32px); }
   .first-enroll-sub { font-size: min(3.2vh, 16px); }
   .first-enroll-date { font-size: min(3.2vh, 16px); }
+  .first-enroll-note { max-width: 80vw; font-size: min(1.7vh, 9.5px); margin-top: 1.6vh; padding: 1.6vh 3vh; border-radius: 1.2vh; }
   .first-enroll-btn {
     width: min(46vw, 300px);
     height: auto;

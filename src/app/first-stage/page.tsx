@@ -455,6 +455,50 @@ export default function FirstStagePage() {
         <ReviewsMarquee />
       </section>
 
+      {/* ── Section 7.5 — Цена — Figma 980:446 (1672×850) ── */}
+      <section className="first-price">
+        {/* Desktop bg — landscape (Figma 981:448) */}
+        <div className="first-price-bg desktop-only" aria-hidden="true">
+          <Image
+            src="/images/first-stage/price-bg.jpg?v=2"
+            alt=""
+            fill
+            sizes="100vw"
+            quality={75}
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+        </div>
+        {/* Mobile bg — portrait (Figma 983:450) */}
+        <div className="first-price-bg mobile-only" aria-hidden="true">
+          <Image
+            src="/images/first-stage/price-bg-m.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            quality={75}
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+        </div>
+        <div className="first-price-content">
+          <p className="first-price-label">{tr('first_stage_price_label')}</p>
+          <p className="first-price-amount">{tr('first_stage_price_amount')}</p>
+          <p className="first-price-installment">{tr('first_stage_price_installment')}</p>
+          <div className="first-price-payments">
+            <div className="first-price-payment">
+              <span className="first-price-num">1</span>
+              <span className="first-price-pay-title">{tr('first_stage_price_pay1_title')}</span>
+              <span className="first-price-pay-sub">{tr('first_stage_price_pay1_sub')}</span>
+            </div>
+            <span className="first-price-divider" aria-hidden="true" />
+            <div className="first-price-payment">
+              <span className="first-price-num">2</span>
+              <span className="first-price-pay-title">{tr('first_stage_price_pay2_title')}</span>
+              <span className="first-price-pay-sub">{tr('first_stage_price_pay2_sub')}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── Section 8 — "Формат" — Figma 873:5995 (1672×1048) ── */}
       <section className="first-format">
         {/* Правая светящаяся сфера */}
@@ -494,6 +538,42 @@ export default function FirstStagePage() {
         </button>
       </section>
 
+      {/* ── Section 8.5 — Эссе для поступления — Figma 986:452 (1672×850) ── */}
+      <section className="first-essay">
+        <div className="first-essay-bg" aria-hidden="true">
+          <Image
+            src="/images/first-stage/essay-bg.jpg?v=5"
+            alt=""
+            fill
+            sizes="100vw"
+            quality={75}
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+        </div>
+        <div className="first-essay-content">
+          <h2 className="first-essay-title">{tr('first_stage_essay_title')}</h2>
+          <div className="first-essay-panel">
+            <p className="first-essay-note first-essay-note--top">
+              {tr('first_stage_essay_note')}
+              <br />
+              {tr('first_stage_essay_note2')}
+            </p>
+            <p className="first-essay-subtitle">{tr('first_stage_essay_subtitle')}</p>
+            <ul className="first-essay-points">
+              <li>{tr('first_stage_essay_point_1')}</li>
+              <li>{tr('first_stage_essay_point_2')}</li>
+              <li>{tr('first_stage_essay_point_3')}</li>
+              <li>{tr('first_stage_essay_point_4')}</li>
+            </ul>
+            <p className="first-essay-note">
+              {tr('first_stage_essay_anna_1')}
+              <br />
+              {tr('first_stage_essay_anna_2')}
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* ── CTA-баннер «Запись в Академию» — Figma 949:520 (1672×392) ── */}
       <section className="first-enroll">
         <div className="first-enroll-bg" aria-hidden="true">
@@ -519,6 +599,7 @@ export default function FirstStagePage() {
           <button type="button" className="first-enroll-btn" onClick={() => setLeadOpen(true)}>
             {tr('academy_hero_cta')}
           </button>
+          <p className="first-enroll-note">{tr('s12_fs_note')}</p>
         </div>
       </section>
 

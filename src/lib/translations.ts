@@ -123,9 +123,10 @@ const t = {
     s12_privacy: 'Политика конфиденциальности',
     // First-stage footer (uniquely for /first-stage)
     s12_fs_academy: 'Запись в Академию',
-    s12_fs_cohorts: 'Набор проходит потоками.',
+    s12_fs_cohorts: 'Набор проходит потоками',
     s12_fs_start: 'Ближайший старт — ',
-    s12_fs_date: 'сентябрь 2026',
+    s12_fs_date: 'Сентябрь 2026',
+    s12_fs_note: 'Академия оставляет за собой право отказать в поступлении без дополнительных объяснений причин. Это связано с тем, что для качественной работы группы важно не только желание учиться, но и готовность человека к определённому формату и глубине процесса',
     // Side menu nav
     menu_ri: 'Что такое RI',
     menu_key_ri: 'Ключ к RI',
@@ -428,6 +429,14 @@ const t = {
     first_stage_result_quote: '«Я могу»',
     first_stage_reviews_title: 'Отзывы',
     first_stage_reviews_subtitle: 'Что говорят те, кто уже прошёл',
+    // Section 7.5 — Цена
+    first_stage_price_label: 'Стоимость одной ступени',
+    first_stage_price_amount: '700$',
+    first_stage_price_installment: 'Доступна внутренняя рассрочка на 2 платежа',
+    first_stage_price_pay1_title: 'первый платёж',
+    first_stage_price_pay1_sub: 'до начала обучения',
+    first_stage_price_pay2_title: 'второй платёж',
+    first_stage_price_pay2_sub: 'в середине обучения',
     // Section 8 — Формат
     first_stage_format_title: 'Формат',
     first_stage_format_desc: 'Это не просто обучение. Это момент, где вы впервые начинаете видеть как устроена реальность.',
@@ -439,6 +448,17 @@ const t = {
     first_stage_format_book_title: 'ДНК реальности',
     first_stage_format_book_sub: 'Читать книгу',
     first_stage_format_button: 'Подробнее о программе',
+    // Section 8.5 — Эссе для поступления
+    first_stage_essay_title: 'Для поступления',
+    first_stage_essay_subtitle: 'Важно рассказать:',
+    first_stage_essay_point_1: 'На каком этапе жизни вы сейчас находитесь',
+    first_stage_essay_point_2: 'Чем вас привлекло обучение',
+    first_stage_essay_point_3: 'Что вы хотите получить от Академии',
+    first_stage_essay_point_4: 'Почему решили прийти именно сейчас',
+    first_stage_essay_note: 'Необходимо написать небольшое эссе о себе',
+    first_stage_essay_note2: 'Это может быть текст любого объёма',
+    first_stage_essay_anna_1: 'Все заявки Анна читает лично',
+    first_stage_essay_anna_2: 'Через это знакомство формируется группа и принимается решение о зачислении',
     // Lead form modal
     lead_form_title: 'Оставьте заявку',
     lead_form_sub: 'Мы свяжемся с вами в ближайшее время',
@@ -576,9 +596,10 @@ const t = {
     s12_privacy: 'Політика конфіденційності',
     // First-stage footer (uniquely for /first-stage)
     s12_fs_academy: 'Запис до Академії',
-    s12_fs_cohorts: 'Набір проходить потоками.',
+    s12_fs_cohorts: 'Набір проходить потоками',
     s12_fs_start: 'Найближчий старт — ',
-    s12_fs_date: 'вересень 2026',
+    s12_fs_date: 'Вересень 2026',
+    s12_fs_note: 'Академія залишає за собою право відмовити у вступі без додаткових пояснень причин. Це пов’язано з тим, що для якісної роботи групи важливе не лише бажання вчитися, але й готовність людини до певного формату та глибини процесу',
     // Side menu nav
     menu_ri: 'Що таке RI',
     menu_key_ri: 'Ключ до RI',
@@ -880,6 +901,14 @@ const t = {
     first_stage_result_quote: '«Я можу»',
     first_stage_reviews_title: 'Відгуки',
     first_stage_reviews_subtitle: 'Що кажуть ті, хто вже пройшов',
+    // Section 7.5 — Ціна
+    first_stage_price_label: 'Вартість одного ступеня',
+    first_stage_price_amount: '700$',
+    first_stage_price_installment: 'Доступна внутрішня розстрочка на 2 платежі',
+    first_stage_price_pay1_title: 'перший платіж',
+    first_stage_price_pay1_sub: 'до початку навчання',
+    first_stage_price_pay2_title: 'другий платіж',
+    first_stage_price_pay2_sub: 'в середині навчання',
     // Section 8 — Формат
     first_stage_format_title: 'Формат',
     first_stage_format_desc: 'Це не просто навчання. Це момент, де ви вперше починаєте бачити як влаштована реальність.',
@@ -891,6 +920,17 @@ const t = {
     first_stage_format_book_title: 'ДНК реальності',
     first_stage_format_book_sub: 'Читати книгу',
     first_stage_format_button: 'Детальніше про програму',
+    // Section 8.5 — Есе для вступу
+    first_stage_essay_title: 'Для вступу',
+    first_stage_essay_subtitle: 'Важливо розповісти:',
+    first_stage_essay_point_1: 'На якому етапі життя ви зараз перебуваєте',
+    first_stage_essay_point_2: 'Чим вас привабило навчання',
+    first_stage_essay_point_3: 'Що ви хочете отримати від Академії',
+    first_stage_essay_point_4: 'Чому вирішили прийти саме зараз',
+    first_stage_essay_note: 'Необхідно написати невелике есе про себе',
+    first_stage_essay_note2: 'Це може бути текст будь-якого обсягу',
+    first_stage_essay_anna_1: 'Усі заявки Анна читає особисто',
+    first_stage_essay_anna_2: 'Через це знайомство формується група та ухвалюється рішення про зарахування',
     // Lead form modal
     lead_form_title: 'Залиште заявку',
     lead_form_sub: 'Ми зв’яжемося з вами найближчим часом',
@@ -1028,9 +1068,10 @@ const t = {
     s12_privacy: 'Privacy Policy',
     // First-stage footer (uniquely for /first-stage)
     s12_fs_academy: 'Academy enrollment',
-    s12_fs_cohorts: 'Admission runs in cohorts.',
+    s12_fs_cohorts: 'Admission runs in cohorts',
     s12_fs_start: 'Next start — ',
     s12_fs_date: 'September 2026',
+    s12_fs_note: 'The Academy reserves the right to decline admission without further explanation. This is because the quality of the group’s work depends not only on the desire to learn, but also on a person’s readiness for a certain format and depth of the process',
     // Side menu nav
     menu_ri: 'What is RI',
     menu_key_ri: 'Key to RI',
@@ -1332,6 +1373,14 @@ const t = {
     first_stage_result_quote: '«I can»',
     first_stage_reviews_title: 'Reviews',
     first_stage_reviews_subtitle: 'What those who already completed it say',
+    // Section 7.5 — Price
+    first_stage_price_label: 'Cost of one stage',
+    first_stage_price_amount: '700$',
+    first_stage_price_installment: 'Internal instalment plan available — 2 payments',
+    first_stage_price_pay1_title: 'first payment',
+    first_stage_price_pay1_sub: 'before training begins',
+    first_stage_price_pay2_title: 'second payment',
+    first_stage_price_pay2_sub: 'halfway through training',
     // Section 8 — Format
     first_stage_format_title: 'Format',
     first_stage_format_desc: 'This is not just training. It is the moment where you first start to see how reality works.',
@@ -1343,6 +1392,17 @@ const t = {
     first_stage_format_book_title: 'DNA of reality',
     first_stage_format_book_sub: 'Read the book',
     first_stage_format_button: 'More about the program',
+    // Section 8.5 — Application essay
+    first_stage_essay_title: 'To apply',
+    first_stage_essay_subtitle: "What's important to share:",
+    first_stage_essay_point_1: 'What stage of life you are in right now',
+    first_stage_essay_point_2: 'What attracted you to the training',
+    first_stage_essay_point_3: 'What you want to gain from the Academy',
+    first_stage_essay_point_4: 'Why you decided to come right now',
+    first_stage_essay_note: 'You need to write a short essay about yourself',
+    first_stage_essay_note2: 'It can be any length',
+    first_stage_essay_anna_1: 'Anna reads every application personally',
+    first_stage_essay_anna_2: 'This is how the group is formed and the admission decision is made',
     // Lead form modal
     lead_form_title: 'Leave a request',
     lead_form_sub: 'We will contact you shortly',
