@@ -13313,11 +13313,11 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   line-height: 1.45;
   color: rgba(255, 245, 239, 0.55);
 }
-.first-essay-note--top { margin-top: 0; }
+.first-essay-note--top { margin-top: 0; font-size: min(1.1vw, 16px); color: #fff5ef; }
 .first-essay-subtitle {
   margin: min(1.6vw, 24px) 0 0;
   font-family: var(--font-body);
-  font-size: min(1.7vw, 16px);
+  font-size: min(0.9vw, 13px);
   font-weight: 500;
   color: #fff5ef;
 }
@@ -13333,7 +13333,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   position: relative;
   padding-left: min(1.7vw, 26px);
   font-family: var(--font-body);
-  font-size: min(1.7vw, 16px);
+  font-size: min(0.9vw, 13px);
   line-height: 1.35;
   color: rgba(255, 245, 239, 0.88);
 }
@@ -13742,7 +13742,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   border-radius: min(1vw, 16px);
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: min(0.66vw, 11px);
+  font-size: min(0.96vw, 16px);
   line-height: 1.5;
   color: rgba(255, 245, 239, 0.7);
   text-align: center;
