@@ -13294,7 +13294,7 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   margin: 0;
   max-width: min(640px, 100%);
   font-family: var(--font-heading);
-  font-size: min(2.15vw, 36px);
+  font-size: 36px;
   font-weight: 600;
   line-height: 1.12;
   letter-spacing: 0.02em;
