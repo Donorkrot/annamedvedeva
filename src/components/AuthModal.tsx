@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from '@/components/LanguageProvider';
+import { localizePath } from '@/lib/i18n';
 import { setUser } from '@/lib/auth';
 
 interface AuthModalProps {
@@ -10,7 +11,7 @@ interface AuthModalProps {
 }
 
 export default function AuthModal({ open, onClose }: AuthModalProps) {
-  const { tr } = useTranslation();
+  const { tr, lang } = useTranslation();
   const router = useRouter();
   const [tab, setTab] = useState<'login' | 'register'>('login');
 
@@ -53,7 +54,7 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
   const finish = (user: { name: string; email: string }) => {
     setUser({ ...user, since: Date.now() });
     onClose();
-    router.push('/account');
+    router.push(localizePath('/account', lang));
   };
 
   const handleLogin = (e: React.FormEvent) => {

@@ -1,10 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Raleway } from "next/font/google";
 import Script from "next/script";
-import "./globals.css";
+import "../globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import Header from "@/components/Header";
-import { SITE, absUrl } from "@/lib/seo";
+import { SITE, absUrl, altLanguages, canonicalFor } from "@/lib/seo";
+import { LOCALES, HTML_LANG, OG_LOCALE } from "@/lib/i18n";
+import type { Lang } from "@/lib/translations";
 
 // Google Analytics 4 — Measurement ID (поток данных)
 const GA_MEASUREMENT_ID = "G-KGZ17SHLEL";
@@ -28,9 +30,21 @@ const raleway = Raleway({
   display: "swap",
 });
 
+// Все три локали пре-рендерятся статически.
+export function generateStaticParams() {
+  return LOCALES.map((lang) => ({ lang }));
+}
+
 // metadataBase нужен Next.js для резолва относительных URL в OG/canonical.
 // Без него Next выводит warning при сборке. Используем production-домен.
-export const metadata: Metadata = {
+// generateMetadata — чтобы canonical/hreflang/og:locale зависели от локали.
+export async function generateMetadata({
+  params,
+}: {
+  params: { lang: Lang };
+}): Promise<Metadata> {
+  const { lang } = params;
+  return {
   metadataBase: new URL(SITE.url),
   // Title-шаблон: на main используется default; per-page title подставляется
   // через `title.template` (см. per-route layout.tsx).
@@ -45,17 +59,18 @@ export const metadata: Metadata = {
   publisher: SITE.brand,
   category: 'health',
 
-  // Canonical для главной (per-route layouts перебивают)
+  // Canonical + hreflang для главной (per-route layouts перебивают)
   alternates: {
-    canonical: SITE.url,
+    canonical: canonicalFor('/', lang),
+    languages: altLanguages('/'),
   },
 
   // Open Graph — для Facebook, LinkedIn, Telegram превью
   openGraph: {
     type: 'website',
-    locale: SITE.locale,
+    locale: OG_LOCALE[lang],
     alternateLocale: [...SITE.alternateLocales],
-    url: SITE.url,
+    url: canonicalFor('/', lang),
     siteName: SITE.brand,
     title: SITE.baseTitle,
     description: SITE.description,
@@ -107,9 +122,15 @@ export const metadata: Metadata = {
     address: false,
   },
 
-  // verification — добавлять когда подтвердим сайт в Google/Yandex Search Console
-  // verification: { google: '...', yandex: '...' },
-};
+  // verification — meta-теги подтверждения прав в Google Search Console и
+  // Яндекс.Вебмастере. Коды задаются в SITE.verification (src/lib/seo.ts);
+  // пустые значения не выводятся (|| undefined).
+  verification: {
+    google: SITE.verification.google || undefined,
+    yandex: SITE.verification.yandex || undefined,
+  },
+  };
+}
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -129,11 +150,18 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { lang: Lang };
 }) {
+  const lang = params.lang;
   return (
-    <html lang="ru" className={`${cormorant.variable} ${raleway.variable}`}>
+    <html
+      lang={HTML_LANG[lang] ?? 'ru'}
+      data-lang={lang}
+      className={`${cormorant.variable} ${raleway.variable}`}
+    >
       <head>
         {/* Mobile is now truly fluid: every px value inside
             `@media (max-width: 768px)` was converted to vw relative to the
@@ -143,7 +171,7 @@ export default function RootLayout({
             without depending on viewport-meta tricks. */}
       </head>
       <body>
-        <LanguageProvider><Header />{children}</LanguageProvider>
+        <LanguageProvider lang={lang}><Header />{children}</LanguageProvider>
 
         {/* Google Analytics 4 (gtag.js) */}
         <Script

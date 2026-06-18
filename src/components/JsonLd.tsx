@@ -1,4 +1,6 @@
-import { SITE, absUrl } from '@/lib/seo';
+import { SITE, canonicalFor } from '@/lib/seo';
+import { HREFLANG } from '@/lib/i18n';
+import type { Lang } from '@/lib/translations';
 
 /**
  * JSON-LD структурированные данные.
@@ -31,16 +33,16 @@ function JsonLdScript({ data }: { data: object }) {
 /**
  * Главная: WebSite + Organization + Person, связанные через @id.
  */
-export function HomeJsonLd() {
+export function HomeJsonLd({ lang = 'ru' }: { lang?: Lang } = {}) {
   const data = {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'WebSite',
         '@id': WEBSITE_ID,
-        url: SITE.url,
+        url: canonicalFor('/', lang),
         name: SITE.brand,
-        inLanguage: 'ru',
+        inLanguage: HREFLANG[lang],
         description: SITE.description,
         publisher: { '@id': ORG_ID },
       },
@@ -61,7 +63,7 @@ export function HomeJsonLd() {
         '@id': PERSON_ID,
         name: SITE.authorName,
         alternateName: 'Anna Medvedeva',
-        url: absUrl('/about'),
+        url: canonicalFor('/about', lang),
         jobTitle: 'Квантовый психолог, автор метода ДНК Реальности',
         worksFor: { '@id': ORG_ID },
         image: `${SITE.url}/images/content/s7-photo-desktop.jpg`,
@@ -80,8 +82,10 @@ export function HomeJsonLd() {
  */
 export function BreadcrumbJsonLd({
   items,
+  lang = 'ru',
 }: {
   items: { name: string; path: string }[];
+  lang?: Lang;
 }) {
   const data = {
     '@context': 'https://schema.org',
@@ -90,7 +94,7 @@ export function BreadcrumbJsonLd({
       '@type': 'ListItem',
       position: i + 1,
       name: it.name,
-      item: it.path === '/' ? SITE.url : absUrl(it.path),
+      item: canonicalFor(it.path, lang),
     })),
   };
   return <JsonLdScript data={data} />;
@@ -100,19 +104,19 @@ export function BreadcrumbJsonLd({
  * Service — для страницы консультации. Без цен/гарантий (их нет в схеме,
  * чтобы не публиковать непроверяемые данные); цена видна на самой странице.
  */
-export function ConsultationServiceJsonLd() {
+export function ConsultationServiceJsonLd({ lang = 'ru' }: { lang?: Lang } = {}) {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    '@id': `${absUrl('/consultation')}#service`,
+    '@id': `${canonicalFor('/consultation', lang)}#service`,
     name: 'Индивидуальная консультация с Анной Медведевой',
     serviceType: 'Консультация по управлению состоянием',
-    url: absUrl('/consultation'),
+    url: canonicalFor('/consultation', lang),
     description:
       'Индивидуальная консультация Анны Медведевой по управлению состоянием: глубинная работа с состоянием, формат и запись на сессию.',
     provider: { '@id': ORG_ID },
     areaServed: 'Worldwide',
-    inLanguage: 'ru',
+    inLanguage: HREFLANG[lang],
   };
   return <JsonLdScript data={data} />;
 }
@@ -125,19 +129,21 @@ export function CourseJsonLd({
   name,
   description,
   path,
+  lang = 'ru',
 }: {
   name: string;
   description: string;
   path: string;
+  lang?: Lang;
 }) {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Course',
-    '@id': `${absUrl(path)}#course`,
+    '@id': `${canonicalFor(path, lang)}#course`,
     name,
     description,
-    url: absUrl(path),
-    inLanguage: 'ru',
+    url: canonicalFor(path, lang),
+    inLanguage: HREFLANG[lang],
     provider: {
       '@type': 'Organization',
       '@id': ORG_ID,

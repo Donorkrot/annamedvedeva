@@ -37,8 +37,9 @@ export default function ConsultationPage() {
     // `data-lang` lets CSS target language-specific button positions for c2
     // (exports have slightly different vertical alignment per language).
     <main data-lang={lang} className="consult-pg">
-      <ConsultationServiceJsonLd />
+      <ConsultationServiceJsonLd lang={lang} />
       <Breadcrumbs
+        lang={lang}
         items={[
           { name: 'Главная', path: '/' },
           { name: 'Консультация', path: '/consultation' },
@@ -70,7 +71,7 @@ export default function ConsultationPage() {
               <div className="c1-d-photo desktop-only">
                 <Image
                   src={v("/images/backgrounds/consultation/c1-photo.jpg")}
-                  alt=""
+                  alt={tr('a11y_anna_alt')}
                   fill
                   sizes="(max-width: 768px) 100vw, 37vw"
                   style={{ objectFit: 'cover', objectPosition: 'center bottom' }}
@@ -104,7 +105,7 @@ export default function ConsultationPage() {
               <div className="c3-d-photo desktop-only">
                 <Image
                   src="/images/backgrounds/consultation/c3-photo.jpg"
-                  alt=""
+                  alt={tr('a11y_anna_alt')}
                   fill
                   sizes="(max-width: 768px) 100vw, 42vw"
                   style={{ objectFit: 'cover', objectPosition: 'center bottom' }}
@@ -144,7 +145,7 @@ export default function ConsultationPage() {
               <div className="c1-m-photo mobile-only">
                 <Image
                   src={v("/images/backgrounds/consultation/c1-photo.jpg")}
-                  alt=""
+                  alt={tr('a11y_anna_alt')}
                   fill
                   sizes="(max-width: 768px) 100vw, 100vw"
                   style={{ objectFit: 'cover', objectPosition: 'center bottom' }}

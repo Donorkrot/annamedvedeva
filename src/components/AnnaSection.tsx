@@ -1,9 +1,10 @@
 'use client';
 import Image from 'next/image';
 import { useTranslation } from '@/components/LanguageProvider';
+import { localizePath } from '@/lib/i18n';
 
 export default function AnnaSection() {
-  const { tr } = useTranslation();
+  const { tr, lang } = useTranslation();
 
   return (
     <section id="s7" className="section s7-figma">
@@ -33,8 +34,8 @@ export default function AnnaSection() {
       </div>
 
       <div className="s7-buttons desktop-only">
-        <a href="/about" className="s7-btn"><span>{tr('s7_btn2')}</span></a>
-        <a href="/consultation" className="s7-btn"><span>{tr('s7_btn')}</span></a>
+        <a href={localizePath('/about', lang)} className="s7-btn"><span>{tr('s7_btn2')}</span></a>
+        <a href={localizePath('/consultation', lang)} className="s7-btn"><span>{tr('s7_btn')}</span></a>
       </div>
 
       {/* ── Mobile: HTML from Figma node 1:993 (375×1019) ── */}
@@ -90,12 +91,12 @@ export default function AnnaSection() {
         </div>
 
         {/* Button "About the Master" — x:30 y:870 w:315 h:49 r:10 stroke:#fff5ef */}
-        <a href="/about" className="s7-m-btn s7-m-btn--about">
+        <a href={localizePath('/about', lang)} className="s7-m-btn s7-m-btn--about">
           <span>{tr('s7_btn2')}</span>
         </a>
 
         {/* Button "Individual Session" — x:30 y:939 w:315 h:49 r:10 stroke:#fff5ef */}
-        <a href="/consultation" className="s7-m-btn s7-m-btn--consult">
+        <a href={localizePath('/consultation', lang)} className="s7-m-btn s7-m-btn--consult">
           <span>{tr('s7_btn')}</span>
         </a>
 

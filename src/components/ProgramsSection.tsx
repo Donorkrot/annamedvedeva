@@ -2,12 +2,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from '@/components/LanguageProvider';
+import { localizePath } from '@/lib/i18n';
 
 const CTA_HREF = 'https://t.me/medvedieva_anna';
-const ACADEMY_HREF = '/academy';
 
 export default function ProgramsSection() {
-  const { tr } = useTranslation();
+  const { tr, lang } = useTranslation();
+  const ACADEMY_HREF = localizePath('/academy', lang);
 
   return (
     <section id="s11" className="section s11-figma">

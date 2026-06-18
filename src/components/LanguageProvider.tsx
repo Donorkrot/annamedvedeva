@@ -1,28 +1,37 @@
 'use client';
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import t, { Lang, TranslationKey } from '@/lib/translations';
+import { localizePath, stripLocale } from '@/lib/i18n';
 
 type LangCtx = { lang: Lang; setLang: (l: Lang) => void };
 const LanguageContext = createContext<LangCtx>({ lang: 'ru', setLang: () => {} });
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>('ru');
+/**
+ * Локаль теперь приходит из URL-маршрута (param [lang]), а не из localStorage —
+ * это даёт серверный рендер контента на нужном языке (SEO). Переключение языка
+ * = навигация на локализованный URL текущей страницы.
+ */
+export function LanguageProvider({
+  lang,
+  children,
+}: {
+  lang: Lang;
+  children: React.ReactNode;
+}) {
+  const router = useRouter();
+  const pathname = usePathname();
 
-  useEffect(() => {
-    const saved = localStorage.getItem('lang') as Lang;
-    if (saved && ['ru', 'ua', 'en'].includes(saved)) setLangState(saved);
-  }, []);
-
-  // Sync lang to <html> data-lang so CSS can target language-specific
-  // overrides (e.g. mobile s8 trait spacing depends on body line count
-  // which differs per language).
+  // CSS-хуки на язык (некоторые мобильные оверрайды зависят от длины строк,
+  // различной по языкам). Дублируем серверный data-lang на клиенте.
   useEffect(() => {
     document.documentElement.setAttribute('data-lang', lang);
   }, [lang]);
 
   const setLang = (l: Lang) => {
-    setLangState(l);
-    localStorage.setItem('lang', l);
+    if (l === lang) return;
+    const { path } = stripLocale(pathname); // голый путь без префикса локали
+    router.push(localizePath(path, l));
   };
 
   return (

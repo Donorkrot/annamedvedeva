@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/components/LanguageProvider';
+import { localizePath } from '@/lib/i18n';
 import AuthModal from '@/components/AuthModal';
 import SideMenu from '@/components/SideMenu';
 import type { Lang } from '@/lib/translations';
@@ -105,7 +106,7 @@ export default function Header() {
   return (
     <>
       <header className={`site-header${scrolled ? ' scrolled' : ''}${hidden ? ' hidden' : ''}${isHome ? ' site-header--home' : ''}`}>
-        <Link href="/" className="header-logo">
+        <Link href={localizePath('/', lang)} className="header-logo">
           <span className="header-logo-text">REALITY DNA</span>
         </Link>
 
@@ -161,7 +162,7 @@ export default function Header() {
           </button>
 
           <Link
-            href="/consultation"
+            href={localizePath('/consultation', lang)}
             className="btn-site header-btn"
           >
             {tr('nav_consult')}

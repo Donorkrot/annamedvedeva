@@ -1763,14 +1763,13 @@ img.desktop-only { display: block !important; }
   .header-burger span { width: 20px; }
 }
 
-/* ── Home page header — прозрачный (без bg/blur) до скролла. CTA скрыта
-   на всех ширинах, чтобы остались только логотип + языки + кнопка меню. */
+/* ── Home page header — прозрачный (без bg/blur) до скролла.
+   Кнопка «Консультация» показывается на главной, как и на других страницах. */
 .site-header--home:not(.scrolled) {
   background: transparent !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
-.site-header--home .header-btn { display: none !important; }
 
 .header-login {
   font-family: var(--font-body);

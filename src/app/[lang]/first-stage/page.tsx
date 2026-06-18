@@ -49,11 +49,13 @@ export default function FirstStagePage() {
   return (
     <main className="first-stage">
       <CourseJsonLd
+        lang={lang}
         name="Первая ступень Академии Reality DNA"
         description="Программа первой ступени Reality DNA: содержание обучения, формат занятий, практика и вход в метод управления состоянием."
         path="/first-stage"
       />
       <Breadcrumbs
+        lang={lang}
         items={[
           { name: 'Главная', path: '/' },
           { name: 'Академия', path: '/academy' },

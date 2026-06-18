@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useTranslation } from '@/components/LanguageProvider';
+import { localizePath } from '@/lib/i18n';
 import { isValidPhone } from '@/lib/phone';
 
 interface LeadFormModalProps {
@@ -17,7 +18,7 @@ interface LeadFormModalProps {
  * Используется со страницы /first-stage по кнопке «Вход в метод».
  */
 export default function LeadFormModal({ open, onClose, source = 'first-stage', topic }: LeadFormModalProps) {
-  const { tr } = useTranslation();
+  const { tr, lang } = useTranslation();
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
@@ -201,7 +202,7 @@ export default function LeadFormModal({ open, onClose, source = 'first-stage', t
               />
               <span>
                 {tr('lead_form_consent_pre')}{' '}
-                <a href="/privacy" target="_blank" rel="noopener noreferrer">{tr('lead_form_consent_link')}</a>
+                <a href={localizePath('/privacy', lang)} target="_blank" rel="noopener noreferrer">{tr('lead_form_consent_link')}</a>
               </span>
             </label>
 

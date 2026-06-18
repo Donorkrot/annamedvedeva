@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useTranslation } from '@/components/LanguageProvider';
+import { localizePath } from '@/lib/i18n';
 import { useAuth } from '@/lib/auth';
 
 /**
@@ -13,13 +14,13 @@ import { useAuth } from '@/lib/auth';
  * + список «скоро будет» (курсы/материалы/консультации) + выход.
  */
 export default function AccountClient() {
-  const { tr } = useTranslation();
+  const { tr, lang } = useTranslation();
   const { user, ready } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (ready && !user) router.replace('/');
-  }, [ready, user, router]);
+    if (ready && !user) router.replace(localizePath('/', lang));
+  }, [ready, user, router, lang]);
 
   // До готовности или без сессии — лёгкий каркас (без мигания контентом).
   if (!ready || !user) {
@@ -65,7 +66,7 @@ export default function AccountClient() {
           </div>
 
           <div className="account-actions">
-            <Link href="/" className="account-btn account-btn--ghost">{tr('account_back_home')}</Link>
+            <Link href={localizePath('/', lang)} className="account-btn account-btn--ghost">{tr('account_back_home')}</Link>
           </div>
 
       </div>

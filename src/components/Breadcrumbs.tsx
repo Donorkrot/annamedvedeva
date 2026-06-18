@@ -1,4 +1,5 @@
 import { BreadcrumbJsonLd } from '@/components/JsonLd';
+import type { Lang } from '@/lib/translations';
 
 export type Crumb = { name: string; path: string };
 
@@ -10,6 +11,6 @@ export type Crumb = { name: string; path: string };
  * Если понадобится вернуть видимые крошки — рендерить <nav> по `items`
  * рядом с этим вызовом (разметка/CSS есть в истории git).
  */
-export default function Breadcrumbs({ items }: { items: Crumb[] }) {
-  return <BreadcrumbJsonLd items={items} />;
+export default function Breadcrumbs({ items, lang }: { items: Crumb[]; lang?: Lang }) {
+  return <BreadcrumbJsonLd items={items} lang={lang} />;
 }

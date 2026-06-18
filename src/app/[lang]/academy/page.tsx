@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useTranslation } from '@/components/LanguageProvider';
+import { localizePath } from '@/lib/i18n';
 import type { TranslationKey } from '@/lib/translations';
 import Footer from '@/components/Footer';
 import LeadFormModal from '@/components/LeadFormModal';
@@ -28,11 +29,13 @@ export default function AcademyPage() {
   return (
     <main className="academy" data-lang={lang}>
       <CourseJsonLd
+        lang={lang}
         name="Академия Reality DNA"
         description="Программа Академии Reality DNA: ступени обучения, практика, работа с состоянием и подготовка специалистов методу управления состоянием."
         path="/academy"
       />
       <Breadcrumbs
+        lang={lang}
         items={[
           { name: 'Главная', path: '/' },
           { name: 'Академия', path: '/academy' },
@@ -563,7 +566,7 @@ export default function AcademyPage() {
           <div className="acad-step1-col acad-step1-col--left">
             <h3 className="acad-step1-subtitle">{tr('academy_step1_left_title')}</h3>
             <p className="acad-step1-text">{tr('academy_step1_left_text')}</p>
-            <a href="/first-stage" className="acad-step1-btn">
+            <a href={localizePath('/first-stage', lang)} className="acad-step1-btn">
               <span>{tr('academy_step1_left_btn')}</span>
             </a>
           </div>

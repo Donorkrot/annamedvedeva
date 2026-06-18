@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from '@/components/LanguageProvider';
+import { localizePath } from '@/lib/i18n';
 import { useAuth } from '@/lib/auth';
 
 interface SideMenuProps {
@@ -27,7 +28,7 @@ const SOCIAL_LINKS = {
 } as const;
 
 export default function SideMenu({ open, onClose, onLogin }: SideMenuProps) {
-  const { tr } = useTranslation();
+  const { tr, lang } = useTranslation();
   const { user } = useAuth();
 
   // Close on Escape
@@ -74,7 +75,7 @@ export default function SideMenu({ open, onClose, onLogin }: SideMenuProps) {
           {PAGE_ITEMS.map(item => (
             <Link
               key={item.key}
-              href={item.href}
+              href={localizePath(item.href, lang)}
               className="sidemenu-link"
               onClick={onClose}
             >
@@ -109,7 +110,7 @@ export default function SideMenu({ open, onClose, onLogin }: SideMenuProps) {
             кабинет; иначе открываем модалку авторизации. */}
         {user ? (
           <Link
-            href="/account"
+            href={localizePath('/account', lang)}
             className="sidemenu-cta"
             style={{ marginTop: 0 }}
             onClick={onClose}

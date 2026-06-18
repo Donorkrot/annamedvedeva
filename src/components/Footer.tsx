@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/components/LanguageProvider';
+import { localizePath, stripLocale } from '@/lib/i18n';
 
 const BOOK_HREF = 'https://drive.google.com/drive/folders/1V5KF6JG-TGjbRFOk_Y0n7wxdmd0SG49V';
 
@@ -16,8 +17,9 @@ const BOOK_HREF = 'https://drive.google.com/drive/folders/1V5KF6JG-TGjbRFOk_Y0n7
  * Мобильный подвал у всех страниц общий.
  */
 export default function Footer({ onApply }: { onApply?: () => void } = {}) {
-  const { tr } = useTranslation();
-  const pathname = usePathname() || '';
+  const { tr, lang } = useTranslation();
+  // stripLocale — чтобы детект работал и на /ua/first-stage, /en/academy и т.п.
+  const { path: pathname } = stripLocale(usePathname() || '');
   const isFirstStage = pathname.startsWith('/first-stage');
   const isAcademy = pathname.startsWith('/academy') || isFirstStage;
   const bgDesktop = isAcademy
@@ -72,9 +74,9 @@ export default function Footer({ onApply }: { onApply?: () => void } = {}) {
       <div className="s12-social desktop-only">{social}</div>
 
       <div className="s12-legal desktop-only">
-        <Link href="/offer" className="s12-legal__link">{tr('s12_offer')}</Link>
+        <Link href={localizePath('/offer', lang)} className="s12-legal__link">{tr('s12_offer')}</Link>
         <span className="s12-legal__sep" aria-hidden="true">|</span>
-        <Link href="/privacy" className="s12-legal__link">{tr('s12_privacy')}</Link>
+        <Link href={localizePath('/privacy', lang)} className="s12-legal__link">{tr('s12_privacy')}</Link>
       </div>
 
       <p className="s12-logo desktop-only">REALITY DNA <span className="s12-logo__year">© 2026</span></p>
@@ -144,8 +146,8 @@ export default function Footer({ onApply }: { onApply?: () => void } = {}) {
 
         {/* Legal links — x:30 y:515.5 w:315, gap:25, Raleway 12px opacity:50% */}
         <div className="s12-m-legal">
-          <Link href="/offer" className="s12-m-legal-link">{tr('s12_offer')}</Link>
-          <Link href="/privacy" className="s12-m-legal-link">{tr('s12_privacy')}</Link>
+          <Link href={localizePath('/offer', lang)} className="s12-m-legal-link">{tr('s12_offer')}</Link>
+          <Link href={localizePath('/privacy', lang)} className="s12-m-legal-link">{tr('s12_privacy')}</Link>
         </div>
 
         {/* Copyright — bottom centred */}

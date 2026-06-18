@@ -2,6 +2,8 @@
  * SEO-конфиг: общие константы и helpers для metadata всех страниц.
  * Используется в layout.tsx и per-route layout-обёртках.
  */
+import type { Lang } from '@/lib/translations';
+import { LOCALES, HREFLANG, DEFAULT_LOCALE, localizePath } from '@/lib/i18n';
 
 export const SITE = {
   /**
@@ -43,6 +45,18 @@ export const SITE = {
     telegram: 'https://t.me/medvedieva_anna',
     instagram: 'https://www.instagram.com/medvedieva.anna',
   },
+  /**
+   * Коды подтверждения прав в вебмастер-панелях. Вставить значение из meta-тега
+   * (только content, без самого тега). Пустая строка → meta не выводится.
+   *  - google: из Google Search Console → способ «HTML-тег» →
+   *    <meta name="google-site-verification" content="ВОТ_ЭТО">
+   *  - yandex: из Яндекс.Вебмастер → «Мета-тег» →
+   *    <meta name="yandex-verification" content="ВОТ_ЭТО">
+   */
+  verification: {
+    google: '',
+    yandex: '',
+  },
 } as const;
 
 /**
@@ -52,4 +66,22 @@ export const SITE = {
 export function absUrl(path: string): string {
   if (path === '/' || path === '') return SITE.url;
   return `${SITE.url}${path.startsWith('/') ? path : `/${path}`}`;
+}
+
+/**
+ * hreflang-альтернаты для «голого» пути (RU-вид, напр. '/about').
+ * Возвращает карту { ru, uk, en, x-default } → абсолютные URL локалей.
+ * x-default указывает на RU (локаль по умолчанию). Кладётся в
+ * alternates.languages — Google связывает языковые версии страницы.
+ */
+export function altLanguages(path: string): Record<string, string> {
+  const langs: Record<string, string> = {};
+  for (const l of LOCALES) langs[HREFLANG[l]] = absUrl(localizePath(path, l));
+  langs['x-default'] = absUrl(localizePath(path, DEFAULT_LOCALE));
+  return langs;
+}
+
+/** Канонический URL «голого» пути для конкретной локали. */
+export function canonicalFor(path: string, lang: Lang): string {
+  return absUrl(localizePath(path, lang));
 }

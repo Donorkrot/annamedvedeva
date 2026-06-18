@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useTranslation } from '@/components/LanguageProvider';
+import { localizePath } from '@/lib/i18n';
 import Footer from '@/components/Footer';
 
 /**
@@ -11,7 +12,7 @@ import Footer from '@/components/Footer';
  *   https://annamedvedeva-test.vercel.app/thank-you
  */
 export default function ThankYouPage() {
-  const { tr } = useTranslation();
+  const { tr, lang } = useTranslation();
 
   return (
     <main>
@@ -40,7 +41,7 @@ export default function ThankYouPage() {
           <p className="thanks-body">{tr('thanks_body')}</p>
 
           <div className="thanks-cta">
-            <Link href="/" className="thanks-btn thanks-btn-primary">
+            <Link href={localizePath('/', lang)} className="thanks-btn thanks-btn-primary">
               {tr('thanks_cta_home')}
             </Link>
           </div>

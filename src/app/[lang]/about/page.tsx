@@ -1,6 +1,7 @@
 'use client';
 import Image from "next/image";
 import { useTranslation } from '@/components/LanguageProvider';
+import { localizePath } from '@/lib/i18n';
 import Footer from '@/components/Footer';
 import LiteYouTube from '@/components/LiteYouTube';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -42,6 +43,7 @@ export default function AboutPage() {
   return (
     <main className="about-pg">
       <Breadcrumbs
+        lang={lang}
         items={[
           { name: 'Главная', path: '/' },
           { name: 'О мастере', path: '/about' },
@@ -61,7 +63,7 @@ export default function AboutPage() {
                   <Image src="/images/about/a1-d-bg.png" alt="" fill sizes="83vw" priority />
                 </div>
                 <div className="a1-d-photo" aria-hidden="true">
-                  <Image src="/images/about/a1-d-photo.png" alt="" fill sizes="42vw" priority />
+                  <Image src="/images/about/a1-d-photo.png" alt={tr('a11y_anna_alt')} fill sizes="42vw" priority />
                 </div>
                 <div className="a1-d-text">
                   {/* Единственный h1 страницы /about — главный видимый заголовок.
@@ -83,7 +85,7 @@ export default function AboutPage() {
                   <Image src="/images/about/a1-m-bg.jpg" alt="" fill sizes="100vw" priority />
                 </div>
                 <div className="a1-m-photo" aria-hidden="true">
-                  <Image src="/images/about/a1-m-photo.png" alt="" fill sizes="100vw" priority />
+                  <Image src="/images/about/a1-m-photo.png" alt={tr('a11y_anna_alt')} fill sizes="100vw" priority />
                 </div>
                 <div className="a1-m-text">
                   <h2 className="a1-title">
@@ -107,7 +109,7 @@ export default function AboutPage() {
                 </div>
                 <div className="a2-d-photo" aria-hidden="true">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/about/a2-d-photo.jpg" alt="" className="a2-d-photo__img" />
+                  <img src="/images/about/a2-d-photo.jpg" alt={tr('a11y_anna_alt')} className="a2-d-photo__img" />
                 </div>
                 <h2 className="a2-d-title">{tr('about_a2_title')}</h2>
                 <div className="a2-d-cards">
@@ -351,7 +353,7 @@ export default function AboutPage() {
                   <Image src="/images/about/a9-d-bg.jpg" alt="" fill sizes="67vw" quality={90} />
                 </div>
                 <div className="a9-d-photo" aria-hidden="true">
-                  <Image src="/images/about/a9-d-photo.jpg" alt="" fill sizes="34vw" quality={90} />
+                  <Image src="/images/about/a9-d-photo.jpg" alt={tr('a11y_anna_alt')} fill sizes="34vw" quality={90} />
                 </div>
                 <h2 className="a9-d-title">{tr('about_a9_title')}</h2>
                 <div className="a9-d-stats">
@@ -417,7 +419,7 @@ export default function AboutPage() {
                   </div>
                 </div>
                 <div className="a9-m-photo" aria-hidden="true">
-                  <Image src="/images/about/a9-m-photo.jpg" alt="" fill sizes="100vw" quality={90} />
+                  <Image src="/images/about/a9-m-photo.jpg" alt={tr('a11y_anna_alt')} fill sizes="100vw" quality={90} />
                 </div>
                 <h2 className="a9-m-cta-title">{tr('about_a9_cta_title')}</h2>
                 <p className="a9-m-cta-sub">
@@ -582,7 +584,7 @@ export default function AboutPage() {
 
           {/* a5 — "Подробнее о методе" button */}
           {i === 4 && (
-            <a href="/method" className="about-btn-method">
+            <a href={localizePath('/method', lang)} className="about-btn-method">
               <span>{tr('about_btn_method')}</span>
             </a>
           )}
@@ -597,7 +599,7 @@ export default function AboutPage() {
 
           {/* a9 — consultation button */}
           {i === 8 && (
-            <a href="/consultation" className="about-btn-consult">
+            <a href={localizePath('/consultation', lang)} className="about-btn-consult">
               <span>{tr('about_btn_consult')}</span>
             </a>
           )}

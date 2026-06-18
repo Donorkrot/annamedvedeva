@@ -281,7 +281,7 @@ const t = {
     about_btn_consult: 'Запись на консультацию',
     a11y_menu: 'Меню',
     a11y_play: 'Воспроизвести',
-    a11y_anna_alt: 'Анна Медведева',
+    a11y_anna_alt: 'Анна Медведева — мастер состояния, автор метода Reality DNA',
     video_title_method: 'Метод Reality DNA — Анна Медведева',
     // ── /academy hero (Figma 668:466 / 2138:744) ──
     academy_hero_title: 'Академия мастеров',
@@ -757,7 +757,7 @@ const t = {
     about_btn_consult: 'Запис на консультацію',
     a11y_menu: 'Меню',
     a11y_play: 'Відтворити',
-    a11y_anna_alt: 'Анна Медведєва',
+    a11y_anna_alt: 'Анна Медведєва — майстер стану, авторка методу Reality DNA',
     video_title_method: 'Метод Reality DNA — Анна Медведєва',
     // ── /academy hero ──
     academy_hero_title: 'Академія майстрів',
@@ -1233,7 +1233,7 @@ const t = {
     about_btn_consult: 'Book a session',
     a11y_menu: 'Menu',
     a11y_play: 'Play',
-    a11y_anna_alt: 'Anna Medvedeva',
+    a11y_anna_alt: 'Anna Medvedeva — state mastery coach, author of the Reality DNA method',
     video_title_method: 'Reality DNA method — Anna Medvedeva',
     // ── /academy hero ──
     academy_hero_title: 'Academy of Masters',
