@@ -10972,7 +10972,10 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
   .first-hero-title { font-size: min(4.4vw, 44px); }
   .first-hero-subtitle-row { font-size: min(1.5vw, 15px); gap: min(1.1vw, 11px); }
   .first-hero-divider-line { width: min(5.5vw, 64px); }
-  .first-hero-desc { font-size: min(1.35vw, 14px); }
+  /* На планшете кнопка поднимается меньше (меньше шрифт/паддинг), поэтому
+     фиксированный -127px из десктопного блока загонял описание под кнопку.
+     Делаем подъём пропорциональным ширине, чтобы текст всегда стоял ниже. */
+  .first-hero-desc { font-size: min(1.35vw, 14px); transform: translateY(-9.5vw); }
 }
 
 /* ── Mobile — Figma 774:616 (941×1672, portrait) ────────────────── */
