@@ -10976,6 +10976,10 @@ main[data-lang="ua"] .cons-support { top: 51.09%; }
      фиксированный -127px из десктопного блока загонял описание под кнопку.
      Делаем подъём пропорциональным ширине, чтобы текст всегда стоял ниже. */
   .first-hero-desc { font-size: min(1.35vw, 14px); transform: translateY(-9.5vw); }
+  /* Кнопка «ВХОД В МЕТОД» — по центру между заголовком и текстом (как на десктопе),
+     иначе при -275% она прижималась вплотную к заголовку. */
+  .first-hero-subtitle-btn { transform: scale(0.82) translateY(-225%); }
+  .first-hero-subtitle-btn:hover { transform: scale(0.82) translateY(calc(-225% - 1px)); }
 }
 
 /* ── Mobile — Figma 774:616 (941×1672, portrait) ────────────────── */
