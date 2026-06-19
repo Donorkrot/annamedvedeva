@@ -1,16 +1,7 @@
 'use client';
 import { useEffect } from "react";
-import Image from "next/image";
 import { useTranslation } from '@/components/LanguageProvider';
 import Footer from '@/components/Footer';
-
-const ASSET_VERSION = '20260418-hq3x';
-const v = (p: string) => `${p}?v=${ASSET_VERSION}`;
-
-function offerPath(name: string, lang: string): string {
-  const langDir = lang === 'ru' ? '' : `/${lang}`;
-  return v(`/images/backgrounds/offer${langDir}/${name}.jpg`);
-}
 
 function OfferRu() {
   return (
@@ -430,26 +421,9 @@ export default function OfferPage() {
 
   return (
     <main>
-      {/* Desktop — keep existing JPG */}
-      <section
-        className="consult-section desktop-only"
-        style={{ aspectRatio: '1076 / 1440', background: '#f5f0eb' }}
-      >
-        <div className="s10-bg">
-          <Image
-            src={offerPath('offer', lang)}
-            alt=""
-            fill
-            sizes="100vw"
-            style={{ objectFit: 'cover', objectPosition: 'center top' }}
-            quality={90}
-            priority
-          />
-        </div>
-      </section>
-
-      {/* Mobile — readable HTML per Figma 367:408 */}
-      <article className="legal-mobile mobile-only">
+      {/* Единый читаемый HTML (текст копируется, индексируется) — на всех ширинах.
+          Раньше на десктопе была JPG-картинка; заменено на HTML. */}
+      <article className="legal-mobile">
         <div className="legal-mobile-card">
           {lang === 'ua' ? <OfferUa /> : lang === 'en' ? <OfferEn /> : <OfferRu />}
         </div>

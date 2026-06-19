@@ -1575,6 +1575,30 @@ img.desktop-only { display: block !important; }
   margin: 0 0 2px;
 }
 
+/* Десктоп — те же юридические страницы (.legal-mobile теперь на всех ширинах,
+   текст HTML вместо прежней JPG-картинки): читаемая центрированная колонка. */
+@media (min-width: 769px) {
+  .legal-mobile {
+    padding: 104px 24px 72px;
+  }
+  .legal-mobile-card {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 56px;
+    border-radius: 16px;
+  }
+  .legal-mobile-title {
+    font-size: 26px;
+    margin-bottom: 28px;
+  }
+  .legal-mobile-body { font-size: 16px; line-height: 1.6; }
+  .legal-mobile-body h2 { font-size: 19px; margin: 28px 0 8px; }
+  .legal-mobile-body h2:first-child { margin-top: 0; }
+  .legal-mobile-body h3 { font-size: 16px; margin: 14px 0 6px; }
+  .legal-mobile-body p { margin: 0 0 8px; }
+  .legal-mobile-body li { margin: 0 0 4px; }
+}
+
 /* ===== FIXED HEADER ===== */
 .site-header {
   position: fixed;

@@ -1,16 +1,7 @@
 'use client';
 import { useEffect } from "react";
-import Image from "next/image";
 import { useTranslation } from '@/components/LanguageProvider';
 import Footer from '@/components/Footer';
-
-const ASSET_VERSION = '20260420-privacy';
-const v = (p: string) => `${p}?v=${ASSET_VERSION}`;
-
-function privacyPath(lang: string): string {
-  const langDir = lang === 'ru' ? '' : `/${lang}`;
-  return v(`/images/backgrounds/privacy${langDir}/privacy.jpg`);
-}
 
 function PrivacyRu() {
   return (
@@ -277,26 +268,9 @@ export default function PrivacyPage() {
 
   return (
     <main>
-      {/* Desktop — keep existing JPG */}
-      <section
-        className="consult-section desktop-only"
-        style={{ aspectRatio: '4320 / 4185', background: '#f5f0eb' }}
-      >
-        <div className="s10-bg">
-          <Image
-            src={privacyPath(lang)}
-            alt=""
-            fill
-            sizes="100vw"
-            style={{ objectFit: 'cover', objectPosition: 'center top' }}
-            quality={90}
-            priority
-          />
-        </div>
-      </section>
-
-      {/* Mobile — readable HTML per Figma 368:430 */}
-      <article className="legal-mobile mobile-only">
+      {/* Единый читаемый HTML (текст копируется, индексируется) — на всех ширинах.
+          Раньше на десктопе была JPG-картинка; заменено на HTML. */}
+      <article className="legal-mobile">
         <div className="legal-mobile-card">
           {lang === 'ua' ? <PrivacyUa /> : lang === 'en' ? <PrivacyEn /> : <PrivacyRu />}
         </div>
